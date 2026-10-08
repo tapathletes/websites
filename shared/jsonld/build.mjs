@@ -23,7 +23,7 @@ const END = '<!-- structured-data:end -->';
 function render(graph) {
   const json = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })
     // Never let "</script>" or "<!--" appear inside the script body.
-    .replace(/</g, '\u003c');
+    .replace(/</g, '\\u003c');
   return `${START}\n  <script type="application/ld+json">${json}</script>\n  ${END}`;
 }
 
@@ -42,7 +42,7 @@ export async function buildJsonLd(siteDir) {
 
     let out;
     if (html.includes(START) && html.includes(END)) {
-      out = html.replace(new RegExp(`${START}[\s\S]*?${END}`), block);
+      out = html.replace(new RegExp(`${START}[\\s\\S]*?${END}`), block);
     } else if (html.includes('</head>')) {
       out = html.replace('</head>', `  ${block}\n</head>`);
     } else {
