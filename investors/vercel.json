@@ -1,0 +1,11 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "facility.tapathletes.com" }],
+      "destination": "https://investors.tapathletes.com/:path*",
+      "permanent": true
+    }
+  ]
+}
