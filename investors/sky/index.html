@@ -1,0 +1,1941 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>TAP Athletes — Facility 3D (Sky)</title>
+<style>
+  :root {
+    --slate: #3a4a55;
+    --slate-deep: #2a3640;
+    --powder: #b8d4e0;
+    --paper: #f5f8fb;
+    --ink: #1a232b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: #0a0d12;
+    color: #e6ecf2;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+  }
+  #app { position: fixed; inset: 0; }
+  canvas { display: block; }
+
+  .hud {
+    position: fixed;
+    pointer-events: none;
+    color: #e6ecf2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .hud.top-left   { top: 16px; left: 16px; }
+  .hud.top-right  { top: 16px; right: 16px; text-align: right; }
+  .hud .title {
+    font-weight: 800; font-size: 18px; letter-spacing: 2px;
+    color: #fff;
+  }
+  .hud .sub {
+    font-weight: 500; font-size: 11px; letter-spacing: 3px;
+    color: #b8d4e0; margin-top: 2px;
+  }
+  .hud .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 1.5px; opacity: 0.8;
+  }
+
+  .panel {
+    position: fixed;
+    top: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 28, 36, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(184, 212, 224, 0.2);
+    border-radius: 6px;
+    padding: 6px;
+    display: flex;
+    gap: 4px;
+    pointer-events: auto;
+    z-index: 10;
+  }
+  .panel button {
+    background: transparent;
+    color: #b8d4e0;
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .panel button:hover { background: rgba(184, 212, 224, 0.12); }
+  .panel button.active {
+    background: #3a4a55;
+    color: #fff;
+    border-color: rgba(184, 212, 224, 0.4);
+  }
+  .panel .divider {
+    width: 1px;
+    background: rgba(184, 212, 224, 0.15);
+    margin: 4px 2px;
+  }
+
+  .help {
+    position: fixed;
+    bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 28, 36, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(184, 212, 224, 0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #b8d4e0;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .help kbd {
+    display: inline-block;
+    background: #3a4a55;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 10px;
+    margin: 0 2px;
+  }
+
+  /* On-screen arrows — same job as the keyboard arrow keys; press and hold */
+  .pad {
+    position: fixed;
+    right: 20px; bottom: 20px;
+    display: grid;
+    grid-template-areas: ". fwd ." "left back right";
+    gap: 6px;
+    z-index: 10;
+    user-select: none; -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+  .pad button {
+    width: 52px; height: 52px;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(20, 28, 36, 0.78);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(184, 212, 224, 0.3);
+    border-radius: 8px;
+    color: #b8d4e0;
+    cursor: pointer;
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .pad button svg { width: 22px; height: 22px; pointer-events: none; }
+  .pad button.down { background: #3a4a55; color: #fff; border-color: rgba(184, 212, 224, 0.6); }
+  .pad [data-dir="fwd"]   { grid-area: fwd; }
+  .pad [data-dir="left"]  { grid-area: left; }
+  .pad [data-dir="back"]  { grid-area: back; }
+  .pad [data-dir="right"] { grid-area: right; }
+
+  #app canvas { cursor: grab; }
+  #app canvas.dragging { cursor: grabbing; }
+
+  /* Phones and narrow windows */
+  @media (max-width: 900px) {
+    .hud.top-left { top: 10px; left: 12px; }
+    .hud .title { font-size: 14px; }
+    .hud .sub { font-size: 9px; letter-spacing: 2px; }
+    .hud.top-right { display: none; }
+    .panel { top: 52px; }
+    .panel button { padding: 10px 12px; letter-spacing: 1.5px; white-space: nowrap; }
+    .pad { right: 50%; transform: translateX(50%); bottom: 18px; }
+    .pad button { width: 58px; height: 58px; }
+    .help { bottom: 156px; white-space: nowrap; font-size: 10px; letter-spacing: 1px; padding: 8px 12px; }
+  }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <div class="panel" id="mode-panel">
+    <button data-mode="overview" class="active">Overview</button>
+    <button data-mode="walk">Walk Inside</button>
+    <div class="divider"></div>
+    <button id="bay-door-toggle">Bay Door</button>
+  </div>
+
+  <div class="hud top-left">
+    <div class="title">TAP ATHLETES</div>
+    <div class="sub">PITCHING ACADEMY · FACILITY 3D</div>
+  </div>
+
+  <div class="hud top-right">
+    <div class="mono">25' W × 80' L · NET 14' × 70'</div>
+    <div class="mono" id="cam-info" style="margin-top: 6px; opacity: 0.55;">overview</div>
+  </div>
+
+  <div class="help" id="help"></div>
+
+  <div class="pad" id="pad">
+    <button data-dir="fwd" aria-label="Forward"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 15l7-7 7 7"/></svg></button>
+    <button data-dir="left" aria-label="Left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button data-dir="back" aria-label="Back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l7 7 7-7"/></svg></button>
+    <button data-dir="right" aria-label="Right"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { Reflector } from 'three/addons/objects/Reflector.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+    /* ─────────────────────────────────────────────────────────────────
+       Coordinate system (world units = feet) — LONG AXIS ALONG X:
+         x: 0 .. 80  (length, FRONT wall to BACK wall)
+         z: 0 .. 25  (width, LEFT wall to RIGHT wall)
+         y: 0 .. 14  (height, floor to ceiling)
+       Flooring (2026-10-01): black rubber border around a grey PVC field.
+         - rubber: 10' deep at the front door (x = 0..10) and at the back
+           doors (x = 70..80), 4' along each long wall (z = 0..4, z = 21..25)
+         - smooth grey PVC: x = 10..70, z = 4..21
+         - no turf, no concrete pads
+       Pitching net:   x = 7..77, z = 1.17..15.17, y = 0..13   (14' × 70' × 13')
+         - front edge 7' in from the front door, back edge 3' short of the back doors
+         - z=0 wall: 2" foam wall padding, then 1 ft gap, then cage net
+         - divider net on the centerline (z = 8.17) makes two 7' lanes; shown pulled
+           back halfway (x = 42..77), clear of the mound
+         - tinted windscreen on the front net (x = 7), behind the mound
+         - one mound, centered on the net width: black Portolite XL (Oversized), 10'-6" × 5' × 10"
+         - black batter's mat (boxes + catcher's tab) around the plate, x ~67.1..76.8
+       Right-side strip: z = 15.17..25 (~9.83' wide)
+         - bathroom 7' × 7' outside footprint (as-built 2026-09-22) flush in the front corner,
+           x = 0..7, z = 18..25 — leaves a ~2'-10" walkway to the net
+       Entry zone (x = 0..7, in front of the net):
+         - L-shaped front desk + Acer laptop pressed into the front-left corner,
+           x = 0.3..4.3, z = 0.05..4.55 (main leg along the glass, return leg facing the door)
+         - gym mirrors on the z=25 wall: three 5' × 7' panels, x = 17.5..32.5, 1' to 8' off the floor
+         - classroom nook at x ~41..51: whiteboard + TV on the z=25 wall (centers ~5' up),
+           3 chairs facing the wall on the rubber border + 3 turned to face the pitching lane
+         - kettlebell rack at x = 52..60, z = 22..24.5 (.glb kettlebells on primitive base)
+         - med ball rack at x ~63.8..69.4, z = 22.9..24.5 (dumbbell-rack .glb + procedural med balls)
+         - dumbbell rack at x ~71..76.6, z = 22.9..24.5 (dumbbell-rack .glb)
+       Door: on front wall (x = 0), span z = 7.375..10.375 (per architect: 7'-4 1/2" from z=0 edge)
+       Back wall (x = 80): pedestrian door on the left, z = 4..7; 10' garage roll-up
+         on the right, z = 11..21 (right edge 4' off the right wall)
+    ────────────────────────────────────────────────────────────────── */
+
+    const PAL = {
+      floor:    0x141414,  // black rubber border
+      pvc:      0xc4c8cd,  // smooth grey PVC field. The material is diffuse-only (Lambert), so this
+                           // light value renders as a medium grey — dark enough for the white /
+                           // sky-blue floor logo to read
+      wall:     0xf2efe8,
+      ceiling:  0xe8e5dc,
+      truss:    0x2a3640,
+      mound:    0x0a0a0a,  // black mound
+      moundTop: 0x0c0c0c,  // black turf
+      rubber:   0xfafafa,
+      net:      0x0a0a0a,
+      mirror:   0xc8dde8,
+      mirrorFrame: 0x3a4a55,
+      bathWall: 0x4a5d6b,
+      wood:     0x8a6a4a,
+      woodDk:   0x5a3e26,
+      kbBlack:  0x1a232b,
+      brand:    0xb8d4e0,
+      mat:      0x3a4a55,
+    };
+
+    // ── Renderer / scene / cameras ───────────────────────────────────
+    const app = document.getElementById('app');
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));  // capped to keep laptops and phones smooth
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    // Almost nothing in the scene moves, so the shadow map is redrawn only when
+    // something changes (see shadowFrames in the controls section), not every frame.
+    renderer.shadowMap.autoUpdate = false;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    app.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xa3c4d8); // daytime sky
+    scene.fog = new THREE.Fog(0xc1d4df, 140, 380);
+
+    // Image-based lighting via a procedural indoor environment (PMREM).
+    // Every MeshStandardMaterial with envMap=null auto-picks this up as
+    // ambient/diffuse + reflection contribution — major realism win.
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+
+    // GLTFLoader instance for future photo-realistic equipment pieces.
+    // Usage pattern (when assets land in assets/equipment/*.glb):
+    //   loadEquipment('../assets/equipment/squat-rack.glb', { x: 67, y: 0, z: 16.7 });
+    const gltfLoader = new GLTFLoader();
+    function loadEquipment(path, { x = 0, y = 0, z = 0, rotY = 0, scale = 1 } = {}) {
+      gltfLoader.load(path, (gltf) => {
+        const obj = gltf.scene;
+        obj.position.set(x, y, z);
+        obj.rotation.y = rotY;
+        obj.scale.setScalar(scale);
+        obj.traverse((child) => {
+          if (child.isMesh) {
+            child.castShadow = true;
+            child.receiveShadow = true;
+          }
+        });
+        scene.add(obj);
+      }, undefined, (err) => {
+        console.warn(`[loadEquipment] failed to load ${path}:`, err);
+      });
+    }
+
+    // Building center: (40, 4, 12.5). Default orbit looks at the glass front from outside.
+    const orbitCam = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 600);
+    orbitCam.position.set(-35, 28, 55);
+    orbitCam.lookAt(40, 4, 12.5);
+
+    // Position and heading are set by the walk controls (see CONTROLS).
+    const walkCam = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.05, 300);
+    walkCam.rotation.order = 'YXZ';
+
+    // ── Lighting ──────────────────────────────────────────────────────
+    // Ambient kept low because scene.environment (PMREM) provides diffuse fill.
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+
+    const sun = new THREE.DirectionalLight(0xfff4e0, 1.0);
+    sun.position.set(-40, 70, 40);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -80;
+    sun.shadow.camera.right = 100;
+    sun.shadow.camera.top = 80;
+    sun.shadow.camera.bottom = -80;
+    sun.shadow.camera.near = 1;
+    sun.shadow.camera.far = 250;
+    sun.shadow.bias = -0.0005;
+    scene.add(sun);
+
+    scene.add(new THREE.HemisphereLight(0xb8d4e0, 0x2a3640, 0.45));
+
+    // Ceiling-mounted bay lights along the LENGTH axis
+    for (let x = 8; x < 80; x += 12) {
+      const bay = new THREE.PointLight(0xfff0d4, 0.55, 35, 1.5);
+      bay.position.set(x, 13.5, 12.5);
+      scene.add(bay);
+      const housing = new THREE.Mesh(
+        new THREE.BoxGeometry(1.0, 0.4, 2.5),
+        new THREE.MeshStandardMaterial({ color: 0x222428, roughness: 0.6 })
+      );
+      housing.position.set(x, 13.6, 12.5);
+      scene.add(housing);
+      const bulb = new THREE.Mesh(
+        new THREE.BoxGeometry(0.7, 0.15, 2.2),
+        new THREE.MeshBasicMaterial({ color: 0xfff4d4 })
+      );
+      bulb.position.set(x, 13.4, 12.5);
+      scene.add(bulb);
+    }
+
+    // ── Materials ─────────────────────────────────────────────────────
+    const matFloor = new THREE.MeshStandardMaterial({ color: PAL.floor, roughness: 0.75, metalness: 0.05 });
+    // Lambert, not Standard: no specular or environment reflection, so the whole
+    // PVC field reads as one flat grey from every viewing angle.
+    const matPvc = new THREE.MeshLambertMaterial({ color: PAL.pvc });
+    const matWall =new THREE.MeshStandardMaterial({ color: PAL.wall, roughness: 0.85, side: THREE.DoubleSide });
+    const matCeiling = new THREE.MeshStandardMaterial({ color: PAL.ceiling, roughness: 0.9, side: THREE.DoubleSide });
+    const matFrame = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.55, metalness: 0.4 });  // net rope + hanger cables
+    const matMoundTop = new THREE.MeshStandardMaterial({ color: PAL.moundTop, roughness: 0.95 });
+    const matRubber = new THREE.MeshStandardMaterial({ color: PAL.rubber, roughness: 0.5 });
+    const matBathWall = new THREE.MeshStandardMaterial({ color: PAL.bathWall, roughness: 0.85, side: THREE.DoubleSide });
+    const matMirrorFrame = new THREE.MeshStandardMaterial({ color: PAL.mirrorFrame, roughness: 0.55, metalness: 0.5 });
+    const matWood = new THREE.MeshStandardMaterial({ color: PAL.wood, roughness: 0.8 });
+    const matWoodDk = new THREE.MeshStandardMaterial({ color: PAL.woodDk, roughness: 0.85 });
+    const matMetal = new THREE.MeshStandardMaterial({ color: PAL.kbBlack, roughness: 0.4, metalness: 0.6 });
+    const matMat = new THREE.MeshStandardMaterial({ color: PAL.mat, roughness: 0.95 });
+
+    /* ─────────────────────────────────────────────────────────────────
+       BUILDING SHELL (long axis = x)
+    ────────────────────────────────────────────────────────────────── */
+
+    // Flooring (2026-10-01): a grey PVC field boxed in by black rubber.
+    // Rubber runs 10 ft in from the front door, 10 ft in from the back doors,
+    // and 4 ft in from each long wall.
+    const RUBBER_END = 10, RUBBER_SIDE = 4;
+    // Black rubber — full slab (x = 0..80); shows as the border around the PVC
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(80, 0.05, 25), matFloor);
+      m.position.set(40, -0.025, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+    // Smooth grey PVC field (x = 10..70, z = 4..21), laid just proud of the rubber
+    {
+      const m = new THREE.Mesh(
+        new THREE.BoxGeometry(80 - RUBBER_END*2, 0.02, 25 - RUBBER_SIDE*2),
+        matPvc
+      );
+      m.position.set(40, 0, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+
+    // Walls
+    const WALL_T = 0.5;
+    const WALL_H = 14;
+    function wall(w, h, d, x, y, z) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matWall);
+      m.position.set(x, y, z);
+      m.castShadow = true; m.receiveShadow = true;
+      return m;
+    }
+    // Long walls (running along x)
+    scene.add(wall(80 + WALL_T*2, WALL_H, WALL_T, 40, WALL_H/2, -WALL_T/2));      // left long wall (z=0)
+    {
+      // right long wall (z=25). It faces the sun, and the ceiling casts no shadow,
+      // so its shadow used to fall as an 8 ft band along the gym strip and split
+      // the grey floor into two shades. No shadow from this wall keeps it even.
+      const rightWall = wall(80 + WALL_T*2, WALL_H, WALL_T, 40, WALL_H/2, 25 + WALL_T/2);
+      rightWall.castShadow = false;
+      scene.add(rightWall);
+    }
+    // Bay door state — outer scope so the click handler + animate loop can reach it
+    let bayDoorGroup, bayDoorRollH;
+    let bayDoorOpen = false;
+    let bayDoorState = 1; // 1 = fully closed, 0 = fully open (lerps toward target)
+
+    // Back short wall (x=80) — with garage roll-up + pedestrian back door
+    {
+      // Door layout per Eugene 2026-10-01 (from memory, not yet measured):
+      // pedestrian door on the LEFT, garage door on the right.
+      // Garage roll-up door: 10 ft wide, its right edge 4 ft off the right wall.
+      const ROLL_W = 10, ROLL_H = 8;
+      const ROLL_Z2 = 25 - 4, ROLL_Z1 = ROLL_Z2 - ROLL_W;  // z=11..21
+
+      // Pedestrian back door: 3 ft wide, centered in the wall left of the garage
+      // door (4 ft each side on this 25 ft model; ~3'-7" each side at the
+      // as-built 24'-2" width).
+      const PED_W = 3, PED_H = 7;
+      const PED_Z1 = (ROLL_Z1 - PED_W) / 2, PED_Z2 = PED_Z1 + PED_W;     // z=4..7
+
+      // Wall segments around the two openings
+      // z=0..PED_Z1: left of pedestrian
+      scene.add(wall(WALL_T, WALL_H, PED_Z1, 80 + WALL_T/2, WALL_H/2, PED_Z1/2));
+      // z=PED_Z2..ROLL_Z1: between pedestrian and garage
+      scene.add(wall(WALL_T, WALL_H, ROLL_Z1 - PED_Z2, 80 + WALL_T/2, WALL_H/2, (PED_Z2 + ROLL_Z1)/2));
+      // z=ROLL_Z2..25: right of garage
+      scene.add(wall(WALL_T, WALL_H, 25 - ROLL_Z2, 80 + WALL_T/2, WALL_H/2, (ROLL_Z2 + 25)/2));
+
+      // Lintel above garage (y = 8..14)
+      scene.add(wall(WALL_T, WALL_H - ROLL_H, ROLL_W, 80 + WALL_T/2, ROLL_H + (WALL_H - ROLL_H)/2, (ROLL_Z1 + ROLL_Z2)/2));
+      // Lintel above pedestrian door (y = 7..14)
+      scene.add(wall(WALL_T, WALL_H - PED_H, PED_W, 80 + WALL_T/2, PED_H + (WALL_H - PED_H)/2, (PED_Z1 + PED_Z2)/2));
+
+      // Bay door is wrapped in a Group so it can animate (roll up) as a unit.
+      // Group origin = world (80, ROLL_H/2, garage_center_z); children positions
+      // are relative to that origin so scaling the group along y compresses the
+      // door panel toward the top of the opening (lintel).
+      bayDoorGroup = new THREE.Group();
+      bayDoorGroup.position.set(80, ROLL_H/2, (ROLL_Z1 + ROLL_Z2)/2);
+      scene.add(bayDoorGroup);
+
+      // roller door slab (sectional panel)
+      const doorMat = new THREE.MeshStandardMaterial({ color: 0x3a4a55, roughness: 0.55, metalness: 0.3 });
+      const door = new THREE.Mesh(new THREE.BoxGeometry(0.15, ROLL_H, ROLL_W), doorMat);
+      door.position.set(0, 0, 0); // centered in group
+      door.castShadow = true;
+      bayDoorGroup.add(door);
+
+      // section grooves (every 2 ft of height) — relative to group center
+      const grooveMat = new THREE.MeshStandardMaterial({ color: 0x1a232b, roughness: 0.8 });
+      for (let yy = 2; yy < ROLL_H; yy += 2) {
+        const groove = new THREE.Mesh(
+          new THREE.BoxGeometry(0.18, 0.05, ROLL_W),
+          grooveMat
+        );
+        groove.position.set(0, yy - ROLL_H/2, 0);
+        bayDoorGroup.add(groove);
+      }
+
+      // vertical handle / lift bar (interior side) — relative to group
+      const handleMat = new THREE.MeshStandardMaterial({ color: 0xb8d4e0, roughness: 0.4, metalness: 0.6 });
+      const handle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.2, 0.15), handleMat);
+      handle.position.set(-0.15, 3.5 - ROLL_H/2, 0);
+      bayDoorGroup.add(handle);
+
+      // expose ROLL_H so the animate loop can compute open/closed positions
+      bayDoorRollH = ROLL_H;
+
+      // door tracks — vertical rails inside, on each side of the opening, up past the lintel
+      const trackMat = new THREE.MeshStandardMaterial({ color: 0x3a4a55, roughness: 0.5, metalness: 0.6 });
+      const trackGeom = new THREE.BoxGeometry(0.4, ROLL_H + 0.5, 0.18);
+      const trackL = new THREE.Mesh(trackGeom, trackMat);
+      trackL.position.set(79.7, (ROLL_H + 0.5)/2, ROLL_Z1);
+      const trackR = trackL.clone();
+      trackR.position.set(79.7, (ROLL_H + 0.5)/2, ROLL_Z2);
+      scene.add(trackL, trackR);
+
+      // roller drum (horizontal cylinder above the door, mounted to the lintel)
+      const drum = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.45, 0.45, ROLL_W + 0.4, 16),
+        trackMat
+      );
+      drum.rotation.x = Math.PI / 2;
+      drum.position.set(79.6, ROLL_H + 0.7, (ROLL_Z1 + ROLL_Z2)/2);
+      scene.add(drum);
+
+      // drum end caps / mounting plates
+      const capGeom = new THREE.BoxGeometry(0.5, 1.0, 0.2);
+      const capL = new THREE.Mesh(capGeom, trackMat);
+      capL.position.set(79.6, ROLL_H + 0.7, ROLL_Z1 - 0.2);
+      const capR = capL.clone();
+      capR.position.set(79.6, ROLL_H + 0.7, ROLL_Z2 + 0.2);
+      scene.add(capL, capR);
+
+      // Pedestrian back door — simple slab
+      const pedDoor = new THREE.Mesh(new THREE.BoxGeometry(0.15, PED_H, PED_W), doorMat);
+      pedDoor.position.set(80, PED_H/2, (PED_Z1 + PED_Z2)/2);
+      pedDoor.castShadow = true;
+      scene.add(pedDoor);
+
+      // Pedestrian door knob/handle (interior side)
+      const pedHandle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.4, 0.15), handleMat);
+      pedHandle.position.set(79.85, 3.3, PED_Z2 - 0.4);
+      scene.add(pedHandle);
+    }
+    // Front facade (x=0) — full glass curtain wall + glass door
+    {
+      const matGlass = new THREE.MeshStandardMaterial({
+        color: 0xb8d4e0,
+        metalness: 0.3,
+        roughness: 0.05,
+        transparent: true,
+        opacity: 0.22,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      });
+      const matMullion = new THREE.MeshStandardMaterial({
+        color: 0x2a3640, metalness: 0.6, roughness: 0.4,
+      });
+
+      // Glass panes (3 sections: left of door, transom over door, right of door)
+      function pane(zCenter, w, yCenter, h) {
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), matGlass);
+        m.position.set(0, yCenter, zCenter);
+        m.rotation.y = -Math.PI / 2; // face -x (toward parking lot)
+        return m;
+      }
+      scene.add(pane(3.6875, 7.375, 7,    14)); // left pane (z=0..7.375)
+      scene.add(pane(8.875,  3,     10.5,  7)); // transom over door (z=7.375..10.375, y=7..14)
+      scene.add(pane(17.6875, 14.625, 7,   14)); // right pane (z=10.375..25)
+
+      // Vertical mullions every ~5 ft + at door jambs (jambs at 7.375 and 10.375 per architect spec)
+      const vMullionGeom = new THREE.BoxGeometry(0.5, 14, 0.25);
+      [0, 5, 7.375, 10.375, 15, 20, 25].forEach(z => {
+        const m = new THREE.Mesh(vMullionGeom, matMullion);
+        m.position.set(0, 7, z);
+        scene.add(m);
+      });
+      // Horizontal rails at floor, mid (door head height), and ceiling
+      const hRail = (y) => {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.25, 25.5), matMullion);
+        m.position.set(0, y, 12.5);
+        return m;
+      };
+      scene.add(hRail(0));
+      scene.add(hRail(7));   // door head / transom break
+      scene.add(hRail(14));
+
+      // Glass door (hinged on z=7.375 side, swung inward to interior)
+      const doorPivot = new THREE.Group();
+      doorPivot.position.set(0, 0, 7.375);
+      doorPivot.rotation.y = -Math.PI / 8;
+      scene.add(doorPivot);
+
+      const doorGlass = new THREE.Mesh(new THREE.BoxGeometry(0.12, 7, 3), matGlass);
+      doorGlass.position.set(0, 3.5, 1.5);
+      doorPivot.add(doorGlass);
+
+      // door rails (top + bottom) and stiles (left + right)
+      const doorRailMat = new THREE.MeshStandardMaterial({ color: 0x2a3640, metalness: 0.6, roughness: 0.4 });
+      const dTop = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 3), doorRailMat);
+      dTop.position.set(0, 6.83, 1.5);
+      const dBot = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 3), doorRailMat);
+      dBot.position.set(0, 0.18, 1.5);
+      const dStileL = new THREE.Mesh(new THREE.BoxGeometry(0.18, 7, 0.2), doorRailMat);
+      dStileL.position.set(0, 3.5, 0.1);
+      const dStileR = new THREE.Mesh(new THREE.BoxGeometry(0.18, 7, 0.2), doorRailMat);
+      dStileR.position.set(0, 3.5, 2.9);
+      doorPivot.add(dTop, dBot, dStileL, dStileR);
+
+      // Vertical pull handle (interior side)
+      const handleMat = new THREE.MeshStandardMaterial({ color: 0xb8d4e0, metalness: 0.85, roughness: 0.18 });
+      const handle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.5, 0.15), handleMat);
+      handle.position.set(0.18, 3.5, 2.6);
+      doorPivot.add(handle);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       OUTDOOR ENVIRONMENT — parking lot in front of the building (x < 0)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      // Ground plane far beyond the parking lot, simple grass/concrete fade.
+      // Big enough that its edge is lost in the fog from every overview angle.
+      const ground = new THREE.Mesh(
+        new THREE.BoxGeometry(1400, 0.02, 1400),
+        new THREE.MeshStandardMaterial({ color: 0x86927a, roughness: 0.95 })
+      );
+      ground.position.set(40, -0.06, 12.5);
+      ground.receiveShadow = true;
+      scene.add(ground);
+
+      // Asphalt parking lot
+      const asphalt = new THREE.Mesh(
+        new THREE.BoxGeometry(60, 0.04, 80),
+        new THREE.MeshStandardMaterial({ color: 0x2a2d33, roughness: 0.9 })
+      );
+      asphalt.position.set(-32, -0.04, 12.5);
+      asphalt.receiveShadow = true;
+      scene.add(asphalt);
+
+      // Sidewalk strip just in front of the building (x = -3..0)
+      const sidewalk = new THREE.Mesh(
+        new THREE.BoxGeometry(3, 0.06, 30),
+        new THREE.MeshStandardMaterial({ color: 0xa8a39a, roughness: 0.85 })
+      );
+      sidewalk.position.set(-1.5, -0.018, 12.5);
+      sidewalk.receiveShadow = true;
+      scene.add(sidewalk);
+
+      // Curb edge (raised lip between sidewalk and asphalt)
+      const curb = new THREE.Mesh(
+        new THREE.BoxGeometry(0.4, 0.4, 30),
+        new THREE.MeshStandardMaterial({ color: 0xc0bcb2, roughness: 0.85 })
+      );
+      curb.position.set(-3.2, 0.18, 12.5);
+      scene.add(curb);
+
+      // Parking spot stripes — 6 spots facing the building (cars nose-in toward sidewalk)
+      const stripeMat = new THREE.MeshBasicMaterial({ color: 0xfafaf0 });
+      const stripeGeom = new THREE.BoxGeometry(0.25, 0.005, 18);
+      const stripeXCenter = -14; // car nose at x=-5 (sidewalk edge), car length 18 -> back at x=-23
+      const spotZs = [-12, -3, 6, 15, 24, 33, 42];
+      spotZs.forEach(z => {
+        const stripe = new THREE.Mesh(stripeGeom, stripeMat);
+        stripe.position.set(stripeXCenter, 0.001, z);
+        scene.add(stripe);
+      });
+
+      // Curb stops at the head of each spot (between stripes)
+      const stopMat = new THREE.MeshStandardMaterial({ color: 0xb89a6c, roughness: 0.9 });
+      const stopGeom = new THREE.BoxGeometry(0.5, 0.4, 6);
+      [-7.5, 1.5, 10.5, 19.5, 28.5, 37.5].forEach(z => {
+        const s = new THREE.Mesh(stopGeom, stopMat);
+        s.position.set(-5.5, 0.18, z);
+        scene.add(s);
+      });
+
+      // Tall light pole at edge of lot
+      const poleMat = new THREE.MeshStandardMaterial({ color: 0x2a2d33, roughness: 0.6, metalness: 0.4 });
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 22, 12), poleMat);
+      pole.position.set(-26, 11, -10);
+      scene.add(pole);
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(4, 0.3, 0.3), poleMat);
+      arm.position.set(-24, 21, -10);
+      scene.add(arm);
+      const lamp = new THREE.Mesh(
+        new THREE.BoxGeometry(2.5, 0.5, 1.2),
+        new THREE.MeshStandardMaterial({ color: 0x202428, roughness: 0.5 })
+      );
+      lamp.position.set(-22, 20.7, -10);
+      scene.add(lamp);
+    }
+
+    // Ceiling
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(80, 0.2, 25), matCeiling);
+      m.position.set(40, WALL_H + 0.1, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+
+    // Roof trusses (perpendicular to length, every 8 ft along x)
+    for (let x = 4; x <= 80; x += 8) {
+      const truss = new THREE.Mesh(
+        new THREE.BoxGeometry(0.4, 0.4, 25),
+        new THREE.MeshStandardMaterial({ color: PAL.truss, roughness: 0.6 })
+      );
+      truss.position.set(x, WALL_H - 0.5, 12.5);
+      scene.add(truss);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       BRAND TEXTURES
+    ────────────────────────────────────────────────────────────────── */
+    // Full horizontal lockup: TAP diamond + ATHLETES / PITCHING ACADEMY
+    function makeLockupTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1280; c.height = 400;
+      const ctx = c.getContext('2d');
+      // light-blue brand panel
+      ctx.fillStyle = '#b8d4e0';
+      ctx.fillRect(0, 0, 1280, 400);
+
+      const ink = '#1a232b';
+      ctx.strokeStyle = ink;
+      ctx.fillStyle = ink;
+
+      // Diamond (left)
+      ctx.lineWidth = 16;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(220,  50);
+      ctx.lineTo(390, 200);
+      ctx.lineTo(220, 350);
+      ctx.lineTo( 50, 200);
+      ctx.closePath();
+      ctx.stroke();
+
+      // TAP text inside diamond
+      ctx.font = '900 115px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('TAP', 220, 195);
+
+      // Home plate at bottom of diamond
+      ctx.lineWidth = 12;
+      ctx.beginPath();
+      ctx.moveTo(186, 268);
+      ctx.lineTo(254, 268);
+      ctx.lineTo(254, 296);
+      ctx.lineTo(220, 326);
+      ctx.lineTo(186, 296);
+      ctx.closePath();
+      ctx.stroke();
+
+      // "ATHLETES" — big bold (right)
+      ctx.font = '900 138px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('ATHLETES', 470, 155);
+
+      // "PITCHING ACADEMY" — smaller, letter-spaced
+      ctx.font = '500 56px Inter, sans-serif';
+      const sub = 'PITCHING ACADEMY';
+      const startX = 470;
+      const subY = 252;
+      const spacing = 8;
+      let xx = startX;
+      for (const ch of sub) {
+        ctx.fillText(ch, xx, subY);
+        xx += ctx.measureText(ch).width + spacing;
+      }
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    }
+
+    // Motivational quote on the back wall (replaces the TAP lockup that used to live here).
+    // Auto-fits the quote font size to keep the text within the canvas, then
+    // scales the attribution proportionally.
+    function makeQuoteTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1536; c.height = 384;
+      const ctx = c.getContext('2d');
+
+      const quote = '"IT TAKES WHAT IT TAKES"';
+      const attr  = '— NICK SABAN';
+
+      // Auto-fit quote to ~85% of canvas width
+      let quoteSize = 120;
+      ctx.font = `900 ${quoteSize}px Inter, sans-serif`;
+      const target = c.width * 0.85;
+      while (ctx.measureText(quote).width > target && quoteSize > 40) {
+        quoteSize -= 4;
+        ctx.font = `900 ${quoteSize}px Inter, sans-serif`;
+      }
+
+      // Quote
+      ctx.fillStyle = 'rgba(184,212,224,0.96)';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(quote, c.width / 2, 150);
+
+      // Attribution — proportional to quote size
+      ctx.fillStyle = 'rgba(184,212,224,0.65)';
+      ctx.font = `500 ${Math.floor(quoteSize * 0.45)}px Inter, sans-serif`;
+      ctx.fillText(attr, c.width / 2, 270);
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    }
+
+    // shared lockup texture (used by all wall placements except back wall)
+    const lockupTex = makeLockupTexture();
+
+    // Back wall — motivational quote (was TAP lockup).
+    // Positioned in the lintel above the garage door (garage z=11..21,
+    // lintel y=8..14). z=16 centers it on the bay door.
+    {
+      const decal = new THREE.Mesh(
+        new THREE.PlaneGeometry(10, 2.5),
+        new THREE.MeshBasicMaterial({ map: makeQuoteTexture(), transparent: true })
+      );
+      decal.position.set(79.95, 10.5, 16); // y=10.5 in lintel (8..14), z=16 centered on garage
+      decal.rotation.y = -Math.PI / 2;
+      scene.add(decal);
+    }
+
+    // Left wall decals — 3 lockups along the cage length (z=0 wall, behind the left side net)
+    [20, 45, 70].forEach(xPos => {
+      const decal = new THREE.Mesh(
+        new THREE.PlaneGeometry(12, 3.75),
+        new THREE.MeshBasicMaterial({ map: lockupTex, transparent: true })
+      );
+      decal.position.set(xPos, 7.5, 0.01); // z=0 interior face, default normal faces +z (into building)
+      scene.add(decal);
+    });
+
+    // TAP Athletes Pitching Academy logo in the middle of the grey PVC field
+    // (2026-10-01). Artwork is 02_Marketing/Logos "small logo version" with its
+    // flat background cut out. Laid to read upright looking down the building
+    // from the entry / the mound (+x). Centered on the PVC field: x=40, z=12.5.
+    {
+      const LOGO_W = 9, LOGO_H = LOGO_W * 321 / 365;   // ft; artwork is 365 × 321 px
+      const tex = new THREE.TextureLoader().load('../assets/brand/tap-athletes-pitching-academy.png');
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      const pvcLogo = new THREE.Mesh(
+        new THREE.PlaneGeometry(LOGO_W, LOGO_H),
+        new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+      );
+      pvcLogo.rotation.set(-Math.PI / 2, 0, -Math.PI / 2);   // flat; artwork "up" → +x
+      pvcLogo.position.set(40, 0.03, 12.5);
+      scene.add(pvcLogo);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       PITCHING NET — 14' × 70' × 13' (x=7..77, z=1.17..15.17, h=13)
+       Front edge 7 ft in from the front door; back edge 3 ft short of the
+       back doors (matches specs/as-built-2026-09-22.md).
+       Cage net offset from z=0 wall by 2" pad thickness + 1 ft buffer.
+    ────────────────────────────────────────────────────────────────── */
+
+    const cageX1 = 7, cageX2 = cageX1 + 70;
+    const PAD_THK = 2/12, PAD_GAP = 1;
+    const cageZ1 = PAD_THK + PAD_GAP;     // ~1.17
+    const cageZ2 = cageZ1 + 14;           // ~15.17 (14 ft net width)
+    const cageZC = (cageZ1 + cageZ2) / 2; // ~8.17 — single lane centerline
+    const cageH = 13;   // raised from 11 on 2026-10-01; 1 ft below the 14 ft model ceiling
+
+    // Home plate x — the plate's BACK POINT (catcher side). Rubber sits at
+    // x=10.5 (mound starts 2 ft inside the front net), so 60'-6" lands the
+    // point at x=71 with a 6 ft catcher's box to the back net.
+    const PLATE_X = 71;
+
+    /* Netting (2026-10-01): a hung net, not a framed cage. No posts — the net
+       hangs from thin cables that run up to the ceiling, with a rope border
+       along its top edge. Panels carry a diamond-mesh texture so they read
+       as netting; the floor shows through the mesh untinted. */
+
+    // One diamond of mesh per tile. Drawn a little oversize (3" across) so the
+    // mesh reads on screen — real cage netting is about 1 3/4".
+    const NET_CELL = 0.25;
+    function makeNetTexture() {
+      const c = document.createElement('canvas');
+      c.width = 128; c.height = 128;
+      const ctx = c.getContext('2d');
+      // thin twine: ~5% coverage, so the floor under the net stays the same grey
+      ctx.strokeStyle = 'rgba(20,20,20,0.8)';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'square';
+      ctx.beginPath();
+      ctx.moveTo(0, 64); ctx.lineTo(64, 0); ctx.lineTo(128, 64); ctx.lineTo(64, 128); ctx.closePath();
+      ctx.stroke();
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+      tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+      return tex;
+    }
+    const matNet = new THREE.MeshBasicMaterial({
+      map: makeNetTexture(), transparent: true, side: THREE.DoubleSide, depthWrite: false,
+    });
+
+    // Rope border around the top edge of the net
+    const ROPE_T = 0.06;
+    function rope(p1, p2, t = ROPE_T) {
+      const len = new THREE.Vector3().subVectors(p2, p1).length();
+      const m = new THREE.Mesh(new THREE.BoxGeometry(t, t, len), matFrame);
+      m.position.copy(new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5));
+      m.lookAt(p2);
+      return m;
+    }
+    scene.add(rope(new THREE.Vector3(cageX1, cageH, cageZ1), new THREE.Vector3(cageX2, cageH, cageZ1)));
+    scene.add(rope(new THREE.Vector3(cageX1, cageH, cageZ2), new THREE.Vector3(cageX2, cageH, cageZ2)));
+    scene.add(rope(new THREE.Vector3(cageX1, cageH, cageZ1), new THREE.Vector3(cageX1, cageH, cageZ2)));
+    scene.add(rope(new THREE.Vector3(cageX2, cageH, cageZ1), new THREE.Vector3(cageX2, cageH, cageZ2)));
+
+    // Hanger cables from the rope border up to the ceiling, every 10 ft each side
+    for (let x = cageX1; x <= cageX2 + 0.001; x += 10) {
+      [cageZ1, cageZ2].forEach(z => {
+        scene.add(rope(new THREE.Vector3(x, cageH, z), new THREE.Vector3(x, WALL_H, z), 0.03));
+      });
+    }
+
+    // Net panels. One of w / h / d is the thin axis (kept from the old box
+    // signature); the panel is a flat sheet of mesh across the other two.
+    function netPanel(w, h, d, x, y, z) {
+      let geom, rotX = 0, rotY = 0;
+      if (d <= w && d <= h)      { geom = new THREE.PlaneGeometry(w, h); }
+      else if (w <= h && w <= d) { geom = new THREE.PlaneGeometry(d, h); rotY = Math.PI / 2; }
+      else                       { geom = new THREE.PlaneGeometry(w, d); rotX = -Math.PI / 2; }
+      // tile the mesh at NET_CELL per diamond regardless of panel size
+      const uv = geom.attributes.uv;
+      const { width, height } = geom.parameters;
+      for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * width / NET_CELL, uv.getY(i) * height / NET_CELL);
+      const m = new THREE.Mesh(geom, matNet);
+      m.rotation.set(rotX, rotY, 0);
+      m.position.set(x, y, z);
+      return m;
+    }
+    // Left side (z=cageZ1): cage net at the wall-side boundary.
+    scene.add(netPanel(cageX2-cageX1, cageH, 0.05, (cageX1+cageX2)/2, cageH/2, cageZ1));
+    // Foam wall padding (matsupplier-style, 2" thick, 6 ft tall) flush with
+    // z=0 building wall. 1 ft gap between padding face and the cage net.
+    {
+      const padH = 6;
+      const padMat = new THREE.MeshStandardMaterial({
+        color: 0x2a3a47, roughness: 0.85, metalness: 0.05,
+      });
+      const pad = new THREE.Mesh(
+        new THREE.BoxGeometry(cageX2-cageX1, padH, PAD_THK),
+        padMat
+      );
+      pad.position.set(
+        (cageX1+cageX2)/2,    // centered along cage length
+        padH/2,                // bottom flush with floor
+        PAD_THK/2              // sits flush with z=0 wall, sticking 2" inward
+      );
+      scene.add(pad);
+    }
+    // Right (z=cageZ2)
+    scene.add(netPanel(cageX2-cageX1, cageH, 0.05, (cageX1+cageX2)/2, cageH/2, cageZ2));
+    // Front net (x=cageX1): runs along z, thin in x
+    scene.add(netPanel(0.05, cageH, cageZ2-cageZ1, cageX1, cageH/2, (cageZ1+cageZ2)/2));
+    // Back net (x=cageX2)
+    scene.add(netPanel(0.05, cageH, cageZ2-cageZ1, cageX2, cageH/2, (cageZ1+cageZ2)/2));
+    // Top net
+    scene.add(netPanel(cageX2-cageX1, 0.05, cageZ2-cageZ1, (cageX1+cageX2)/2, cageH, (cageZ1+cageZ2)/2));
+
+    // Divider net (2026-10-02): on the centerline, splitting the 14 ft net into
+    // two 7 ft lanes. It slides on its own full-length rope and is shown pulled
+    // back halfway toward the plate end, clear of the mound: the whole 70 ft net
+    // gathered into the back 35 ft, so its mesh is squeezed to half width.
+    {
+      const DIVIDER_OPEN = 0.5;   // share of the lane the divider covers (1 = fully drawn)
+      const len = cageX2 - cageX1;
+      const divider = netPanel(len, cageH, 0.05, cageX2 - len * DIVIDER_OPEN / 2, cageH/2, cageZC);
+      divider.scale.x = DIVIDER_OPEN;
+      scene.add(divider);
+      scene.add(rope(new THREE.Vector3(cageX1, cageH, cageZC), new THREE.Vector3(cageX2, cageH, cageZC)));
+      // rope down the divider's free edge
+      const edgeX = cageX2 - len * DIVIDER_OPEN;
+      scene.add(rope(new THREE.Vector3(edgeX, 0, cageZC), new THREE.Vector3(edgeX, cageH, cageZC), 0.04));
+    }
+
+    // Windscreen (2026-10-02): tinted screen fabric hung on the front net behind
+    // the mound, so the ball leaves the pitcher's hand against a dark background.
+    // Full net width; the 9 ft height is assumed (not measured).
+    {
+      const SCREEN_H = 9;
+      const screen = new THREE.Mesh(
+        new THREE.PlaneGeometry(cageZ2 - cageZ1, SCREEN_H),
+        new THREE.MeshLambertMaterial({
+          color: 0x0e1418, transparent: true, opacity: 0.55, side: THREE.DoubleSide, depthWrite: false,
+        })
+      );
+      screen.rotation.y = Math.PI / 2;
+      screen.position.set(cageX1 + 0.04, SCREEN_H / 2, cageZC);   // just inside the front net
+      scene.add(screen);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       MOUND — one, at the front of the net, centered on the net width
+       Portolite XL (Oversized) practice mound in black: 10'-6" L × 5' W ×
+       10" H. Long axis along x (toward back of cage).
+       x=9..19.5 (2 ft inside the front net), z=cageZC-2.5..cageZC+2.5  (~5.67..10.67)
+    ────────────────────────────────────────────────────────────────── */
+    // Portolite Oversized practice mound (2026-10-01): 10"H × 10'-6"L × 5'W, black turf.
+    // Profile: level table at the back carrying the rubber, then a straight
+    // slope down to a low lip at the front. Table length is assumed (2.5 ft).
+    function mound(x1, x2, z1, z2) {
+      const w = x2 - x1, d = z2 - z1, h = 10/12; // 10 inches
+      const table = 2.5, lip = 0.06;
+      const profile = new THREE.Shape();
+      profile.moveTo(0, 0); profile.lineTo(w, 0); profile.lineTo(w, lip);
+      profile.lineTo(table, h); profile.lineTo(0, h);
+      profile.closePath();
+      const body = new THREE.Mesh(
+        new THREE.ExtrudeGeometry(profile, { depth: d, bevelEnabled: false }),
+        matMoundTop
+      );
+      body.position.set(x1, 0, z1);
+      body.castShadow = true; body.receiveShadow = true;
+      scene.add(body);
+      // Pitching rubber on the table, ~1.5 ft from the back. Pitcher strides forward (+x).
+      const rubber = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.08, 2), matRubber);
+      rubber.position.set(x1 + 1.5, h + 0.04, (z1+z2)/2);
+      scene.add(rubber);
+    }
+    mound(cageX1 + 2, cageX1 + 12.5, cageZC - 2.5, cageZC + 2.5);   // 10'-6" × 5', centered, 4.5 ft clear to each side net
+
+    /* ─────────────────────────────────────────────────────────────────
+       HOME PLATE + BATTER'S MAT — one plate on the lane centerline
+       (z=cageZC), lined up with the mound. Rubber x=10.5 → plate point
+       x=71 keeps the rubber-to-plate spacing at 60'-6", with a 6 ft
+       catcher's box behind the plate (x=71 to back net at x=77).
+       Pentagon shape: flat edge faces the pitcher (-x), point faces the
+       catcher (+x) — flipped 2026-10-01 to match the mat.
+    ────────────────────────────────────────────────────────────────── */
+    {
+      /* Batter's mat (2026-10-01) — black turf mat modeled on the one
+         purchased: batter's boxes both sides of the plate, a catcher's tab
+         behind it, white box lines, plate inlaid.
+         Sizes are ASSUMED until the product spec is in specs/:
+           main mat 7' long × 12' wide, centered on the plate
+           catcher's tab 2.75' long × 5' wide (stops just short of the back net)
+           box lines 4" wide: inner pair 6" off the plate, outer pair 4' beyond */
+      {
+        const plateMidX = PLATE_X - 0.425;
+        const MAIN_L = 7, MAIN_W = 12, TAB_L = 2.75, TAB_W = 5;
+        const mainX1 = plateMidX - MAIN_L/2, mainX2 = plateMidX + MAIN_L/2;
+        const tabX2 = mainX2 + TAB_L;
+        const matY = 0.01, matThk = 0.05;   // sits on the PVC / rubber
+        const turfMat = new THREE.MeshStandardMaterial({ color: 0x0c0c0c, roughness: 0.98 });
+        const lineMat = new THREE.MeshStandardMaterial({ color: 0xfafafa, roughness: 0.7 });
+
+        const main = new THREE.Mesh(new THREE.BoxGeometry(MAIN_L, matThk, MAIN_W), turfMat);
+        main.position.set(plateMidX, matY + matThk/2, cageZC);
+        main.receiveShadow = true;
+        scene.add(main);
+        const tab = new THREE.Mesh(new THREE.BoxGeometry(TAB_L, matThk, TAB_W), turfMat);
+        tab.position.set(mainX2 + TAB_L/2, matY + matThk/2, cageZC);
+        tab.receiveShadow = true;
+        scene.add(tab);
+
+        const LINE_W = 4/12;
+        const innerOff = 0.71 + 0.5 + LINE_W/2;   // half plate width + 6" gap
+        const outerOff = innerOff + 4;            // 4 ft wide batter's box
+        function boxLine(x1, x2, z) {
+          const m = new THREE.Mesh(new THREE.BoxGeometry(x2 - x1, 0.006, LINE_W), lineMat);
+          m.position.set((x1 + x2)/2, matY + matThk + 0.003, z);
+          scene.add(m);
+        }
+        [-1, 1].forEach(side => {
+          boxLine(mainX1, tabX2, cageZC + side * innerOff);   // inner lines run on through the catcher's tab
+          boxLine(mainX1, mainX2, cageZC + side * outerOff);
+        });
+      }
+
+      // Reusable pentagon geometry for home plate (origin at the back point)
+      const shape = new THREE.Shape();
+      shape.moveTo(-0.85, -0.71); shape.lineTo(-0.85, 0.71);
+      shape.lineTo(-0.45, 0.71); shape.lineTo(0, 0); shape.lineTo(-0.45, -0.71);
+      shape.closePath();
+      const plateGeom = new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: false });
+      const plateMat = new THREE.MeshStandardMaterial({ color: 0xfafafa, roughness: 0.4 });
+
+      // Catcher-target texture: dark teal background, dark catcher silhouette,
+      // 8 tan/orange mitts arranged around the strike zone with numbered
+      // positions (1 = center, 2/3 = sides, 4/5 = upper corners, 6/7 = low
+      // corners, 8 = high middle). Used as the back-net pitching target.
+      function makeCatcherTargetTexture() {
+        const c = document.createElement('canvas');
+        c.width = 1024; c.height = 1024;
+        const ctx = c.getContext('2d');
+
+        // Dark teal/slate background
+        ctx.fillStyle = '#1a2f3a';
+        ctx.fillRect(0, 0, c.width, c.height);
+
+        // Catcher body silhouette — chest protector
+        ctx.fillStyle = '#2a3540';
+        const bodyX = 400, bodyY = 380, bodyW = 224, bodyH = 360, bodyR = 50;
+        ctx.beginPath();
+        ctx.moveTo(bodyX + bodyR, bodyY);
+        ctx.lineTo(bodyX + bodyW - bodyR, bodyY);
+        ctx.quadraticCurveTo(bodyX + bodyW, bodyY, bodyX + bodyW, bodyY + bodyR);
+        ctx.lineTo(bodyX + bodyW, bodyY + bodyH - bodyR);
+        ctx.quadraticCurveTo(bodyX + bodyW, bodyY + bodyH, bodyX + bodyW - bodyR, bodyY + bodyH);
+        ctx.lineTo(bodyX + bodyR, bodyY + bodyH);
+        ctx.quadraticCurveTo(bodyX, bodyY + bodyH, bodyX, bodyY + bodyH - bodyR);
+        ctx.lineTo(bodyX, bodyY + bodyR);
+        ctx.quadraticCurveTo(bodyX, bodyY, bodyX + bodyR, bodyY);
+        ctx.closePath();
+        ctx.fill();
+
+        // Catcher mask/head
+        ctx.beginPath();
+        ctx.arc(512, 330, 78, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#3a4a55';
+        ctx.fillRect(454, 305, 116, 50);
+
+        // 8 catcher mitts/gloves
+        const mitts = [
+          { x: 512, y: 580, num: '1' }, // center
+          { x: 360, y: 580, num: '2' }, // left
+          { x: 664, y: 580, num: '3' }, // right
+          { x: 290, y: 420, num: '4' }, // upper left
+          { x: 734, y: 420, num: '5' }, // upper right
+          { x: 280, y: 760, num: '6' }, // lower left
+          { x: 744, y: 760, num: '7' }, // lower right
+          { x: 512, y: 200, num: '8' }, // top center
+        ];
+
+        mitts.forEach(m => {
+          // dark stitched edge
+          ctx.fillStyle = '#15171a';
+          ctx.beginPath();
+          ctx.ellipse(m.x, m.y, 95, 68, 0, 0, Math.PI * 2);
+          ctx.fill();
+          // tan glove face
+          ctx.fillStyle = '#d4825a';
+          ctx.beginPath();
+          ctx.ellipse(m.x, m.y, 85, 58, 0, 0, Math.PI * 2);
+          ctx.fill();
+          // number
+          ctx.fillStyle = '#15171a';
+          ctx.font = '900 60px Inter, sans-serif';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(m.num, m.x, m.y + 4);
+        });
+
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.anisotropy = 8;
+        return tex;
+      }
+
+      const tgtMat = new THREE.MeshBasicMaterial({
+        map: makeCatcherTargetTexture(), side: THREE.DoubleSide,
+      });
+
+      // home plate — inlaid in the batter's mat, top just proud of the turf
+      const plate = new THREE.Mesh(plateGeom, plateMat);
+      plate.rotation.x = -Math.PI / 2;
+      plate.position.set(PLATE_X, 0.012, cageZC);
+      scene.add(plate);
+
+      // Catcher target on the back net, centered above the plate
+      const tgt = new THREE.Mesh(new THREE.PlaneGeometry(4, 4), tgtMat);
+      tgt.position.set(cageX2 - 0.05, 3.7, cageZC);
+      tgt.rotation.y = -Math.PI / 2;
+      scene.add(tgt);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       BATHROOM (x=0..7, z=18..25, h=9) — 7' × 7' outside footprint, flush
+       in the front-right corner (specs/as-built-2026-09-22.md).
+       Right wall (z=25) shared with building wall; entry-side wall sits
+       against the inside of the front glass mullions. Door on the
+       gym-facing (x=bx2) wall, whose outer face lines up with the net front.
+    ────────────────────────────────────────────────────────────────── */
+    {
+      // 7' × 7' OUTSIDE footprint (as-built 2026-09-22; supersedes the architect
+      // 6'-11 1/2" × 8'-8 1/2" interior note). bx/bz are wall centerlines — walls
+      // are 0.2 thick, so the outer faces land on x=7 and z=18.
+      // Door is on the wall at x=bx2 (gym-facing, mirror side). No floor grate
+      // (retired in the as-built notes).
+      const BATH_OUT = 7;
+      const bx1 = 0.35, bx2 = BATH_OUT - 0.1;
+      const bz2 = 25, bz1 = bz2 - BATH_OUT + 0.1;
+      const bh = 9;
+      // entry-side wall (x=bx1), faces -x toward entry pad
+      scene.add(mkBath(0.2, bh, bz2-bz1, bx1, bh/2, (bz1+bz2)/2));
+      // gym-facing wall (x=bx2) — has the door
+      scene.add(mkBath(0.2, bh, bz2-bz1, bx2, bh/2, (bz1+bz2)/2));
+      // side wall (z=bz1), perpendicular to mirror — solid
+      scene.add(mkBath(bx2-bx1, bh, 0.2, (bx1+bx2)/2, bh/2, bz1));
+      // roof
+      scene.add(mkBath(bx2-bx1, 0.2, bz2-bz1, (bx1+bx2)/2, bh, (bz1+bz2)/2));
+
+      function mkBath(w, h, d, x, y, z) {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matBathWall);
+        m.position.set(x, y, z);
+        return m;
+      }
+
+      // Door on x=bx2 wall (gym-facing), centered along z. 3 ft wide, opens into bathroom.
+      const doorWidth = 3;
+      const doorCenterZ = (bz1+bz2)/2;
+      const door = new THREE.Mesh(
+        new THREE.BoxGeometry(0.05, 7, doorWidth),
+        new THREE.MeshStandardMaterial({ color: 0x1a232b, roughness: 0.5 })
+      );
+      door.position.set(bx2 + 0.1, 3.5, doorCenterZ);
+      scene.add(door);
+      // handle (toward +z side of door)
+      const handle = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1),
+        new THREE.MeshStandardMaterial({ color: PAL.brand, roughness: 0.3, metalness: 0.6 })
+      );
+      handle.position.set(bx2 + 0.16, 3.3, doorCenterZ + 1.2);
+      scene.add(handle);
+
+      // WC sign above the door, facing the gym (+x)
+      {
+        const c = document.createElement('canvas');
+        c.width = 256; c.height = 128;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = 'rgba(184,212,224,0.95)';
+        ctx.font = '800 80px Inter, sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('WC', 128, 64);
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        const sign = new THREE.Mesh(
+          new THREE.PlaneGeometry(1.5, 0.75),
+          new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+        );
+        sign.rotation.y = -Math.PI / 2; // face +x toward gym
+        sign.position.set(bx2 + 0.15, 6, doorCenterZ);
+        scene.add(sign);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       GYM MIRRORS — on right wall (z=25): three 5' × 7' panels side by side,
+       15 ft total (x=17.5..32.5), from 1 ft off the floor up to 8 ft.
+       Sized 2026-10-01 (was one 30' × 10' mirror wall, x=10..40).
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const PANELS = 3, PANEL_W = 5, MIRROR_H = 7, MIRROR_Y0 = 1;
+      const MIRROR_W = PANELS * PANEL_W;
+      const mirrorX = 25, mirrorY = MIRROR_Y0 + MIRROR_H / 2;
+
+      // Real-time reflective mirror — renders the scene from a mirrored camera
+      // each frame and projects it onto the surface. Reflects the gym in front.
+      // textureWidth/Height match the viewport (not the device pixel ratio — the
+      // reflection is a full extra render pass, so this keeps it affordable).
+      // One reflector spans all three panels; the seams between panels are drawn over it.
+      const mirror = new Reflector(new THREE.PlaneGeometry(MIRROR_W, MIRROR_H), {
+        clipBias: 0.003,
+        textureWidth:  window.innerWidth,
+        textureHeight: window.innerHeight,
+        color: 0xffffff, // no tint — let the reflected scene's own colors come through
+      });
+      mirror.position.set(mirrorX, mirrorY, 24.88); // just proud of the wall, as a mounted mirror sits
+      mirror.rotation.y = Math.PI;      // face -z (into the building)
+      scene.add(mirror);
+
+      // slim frame around the set
+      const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(MIRROR_W + 0.2, MIRROR_H + 0.2, 0.1),
+        matMirrorFrame
+      );
+      frame.position.set(mirrorX, mirrorY, 24.94);
+      scene.add(frame);
+
+      // seams between the panels
+      for (let i = 1; i < PANELS; i++) {
+        const seam = new THREE.Mesh(new THREE.BoxGeometry(0.05, MIRROR_H, 0.02), matMirrorFrame);
+        seam.position.set(mirrorX - MIRROR_W / 2 + i * PANEL_W, mirrorY, 24.87);
+        scene.add(seam);
+      }
+
+      // floor tape line in front of the mirrors (z=23, same span)
+      const tape = new THREE.Mesh(
+        new THREE.BoxGeometry(MIRROR_W, 0.005, 0.1),
+        new THREE.MeshStandardMaterial({ color: PAL.brand, emissive: PAL.brand, emissiveIntensity: 0.3 })
+      );
+      tape.position.set(mirrorX, 0.07, 23);
+      scene.add(tape);
+
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       KETTLEBELL RACK (x=52..60, z=22..24.5)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const kx1 = 52, kx2 = 60, kz1 = 22, kz2 = 24.5;
+      const base = new THREE.Mesh(
+        new THREE.BoxGeometry(kx2-kx1, 0.6, kz2-kz1),
+        matWoodDk
+      );
+      base.position.set((kx1+kx2)/2, 0.3, (kz1+kz2)/2);
+      base.castShadow = true;
+      scene.add(base);
+      const uprightGeom = new THREE.BoxGeometry(0.15, 3, 0.15);
+      [[kx1,kz1],[kx2,kz1],[kx1,kz2],[kx2,kz2]].forEach(([x,z]) => {
+        const u = new THREE.Mesh(uprightGeom, matMetal);
+        u.position.set(x, 1.5 + 0.6, z);
+        scene.add(u);
+      });
+      // Photo-realistic kettlebells via CC0 .glb (plaggy, 1K PBR textures).
+      // Load once, clone 5 times scaled to match the existing size progression.
+      const kbSizes = [0.35, 0.42, 0.50, 0.58, 0.66];
+      gltfLoader.load('../assets/equipment/kettlebell.glb', (gltf) => {
+        const proto = gltf.scene;
+        const bbox  = new THREE.Box3().setFromObject(proto);
+        const size  = new THREE.Vector3(); bbox.getSize(size);
+        const protoHeight = size.y || 1;
+
+        kbSizes.forEach((r, i) => {
+          const obj = proto.clone(true);
+          const targetHeight = r * 1.7;            // matches the old kettlebell vertical footprint
+          const s = targetHeight / protoHeight;
+          obj.scale.setScalar(s);
+
+          const x = kx1 + 0.8 + (i / (kbSizes.length - 1)) * (kx2 - kx1 - 1.6);
+          const baseOffset = -bbox.min.y * s;      // raise so the model's bottom sits on the rack base
+          obj.position.set(x, 0.6 + baseOffset, (kz1+kz2)/2);
+
+          obj.traverse(c => { if (c.isMesh) { c.castShadow = true; c.receiveShadow = true; } });
+          scene.add(obj);
+        });
+      }, undefined, (err) => {
+        console.warn('[kettlebell.glb] failed to load, falling back to primitive spheres:', err);
+        // Primitive fallback so the rack isn't empty if the file 404s
+        kbSizes.forEach((r, i) => {
+          const x = kx1 + 0.8 + (i / (kbSizes.length - 1)) * (kx2 - kx1 - 1.6);
+          const ball = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), matMetal);
+          ball.position.set(x, 0.6 + r + 0.05, (kz1+kz2)/2);
+          ball.castShadow = true;
+          scene.add(ball);
+        });
+      });
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       CLASSROOM NOOK — against the mirror-side wall (z=25), x ~41..51
+       Sits where the med ball rack used to be (the rack moved back to the
+       old barbell-rack spot). Whiteboard + TV on the wall, centers ~5 ft
+       off the floor; 3 chairs facing the wall on the rubber border, and 3
+       turned around behind them as a viewing row facing the pitching lane.
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const WALL_Z = 25;        // interior face of the mirror-side wall
+      const MOUNT_Y = 5;        // board + TV center height
+      const trimMat = new THREE.MeshStandardMaterial({ color: 0xb4b9be, roughness: 0.4, metalness: 0.7 });
+
+      // Whiteboard — 6' × 4', x=41..47
+      {
+        const wbX = 44, wbW = 6, wbH = 4;
+        const frame = new THREE.Mesh(new THREE.BoxGeometry(wbW + 0.2, wbH + 0.2, 0.06), trimMat);
+        frame.position.set(wbX, MOUNT_Y, WALL_Z - 0.03);
+        scene.add(frame);
+        const board = new THREE.Mesh(
+          new THREE.BoxGeometry(wbW, wbH, 0.04),
+          // slight emissive so the board reads white against the off-white wall
+          new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.25, metalness: 0.0, emissive: 0xffffff, emissiveIntensity: 0.45 })
+        );
+        board.position.set(wbX, MOUNT_Y, WALL_Z - 0.07);
+        scene.add(board);
+        // marker tray along the bottom edge
+        const tray = new THREE.Mesh(new THREE.BoxGeometry(wbW - 1, 0.06, 0.25), trimMat);
+        tray.position.set(wbX, MOUNT_Y - wbH/2 - 0.08, WALL_Z - 0.16);
+        scene.add(tray);
+      }
+
+      // TV — 55" class (4' × 2.25' screen), x=47.5..51.5
+      {
+        const tvX = 49.5, tvW = 4, tvH = 2.25;
+        const bezel = new THREE.Mesh(
+          new THREE.BoxGeometry(tvW + 0.12, tvH + 0.12, 0.14),
+          new THREE.MeshStandardMaterial({ color: 0x0c0d0f, roughness: 0.5, metalness: 0.3 })
+        );
+        bezel.position.set(tvX, MOUNT_Y, WALL_Z - 0.1);
+        bezel.castShadow = true;
+        scene.add(bezel);
+        const screen = new THREE.Mesh(
+          new THREE.BoxGeometry(tvW, tvH, 0.02),
+          new THREE.MeshStandardMaterial({ color: 0x10161d, roughness: 0.12, metalness: 0.5 })
+        );
+        screen.position.set(tvX, MOUNT_Y, WALL_Z - 0.18);
+        scene.add(screen);
+      }
+
+      // Chairs — 6 total, 2 rows of 3, back to back (2026-10-01):
+      //   classroom row on the rubber border, ~2.3 ft off the wall, facing the board (+z)
+      //   viewing row turned around to face the pitching lane (-z), 1.7 ft off the net
+      [43.8, 46.0, 48.2].forEach(x => {
+        chair(x, 22.0);
+        chair(x, 17.6, Math.PI);
+      });
+    }
+
+    // Simple chair (classroom nook + front desk). Faces +z at rotY=0.
+    function chair(x, z, rotY = 0) {
+      const seatH = 1.5, seatW = 1.5, seatD = 1.4;
+      const g = new THREE.Group();
+      g.position.set(x, 0, z);
+      g.rotation.y = rotY;
+      const seat = new THREE.Mesh(new THREE.BoxGeometry(seatW, 0.1, seatD), matMat);
+      seat.position.set(0, seatH, 0);
+      seat.castShadow = true;
+      g.add(seat);
+      const back = new THREE.Mesh(new THREE.BoxGeometry(seatW, 1.3, 0.1), matMat);
+      back.position.set(0, seatH + 0.85, -seatD/2 + 0.05);
+      back.castShadow = true;
+      g.add(back);
+      const legGeom = new THREE.BoxGeometry(0.08, seatH, 0.08);
+      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => {
+        const leg = new THREE.Mesh(legGeom, matMetal);
+        leg.position.set(sx * (seatW/2 - 0.08), seatH/2, sz * (seatD/2 - 0.08));
+        g.add(leg);
+      });
+      scene.add(g);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       DUMBBELL RACK + MED BALL RACK (CC BY 4.0 by MH, via Sketchfab)
+       Two instances of the same .gltf:
+         - Rack #1: dumbbells visible (default).       x ~71..76.6
+         - Rack #2: dumbbells hidden, med balls on it. x ~63.8..69.4
+       Real model dims: 170 × 50 × 85 cm (5.58 × 1.64 × 2.79 ft).
+       Both against the mirror-side wall at the back end of the gym strip.
+    ────────────────────────────────────────────────────────────────── */
+    function makeMedBallTexture(topColor) {
+      const c = document.createElement('canvas');
+      c.width = 1024; c.height = 512;
+      const ctx = c.getContext('2d');
+      // Top half: bright color
+      ctx.fillStyle = topColor;
+      ctx.fillRect(0, 0, c.width, c.height / 2);
+      // Bottom half: black rubber
+      ctx.fillStyle = '#15171a';
+      ctx.fillRect(0, c.height / 2, c.width, c.height / 2);
+      // Center stripe with TAP branding
+      const stripeH = 70;
+      ctx.fillStyle = '#15171a';
+      ctx.fillRect(0, c.height / 2 - stripeH / 2, c.width, stripeH);
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '900 38px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      for (let i = 0; i < 4; i++) {
+        ctx.fillText('TAP ATHLETES', c.width * (0.125 + i * 0.25), c.height / 2);
+      }
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    }
+
+    gltfLoader.load('../assets/equipment/dumbbell-rack/scene.gltf', (gltf) => {
+      const proto = gltf.scene;
+      proto.updateMatrixWorld(true);
+
+      // Proto bbox (in the loaded model's own coord space) — used to compute
+      // scale + center offset so the rack lands centered + bottom-on-floor.
+      const protoBbox = new THREE.Box3().setFromObject(proto);
+      const protoSize = new THREE.Vector3(); protoBbox.getSize(protoSize);
+      const protoCenter = new THREE.Vector3(); protoBbox.getCenter(protoCenter);
+      const longest = Math.max(protoSize.x, protoSize.y, protoSize.z);
+      const scaleFactor = longest > 0 ? 5.58 / longest : 1;
+
+      function placeRack(opts) {
+        // Wrapper group sits at the world target (opts.x, 0, opts.z) and
+        // owns the rotation. The rack inside is offset so its bbox center +
+        // floor end up at the wrapper's origin.
+        const wrapper = new THREE.Group();
+        wrapper.position.set(opts.x, 0, opts.z);
+        wrapper.rotation.y = opts.rotY || 0;
+        scene.add(wrapper);
+
+        const rack = proto.clone(true);
+        rack.scale.setScalar(scaleFactor);
+        rack.position.set(
+          -protoCenter.x * scaleFactor,         // center horizontally
+          -protoBbox.min.y * scaleFactor,       // sit bottom on floor
+          -protoCenter.z * scaleFactor,         // center on depth
+        );
+        rack.traverse(c => {
+          if (!c.isMesh) return;
+          c.castShadow = true; c.receiveShadow = true;
+          const matName = (c.material && c.material.name) || '';
+          // The gltf's fabric mat is ~5.5×5.5 ft — much bigger than the rack
+          // frame. Hide it and replace with a properly-sized custom mat below
+          // so it doesn't poke through the building wall.
+          if (matName === 'fabric') {
+            c.visible = false;
+          }
+          if (opts.hideDumbbells && (matName === 'plastic' || matName === 'metal')) {
+            c.visible = false;
+          }
+        });
+        wrapper.add(rack);
+
+        // Custom black floor mat sized to the rack frame footprint (5.7 × 1.9 ft).
+        const matMesh = new THREE.Mesh(
+          new THREE.BoxGeometry(5.7, 0.06, 1.9),
+          new THREE.MeshStandardMaterial({ color: 0x111111, roughness: 0.95, metalness: 0 })
+        );
+        matMesh.position.set(0, 0.03, 0);
+        matMesh.receiveShadow = true;
+        wrapper.add(matMesh);
+
+        // Now compute the WORLD bbox so callers can place things relative to
+        // the actual on-screen rack location, not the proto's local space.
+        wrapper.updateMatrixWorld(true);
+        const worldBbox = new THREE.Box3().setFromObject(wrapper);
+        return worldBbox;
+      }
+
+      // Rack #1 — with dumbbells, against the mirror wall just past the med ball rack
+      placeRack({ x: 73.8, z: 23.7, hideDumbbells: false });
+
+      // Rack #2 — med balls instead of dumbbells. Moved 2026-10-01 from x=46 into
+      // the old barbell-rack spot (x=64..69.15) to free the wall for the classroom nook.
+      const r2bbox = placeRack({ x: 66.6, z: 23.7, hideDumbbells: true });
+
+      // Med balls on Rack #2 — two rows (top: lighter/smaller, bottom: heavier/bigger)
+      const medBallColors = ['#e8c84a', '#4a8acd', '#5fb959', '#a96cd4', '#cd4a4a']; // yellow/blue/green/purple/red
+      const r2x1 = r2bbox.min.x, r2x2 = r2bbox.max.x;
+      const r2y1 = r2bbox.min.y, r2y2 = r2bbox.max.y;
+      const r2zC = (r2bbox.min.z + r2bbox.max.z) / 2;
+      [
+        { yFrac: 0.62, r: 0.28 }, // top tier — 2 lb-ish, smaller
+        { yFrac: 0.20, r: 0.42 }, // bottom tier — 6 lb+, bigger
+      ].forEach((tier) => {
+        const y = r2y1 + (r2y2 - r2y1) * tier.yFrac;
+        for (let i = 0; i < 5; i++) {
+          const t = (i + 0.5) / 5;
+          const x = r2x1 + t * (r2x2 - r2x1);
+          const tex = makeMedBallTexture(medBallColors[i]);
+          const ball = new THREE.Mesh(
+            new THREE.SphereGeometry(tier.r, 32, 24),
+            new THREE.MeshStandardMaterial({ map: tex, roughness: 0.85, metalness: 0.05 })
+          );
+          ball.position.set(x, y + tier.r, r2zC);
+          ball.castShadow = true;
+          scene.add(ball);
+        }
+      });
+    }, undefined, (err) => {
+      console.warn('[dumbbell-rack.gltf] failed to load:', err);
+    });
+
+    /* ─────────────────────────────────────────────────────────────────
+       FRONT DESK — L-shaped, pressed into the front-left corner
+       (x=0.3..4.3, z=0.05..4.55). The main leg runs along the front glass
+       with its end against the left wall; the return leg comes off its
+       door end and faces the opening, meeting people as they walk in.
+       The seat sits inside the L facing the glass (-x); staff walk in
+       from the net side, which stays ~2.7 ft clear (net front at x=7).
+       Acer laptop on the glass leg. Sizes assumed: 4.5' + 4' legs,
+       2' deep, 29" high.
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const DESK_H = 2.42, TOP_T = 0.1, PANEL_T = 0.08;
+      const DEPTH = 2;
+      const glassX = 0.3, wallZ = 0.05;            // inside of the glass mullions / left wall
+      const doorZ = wallZ + 4.5;                   // glass leg: 4.5' along the glass, door end
+      const elbowX = glassX + DEPTH;
+      const retX2 = elbowX + 2;                    // return leg: 4' back from the glass (incl. the elbow)
+      const panelMat = new THREE.MeshStandardMaterial({ color: 0x2a3640, roughness: 0.7 });
+      const panelH = DESK_H - TOP_T;
+
+      function slab(w, h, d, x, y, z, mat) {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+        m.position.set(x, y, z);
+        m.castShadow = true; m.receiveShadow = true;
+        scene.add(m);
+      }
+      // tops
+      slab(DEPTH, TOP_T, doorZ - wallZ, glassX + DEPTH/2, DESK_H - TOP_T/2, (wallZ + doorZ)/2, matWood);
+      slab(retX2 - elbowX, TOP_T, DEPTH, (elbowX + retX2)/2, DESK_H - TOP_T/2, doorZ - DEPTH/2, matWood);
+      // visitor-facing panels: along the glass, and along the door side of both legs
+      slab(PANEL_T, panelH, doorZ - wallZ, glassX + PANEL_T/2, panelH/2, (wallZ + doorZ)/2, panelMat);
+      slab(retX2 - glassX, panelH, PANEL_T, (glassX + retX2)/2, panelH/2, doorZ - PANEL_T/2, panelMat);
+      // end panel: net end of the return leg
+      slab(PANEL_T, panelH, DEPTH, retX2 - PANEL_T/2, panelH/2, doorZ - DEPTH/2, panelMat);
+
+      const seatZ = 1.35;
+      chair(elbowX + 1.1, seatZ, -Math.PI / 2);   // facing the front glass (-x)
+
+      // Acer laptop — open on the glass leg, screen toward the seat
+      {
+        const lapW = 1.17, lapD = 0.8;   // ~14" wide
+        const shellMat = new THREE.MeshStandardMaterial({ color: 0xb9bcc0, roughness: 0.4, metalness: 0.6 });
+        const hingeX = glassX + 0.7;
+        const base = new THREE.Mesh(new THREE.BoxGeometry(lapD, 0.05, lapW), shellMat);
+        base.position.set(hingeX + lapD/2, DESK_H + 0.025, seatZ);
+        base.castShadow = true;
+        scene.add(base);
+        const keyboard = new THREE.Mesh(
+          new THREE.BoxGeometry(lapD * 0.55, 0.004, lapW * 0.88),
+          new THREE.MeshStandardMaterial({ color: 0x1c1e21, roughness: 0.6 })
+        );
+        keyboard.position.set(hingeX + lapD * 0.36, DESK_H + 0.052, seatZ);
+        scene.add(keyboard);
+
+        // lid pivots at the hinge, leaning back toward the glass
+        const lid = new THREE.Group();
+        lid.position.set(hingeX, DESK_H + 0.05, seatZ);
+        lid.rotation.z = 0.3;
+        scene.add(lid);
+        const lidH = 0.78;
+        const shell = new THREE.Mesh(new THREE.BoxGeometry(0.03, lidH, lapW), shellMat);
+        shell.position.set(0, lidH/2, 0);
+        shell.castShadow = true;
+        lid.add(shell);
+        const display = new THREE.Mesh(
+          new THREE.BoxGeometry(0.004, lidH - 0.08, lapW - 0.08),
+          new THREE.MeshBasicMaterial({ color: 0x9fc3dc })
+        );
+        display.position.set(0.017, lidH/2, 0);
+        lid.add(display);
+
+        // "acer" wordmark on the back of the lid (faces people walking in)
+        const c = document.createElement('canvas');
+        c.width = 256; c.height = 96;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = '#5b8f00';
+        ctx.font = '700 72px Inter, sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('acer', 128, 50);
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        const logo = new THREE.Mesh(
+          new THREE.PlaneGeometry(0.42, 0.16),
+          new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+        );
+        logo.rotation.y = -Math.PI / 2;   // face -x
+        logo.position.set(-0.017, lidH/2, 0);
+        lid.add(logo);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       WELCOME MAT — just inside the front door (x=4..6, z=7.375..10.375)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const mat = new THREE.Mesh(new THREE.BoxGeometry(2, 0.04, 3), matMat);
+      mat.position.set(5, 0.07, 8.875);
+      scene.add(mat);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       CONTROLS — two views, both driven the same way:
+         arrow keys (or W A S D), the on-screen arrows, or drag / swipe.
+       Overview:    looking in from outside. Left / right spins the building,
+                    up / down zooms. The roof and whichever wall is between
+                    the camera and the room are hidden so you can see inside.
+       Walk Inside: at eye level. Up / down walks, left / right turns,
+                    drag or swipe looks around. No mouse capture, no ESC.
+    ────────────────────────────────────────────────────────────────── */
+
+    let mode = 'overview';
+    let activeCam = orbitCam;
+    const canvas = renderer.domElement;
+    const portrait = () => window.innerWidth < window.innerHeight;
+
+    // Shadows are redrawn only for a few frames after something changes.
+    let shadowFrames = 60;
+    THREE.DefaultLoadingManager.onLoad = () => { shadowFrames = 10; };  // models / textures arrived
+
+    // ── Input: keyboard + on-screen arrows feed the same four directions ──
+    const DIRS = ['fwd', 'back', 'left', 'right'];
+    const keyDown = { fwd: false, back: false, left: false, right: false };
+    const padDown = { fwd: false, back: false, left: false, right: false };
+    let fast = false;
+    const on = (dir) => keyDown[dir] || padDown[dir];
+    const KEY_DIR = {
+      ArrowUp: 'fwd', ArrowDown: 'back', ArrowLeft: 'left', ArrowRight: 'right',
+      KeyW: 'fwd', KeyS: 'back', KeyA: 'left', KeyD: 'right',
+    };
+    const padButtons = {};
+    document.querySelectorAll('#pad button').forEach(b => { padButtons[b.dataset.dir] = b; });
+    function refreshPad() {
+      DIRS.forEach(d => padButtons[d].classList.toggle('down', on(d)));
+    }
+    function releaseAll() {
+      DIRS.forEach(d => { keyDown[d] = false; padDown[d] = false; });
+      fast = false;
+      refreshPad();
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') fast = true;
+      const dir = KEY_DIR[e.code];
+      if (!dir || e.ctrlKey || e.metaKey || e.altKey) return;
+      e.preventDefault();
+      keyDown[dir] = true;
+      refreshPad();
+    });
+    document.addEventListener('keyup', (e) => {
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') fast = false;
+      const dir = KEY_DIR[e.code];
+      if (!dir) return;
+      keyDown[dir] = false;
+      refreshPad();
+    });
+    window.addEventListener('blur', releaseAll);   // no stuck keys after switching windows
+
+    DIRS.forEach(dir => {
+      const b = padButtons[dir];
+      const set = (v) => { padDown[dir] = v; refreshPad(); };
+      b.addEventListener('pointerdown', (e) => {
+        e.preventDefault();
+        b.setPointerCapture(e.pointerId);
+        set(true);
+      });
+      ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(t => b.addEventListener(t, () => set(false)));
+      b.addEventListener('contextmenu', (e) => e.preventDefault());   // long-press on a phone
+    });
+
+    // ── Overview: orbit around the building ──
+    const orbit = new OrbitControls(orbitCam, canvas);
+    orbit.target.set(40, 4, 12.5);
+    orbit.enableDamping = true;
+    orbit.dampingFactor = 0.2;      // settles quickly — the view stays under the finger
+    orbit.enablePan = false;        // the building can't be dragged off screen
+    orbit.rotateSpeed = 0.8;
+    orbit.zoomSpeed = 0.8;
+    orbit.maxPolarAngle = Math.PI * 0.4;   // never lower than ~18° above the ground
+    orbit.minDistance = 12;
+    orbit.maxDistance = 170;
+
+    function overviewHome() {
+      // Wide screens: from the front-right corner. Tall phone screens: from
+      // above the front door, looking down the length of the building.
+      // Squarer windows back the camera off so the whole building stays in frame.
+      const aspect = window.innerWidth / window.innerHeight;
+      orbit.target.set(40, 4, 12.5);
+      if (portrait()) orbitCam.position.set(-52, 62, 30);
+      else orbitCam.position.set(-75, 24, 42.5).multiplyScalar(Math.max(1, 1.7 / aspect)).add(orbit.target);
+      orbit.update();
+    }
+
+    const SPIN_RATE = 1.0;   // rad/s with left / right held
+    const ZOOM_RATE = 0.9;   // e-folds/s with up / down held
+    let spinV = 0, zoomV = 0;
+    const orbitOffset = new THREE.Vector3();
+    const orbitSph = new THREE.Spherical();
+    function updateOverview(dt) {
+      const ease = Math.min(1, 10 * dt);
+      const boost = fast ? 2 : 1;
+      spinV += ((Number(on('right')) - Number(on('left'))) * SPIN_RATE * boost - spinV) * ease;
+      zoomV += ((Number(on('fwd')) - Number(on('back'))) * ZOOM_RATE * boost - zoomV) * ease;
+      if (Math.abs(spinV) > 1e-4 || Math.abs(zoomV) > 1e-4) {
+        orbitOffset.copy(orbitCam.position).sub(orbit.target);
+        orbitSph.setFromVector3(orbitOffset);
+        orbitSph.theta += spinV * dt;
+        orbitSph.radius *= Math.exp(-zoomV * dt);
+        orbitOffset.setFromSpherical(orbitSph);
+        orbitCam.position.copy(orbit.target).add(orbitOffset);
+      }
+      orbit.update();   // also clamps the zoom distance
+    }
+
+    // ── Walk Inside ──
+    const EYE_H = 5.6;
+    const WALK_SPEED = 8, RUN_SPEED = 16;   // ft/s
+    const TURN_RATE = 1.4;                  // rad/s
+    const MAX_PITCH = 1.0;                  // how far you can look up / down
+    const BODY = 0.6;                       // shoulder room kept from walls and solid things
+    // Solid things you can't walk through: [x1, x2, z1, z2]. The net is not one
+    // of them — you walk through it the way you'd lift it and step in.
+    const BLOCKS = [
+      [0, 7, 18, 25],          // bathroom
+      [0.3, 4.3, 0.05, 4.55],  // front desk
+    ];
+    const blocked = (x, z) => BLOCKS.some(([x1, x2, z1, z2]) =>
+      x > x1 - BODY && x < x2 + BODY && z > z1 - BODY && z < z2 + BODY);
+
+    const walkPos = new THREE.Vector2();   // x, z
+    let yaw = 0, pitch = 0, walkV = 0, turnV = 0;
+    function walkHome() {
+      // At the head of the gym-side lane, just inside the net, looking down its length.
+      // (From the door itself the net is 4 ft from your face and fills the screen;
+      // on the centerline, walking straight ahead runs you into the divider net.)
+      walkPos.set(cageX1 + 0.8, cageZC + 3.5);
+      yaw = -Math.PI / 2;          // -PI/2 looks straight down the length (+x)
+      pitch = -0.05;
+      walkV = turnV = 0;
+    }
+    function updateWalk(dt) {
+      const ease = Math.min(1, 10 * dt);
+      const speed = fast ? RUN_SPEED : WALK_SPEED;
+      walkV += ((Number(on('fwd')) - Number(on('back'))) * speed - walkV) * ease;
+      turnV += ((Number(on('left')) - Number(on('right'))) * TURN_RATE - turnV) * ease;
+      yaw += turnV * dt;
+      const dx = -Math.sin(yaw) * walkV * dt;
+      const dz = -Math.cos(yaw) * walkV * dt;
+      // one axis at a time, so you slide along a wall instead of sticking to it
+      const nx = Math.max(BODY, Math.min(80 - BODY, walkPos.x + dx));
+      if (!blocked(nx, walkPos.y)) walkPos.x = nx;
+      const nz = Math.max(BODY, Math.min(25 - BODY, walkPos.y + dz));
+      if (!blocked(walkPos.x, nz)) walkPos.y = nz;
+      walkCam.position.set(walkPos.x, EYE_H, walkPos.y);
+      walkCam.rotation.set(pitch, yaw, 0);
+    }
+
+    // Drag (mouse / trackpad) or swipe (finger) to look around. The scene
+    // follows the pointer, like dragging a photo.
+    let dragId = null, dragX = 0, dragY = 0;
+    canvas.addEventListener('pointerdown', (e) => {
+      canvas.classList.add('dragging');
+      if (mode !== 'walk' || dragId !== null) return;
+      dragId = e.pointerId; dragX = e.clientX; dragY = e.clientY;
+      canvas.setPointerCapture(e.pointerId);
+    });
+    canvas.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== dragId) return;
+      const perPx = THREE.MathUtils.degToRad(walkCam.fov) / window.innerHeight;
+      yaw += (e.clientX - dragX) * perPx;
+      pitch = Math.max(-MAX_PITCH, Math.min(MAX_PITCH, pitch + (e.clientY - dragY) * perPx));
+      dragX = e.clientX; dragY = e.clientY;
+    });
+    ['pointerup', 'pointercancel'].forEach(t => canvas.addEventListener(t, (e) => {
+      canvas.classList.remove('dragging');
+      if (e.pointerId === dragId) dragId = null;
+    }));
+
+    // ── Cutaway: in the overview, hide the roof and the walls the camera is behind ──
+    const shell = { roof: [], left: [], right: [], back: [] };
+    {
+      const box = new THREE.Box3();
+      scene.children.forEach(o => {
+        if (o.isLight || o.isCamera) return;
+        box.setFromObject(o);
+        if (box.isEmpty()) return;
+        // only things on the building itself, not the parking lot
+        if (box.min.x < -1 || box.max.x > 81.5 || box.min.z < -1 || box.max.z > 26.5) return;
+        if (box.min.y > 13.05) shell.roof.push(o);        // ceiling, trusses, light housings
+        else if (box.max.z < 0.5) shell.left.push(o);     // z=0 wall + what hangs on it
+        else if (box.min.z > 24.4) shell.right.push(o);   // z=25 wall, mirrors, whiteboard, TV
+        else if (box.min.x > 79) shell.back.push(o);      // back wall + both doors
+      });
+    }
+    const shellShown = { roof: true, left: true, right: true, back: true };
+    function updateCutaway() {
+      const over = mode === 'overview';
+      const want = {
+        roof:  !over,
+        left:  !(over && orbitCam.position.z < 0),
+        right: !(over && orbitCam.position.z > 25),
+        back:  !(over && orbitCam.position.x > 80),
+      };
+      for (const side in want) {
+        if (want[side] === shellShown[side]) continue;
+        shellShown[side] = want[side];
+        shell[side].forEach(o => { o.visible = want[side]; });
+        shadowFrames = 2;
+      }
+    }
+
+    // ── Mode switch + on-screen hint ──
+    const coarse = window.matchMedia('(pointer: coarse)').matches;   // finger, not mouse
+    const HELP = coarse ? {
+      overview: 'Swipe to spin · pinch to zoom',
+      walk: 'Hold the arrows to walk · swipe to look',
+    } : {
+      overview: '<kbd>←</kbd><kbd>→</kbd> spin · <kbd>↑</kbd><kbd>↓</kbd> zoom · or drag',
+      walk: '<kbd>↑</kbd><kbd>↓</kbd> walk · <kbd>←</kbd><kbd>→</kbd> turn · drag to look around',
+    };
+
+    function setMode(newMode) {
+      // Pressing the button for the view you're already in takes you back to its start.
+      if (newMode === mode) { if (mode === 'walk') walkHome(); else overviewHome(); }
+      mode = newMode;
+      activeCam = (mode === 'walk') ? walkCam : orbitCam;
+      orbit.enabled = (mode === 'overview');
+      dragId = null;
+      spinV = zoomV = walkV = turnV = 0;
+      document.querySelectorAll('#mode-panel button[data-mode]').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === mode);
+      });
+      document.getElementById('help').innerHTML = HELP[mode];
+      document.getElementById('cam-info').textContent = mode;
+    }
+
+    document.querySelectorAll('#mode-panel button[data-mode]').forEach(b => {
+      b.addEventListener('click', () => { setMode(b.dataset.mode); b.blur(); });
+    });
+
+    // Bay door toggle
+    const bayDoorBtn = document.getElementById('bay-door-toggle');
+    bayDoorBtn.addEventListener('click', () => {
+      bayDoorOpen = !bayDoorOpen;
+      bayDoorBtn.classList.toggle('active', bayDoorOpen);
+      bayDoorBtn.blur();
+    });
+
+    function fitCameras() {
+      const w = window.innerWidth, h = window.innerHeight, aspect = w / h;
+      renderer.setSize(w, h);
+      // The field of view is set top-to-bottom, so on a tall phone screen it is
+      // widened to keep a usable left-to-right view.
+      const sideToSide = THREE.MathUtils.degToRad(65);
+      walkCam.fov = aspect >= 1 ? 75
+        : Math.min(100, THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(sideToSide / 2) / aspect)));
+      orbitCam.fov = aspect >= 1 ? 38 : 50;
+      orbitCam.aspect = aspect; orbitCam.updateProjectionMatrix();
+      walkCam.aspect = aspect; walkCam.updateProjectionMatrix();
+    }
+    let wasPortrait = portrait();
+    window.addEventListener('resize', () => {
+      fitCameras();
+      // phone turned: re-frame the overview for the new shape
+      if (portrait() !== wasPortrait) { wasPortrait = portrait(); overviewHome(); }
+    });
+
+    fitCameras();
+    overviewHome();
+    walkHome();
+    setMode('overview');
+
+    function frame(dt) {
+      if (mode === 'walk') updateWalk(dt);
+      else updateOverview(dt);
+      updateCutaway();
+
+      // Bay door roll-up animation: scale.y compresses the panel toward the
+      // top of the opening; position.y shifts so the top stays pinned at ROLL_H.
+      if (bayDoorGroup) {
+        const target = bayDoorOpen ? 0 : 1;
+        if (Math.abs(target - bayDoorState) > 0.001) shadowFrames = 2;
+        bayDoorState += (target - bayDoorState) * 0.08;
+        const s = Math.max(bayDoorState, 0.01);
+        bayDoorGroup.scale.y = s;
+        bayDoorGroup.position.y = (2 - s) * bayDoorRollH / 2;
+      }
+
+      if (shadowFrames > 0) { renderer.shadowMap.needsUpdate = true; shadowFrames--; }
+      renderer.render(scene, activeCam);
+    }
+
+    const clock = new THREE.Clock();
+    function animate() {
+      frame(Math.min(clock.getDelta(), 0.05));
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

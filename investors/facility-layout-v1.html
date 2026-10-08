@@ -1,0 +1,1207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TAP Athletes Pitching Academy — Facility Layout</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate: #3a4a55;
+    --slate-deep: #2a3640;
+    --slate-mid: #4a5d6b;
+    --slate-light: #5a6f7e;
+    --powder: #b8d4e0;
+    --powder-soft: #d4e4ed;
+    --black: #0a0a0a;
+    --rubber: #141414;
+    --rubber-light: #1f1f1f;
+    --turf: #4a7c4e;
+    --turf-light: #5a8c5e;
+    --turf-deep: #3a6c3e;
+    --royal: #1e5fb8;
+    --royal-deep: #164a96;
+    --paper: #f5f8fb;
+    --ink: #1a232b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: #e8edf2; }
+  body {
+    background: #e8edf2;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .sheet {
+    width: min(1800px, 100%);
+    aspect-ratio: 3 / 2;
+    background: var(--paper);
+    position: relative;
+    box-shadow: 0 30px 80px -20px rgba(58, 74, 85, 0.25), 0 4px 12px rgba(58, 74, 85, 0.08);
+    overflow: hidden;
+  }
+  /* paper subtle grid */
+  .sheet::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(58,74,85,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(58,74,85,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .sheet::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 1px solid rgba(58,74,85,0.12);
+    pointer-events: none;
+  }
+  svg { display: block; width: 100%; height: 100%; }
+
+  /* SVG-friendly font setup is in <text> attrs */
+</style>
+</head>
+<body>
+
+<div class="sheet">
+<svg viewBox="0 0 1800 1200" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+
+  <defs>
+    <!-- gradients -->
+    <linearGradient id="wallTop" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#4a5d6b"/>
+      <stop offset="1" stop-color="#3a4a55"/>
+    </linearGradient>
+    <linearGradient id="wallSideL" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#2a3640"/>
+      <stop offset="1" stop-color="#3a4a55"/>
+    </linearGradient>
+    <linearGradient id="wallSideR" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#3a4a55"/>
+      <stop offset="1" stop-color="#2a3640"/>
+    </linearGradient>
+    <linearGradient id="wallBack" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#3f515d"/>
+      <stop offset="1" stop-color="#324049"/>
+    </linearGradient>
+
+    <linearGradient id="floor" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1a1a1a"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+
+    <linearGradient id="turfGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#7fb3cf"/>
+      <stop offset="1" stop-color="#3d6f8c"/>
+    </linearGradient>
+
+    <linearGradient id="moundTop" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2a6fc8"/>
+      <stop offset="1" stop-color="#164a96"/>
+    </linearGradient>
+    <linearGradient id="moundSide" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#1e5fb8"/>
+      <stop offset="1" stop-color="#0f3a78"/>
+    </linearGradient>
+
+    <linearGradient id="mirrorGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#cfe1ea"/>
+      <stop offset="0.5" stop-color="#e8f0f5"/>
+      <stop offset="1" stop-color="#a8c4d2"/>
+    </linearGradient>
+
+    <linearGradient id="bathroomTop" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#5a6f7e"/>
+      <stop offset="1" stop-color="#42525e"/>
+    </linearGradient>
+
+    <!-- pill shadow -->
+    <filter id="pillShadow" x="-20%" y="-20%" width="140%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#3a4a55" flood-opacity="0.25"/>
+    </filter>
+    <filter id="bldgShadow" x="-10%" y="-10%" width="120%" height="140%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="14"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- TAP diamond emblem -->
+    <symbol id="tapDiamond" viewBox="0 0 100 120">
+      <g fill="none" stroke="currentColor" stroke-width="3.5">
+        <path d="M50 6 L94 50 L50 94 L6 50 Z"/>
+      </g>
+      <text x="50" y="60" text-anchor="middle"
+            font-family="Inter, sans-serif" font-weight="800" font-size="28"
+            letter-spacing="2" fill="currentColor">TAP</text>
+      <!-- home plate -->
+      <path d="M38 102 L62 102 L62 110 L50 117 L38 110 Z"
+            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    </symbol>
+
+    <!-- netting pattern (diagonal lattice) -->
+    <pattern id="netting" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+      <path d="M0 14 L14 0 M-3 3 L3 -3 M11 17 L17 11" stroke="#1a1a1a" stroke-width="0.6" opacity="0.55"/>
+      <path d="M0 0 L14 14 M-3 11 L3 17 M11 -3 L17 3" stroke="#1a1a1a" stroke-width="0.6" opacity="0.55"/>
+    </pattern>
+
+    <!-- turf texture (tiny stipple) -->
+    <pattern id="turfDots" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="url(#turfGrad)"/>
+      <circle cx="2" cy="2" r="0.5" fill="#2c5a73" opacity="0.6"/>
+      <circle cx="5" cy="4" r="0.4" fill="#9ec6dc" opacity="0.5"/>
+    </pattern>
+
+    <!-- rubber floor stipple -->
+    <pattern id="rubberTex" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="url(#floor)"/>
+      <circle cx="4" cy="6" r="0.6" fill="#2a2a2a"/>
+      <circle cx="14" cy="3" r="0.5" fill="#222"/>
+      <circle cx="9" cy="13" r="0.7" fill="#2a2a2a"/>
+      <circle cx="17" cy="16" r="0.5" fill="#222"/>
+      <circle cx="2" cy="17" r="0.4" fill="#1e1e1e"/>
+    </pattern>
+
+  </defs>
+
+  <!-- ============== HEADER ============== -->
+  <g id="header">
+    <!-- diamond logo -->
+    <g transform="translate(70, 60)" color="#3a4a55">
+      <use href="#tapDiamond" width="64" height="76"/>
+    </g>
+
+    <!-- wordmark -->
+    <text x="156" y="98" font-family="Inter, sans-serif" font-weight="800" font-size="34"
+          letter-spacing="3" fill="#3a4a55">TAP ATHLETES</text>
+    <text x="156" y="128" font-family="Inter, sans-serif" font-weight="500" font-size="20"
+          letter-spacing="6" fill="#5a6f7e">PITCHING ACADEMY</text>
+
+    <!-- right-side title block -->
+    <g transform="translate(1730, 60)">
+      <text x="0" y="20" text-anchor="end"
+            font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2"
+            fill="#5a6f7e">DOC · FL-001 / REV A</text>
+      <text x="0" y="42" text-anchor="end"
+            font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2"
+            fill="#5a6f7e">SCALE · 1/4" = 1'-0"</text>
+      <text x="0" y="64" text-anchor="end"
+            font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2"
+            fill="#5a6f7e">SHEET · 1 OF 1</text>
+    </g>
+
+    <!-- divider -->
+    <line x1="70" y1="160" x2="1730" y2="160" stroke="#3a4a55" stroke-width="1" opacity="0.35"/>
+
+    <!-- title bar -->
+    <text x="70" y="200" font-family="Inter, sans-serif" font-weight="700" font-size="44"
+          letter-spacing="-0.5" fill="#1a232b">Facility Layout</text>
+    <text x="70" y="232" font-family="Inter, sans-serif" font-weight="400" font-size="18"
+          letter-spacing="0.5" fill="#5a6f7e">Elite pitching development. Built for the next level.</text>
+
+    <!-- top-right footprint badge -->
+    <g transform="translate(1730, 195)">
+      <rect x="-200" y="-30" width="200" height="50" fill="#3a4a55"/>
+      <text x="-100" y="-8" text-anchor="middle" font-family="JetBrains Mono, monospace"
+            font-size="10" letter-spacing="3" fill="#b8d4e0">FOOTPRINT</text>
+      <text x="-100" y="13" text-anchor="middle" font-family="Inter, sans-serif"
+            font-weight="700" font-size="18" letter-spacing="2" fill="#fff">30' × 70' · 2,000 SF</text>
+    </g>
+  </g>
+
+  <!-- ============== ISOMETRIC DIAGRAM ============== -->
+  <!-- iso projection setup:
+       facility footprint 30ft (x-axis, width) x 70ft (z-axis, depth)
+       x scale: 14 px/ft along iso-x (right-down)
+       z scale: 14 px/ft along iso-z (left-down)
+       iso angle: 30 deg.
+       Helper math (in <g transform>):
+         iso point (x, z) at floor level (y=0):
+           sx = ix * cos30 + iz * cos30  -> with sign: x to right, z to left
+           sy = -ix * sin30 + iz * sin30
+       I'll build a transform group anchored at the front corner of the building.
+  -->
+
+  <!-- big soft drop shadow under the building -->
+  <ellipse cx="900" cy="1080" rx="640" ry="56" fill="#3a4a55" opacity="0.16"/>
+  <ellipse cx="900" cy="1080" rx="540" ry="34" fill="#3a4a55" opacity="0.18"/>
+
+  <!--
+    Origin: front-LEFT corner of building, on floor.
+    iso unit vectors (px per foot):
+      ex  (along width, going to back-right side)  = ( 12.124, -7.0 )
+      ez  (along depth, going to back-left side)   = (-12.124, -7.0 )
+      ey  (vertical, up the page)                  = ( 0, -10 )
+
+    Building 30 ft wide (along ex) x 70 ft deep (along ez).
+    Wall height ~ 14 ft.
+
+    front-left  (FL): (0,0)
+    front-right (FR): 30*ex = (363.7, -210)
+    back-left   (BL): 70*ez = (-848.7, -490)
+    back-right  (BR): FR + BL = (-485, -700)
+  -->
+
+  <g id="building" transform="translate(1010, 1000)">
+
+    <!-- ====== FLOOR (rubber) ====== -->
+    <!-- floor polygon FL -> FR -> BR -> BL -->
+    <polygon points="0,0 363.7,-210 -485,-700 -848.7,-490"
+             fill="url(#rubberTex)" stroke="#000" stroke-width="0.5"/>
+
+    <!-- subtle floor seams (rubber tile lines, every 5 ft along width and depth) -->
+    <g opacity="0.18" stroke="#3a3a3a" stroke-width="0.6" fill="none">
+      <!-- lines parallel to ex (from front edge to back edge) at every 5 ft of depth -->
+      <g>
+        <!-- depth = 5..65 every 5 ft  : start point = 5n * ez, end = 5n*ez + 30*ex -->
+        <line x1="-60.6" y1="-35" x2="303.0" y2="-245"/>
+        <line x1="-121.2" y1="-70" x2="242.4" y2="-280"/>
+        <line x1="-181.9" y1="-105" x2="181.8" y2="-315"/>
+        <line x1="-242.5" y1="-140" x2="121.2" y2="-350"/>
+        <line x1="-303.1" y1="-175" x2="60.6" y2="-385"/>
+        <line x1="-363.7" y1="-210" x2="0" y2="-420"/>
+        <line x1="-424.3" y1="-245" x2="-60.6" y2="-455"/>
+        <line x1="-485.0" y1="-280" x2="-121.2" y2="-490"/>
+        <line x1="-545.6" y1="-315" x2="-181.9" y2="-525"/>
+        <line x1="-606.2" y1="-350" x2="-242.5" y2="-560"/>
+        <line x1="-666.8" y1="-385" x2="-303.1" y2="-595"/>
+        <line x1="-727.4" y1="-420" x2="-363.7" y2="-630"/>
+        <line x1="-788.1" y1="-455" x2="-424.4" y2="-665"/>
+      </g>
+      <!-- lines parallel to ez at every 5 ft of width -->
+      <g>
+        <line x1="60.6" y1="-35" x2="-788.1" y2="-525"/>
+        <line x1="121.2" y1="-70" x2="-727.5" y2="-560"/>
+        <line x1="181.9" y1="-105" x2="-666.8" y2="-595"/>
+        <line x1="242.5" y1="-140" x2="-606.2" y2="-630"/>
+        <line x1="303.1" y1="-175" x2="-545.6" y2="-665"/>
+      </g>
+    </g>
+
+    <!-- ====== WALLS (left + back, with thickness) ====== -->
+    <!-- wall thickness ~0.5 ft inward; wall height = 14 ft -->
+    <!-- BACK wall: from BL to BR, height up
+         BL = (-848.7, -490), BR = (-485, -700)
+         top-BL = BL + 14*ey = (-848.7, -630)
+         top-BR = BR + 14*ey = (-485, -840) -->
+    <polygon points="-848.7,-490 -485,-700 -485,-840 -848.7,-630"
+             fill="url(#wallBack)" stroke="#1f2830" stroke-width="1.2"/>
+
+    <!-- LEFT wall: from FL to BL
+         FL = (0,0), BL = (-848.7,-490)
+         top-FL = (0,-140), top-BL = (-848.7,-630) -->
+    <polygon points="0,0 -848.7,-490 -848.7,-630 0,-140"
+             fill="url(#wallSideL)" stroke="#1f2830" stroke-width="1.2"/>
+
+    <!-- wall thickness top caps (thin band at the top of each wall) -->
+    <!-- top of back wall, slim slab -->
+    <polygon points="-848.7,-630 -485,-840 -485,-844 -848.7,-634"
+             fill="#5a6f7e"/>
+    <!-- top of left wall slim slab -->
+    <polygon points="0,-140 -848.7,-630 -848.7,-634 0,-144"
+             fill="#5a6f7e"/>
+
+    <!-- inner-corner crease where back+left walls meet (BL corner) -->
+    <line x1="-848.7" y1="-490" x2="-848.7" y2="-630" stroke="#1a232b" stroke-width="1.2"/>
+
+    <!-- ====== BRANDING WALL GRAPHICS ====== -->
+    <!-- Back wall logo lockup, drawn on the back-wall plane.
+         The back wall plane spans BL->BR horizontally; height up.
+         A horizontal vector "u" along the back wall (per foot of width):
+           u_back = (BR-BL)/30 = ( (363.7-0)/30 ?  actually BR-BL = (363.7, -210) ) / 30 = (12.124, -7)
+         vertical "v" = (0,-10)
+    -->
+    <!-- big "TAP" + diamond on back wall, centered, ~5 ft above floor -->
+    <g opacity="0.92">
+      <!-- diamond emblem on back wall, centered -->
+      <!-- center of back wall: midpoint between BL and BR raised 7 ft
+           BL=(-848.7,-490), BR=(-485,-700). mid = (-666.85,-595). raise 7ft = +(0,-70) => (-666.85,-665).
+           Now we'll draw a logo "decal" using a small rotated/skewed group.
+           To stick it to the back-wall plane, apply a transform whose basis is u_back and v.
+      -->
+      <g transform="matrix(12.124, -7, 0, -10, -666.85, -595)">
+        <!-- inside this matrix, x is feet along wall (right), y is feet up -->
+        <!-- diamond: span ~3 ft, centered at (0, 7) ft -->
+        <g transform="translate(-12, 6)" stroke="#b8d4e0" stroke-width="0.18" fill="none">
+          <path d="M0 0 L1.5 1.5 L0 3 L-1.5 1.5 Z"/>
+          <text x="0" y="2" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800"
+                font-size="1" letter-spacing="0.05" fill="#b8d4e0" stroke="none">TAP</text>
+        </g>
+        <!-- horizontal lockup -->
+        <text x="0" y="6" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800"
+              font-size="1.7" letter-spacing="0.18" fill="#b8d4e0" stroke="none">TAP ATHLETES</text>
+        <text x="0" y="3.8" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500"
+              font-size="0.95" letter-spacing="0.35" fill="#b8d4e0" stroke="none">PITCHING ACADEMY</text>
+      </g>
+    </g>
+
+    <!-- left-wall stripe graphic above pitching lane (thin powder-blue stripe + repeating wordmark) -->
+    <g opacity="0.78">
+      <!-- left wall plane basis: along ez per foot = (-12.124, -7); vertical = (0,-10).
+           Stripe runs from depth 8 ft to 62 ft, at height 9 ft -->
+      <!-- thin stripe -->
+      <polygon
+        points="-96.99,-146 -751.69,-524 -751.69,-534 -96.99,-156"
+        fill="#b8d4e0" opacity="0.85"/>
+      <!-- wordmark repeated along left wall -->
+      <g transform="matrix(-12.124, -7, 0, -10, -424.4, -335)">
+        <text x="0" y="0" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700"
+              font-size="1.4" letter-spacing="0.3" fill="#b8d4e0">TAP · TAP · TAP · TAP</text>
+      </g>
+    </g>
+
+    <!-- ====== CENTRAL TAP LOGO INLAY ON FLOOR ====== -->
+    <!-- Logo inlaid in the open front-central area of the floor, in front of training area / right of pitching lane.
+         Logo center in feet: x=20 (from left), z=15 (from front). At floor level y=0.
+         Iso position: 20*ex + 15*ez = (242.5,-140) + (-181.85,-105) = (60.65, -245)
+    -->
+    <g transform="translate(60.65,-245)">
+      <!-- circular ring -->
+      <ellipse cx="0" cy="0" rx="98" ry="56" fill="none" stroke="#b8d4e0" stroke-width="3" opacity="0.85"/>
+      <ellipse cx="0" cy="0" rx="86" ry="49" fill="none" stroke="#b8d4e0" stroke-width="1" opacity="0.55"/>
+      <!-- diamond -->
+      <g opacity="0.95">
+        <path d="M0,-32 L46,0 L0,32 L-46,0 Z" fill="none" stroke="#b8d4e0" stroke-width="3"/>
+        <text x="0" y="-2" text-anchor="middle" font-family="Inter, sans-serif"
+              font-weight="800" font-size="22" letter-spacing="3" fill="#b8d4e0"
+              transform="scale(1, 0.58)">TAP</text>
+        <!-- small home plate below -->
+        <path d="M-12,18 L12,18 L12,24 L0,30 L-12,24 Z" fill="none" stroke="#b8d4e0"
+              stroke-width="2" stroke-linejoin="round" transform="scale(1, 0.58) translate(0, 8)"/>
+      </g>
+    </g>
+
+    <!-- ====== PITCHING LANE ====== -->
+    <!--
+      Lane occupies:
+        width: from x=0 to x=12 (along ex)
+        depth: from z=0 to z=70 (along ez)
+        2 ft clearance from LEFT WALL — left wall is at x=0 (interior), so clearance puts lane starting at x=2.
+        Actually the spec says "runs along the left wall with ~2ft clearance from the wall"
+        So lane spans x = 2 .. 14 (12 ft wide).
+    -->
+    <!-- Turf runway: x in [2,14], z in [0,70] -->
+    <g id="lane">
+      <!-- compute corners (xa..xd):
+           A: x=2,  z=0   -> 2*ex             = (24.25, -14)
+           B: x=14, z=0   -> 14*ex            = (169.74,-98)
+           C: x=14, z=70  -> 14*ex + 70*ez    = (169.74,-98) + (-848.7,-490) = (-678.96,-588)
+           D: x=2,  z=70  -> 2*ex + 70*ez     = (24.25,-14) + (-848.7,-490) = (-824.45,-504)
+      -->
+      <!-- turf base -->
+      <polygon points="24.25,-14 169.74,-98 -678.96,-588 -824.45,-504"
+               fill="url(#turfGrad)" stroke="#2a4a5e" stroke-width="0.8"/>
+      <!-- turf lighter stripes (mowing pattern) -->
+      <g opacity="0.45">
+        <!-- thin stripes parallel to ez at every 2 ft of width -->
+        <polygon points="48.5,-28 72.74,-42 -776.0,-532 -800.2,-518" fill="#9ec6dc" opacity="0.5"/>
+        <polygon points="96.99,-56 121.24,-70 -727.5,-560 -751.7,-546" fill="#9ec6dc" opacity="0.5"/>
+        <polygon points="145.49,-84 169.74,-98 -678.96,-588 -703.21,-574" fill="#9ec6dc" opacity="0.5"/>
+      </g>
+      <!-- turf inner outline -->
+      <polygon points="24.25,-14 169.74,-98 -678.96,-588 -824.45,-504"
+               fill="none" stroke="#b8d4e0" stroke-width="0.8" opacity="0.45"/>
+
+      <!-- ===== Netting cage frame ===== -->
+      <!-- Frame posts at corners + intermediate.
+           Net height ~ 11 ft.
+           Posts at z=0,15,30,45,60,70; on both x=2 and x=14 sides; plus back net at z=70.
+      -->
+      <!-- helper: post height = 11 ft (110 px). Post at base (bx,by) -> top (bx, by-110) -->
+
+      <!-- LEFT side posts (x=2): visible (front side facing camera-right? )
+           Their bases:
+           z=0:  (24.25, -14)
+           z=15: 2*ex + 15*ez = (24.25,-14)+(-181.85,-105) = (-157.6,-119)
+           z=30: (-339.45, -224)
+           z=45: (-521.30, -329)
+           z=60: (-703.15, -434)
+           z=70: (-824.45, -504)
+      -->
+      <!-- RIGHT side posts (x=14):
+           z=0:  (169.74, -98)
+           z=15: (-12.11,-203)
+           z=30: (-193.96,-308)
+           z=45: (-375.81,-413)
+           z=60: (-557.66,-518)
+           z=70: (-678.96,-588)
+      -->
+
+      <!-- net panels (drawn first, behind posts) -->
+      <!-- LEFT side net (vertical) — semi-transparent dark with netting pattern -->
+      <polygon points="24.25,-14 -824.45,-504 -824.45,-614 24.25,-124"
+               fill="url(#netting)" stroke="#0a0a0a" stroke-width="0.6" opacity="0.95"/>
+      <polygon points="24.25,-14 -824.45,-504 -824.45,-614 24.25,-124"
+               fill="#0a0a0a" opacity="0.18"/>
+
+      <!-- RIGHT side net (vertical) -->
+      <polygon points="169.74,-98 -678.96,-588 -678.96,-698 169.74,-208"
+               fill="url(#netting)" stroke="#0a0a0a" stroke-width="0.6" opacity="0.95"/>
+      <polygon points="169.74,-98 -678.96,-588 -678.96,-698 169.74,-208"
+               fill="#0a0a0a" opacity="0.15"/>
+
+      <!-- BACK net (across x at z=70) -->
+      <polygon points="-824.45,-504 -678.96,-588 -678.96,-698 -824.45,-614"
+               fill="url(#netting)" stroke="#0a0a0a" stroke-width="0.6" opacity="0.98"/>
+
+      <!-- TOP net (very faint horizontal mesh suggestion) -->
+      <polygon points="24.25,-124 169.74,-208 -678.96,-698 -824.45,-614"
+               fill="url(#netting)" opacity="0.35"/>
+
+      <!-- Frame rails (top edges) -->
+      <g stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round">
+        <line x1="24.25" y1="-124" x2="-824.45" y2="-614"/>
+        <line x1="169.74" y1="-208" x2="-678.96" y2="-698"/>
+        <line x1="24.25" y1="-124" x2="169.74" y2="-208"/>
+        <line x1="-824.45" y1="-614" x2="-678.96" y2="-698"/>
+      </g>
+
+      <!-- Posts (vertical) -->
+      <g stroke="#0a0a0a" stroke-width="3" stroke-linecap="round">
+        <!-- LEFT side -->
+        <line x1="24.25" y1="-14" x2="24.25" y2="-124"/>
+        <line x1="-157.6" y1="-119" x2="-157.6" y2="-229"/>
+        <line x1="-339.45" y1="-224" x2="-339.45" y2="-334"/>
+        <line x1="-521.30" y1="-329" x2="-521.30" y2="-439"/>
+        <line x1="-703.15" y1="-434" x2="-703.15" y2="-544"/>
+        <line x1="-824.45" y1="-504" x2="-824.45" y2="-614"/>
+        <!-- RIGHT side -->
+        <line x1="169.74" y1="-98" x2="169.74" y2="-208"/>
+        <line x1="-12.11" y1="-203" x2="-12.11" y2="-313"/>
+        <line x1="-193.96" y1="-308" x2="-193.96" y2="-418"/>
+        <line x1="-375.81" y1="-413" x2="-375.81" y2="-523"/>
+        <line x1="-557.66" y1="-518" x2="-557.66" y2="-628"/>
+        <line x1="-678.96" y1="-588" x2="-678.96" y2="-698"/>
+      </g>
+
+      <!-- Bottom frame rails (along the floor) -->
+      <g stroke="#1a1a1a" stroke-width="1.5" fill="none">
+        <line x1="24.25" y1="-14" x2="-824.45" y2="-504"/>
+        <line x1="169.74" y1="-98" x2="-678.96" y2="-588"/>
+      </g>
+
+      <!-- ===== HOME PLATE & TARGET (back of lane, z near 68 ft) ===== -->
+      <!-- Home plate position: x=8, z=66 (centered in lane, near back) -->
+      <!-- iso: 8*ex + 66*ez = (96.99,-56) + (-800.18,-462) = (-703.19,-518) -->
+      <g transform="translate(-703.19,-518)">
+        <!-- home plate (pentagon) -->
+        <path d="M-14,0 L14,0 L14,8 L0,18 L-14,8 Z" fill="#fff" stroke="#1a1a1a" stroke-width="1.2"/>
+        <!-- batter's box (chalk lines) -->
+        <g stroke="#fff" stroke-width="1" opacity="0.55" fill="none">
+          <path d="M-32,-6 L-14,-6 M14,-6 L32,-6 M-32,-6 L-32,18 M32,-6 L32,18 M-32,18 L-14,18 M14,18 L32,18"/>
+        </g>
+      </g>
+
+      <!-- Target / strike zone net frame on back net (above home plate) -->
+      <!-- Center on back wall plane at lane center (x=8), height 4 ft, z=70 -->
+      <!-- Place a strike zone box at that location, painted onto back net plane.
+           back net basis along x: ex=(12.124,-7); vertical: (0,-10). origin at (-824.45,-614)+8*ex relative
+           Easier: position relative to point (-727.46,-570) which is x=8,z=70,h=4ft   -->
+      <g>
+        <!-- compute: 8*ex + 70*ez + 4*ey = (96.99,-56)+(-848.7,-490)+(0,-40)=(-751.71,-586) -->
+        <g transform="translate(-751.71,-586)">
+          <!-- strike zone, painted on back net plane (skewed via matrix) -->
+          <g transform="matrix(12.124,-7,0,-10,0,0)">
+            <!-- box from -1.5..1.5 ft wide, 0..2.5 ft up -->
+            <rect x="-1.5" y="0" width="3" height="2.5" fill="none" stroke="#b8d4e0" stroke-width="0.18"/>
+            <rect x="-1.3" y="0.2" width="2.6" height="2.1" fill="none" stroke="#b8d4e0" stroke-width="0.1" opacity="0.7"/>
+            <!-- bullseye -->
+            <circle cx="0" cy="1.25" r="0.45" fill="none" stroke="#b8d4e0" stroke-width="0.14"/>
+            <circle cx="0" cy="1.25" r="0.18" fill="#b8d4e0"/>
+          </g>
+        </g>
+      </g>
+
+      <!-- ===== PITCHING MOUNDS (front end of lane, side-by-side) ===== -->
+      <!--
+        Two portable mounds, each 4 ft (width along ex) x 10 ft (depth along ez), height ~ 0.8 ft.
+        Place them near the front end. With lane spanning x=2..14, two mounds side by side at:
+          mound A: x=3..7, z=4..14
+          mound B: x=9..13, z=4..14
+        Mound height = 0.8 ft (8 px).
+      -->
+      <!-- helper to draw a mound at given x0,z0 (front-left in feet) sized 4 wide x 10 deep, h=0.8 -->
+
+      <!-- MOUND A:  x0=3, z0=4
+           base FL: 3*ex + 4*ez = (36.37,-21)+(-48.5,-28) = (-12.13,-49)
+           base FR: 7*ex + 4*ez = (84.87,-49)+(-48.5,-28) = (36.37,-77)
+           base BR: 7*ex + 14*ez = (84.87,-49)+(-169.74,-98) = (-84.87,-147)
+           base BL: 3*ex + 14*ez = (36.37,-21)+(-169.74,-98) = (-133.37,-119)
+           top adds (0,-8) to each
+      -->
+      <g id="moundA">
+        <!-- right side face (between FR and BR) -->
+        <polygon points="36.37,-77 -84.87,-147 -84.87,-155 36.37,-85"
+                 fill="url(#moundSide)" stroke="#0a2a5a" stroke-width="0.5"/>
+        <!-- front face (between FL and FR) -->
+        <polygon points="-12.13,-49 36.37,-77 36.37,-85 -12.13,-57"
+                 fill="#1e5fb8" stroke="#0a2a5a" stroke-width="0.5"/>
+        <!-- top -->
+        <polygon points="-12.13,-57 36.37,-85 -84.87,-155 -133.37,-127"
+                 fill="url(#moundTop)" stroke="#0a2a5a" stroke-width="0.6"/>
+        <!-- foam edge (thin black band on top edge front) -->
+        <polygon points="-12.13,-57 36.37,-85 33.37,-87.5 -10.13,-58.5"
+                 fill="#0a0a0a"/>
+        <polygon points="36.37,-85 -84.87,-155 -82.87,-156.8 38.37,-86.5"
+                 fill="#0a0a0a"/>
+        <!-- pitching rubber (white slab on top, ~2ft x 0.5ft, near back-center of mound)
+             rubber rect at x=4..6, z=12..12.5 + h=0.8
+             corners: (4,12) -> 4ex+12ez+0.8ey = (48.5,-28)+(-145.5,-84)+(0,-8)=(-97,-120)
+                      (6,12) -> 6ex+12ez+0.8ey = (72.74,-42)+(-145.5,-84)+(0,-8)=(-72.76,-134)
+                      (6,12.5)-> +0.5ez = (-72.76,-134)+(-6.06,-3.5)=(-78.82,-137.5)
+                      (4,12.5)-> = (-97,-120)+(-6.06,-3.5)=(-103.06,-123.5) -->
+        <polygon points="-97,-120 -72.76,-134 -78.82,-137.5 -103.06,-123.5"
+                 fill="#fff" stroke="#888" stroke-width="0.4"/>
+      </g>
+
+      <!-- MOUND B: x0=9, z0=4
+           base FL: 9*ex+4*ez = (109.12,-63)+(-48.5,-28) = (60.62,-91)
+           base FR: 13*ex+4*ez = (157.62,-91)+(-48.5,-28) = (109.12,-119)
+           base BR: 13*ex+14*ez = (157.62,-91)+(-169.74,-98) = (-12.12,-189)
+           base BL: 9*ex+14*ez = (109.12,-63)+(-169.74,-98) = (-60.62,-161)
+      -->
+      <g id="moundB">
+        <polygon points="109.12,-119 -12.12,-189 -12.12,-197 109.12,-127"
+                 fill="url(#moundSide)" stroke="#0a2a5a" stroke-width="0.5"/>
+        <polygon points="60.62,-91 109.12,-119 109.12,-127 60.62,-99"
+                 fill="#1e5fb8" stroke="#0a2a5a" stroke-width="0.5"/>
+        <polygon points="60.62,-99 109.12,-127 -12.12,-197 -60.62,-169"
+                 fill="url(#moundTop)" stroke="#0a2a5a" stroke-width="0.6"/>
+        <polygon points="60.62,-99 109.12,-127 106.12,-129.5 62.62,-100.5"
+                 fill="#0a0a0a"/>
+        <polygon points="109.12,-127 -12.12,-197 -10.12,-198.8 111.12,-128.5"
+                 fill="#0a0a0a"/>
+        <!-- white pitching rubber: x=10..12, z=12..12.5 + h
+             (10,12): 10ex+12ez+0.8ey=(121.24,-70)+(-145.5,-84)+(0,-8)=(-24.26,-162)
+             (12,12): 12ex+12ez+0.8ey=(145.49,-84)+(-145.5,-84)+(0,-8)=(-0.01,-176)
+             (12,12.5): + (-6.06,-3.5)=(-6.07,-179.5)
+             (10,12.5): (-24.26,-162)+(-6.06,-3.5)=(-30.32,-165.5) -->
+        <polygon points="-24.26,-162 -0.01,-176 -6.07,-179.5 -30.32,-165.5"
+                 fill="#fff" stroke="#888" stroke-width="0.4"/>
+      </g>
+
+    </g><!-- /lane -->
+
+    <!-- ====== TRAINING AREA (right portion of facility) ====== -->
+    <!--
+      Right side of facility (x = 14..30) hosts:
+        - bathroom (front-right corner): x=25..30, z=0..5
+        - training area: rest of right side (x=14..30, z=5..70 minus bathroom).
+      Equipment placement (in feet, x,z):
+        - Mirror wall: full-height, mounted on RIGHT INTERIOR WALL (at x=30), spanning z=10..40
+        - Plyo ball rack: along bottom (right wall) at x=27..29, z=42..50
+        - Kettlebell rack: along right wall x=27..29, z=52..60
+        - Center mobility floor: open
+    -->
+
+    <!-- ====== BATHROOM (front-right corner) ====== -->
+    <!--
+      Box: x=25..30, z=0..5, height = 9 ft.
+      Corners (base):
+        FL: 25ex          = (303.10,-175)
+        FR: 30ex          = (363.71,-210)
+        BR: 30ex + 5ez    = (363.71,-210)+(-60.62,-35) = (303.09,-245)
+        BL: 25ex + 5ez    = (303.10,-175)+(-60.62,-35) = (242.48,-210)
+      Top: subtract (0,90)
+    -->
+    <g id="bathroom">
+      <!-- left face (FL->BL, plus up) — this is the face that 'opens' to the rest of the room -->
+      <polygon points="303.10,-175 242.48,-210 242.48,-300 303.10,-265"
+               fill="url(#wallSideR)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- back face (BL->BR) — facing the training area -->
+      <polygon points="242.48,-210 303.09,-245 303.09,-335 242.48,-300"
+               fill="url(#wallBack)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- right face (BR->FR) — flush with right exterior wall, lighter -->
+      <polygon points="303.09,-245 363.71,-210 363.71,-300 303.09,-335"
+               fill="url(#wallSideL)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- top -->
+      <polygon points="303.10,-265 242.48,-300 303.09,-335 363.71,-300"
+               fill="url(#bathroomTop)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- door on the LEFT face (the face visible to the training area / front)
+           door rectangle on left face: door from interior (FL) edge across the face.
+           Place door on left face at center: along FL->BL the face spans 5ft of depth.
+           door at z=1.5..3.5 ft along this face, height 0..7 ft.
+           Iso of left face: u along (BL-FL)/5 per ft of depth = ((-60.62,-35))/5 = (-12.124,-7)
+           v vertical = (0,-10).
+           door rect corners (depth 1.5..3.5, height 0..7):
+             p1: FL + 1.5*u + 0*v = (303.10,-175)+(-18.19,-10.5) = (284.91,-185.5)
+             p2: FL + 3.5*u + 0*v = (303.10,-175)+(-42.43,-24.5) = (260.67,-199.5)
+             p3: FL + 3.5*u + 7*v = (260.67,-199.5)+(0,-70) = (260.67,-269.5)
+             p4: FL + 1.5*u + 7*v = (284.91,-185.5)+(0,-70) = (284.91,-255.5)
+      -->
+      <polygon points="284.91,-185.5 260.67,-199.5 260.67,-269.5 284.91,-255.5"
+               fill="#1a232b" stroke="#0a0a0a" stroke-width="0.8"/>
+      <!-- door handle -->
+      <circle cx="265.5" cy="-232" r="1.6" fill="#b8d4e0"/>
+      <!-- restroom symbol on door -->
+      <text x="272.8" y="-218" font-family="Inter, sans-serif" font-weight="700" font-size="6"
+            fill="#b8d4e0" text-anchor="middle"
+            transform="rotate(-30 272.8 -218)">WC</text>
+    </g>
+
+    <!-- ====== MIRROR WALL (mounted on right interior wall, x=30, z=10..40) ====== -->
+    <!--
+      Right wall is exterior; we don't draw it (back-left iso means right exterior wall faces away from camera).
+      Instead, draw the mirror as a tall standing panel slightly inset from x=30 line, facing into the room.
+      Place mirror panel on the FLOOR plane, with vertical extent (height = 10 ft).
+      Mirror base line: from (x=29.7, z=10) to (x=29.7, z=40). It's a thin slab.
+
+      Easier rendering: a vertical plane, 30 ft long along ez, 10 ft tall.
+      Base front-left:  29.7*ex + 10*ez = (360.07,-207.9)+(-121.24,-70) = (238.83,-277.9)
+      Base front-right: 29.7*ex + 40*ez = (360.07,-207.9)+(-484.96,-280) = (-124.89,-487.9)
+      Top adds (0,-100)
+    -->
+    <g id="mirror">
+      <!-- mirror face -->
+      <polygon points="238.83,-277.9 -124.89,-487.9 -124.89,-587.9 238.83,-377.9"
+               fill="url(#mirrorGrad)" stroke="#1a232b" stroke-width="1"/>
+      <!-- frame (slate) -->
+      <polygon points="238.83,-277.9 -124.89,-487.9 -124.89,-587.9 238.83,-377.9"
+               fill="none" stroke="#3a4a55" stroke-width="3.5"/>
+      <!-- subtle reflection streaks -->
+      <g opacity="0.35" stroke="#fff" stroke-width="1.2" fill="none">
+        <line x1="200" y1="-300" x2="180" y2="-560"/>
+        <line x1="100" y1="-360" x2="80" y2="-540"/>
+        <line x1="-20" y1="-430" x2="-40" y2="-560"/>
+      </g>
+      <!-- ground tape line in front of mirror (drill mark on floor) -->
+      <g opacity="0.6" stroke="#b8d4e0" stroke-width="1.2" stroke-dasharray="4 3" fill="none">
+        <!-- line from (28,10) to (28,40)
+             (28,10): (339.46,-196)+(-121.24,-70)=(218.22,-266)
+             (28,40): (339.46,-196)+(-484.96,-280)=(-145.5,-476)  -->
+        <line x1="218.22" y1="-266" x2="-145.5" y2="-476"/>
+      </g>
+    </g>
+
+    <!-- ====== PLYO BALL RACK (right side, z=42..50, x=27..29.5) ====== -->
+    <!--
+      Wooden rack with 1 row of 4 balls + low shelf. Approx 8 ft long along ez, 2.5 ft wide along ex,
+      shelf height ~1.5 ft, with balls (diameter ~0.8 ft) sitting on top.
+      Rack base FL: 27*ex + 42*ez = (327.34,-189)+(-509.20,-294) = (-181.86,-483)
+                FR: 29.5*ex + 42*ez = (357.65,-206.5)+(-509.20,-294) = (-151.55,-500.5)
+                BR: 29.5*ex + 50*ez = (357.65,-206.5)+(-606.19,-350) = (-248.54,-556.5)
+                BL: 27*ex + 50*ez = (327.34,-189)+(-606.19,-350) = (-278.85,-539)
+      Top of shelf adds (0,-15) (1.5 ft tall).
+    -->
+    <g id="plyoRack">
+      <!-- shelf box: front face -->
+      <polygon points="-181.86,-483 -151.55,-500.5 -151.55,-515.5 -181.86,-498"
+               fill="#8a6a4a" stroke="#3a2a1a" stroke-width="0.5"/>
+      <!-- right face -->
+      <polygon points="-151.55,-500.5 -248.54,-556.5 -248.54,-571.5 -151.55,-515.5"
+               fill="#6f5238" stroke="#3a2a1a" stroke-width="0.5"/>
+      <!-- top -->
+      <polygon points="-181.86,-498 -151.55,-515.5 -248.54,-571.5 -278.85,-554"
+               fill="#a07e58" stroke="#3a2a1a" stroke-width="0.6"/>
+      <!-- low base -->
+      <polygon points="-181.86,-483 -151.55,-500.5 -248.54,-556.5 -278.85,-539"
+               fill="#5a3e26" stroke="#3a2a1a" stroke-width="0.5" opacity="0.85"/>
+
+      <!-- balls on top: 4 balls, centers along midline (x≈28.25), z = 43.0, 45.0, 47.0, 49.0
+           Convert to iso atop shelf (h=1.5 ft = 15 px).
+           ball center iso: 28.25*ex + z*ez + (0,-15-r)... we'll just compute centers:
+           28.25*ex = (342.49, -197.75)
+           z*ez = (-12.124z, -7z)
+           Ball radius ~ 0.55 ft -> ~7 px
+      -->
+      <g>
+        <!-- z=43.5 RED -->
+        <g transform="translate(-178.84, -519.25)">
+          <ellipse cx="2" cy="3" rx="9" ry="9" fill="#000" opacity="0.35"/>
+          <circle r="9" fill="#c2402d"/>
+          <circle r="9" fill="url(#plyoR)" opacity="0.5"/>
+          <ellipse cx="-2.5" cy="-2.5" rx="3" ry="2" fill="#fff" opacity="0.45"/>
+        </g>
+        <!-- z=45.5 BLUE -->
+        <g transform="translate(-203.09, -533.25)">
+          <ellipse cx="2" cy="3" rx="10" ry="10" fill="#000" opacity="0.35"/>
+          <circle r="10" fill="#1e5fb8"/>
+          <ellipse cx="-3" cy="-3" rx="3.5" ry="2.5" fill="#fff" opacity="0.45"/>
+        </g>
+        <!-- z=47.5 GRAY -->
+        <g transform="translate(-227.34, -547.25)">
+          <ellipse cx="2" cy="3" rx="11" ry="11" fill="#000" opacity="0.35"/>
+          <circle r="11" fill="#6a7884"/>
+          <ellipse cx="-3.5" cy="-3.5" rx="4" ry="3" fill="#fff" opacity="0.4"/>
+        </g>
+        <!-- z=49.5 GREEN -->
+        <g transform="translate(-251.59, -561.25)">
+          <ellipse cx="2" cy="3" rx="12" ry="12" fill="#000" opacity="0.35"/>
+          <circle r="12" fill="#4a7c4e"/>
+          <ellipse cx="-4" cy="-4" rx="4.5" ry="3.5" fill="#fff" opacity="0.4"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ====== KETTLEBELL RACK (right side, z=52..60) ====== -->
+    <!--
+      Vertical rack: 8 ft long, holds 5 kettlebells in ascending size.
+      Base FL: 27*ex + 52*ez = (327.34,-189)+(-630.45,-364) = (-303.11,-553)
+            FR: 29.5*ex + 52*ez = (357.65,-206.5)+(-630.45,-364)=(-272.80,-570.5)
+            BR: 29.5*ex + 60*ez = (357.65,-206.5)+(-727.43,-420)=(-369.78,-626.5)
+            BL: 27*ex + 60*ez = (327.34,-189)+(-727.43,-420)=(-400.09,-609)
+      Rack is two posts (uprights) ~3 ft tall + base.
+    -->
+    <g id="kbRack">
+      <!-- base -->
+      <polygon points="-303.11,-553 -272.80,-570.5 -369.78,-626.5 -400.09,-609"
+               fill="#3a2a1a" stroke="#1a0a00" stroke-width="0.5"/>
+      <polygon points="-303.11,-553 -272.80,-570.5 -272.80,-558.5 -303.11,-541"
+               fill="#5a3e26"/>
+      <polygon points="-272.80,-570.5 -369.78,-626.5 -369.78,-614.5 -272.80,-558.5"
+               fill="#3a2a1a"/>
+
+      <!-- uprights (vertical bars) -->
+      <g stroke="#1a232b" stroke-width="2" stroke-linecap="round">
+        <!-- front upright (between FL and FR... actually two front uprights at corners FL and FR) -->
+        <line x1="-303.11" y1="-553" x2="-303.11" y2="-583"/>
+        <line x1="-272.80" y1="-570.5" x2="-272.80" y2="-600.5"/>
+        <!-- back uprights -->
+        <line x1="-400.09" y1="-609" x2="-400.09" y2="-639"/>
+        <line x1="-369.78" y1="-626.5" x2="-369.78" y2="-656.5"/>
+      </g>
+      <!-- top crossbar between front uprights and back uprights -->
+      <g stroke="#1a232b" stroke-width="2" fill="none">
+        <line x1="-303.11" y1="-583" x2="-400.09" y2="-639"/>
+        <line x1="-272.80" y1="-600.5" x2="-369.78" y2="-656.5"/>
+      </g>
+
+      <!-- kettlebells: 5 of ascending size, on the base, sitting on upper shelf -->
+      <!-- each kb: a sphere with a small handle (loop on top). Place along midline x=28.25. -->
+      <!-- z positions and sizes -->
+      <g>
+        <!-- z=52.6 small -->
+        <g transform="translate(-310.39, -557.95)">
+          <ellipse cx="2" cy="6" rx="7" ry="2" fill="#000" opacity="0.35"/>
+          <path d="M-3,-6 q3,-7 6,0" fill="none" stroke="#1a232b" stroke-width="1.6"/>
+          <circle r="6" fill="#1a232b"/>
+          <ellipse cx="-2" cy="-2" rx="2" ry="1.4" fill="#5a6f7e" opacity="0.6"/>
+        </g>
+        <!-- z=54.0 -->
+        <g transform="translate(-327.36, -567.75)">
+          <ellipse cx="3" cy="7" rx="9" ry="2.5" fill="#000" opacity="0.35"/>
+          <path d="M-4,-8 q4,-9 8,0" fill="none" stroke="#1a232b" stroke-width="1.8"/>
+          <circle r="8" fill="#1a232b"/>
+          <ellipse cx="-3" cy="-3" rx="2.5" ry="1.6" fill="#5a6f7e" opacity="0.6"/>
+        </g>
+        <!-- z=55.5 -->
+        <g transform="translate(-345.55, -578.25)">
+          <ellipse cx="3" cy="8" rx="11" ry="3" fill="#000" opacity="0.35"/>
+          <path d="M-5,-10 q5,-11 10,0" fill="none" stroke="#1a232b" stroke-width="2"/>
+          <circle r="10" fill="#1a232b"/>
+          <ellipse cx="-4" cy="-4" rx="3" ry="2" fill="#5a6f7e" opacity="0.6"/>
+        </g>
+        <!-- z=57.0 -->
+        <g transform="translate(-363.74, -588.75)">
+          <ellipse cx="3" cy="9" rx="13" ry="3.5" fill="#000" opacity="0.35"/>
+          <path d="M-6,-12 q6,-13 12,0" fill="none" stroke="#1a232b" stroke-width="2.2"/>
+          <circle r="12" fill="#1a232b"/>
+          <ellipse cx="-4" cy="-5" rx="3.5" ry="2.5" fill="#5a6f7e" opacity="0.55"/>
+        </g>
+        <!-- z=58.7 large -->
+        <g transform="translate(-384.36, -600.65)">
+          <ellipse cx="4" cy="11" rx="15" ry="4" fill="#000" opacity="0.35"/>
+          <path d="M-7,-14 q7,-15 14,0" fill="none" stroke="#1a232b" stroke-width="2.4"/>
+          <circle r="14" fill="#1a232b"/>
+          <ellipse cx="-5" cy="-6" rx="4" ry="3" fill="#5a6f7e" opacity="0.5"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ====== ENTRANCE (front wall, right of center) ====== -->
+    <!--
+      The front edge of the building runs from FL=(0,0) to FR=(363.71,-210), along ex.
+      Place a door indicated by an opening/cut at x=18..21 ft on the front edge.
+      Show: a small mat on the floor in front of door + a door symbol on the front edge.
+    -->
+    <g id="entrance">
+      <!-- WELCOME mat just inside (at z=1..3, x=18..21) -->
+      <!--
+        corners:
+        FL: 18*ex + 1*ez = (218.23,-126)+(-12.12,-7)=(206.11,-133)
+        FR: 21*ex + 1*ez = (254.59,-147)+(-12.12,-7)=(242.47,-154)
+        BR: 21*ex + 3*ez = (254.59,-147)+(-36.37,-21)=(218.22,-168)
+        BL: 18*ex + 3*ez = (218.23,-126)+(-36.37,-21)=(181.86,-147)
+      -->
+      <polygon points="206.11,-133 242.47,-154 218.22,-168 181.86,-147"
+               fill="#3a4a55" stroke="#1a232b" stroke-width="0.6"/>
+      <polygon points="206.11,-133 242.47,-154 218.22,-168 181.86,-147"
+               fill="none" stroke="#b8d4e0" stroke-width="0.8" opacity="0.7"
+               stroke-dasharray="2 2"/>
+      <text x="212" y="-148" font-family="Inter, sans-serif" font-weight="800"
+            font-size="7" letter-spacing="2" fill="#b8d4e0"
+            transform="rotate(-30 212 -148)">WELCOME</text>
+
+      <!-- Door arc swing (interior) -->
+      <g fill="none" stroke="#b8d4e0" stroke-width="0.8" opacity="0.6" stroke-dasharray="3 2">
+        <!-- arc from door hinge at (18,0) sweeping into room
+             hinge: 18*ex + 0*ez = (218.23,-126)
+             radius approx 3 ft = 36 px in feet? Just draw an arc roughly. -->
+        <path d="M218.23,-126 Q229,-100 200,-92"/>
+      </g>
+
+      <!-- Door slab on front "edge" (the front wall is open in this view; show door as slab opening) -->
+      <!-- Mark door span at the front floor edge with thicker line -->
+      <line x1="218.23" y1="-126" x2="254.59" y2="-147" stroke="#b8d4e0" stroke-width="3.5"/>
+    </g>
+
+  </g><!-- /building -->
+
+  <!-- ============== LABELS / CALLOUTS ============== -->
+  <!-- Each label = thin connector line + powder-blue pill with white uppercase text. -->
+
+  <g id="labels" font-family="Inter, sans-serif" font-weight="700" letter-spacing="1.5">
+
+    <!-- PITCHING LANE — connector from lane center -->
+    <g>
+      <!-- target point: center of lane on floor: x=8, z=35
+           iso: 8*ex+35*ez = (96.99,-56)+(-424.34,-245)=(-327.35,-301)
+           building offset (1010,1000) -> (682.65, 699) -->
+      <line x1="682.65" y1="699" x2="240" y2="510" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="682.65" cy="699" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="60" y="478" width="360" height="64" rx="4" fill="#b8d4e0"/>
+        <rect x="60" y="478" width="6" height="64" fill="#3a4a55"/>
+      </g>
+      <text x="80" y="503" font-size="11" letter-spacing="3" fill="#3a4a55" font-weight="600">01 · ZONE</text>
+      <text x="80" y="525" font-size="20" letter-spacing="2" fill="#1a232b" font-weight="800">PITCHING LANE</text>
+      <text x="80" y="540" font-family="JetBrains Mono, monospace" font-size="10"
+            letter-spacing="2" fill="#3a4a55" font-weight="500">12'-0" × 70'-0"  ·  TURF + NETTING CAGE</text>
+    </g>
+
+    <!-- PORTABLE MOUNDS callout -->
+    <g>
+      <!-- target: between the two mounds, x=8, z=9
+           iso: 8*ex+9*ez = (96.99,-56)+(-109.12,-63)=(-12.13,-119)
+           +building offset = (997.87, 881) -->
+      <line x1="997.87" y1="881" x2="700" y2="940" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="997.87" cy="881" r="3.5" fill="#1e5fb8"/>
+      <g filter="url(#pillShadow)">
+        <rect x="430" y="918" width="280" height="50" rx="4" fill="#3a4a55"/>
+      </g>
+      <text x="448" y="938" font-size="10" letter-spacing="2" fill="#b8d4e0" font-weight="600">EQUIPMENT</text>
+      <text x="448" y="956" font-size="14" letter-spacing="1.5" fill="#fff" font-weight="700">PORTABLE MOUNDS (2)</text>
+    </g>
+
+    <!-- HOME PLATE & TARGET -->
+    <g>
+      <!-- target: x=8, z=66 = (-703.19,-518); +offset = (306.81, 482) -->
+      <line x1="306.81" y1="482" x2="180" y2="380" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="306.81" cy="482" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="40" y="346" width="240" height="50" rx="4" fill="#3a4a55"/>
+      </g>
+      <text x="58" y="366" font-size="10" letter-spacing="2" fill="#b8d4e0" font-weight="600">FIXTURE</text>
+      <text x="58" y="384" font-size="14" letter-spacing="1.5" fill="#fff" font-weight="700">HOME PLATE + TARGET</text>
+    </g>
+
+    <!-- TRAINING AREA — MOBILITY -->
+    <g>
+      <!-- target: open floor x=22, z=25
+           iso: 22*ex+25*ez = (266.72,-154)+(-303.10,-175)=(-36.38,-329)
+           +offset = (973.62, 671) -->
+      <line x1="973.62" y1="671" x2="1450" y2="510" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="973.62" cy="671" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="1450" y="478" width="320" height="64" rx="4" fill="#b8d4e0"/>
+        <rect x="1450" y="478" width="6" height="64" fill="#3a4a55"/>
+      </g>
+      <text x="1470" y="503" font-size="11" letter-spacing="3" fill="#3a4a55" font-weight="600">02 · ZONE</text>
+      <text x="1470" y="525" font-size="20" letter-spacing="2" fill="#1a232b" font-weight="800">MOBILITY &amp; MIRROR WORK</text>
+      <text x="1470" y="540" font-family="JetBrains Mono, monospace" font-size="10"
+            letter-spacing="2" fill="#3a4a55" font-weight="500">OPEN MAT + EQUIPMENT STATIONS</text>
+    </g>
+
+    <!-- MIRROR WORK WALL -->
+    <g>
+      <!-- target on mirror midpoint: x=29.7, z=25, h=5 ft
+           iso: 29.7*ex+25*ez+5*ey = (360.07,-207.9)+(-303.10,-175)+(0,-50)=(56.97,-432.9)
+           +offset = (1066.97, 567.1) -->
+      <line x1="1066.97" y1="567.1" x2="1450" y2="610" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="1066.97" cy="567.1" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="1450" y="588" width="280" height="50" rx="4" fill="#3a4a55"/>
+      </g>
+      <text x="1468" y="608" font-size="10" letter-spacing="2" fill="#b8d4e0" font-weight="600">EQUIPMENT</text>
+      <text x="1468" y="626" font-size="14" letter-spacing="1.5" fill="#fff" font-weight="700">MIRROR WORK WALL</text>
+    </g>
+
+    <!-- PLYO BALL RACK -->
+    <g>
+      <!-- target plyo rack center: x=28.25, z=46, h=2 ft
+           iso: 28.25*ex+46*ez+2*ey = (342.49,-197.75)+(-557.70,-322)+(0,-20)=(-215.21,-539.75)
+           +offset=(794.79, 460.25) -->
+      <line x1="794.79" y1="460.25" x2="1500" y2="730" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="794.79" cy="460.25" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="1500" y="700" width="240" height="50" rx="4" fill="#3a4a55"/>
+      </g>
+      <text x="1518" y="720" font-size="10" letter-spacing="2" fill="#b8d4e0" font-weight="600">EQUIPMENT</text>
+      <text x="1518" y="738" font-size="14" letter-spacing="1.5" fill="#fff" font-weight="700">PLYO BALL RACK</text>
+    </g>
+
+    <!-- KETTLEBELL RACK -->
+    <g>
+      <!-- target kb rack center: x=28.25, z=56, h=3 ft
+           iso: 28.25*ex+56*ez+3*ey = (342.49,-197.75)+(-678.94,-392)+(0,-30)=(-336.45,-619.75)
+           +offset=(673.55, 380.25) -->
+      <line x1="673.55" y1="380.25" x2="1500" y2="810" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="673.55" cy="380.25" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="1500" y="780" width="240" height="50" rx="4" fill="#3a4a55"/>
+      </g>
+      <text x="1518" y="800" font-size="10" letter-spacing="2" fill="#b8d4e0" font-weight="600">EQUIPMENT</text>
+      <text x="1518" y="818" font-size="14" letter-spacing="1.5" fill="#fff" font-weight="700">KETTLEBELL RACK</text>
+    </g>
+
+    <!-- RESTROOM -->
+    <g>
+      <!-- target bathroom roof center: 27.5*ex+2.5*ez+9*ey = (333.41,-192.5)+(-30.31,-17.5)+(0,-90)=(303.10,-300)
+           +offset=(1313.10, 700) -->
+      <line x1="1313.10" y1="700" x2="1620" y2="900" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="1313.10" cy="700" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="1620" y="878" width="160" height="44" rx="4" fill="#3a4a55"/>
+      </g>
+      <text x="1635" y="898" font-size="10" letter-spacing="2" fill="#b8d4e0" font-weight="600">UTILITY</text>
+      <text x="1635" y="914" font-size="14" letter-spacing="1.5" fill="#fff" font-weight="700">RESTROOM</text>
+    </g>
+
+    <!-- ENTRANCE -->
+    <g>
+      <!-- target: door midpoint at x=19.5, z=0
+           iso: 19.5*ex = (236.42,-136.5)
+           +offset=(1246.42, 863.5) -->
+      <line x1="1246.42" y1="863.5" x2="1480" y2="990" stroke="#3a4a55" stroke-width="1.2"/>
+      <circle cx="1246.42" cy="863.5" r="3.5" fill="#3a4a55"/>
+      <g filter="url(#pillShadow)">
+        <rect x="1480" y="968" width="200" height="44" rx="4" fill="#b8d4e0"/>
+        <rect x="1480" y="968" width="6" height="44" fill="#3a4a55"/>
+      </g>
+      <text x="1500" y="988" font-size="10" letter-spacing="3" fill="#3a4a55" font-weight="600">ACCESS</text>
+      <text x="1500" y="1004" font-size="14" letter-spacing="1.5" fill="#1a232b" font-weight="800">ENTRANCE</text>
+    </g>
+
+  </g>
+
+  <!-- ============== DIMENSION LINES ============== -->
+  <g id="dimensions" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">
+
+    <!-- 30 FT WIDTH (front edge): from FL (1010,1000) to FR (1010+363.71, 1000-210)=(1373.71,790)
+         offset perpendicular outward (down-right of front edge). -->
+    <g stroke="#3a4a55" fill="#3a4a55">
+      <!-- offset line: shift by +(40,40) along outward normal -->
+      <line x1="1042" y1="1056" x2="1405" y2="846" stroke-width="1"/>
+      <!-- ticks (perpendicular to line) -->
+      <line x1="1010" y1="1000" x2="1042" y2="1056" stroke-width="0.8"/>
+      <line x1="1373.71" y1="790" x2="1405" y2="846" stroke-width="0.8"/>
+      <!-- arrowheads -->
+      <polygon points="1042,1056 1052,1051 1054,1063" />
+      <polygon points="1405,846 1395,851 1393,839" />
+      <text x="1240" y="945" text-anchor="middle" fill="#1a232b" font-weight="600"
+            transform="rotate(-30 1240 945)">30'-0" WIDTH</text>
+    </g>
+
+    <!-- 70 FT DEPTH (left edge): from FL (1010,1000) to BL (1010-848.7, 1000-490)=(161.3, 510)
+         offset outward (down-left). -->
+    <g stroke="#3a4a55" fill="#3a4a55">
+      <line x1="978" y1="1056" x2="129.3" y2="566" stroke-width="1"/>
+      <line x1="1010" y1="1000" x2="978" y2="1056" stroke-width="0.8"/>
+      <line x1="161.3" y1="510" x2="129.3" y2="566" stroke-width="0.8"/>
+      <polygon points="978,1056 968,1051 966,1063"/>
+      <polygon points="129.3,566 139.3,571 141.3,559"/>
+      <text x="556" y="816" text-anchor="middle" fill="#1a232b" font-weight="600"
+            transform="rotate(30 556 816)">70'-0" DEPTH</text>
+    </g>
+
+    <!-- 12 FT LANE WIDTH (front of lane: from x=2 to x=14 along front edge of LANE turf) -->
+    <!-- left lane front-floor at (1010+24.25, 1000-14)=(1034.25,986); right lane front at (1010+169.74,1000-98)=(1179.74,902)
+         offset perpendicular outward... we'll offset upward (toward camera-up) for clarity.
+         normal-out: (-7,-12.124) normalized ~ same dir; we'll just shift up-ish: +(20,-30)? Too messy.
+         Place this dimension INSIDE the lane near front, instead of outside. -->
+    <g stroke="#b8d4e0" fill="#3a4a55">
+      <!-- inside lane, just inside front net: at z=2, between x=2..14 -->
+      <!-- p1 = 2ex+2ez = (24.25,-14)+(-24.25,-14)=(0,-28) -> screen (1010,972)
+           p2 = 14ex+2ez = (169.74,-98)+(-24.25,-14)=(145.49,-112) -> screen (1155.49,888) -->
+      <line x1="1010" y1="972" x2="1155.49" y2="888" stroke-width="1.2"/>
+      <line x1="1010" y1="972" x2="1010" y2="966" stroke-width="0.8"/>
+      <line x1="1010" y1="972" x2="1010" y2="978" stroke-width="0.8"/>
+      <line x1="1155.49" y1="888" x2="1155.49" y2="882" stroke-width="0.8"/>
+      <line x1="1155.49" y1="888" x2="1155.49" y2="894" stroke-width="0.8"/>
+      <text x="1082" y="922" text-anchor="middle" fill="#fff" font-weight="700"
+            transform="rotate(-30 1082 922)" stroke="none">12'-0"</text>
+    </g>
+
+  </g>
+
+  <!-- ============== ORIENTATION INDICATOR ============== -->
+  <g id="orient" transform="translate(140, 990)">
+    <!-- ring -->
+    <circle r="48" fill="#fff" stroke="#3a4a55" stroke-width="1.2"/>
+    <circle r="40" fill="none" stroke="#3a4a55" stroke-width="0.5" stroke-dasharray="2 3"/>
+    <!-- arrow pointing up = FRONT -->
+    <polygon points="0,-32 -10,-10 -3,-10 -3,18 3,18 3,-10 10,-10"
+             fill="#3a4a55"/>
+    <text y="-38" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800"
+          font-size="11" letter-spacing="3" fill="#3a4a55">FRONT</text>
+    <text y="44" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600"
+          font-size="9" letter-spacing="3" fill="#5a6f7e">BACK ↓</text>
+  </g>
+
+  <!-- ============== SCALE BAR ============== -->
+  <g id="scaleBar" transform="translate(260, 1080)">
+    <text x="0" y="-12" font-family="JetBrains Mono, monospace" font-size="10"
+          letter-spacing="3" fill="#3a4a55" font-weight="500">SCALE</text>
+    <!-- 0—5—10 ft, 1 ft = 14 px is the iso scale... but these bars represent on-screen reference
+         5 ft along iso width direction = 14*5 = 70 px visible. Use 70 px segments. -->
+    <g>
+      <rect x="0" y="0" width="70" height="10" fill="#3a4a55"/>
+      <rect x="70" y="0" width="70" height="10" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+      <rect x="140" y="0" width="70" height="10" fill="#3a4a55"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="10" fill="#3a4a55" letter-spacing="1">
+      <text x="0" y="26" text-anchor="middle">0</text>
+      <text x="70" y="26" text-anchor="middle">5'</text>
+      <text x="140" y="26" text-anchor="middle">10'</text>
+      <text x="210" y="26" text-anchor="middle">15'</text>
+    </g>
+  </g>
+
+  <!-- ============== LEGEND (bottom-right) ============== -->
+  <g id="legend" transform="translate(1390, 1000)">
+    <rect x="0" y="0" width="340" height="160" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+    <rect x="0" y="0" width="340" height="22" fill="#3a4a55"/>
+    <text x="14" y="16" font-family="Inter, sans-serif" font-weight="700" font-size="11"
+          letter-spacing="3" fill="#b8d4e0">LEGEND · EQUIPMENT</text>
+
+    <g font-family="Inter, sans-serif" font-size="11" letter-spacing="1" fill="#1a232b">
+
+      <!-- column 1 -->
+      <g transform="translate(16, 42)">
+        <!-- mound icon -->
+        <g>
+          <polygon points="0,8 10,2 18,8 8,14" fill="url(#moundTop)"/>
+          <polygon points="0,8 10,2 10,4 0,10" fill="#1e5fb8"/>
+          <polygon points="10,2 18,8 18,10 10,4" fill="#0f3a78"/>
+          <rect x="6" y="6" width="4" height="1.5" fill="#fff"/>
+        </g>
+        <text x="32" y="11" font-weight="600">PORTABLE MOUND</text>
+      </g>
+
+      <g transform="translate(16, 70)">
+        <!-- home plate -->
+        <path d="M0,0 L18,0 L18,6 L9,12 L0,6 Z" fill="#fff" stroke="#1a232b" stroke-width="1"/>
+        <text x="32" y="9" font-weight="600">HOME PLATE</text>
+      </g>
+
+      <g transform="translate(16, 98)">
+        <!-- netting -->
+        <rect x="0" y="0" width="20" height="14" fill="url(#netting)" stroke="#1a232b" stroke-width="0.6"/>
+        <text x="32" y="11" font-weight="600">NETTING / CAGE</text>
+      </g>
+
+      <g transform="translate(16, 126)">
+        <!-- turf -->
+        <rect x="0" y="0" width="20" height="14" fill="url(#turfGrad)" stroke="#3d6f8c" stroke-width="0.6"/>
+        <text x="32" y="11" font-weight="600">TURF RUNWAY</text>
+      </g>
+
+      <!-- column 2 -->
+      <g transform="translate(180, 42)">
+        <!-- plyo balls -->
+        <circle cx="3" cy="9" r="3" fill="#c2402d"/>
+        <circle cx="10" cy="8" r="4" fill="#1e5fb8"/>
+        <circle cx="18" cy="7" r="5" fill="#4a7c4e"/>
+        <text x="32" y="11" font-weight="600">PLYO BALLS</text>
+      </g>
+
+      <g transform="translate(180, 70)">
+        <!-- kettlebell -->
+        <path d="M5,2 q3,-5 6,0" fill="none" stroke="#1a232b" stroke-width="1.5"/>
+        <circle cx="8" cy="8" r="5" fill="#1a232b"/>
+        <ellipse cx="6" cy="6" rx="1.5" ry="1" fill="#5a6f7e" opacity="0.7"/>
+        <text x="32" y="11" font-weight="600">KETTLEBELL</text>
+      </g>
+
+      <g transform="translate(180, 98)">
+        <!-- mirror -->
+        <rect x="0" y="0" width="20" height="14" fill="url(#mirrorGrad)" stroke="#3a4a55" stroke-width="1"/>
+        <text x="32" y="11" font-weight="600">MIRROR PANEL</text>
+      </g>
+
+      <g transform="translate(180, 126)">
+        <!-- door -->
+        <rect x="0" y="0" width="14" height="14" fill="#3a4a55" stroke="#1a232b" stroke-width="0.8"/>
+        <circle cx="11" cy="8" r="0.9" fill="#b8d4e0"/>
+        <text x="32" y="11" font-weight="600">DOOR / ENTRY</text>
+      </g>
+
+    </g>
+  </g>
+
+  <!-- ============== COLOR / MATERIAL KEY (next to legend) ============== -->
+  <g id="materialKey" transform="translate(1010, 1000)">
+    <rect x="0" y="0" width="360" height="160" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+    <rect x="0" y="0" width="360" height="22" fill="#3a4a55"/>
+    <text x="14" y="16" font-family="Inter, sans-serif" font-weight="700" font-size="11"
+          letter-spacing="3" fill="#b8d4e0">MATERIALS · PALETTE</text>
+
+    <g font-family="Inter, sans-serif" font-size="11" letter-spacing="1" fill="#1a232b">
+      <g transform="translate(16, 38)">
+        <rect width="20" height="20" fill="#3a4a55"/>
+        <text x="30" y="9" font-weight="700">SLATE GRAY-BLUE</text>
+        <text x="30" y="22" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#5a6f7e">#3A4A55 · WALLS / STRUCTURE</text>
+      </g>
+      <g transform="translate(16, 72)">
+        <rect width="20" height="20" fill="#b8d4e0"/>
+        <text x="30" y="9" font-weight="700">POWDER BLUE</text>
+        <text x="30" y="22" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#5a6f7e">#B8D4E0 · BRAND / GRAPHICS</text>
+      </g>
+      <g transform="translate(16, 106)">
+        <rect width="20" height="20" fill="#0a0a0a"/>
+        <text x="30" y="9" font-weight="700">RUBBER BLACK</text>
+        <text x="30" y="22" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#5a6f7e">#000000 · GYM FLOORING</text>
+      </g>
+      <g transform="translate(196, 38)">
+        <rect width="20" height="20" fill="#1e5fb8"/>
+        <text x="30" y="9" font-weight="700">ROYAL BLUE</text>
+        <text x="30" y="22" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#5a6f7e">#1E5FB8 · PITCHING MOUNDS</text>
+      </g>
+      <g transform="translate(196, 72)">
+        <rect width="20" height="20" fill="url(#turfGrad)" stroke="#3d6f8c" stroke-width="0.6"/>
+        <text x="30" y="9" font-weight="700">SKY-BLUE TURF</text>
+        <text x="30" y="22" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#5a6f7e">CUSTOM · ARTIFICIAL RUNWAY</text>
+      </g>
+      <g transform="translate(196, 106)">
+        <rect width="20" height="20" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+        <text x="30" y="9" font-weight="700">CHALK WHITE</text>
+        <text x="30" y="22" font-family="JetBrains Mono, monospace" font-size="9"
+              fill="#5a6f7e">#FFFFFF · PLATE / MARKINGS</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- bottom strip / footer -->
+  <g id="footer">
+    <line x1="70" y1="1160" x2="1730" y2="1160" stroke="#3a4a55" stroke-width="0.5" opacity="0.35"/>
+    <text x="70" y="1185" font-family="JetBrains Mono, monospace" font-size="10"
+          letter-spacing="3" fill="#5a6f7e">TAP ATHLETES · PITCHING ACADEMY · FACILITY LAYOUT · ISO VIEW</text>
+    <text x="1730" y="1185" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10"
+          letter-spacing="3" fill="#5a6f7e">© 2026 · ALL DIMENSIONS APPROXIMATE · NTS WHEN PRINTED &lt; 24"</text>
+  </g>
+
+</svg>
+</div>
+
+</body>
+</html>

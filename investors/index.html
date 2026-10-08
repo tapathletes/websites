@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TAP Athletes — Facility Layout</title>
+  <meta name="description" content="3D and 2D models of the TAP Athletes training facility." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <style>
+    :root {
+      --bg: #0b0d10;
+      --panel: #14181d;
+      --panel-2: #1a1f25;
+      --border: #262d36;
+      --text: #e8edf2;
+      --muted: #8a96a3;
+      --accent: #6cf;
+      --shadow: 0 1px 0 rgba(255,255,255,0.04) inset, 0 8px 24px rgba(0,0,0,0.35);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: inherit; text-decoration: none; }
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+    header { margin-bottom: 48px; }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+    .lede {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 64ch;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 40px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      display: block;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: #3a4452;
+      background: var(--panel-2);
+    }
+    .card .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    .card h2 {
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin: 0 0 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+    .card.demo:hover {
+      transform: none;
+      border-color: var(--border);
+      background: var(--panel);
+    }
+    .card.demo h2 { margin-bottom: 16px; }
+    .card.demo video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    footer {
+      margin-top: 64px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">TAP Athletes</div>
+      <h1>Facility Layout</h1>
+      <p class="lede">3D and 2D models of the planned TAP Athletes training facility. Shared with investors and suppliers; used internally to spec flooring and equipment.</p>
+    </header>
+
+    <div class="section-label">Active variants</div>
+    <div class="grid">
+      <a class="card" href="sky/">
+        <div class="tag">3D · Three.js</div>
+        <h2>3D walkthrough</h2>
+        <p>Interactive walkthrough: rubber-bordered grey PVC floor, 14' × 70' net, classroom nook. Arrow keys, drag, or swipe on a phone.</p>
+      </a>
+    </div>
+
+    <div class="section-label">Demos</div>
+    <div class="card demo">
+      <div class="tag">Video · 4:23</div>
+      <h2>TAPOS Sports Management &amp; Performance Software — Demo Video</h2>
+      <video controls playsinline preload="none" poster="demos/tapos-demo-video-poster.png">
+        <source src="demos/tapos-demo-video.mp4" type="video/mp4" />
+        <a href="demos/tapos-demo-video.mp4">Download the video (MP4)</a>
+      </video>
+    </div>
+
+    <footer>tapathletes.com</footer>
+  </div>
+</body>
+</html>

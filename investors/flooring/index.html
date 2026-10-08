@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TAP Athletes — Facility Flooring Plan</title>
+<meta name="description" content="As-built flooring plan and material take-off for the TAP Athletes training facility." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" />
+<style>
+  :root {
+    --paper: #f7f8f9; --sheet: #ffffff; --ink: #1a232b; --slate: #3a4a55; --muted: #6b7885;
+    --powder: #b8d4e0; --line: #d5dde3; --warn: #b9770e; --warn-bg: #fff6e5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--paper); color: var(--ink); font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 24px 16px 64px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 16px; }
+  .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: clamp(20px, 3vw, 28px); margin: 4px 0 0; letter-spacing: -.01em; }
+  .stat { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--slate); }
+  .stat b { color: var(--ink); font-size: 18px; }
+  .banner { background: var(--warn-bg); border: 1px solid #ecd9b0; border-left: 4px solid var(--warn); border-radius: 6px; padding: 10px 14px; font-size: 13px; margin: 0 0 16px; }
+  .banner ul { margin: 6px 0 0; padding-left: 18px; }
+  .banner code { font-family: 'JetBrains Mono', monospace; font-size: 12px; }
+
+  .sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .sheet svg { width: 100%; height: auto; display: block; font-family: 'JetBrains Mono', monospace; }
+  svg text { fill: var(--ink); font-size: 9px; }
+  svg text.muted, svg .muted { fill: var(--muted); }
+  svg .zone { stroke: #fff; stroke-width: .8; }
+  svg .cutout { stroke: var(--ink); stroke-width: 1.2; }
+  svg .net { fill: none; stroke: var(--ink); stroke-width: 1.4; stroke-dasharray: 6 4; }
+  svg .pad { fill: #4b5b66; }
+  svg .mirror { fill: var(--slate); }
+  svg .walls line.wall { stroke: var(--ink); stroke-linecap: square; }
+  svg .walls line.glass { stroke: #4a7fa0; }
+  svg .walls .door { fill: none; stroke: var(--slate); stroke-width: 1; }
+  svg .walls .doortag { fill: var(--muted); stroke: none; }
+  svg .walls .rollup { stroke: #fff; stroke-width: 4; stroke-dasharray: 3 3; }
+  svg .dim line { stroke: var(--slate); stroke-width: .7; }
+  svg .dim .tick { stroke-width: 1.1; }
+  svg .dim text { font-size: 9px; }
+  svg .rip { stroke: #b03a2e; stroke-width: .8; }
+  svg .butt { stroke: #b03a2e; stroke-width: .8; stroke-dasharray: 2 2; }
+  svg .badge circle { fill: var(--warn); }
+  svg .badge text { fill: #fff; font-size: 9px; font-weight: 700; }
+  .sheet-tools { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: 6px 4px 0; font-size: 12px; color: var(--muted); }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; }
+  .legend span::before { content: ''; display: inline-block; width: 12px; height: 12px; border: 1px solid #aaa; margin-right: 5px; vertical-align: -2px; background: var(--sw); }
+  .legend .seam::before { background: none; border: none; border-top: 2px solid #b03a2e; height: 0; vertical-align: 2px; }
+  button.link { background: none; border: 1px solid var(--line); border-radius: 4px; padding: 4px 10px; font: inherit; font-size: 12px; cursor: pointer; color: var(--slate); }
+
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 20px 0; }
+  fieldset { border: 1px solid var(--line); border-radius: 8px; background: var(--sheet); padding: 12px 14px 14px; margin: 0; min-width: 0; }
+  legend { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); padding: 0 6px; }
+  label.row { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 10px; font-size: 13px; padding: 4px 0; }
+  select, input[type=number] { font: inherit; font-size: 13px; padding: 5px 8px; border: 1px solid #c8d1d8; border-radius: 4px; background: #fff; width: 120px; }
+  input[type=number] { text-align: right; }
+  .zone-assign { display: none; }
+  .zone-assign.show { display: block; }
+  .hint { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+
+  h2 { font-size: 15px; margin: 24px 0 8px; letter-spacing: .01em; }
+  table { width: 100%; border-collapse: collapse; background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; font-size: 13px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: #fbfcfd; }
+  td.n, th.n { text-align: right; font-family: 'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
+  tr.total td { font-weight: 700; background: #f3f6f8; }
+  .table-wrap { overflow-x: auto; }
+  .cutlist { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--slate); }
+  footer { margin-top: 40px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .sheet svg { max-height: 88vh; }
+  }
+  @media print {
+    @page { size: letter landscape; margin: 0.4in; }
+    html, body { background: #fff; }
+    .wrap { max-width: none; padding: 0; }
+    .controls, .sheet-tools button, footer, .no-print { display: none !important; }
+    .sheet { border: none; box-shadow: none; padding: 0; break-after: page; }
+    .sheet svg { max-height: none; }
+    table { break-inside: avoid; }
+    * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">TAP Athletes · Facility</div>
+      <h1>Flooring plan &amp; take-off</h1>
+    </div>
+    <div class="stat">Floor to cover <b id="stat-net">—</b> sf net · <span id="stat-gross">—</span> sf interior − <span id="stat-bath">—</span> sf bathroom</div>
+  </header>
+
+  <div class="banner" id="unconfirmed">
+    <strong>Carried forward, not re-measured:</strong> the items below came from the old model. Confirm on site before ordering against them.
+    <ul id="unconfirmed-list"></ul>
+  </div>
+
+  <div class="sheet">
+    <svg id="plan" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flooring plan"></svg>
+    <div class="sheet-tools">
+      <div class="legend" id="legend"></div>
+      <button class="link" id="rotate" type="button">Rotate</button>
+    </div>
+  </div>
+
+  <form class="controls" onsubmit="return false">
+    <fieldset>
+      <legend>Materials</legend>
+      <label class="row">Layout
+        <select id="preset">
+          <option value="allRubber">All rubber</option>
+          <option value="rubberGymPvcCage">Rubber gym · PVC cage</option>
+          <option value="custom">Custom per zone</option>
+        </select>
+      </label>
+      <div class="zone-assign" id="zone-assign"></div>
+      <label class="row">Waste allowance
+        <span><input id="waste" type="number" min="0" max="50" step="1" value="10" style="width:70px" /> %</span>
+      </label>
+      <p class="hint">Waste % feeds the square-foot take-off. The roll calculator computes its own waste from the cut plan.</p>
+    </fieldset>
+    <fieldset id="spec-rubber" data-material="rubber"><legend>Rubber — how it's sold</legend></fieldset>
+    <fieldset id="spec-pvc" data-material="pvc"><legend>PVC — how it's sold</legend></fieldset>
+  </form>
+
+  <h2>Square-foot take-off</h2>
+  <div class="table-wrap"><table id="takeoff">
+    <thead><tr><th>Zone</th><th>Material</th><th class="n">Net sf</th><th class="n">Waste sf</th><th class="n">Order sf</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+
+  <h2>Order by material</h2>
+  <div class="table-wrap"><table id="orders">
+    <thead><tr><th>Material</th><th>Sold as</th><th class="n">Net sf</th><th class="n">Quantity</th><th class="n">Ordered sf</th><th class="n">Waste</th><th>Seams</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+
+  <h2>Installer cut list</h2>
+  <div class="table-wrap"><table id="cuts">
+    <thead><tr><th>Zone</th><th>Material</th><th>Run</th><th class="n">Strips</th><th>Strip length</th><th>Last strip</th><th>Pieces</th><th class="n">Waste</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+
+  <footer>dimensions.js is the source of truth · <a href="../">facility.tapathletes.com</a> · <a href="../sky/">3D walkthrough</a></footer>
+</div>
+
+<script type="module">
+  import { DIMS, ZONES, CUTOUTS, unconfirmed } from '../dimensions.js';
+  import * as T from './takeoff.js';
+  import { renderPlan, renderLabels, renderSeams, setOrientation, MATERIAL_COLORS } from './plan.js';
+
+  const $ = (s) => document.querySelector(s);
+  const svg = $('#plan');
+  const sf = (v) => v.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+
+  const state = {
+    preset: 'allRubber',
+    assignment: T.PRESETS.allRubber(ZONES),
+    wastePct: 10,
+    spec: {
+      rubber: { format: 'roll', rollWidth: 4, rollLength: 0, direction: 'auto', tileW: 2, tileL: 2 },
+      pvc:    { format: 'tile', rollWidth: 4, rollLength: 0, direction: 'auto', tileW: 2, tileL: 2 },
+    },
+  };
+
+  // ── Header stats + unconfirmed banner ──────────────────────────────
+  const gross = DIMS.building.length * DIMS.building.width;
+  const bath = CUTOUTS.reduce((s, c) => s + T.area(c), 0);
+  $('#stat-gross').textContent = sf(gross);
+  $('#stat-bath').textContent = sf(bath);
+  $('#stat-net').textContent = sf(gross - bath);
+  const unc = unconfirmed();
+  $('#unconfirmed-list').innerHTML = unc.map((u) => `<li><code>${u.path}</code> — ${u.note}</li>`).join('');
+  if (!unc.length) $('#unconfirmed').hidden = true;
+
+  // ── Controls ────────────────────────────────────────────────────────
+  $('#zone-assign').innerHTML = ZONES.map((z) => `
+    <label class="row">${z.label}
+      <select data-zone="${z.id}">
+        <option value="rubber">Rubber</option><option value="pvc">PVC</option>
+      </select>
+    </label>`).join('');
+
+  for (const mat of ['rubber', 'pvc']) {
+    const s = state.spec[mat];
+    $(`#spec-${mat}`).insertAdjacentHTML('beforeend', `
+      <label class="row">Format
+        <select data-spec="${mat}.format"><option value="roll">Rolls</option><option value="tile">Tiles</option></select>
+      </label>
+      <div data-fmt="${mat}.roll">
+        <label class="row">Roll width (ft) <input type="number" step="0.25" min="1" data-spec="${mat}.rollWidth" value="${s.rollWidth}" /></label>
+        <label class="row">Roll length (ft, 0 = cut to length) <input type="number" step="1" min="0" data-spec="${mat}.rollLength" value="${s.rollLength}" /></label>
+        <label class="row">Run strips
+          <select data-spec="${mat}.direction"><option value="auto">Auto (least waste)</option><option value="length">Along the length</option><option value="width">Across the width</option></select>
+        </label>
+      </div>
+      <div data-fmt="${mat}.tile">
+        <label class="row">Tile width (ft) <input type="number" step="0.25" min="0.25" data-spec="${mat}.tileW" value="${s.tileW}" /></label>
+        <label class="row">Tile length (ft) <input type="number" step="0.25" min="0.25" data-spec="${mat}.tileL" value="${s.tileL}" /></label>
+      </div>`);
+    $(`[data-spec="${mat}.format"]`).value = s.format;
+  }
+
+  document.addEventListener('input', (e) => {
+    const el = e.target;
+    if (el.id === 'preset') {
+      state.preset = el.value;
+      if (el.value !== 'custom') state.assignment = T.PRESETS[el.value](ZONES);
+      $('#zone-assign').classList.toggle('show', el.value === 'custom');
+      for (const sel of document.querySelectorAll('#zone-assign select')) sel.value = state.assignment[sel.dataset.zone];
+    } else if (el.dataset.zone) {
+      state.assignment[el.dataset.zone] = el.value;
+    } else if (el.id === 'waste') {
+      state.wastePct = +el.value || 0;
+    } else if (el.dataset.spec) {
+      const [mat, key] = el.dataset.spec.split('.');
+      state.spec[mat][key] = el.type === 'number' ? +el.value : el.value;
+    }
+    recompute();
+  });
+
+  let portrait = false;
+  const mq = window.matchMedia('(max-width: 640px)');
+  $('#rotate').addEventListener('click', () => { portrait = !portrait; setOrientation(svg, portrait); });
+  const applyMq = () => { portrait = mq.matches; setOrientation(svg, portrait); };
+  mq.addEventListener('change', applyMq);
+
+  // ── Compute + render ────────────────────────────────────────────────
+  function recompute() {
+    for (const mat of ['rubber', 'pvc']) {
+      const fmt = state.spec[mat].format;
+      $(`[data-fmt="${mat}.roll"]`).hidden = fmt !== 'roll';
+      $(`[data-fmt="${mat}.tile"]`).hidden = fmt !== 'tile';
+    }
+
+    renderPlan(svg, state.assignment);
+    if (portrait) setOrientation(svg, true);
+
+    const tk = T.takeoff(ZONES, state.assignment, state.wastePct);
+    renderLabels(svg, tk.rows);
+
+    $('#takeoff tbody').innerHTML = tk.rows.map((r) => `
+      <tr><td>${r.label}</td><td>${MATERIAL_COLORS[r.material].label}</td><td class="n">${sf(r.netSf)}</td><td class="n">${sf(r.wasteSf)}</td><td class="n">${sf(r.orderSf)}</td></tr>`).join('')
+      + Object.entries(tk.byMaterial).map(([m, v]) => `
+      <tr class="total"><td>Total</td><td>${MATERIAL_COLORS[m].label}</td><td class="n">${sf(v.netSf)}</td><td class="n">${sf(v.orderSf - v.netSf)}</td><td class="n">${sf(v.orderSf)}</td></tr>`).join('');
+
+    const orders = [];
+    const cuts = [];
+    const seams = {};
+    for (const mat of Object.keys(tk.byMaterial)) {
+      const zones = ZONES.filter((z) => state.assignment[z.id] === mat);
+      const s = state.spec[mat];
+      if (s.format === 'tile') {
+        const plans = zones.map((z) => ({ z, p: T.planTiles(z, s.tileW, s.tileL) }));
+        const tiles = plans.reduce((a, x) => a + x.p.tiles, 0);
+        const ordered = plans.reduce((a, x) => a + x.p.orderedSf, 0);
+        const net = tk.byMaterial[mat].netSf;
+        orders.push({ mat, soldAs: `${s.tileW}' × ${s.tileL}' tiles`, net, qty: `${tiles.toLocaleString()} tiles`, ordered, waste: ((ordered - net) / net) * 100, seams: `${plans.reduce((a, x) => a + x.p.cutTiles, 0)} cut tiles` });
+        for (const { z, p } of plans) cuts.push({ zone: z.label, mat, run: '—', strips: `${p.cols} × ${p.rows}`, stripLength: '—', last: '—', pieces: `${p.fullTiles} full + ${p.cutTiles} cut`, waste: ((p.orderedSf - T.area(z)) / T.area(z)) * 100 });
+      } else {
+        const spec = { rollWidth: s.rollWidth, rollLength: s.rollLength || null, direction: s.direction };
+        const m = T.planMaterial(zones, spec);
+        const ripCount = m.perZone.reduce((a, x) => a + x.plan.seams.rip.length, 0);
+        const buttCount = m.perZone.reduce((a, x) => a + x.plan.seams.butt.length, 0);
+        orders.push({
+          mat, soldAs: spec.rollLength ? `${s.rollWidth}' × ${spec.rollLength}' rolls` : `${s.rollWidth}' wide, cut to length`,
+          net: m.netSf, qty: spec.rollLength ? `${m.rolls} rolls` : `${Math.ceil(m.linearFt).toLocaleString()} lin ft`,
+          ordered: m.orderedSf, waste: m.wastePct, seams: `${ripCount} rip · ${buttCount} butt`,
+        });
+        for (const { zone, plan } of m.perZone) {
+          const groups = {};
+          for (const c of plan.cuts) groups[c.len] = (groups[c.len] || 0) + 1;
+          cuts.push({
+            zone: zone.label, mat, run: plan.direction === 'length' ? 'along length' : 'across width', strips: plan.strips,
+            stripLength: T.fmtFtIn(plan.stripLength), last: T.fmtFtIn(plan.lastStripWidth),
+            pieces: Object.entries(groups).sort((a, b) => b[0] - a[0]).map(([len, n]) => `${n} × ${T.fmtFtIn(+len)}`).join(', '),
+            waste: plan.wastePct,
+          });
+          seams[zone.id] = { direction: plan.direction, rip: plan.seams.rip, butt: plan.seams.butt, rollWidth: s.rollWidth };
+        }
+      }
+    }
+    renderSeams(svg, seams);
+
+    $('#orders tbody').innerHTML = orders.map((o) => `
+      <tr><td>${MATERIAL_COLORS[o.mat].label}</td><td>${o.soldAs}</td><td class="n">${sf(o.net)}</td><td class="n">${o.qty}</td><td class="n">${sf(o.ordered)}</td><td class="n">${o.waste.toFixed(1)}%</td><td>${o.seams}</td></tr>`).join('');
+    $('#cuts tbody').innerHTML = cuts.map((c) => `
+      <tr><td>${c.zone}</td><td>${MATERIAL_COLORS[c.mat].label}</td><td>${c.run}</td><td class="n">${c.strips}</td><td>${c.stripLength}</td><td>${c.last}</td><td class="cutlist">${c.pieces}</td><td class="n">${c.waste.toFixed(1)}%</td></tr>`).join('');
+
+    $('#legend').innerHTML = Object.entries(MATERIAL_COLORS).map(([k, v]) => `<span style="--sw:${v.fill}">${v.label}</span>`).join('')
+      + `<span style="--sw:url(#hatch);background:#eee">Not floored</span><span class="seam">Seam (rip solid · butt dashed)</span>`;
+  }
+
+  recompute();
+  applyMq();
+</script>
+</body>
+</html>

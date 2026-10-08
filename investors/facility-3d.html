@@ -1,0 +1,1466 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TAP Athletes — Facility 3D Walkthrough</title>
+<style>
+  :root {
+    --slate: #3a4a55;
+    --slate-deep: #2a3640;
+    --powder: #b8d4e0;
+    --paper: #f5f8fb;
+    --ink: #1a232b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    height: 100%;
+    background: #0a0d12;
+    color: #e6ecf2;
+    font-family: 'Inter', system-ui, sans-serif;
+    overflow: hidden;
+  }
+  #app { position: fixed; inset: 0; }
+  canvas { display: block; }
+
+  .hud {
+    position: fixed;
+    pointer-events: none;
+    color: #e6ecf2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  .hud.top-left   { top: 16px; left: 16px; }
+  .hud.top-right  { top: 16px; right: 16px; text-align: right; }
+  .hud .title {
+    font-weight: 800; font-size: 18px; letter-spacing: 2px;
+    color: #fff;
+  }
+  .hud .sub {
+    font-weight: 500; font-size: 11px; letter-spacing: 3px;
+    color: #b8d4e0; margin-top: 2px;
+  }
+  .hud .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 11px; letter-spacing: 1.5px; opacity: 0.8;
+  }
+
+  .panel {
+    position: fixed;
+    top: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 28, 36, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(184, 212, 224, 0.2);
+    border-radius: 6px;
+    padding: 6px;
+    display: flex;
+    gap: 4px;
+    pointer-events: auto;
+    z-index: 10;
+  }
+  .panel button {
+    background: transparent;
+    color: #b8d4e0;
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+    transition: all 0.15s;
+  }
+  .panel button:hover { background: rgba(184, 212, 224, 0.12); }
+  .panel button.active {
+    background: #3a4a55;
+    color: #fff;
+    border-color: rgba(184, 212, 224, 0.4);
+  }
+  .panel .divider {
+    width: 1px;
+    background: rgba(184, 212, 224, 0.15);
+    margin: 4px 2px;
+  }
+
+  .help {
+    position: fixed;
+    bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: rgba(20, 28, 36, 0.88);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(184, 212, 224, 0.15);
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: #b8d4e0;
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    pointer-events: none;
+    z-index: 10;
+  }
+  .help kbd {
+    display: inline-block;
+    background: #3a4a55;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: inherit;
+    font-size: 10px;
+    margin: 0 2px;
+  }
+
+  #lock-hint {
+    position: fixed; inset: 0;
+    display: none;
+    align-items: center; justify-content: center;
+    background: rgba(8, 12, 18, 0.78);
+    backdrop-filter: blur(4px);
+    z-index: 20;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+  #lock-hint.show { display: flex; }
+  #lock-hint .card {
+    background: #1a232b;
+    border: 1px solid rgba(184, 212, 224, 0.3);
+    border-radius: 8px;
+    padding: 28px 36px;
+    text-align: center;
+    max-width: 360px;
+  }
+  #lock-hint .card h2 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  #lock-hint .card p {
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #b8d4e0;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  #lock-hint .card .cta {
+    background: #b8d4e0;
+    color: #1a232b;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 3px;
+  }
+</style>
+</head>
+<body>
+  <div id="app"></div>
+
+  <div class="panel" id="mode-panel">
+    <button data-mode="orbit" class="active">Orbit</button>
+    <button data-mode="walk">Walk</button>
+    <div class="divider"></div>
+    <button data-preset="iso">Iso</button>
+    <button data-preset="top">Top</button>
+    <button data-preset="mound">From Mound</button>
+    <button data-preset="plate">From Plate</button>
+    <button data-preset="entry">Entry</button>
+  </div>
+
+  <div class="hud top-left">
+    <div class="title">TAP ATHLETES</div>
+    <div class="sub">PITCHING ACADEMY · FACILITY 3D</div>
+  </div>
+
+  <div class="hud top-right">
+    <div class="mono">25' W × 80' L · CAGE 12' × 72'</div>
+    <div class="mono" id="cam-info" style="margin-top: 6px; opacity: 0.55;">orbit</div>
+  </div>
+
+  <div class="help" id="help-orbit">
+    <kbd>L-DRAG</kbd> rotate · <kbd>R-DRAG</kbd> pan · <kbd>SCROLL</kbd> zoom
+  </div>
+  <div class="help" id="help-walk" style="display:none;">
+    <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> move · <kbd>MOUSE</kbd> look · <kbd>SHIFT</kbd> run · <kbd>ESC</kbd> exit
+  </div>
+
+  <div id="lock-hint">
+    <div class="card">
+      <h2>WALK MODE</h2>
+      <p>Click to enter the facility. Use WASD to move, mouse to look around. Press <kbd style="background:#3a4a55;color:#fff;padding:1px 5px;border-radius:2px;font-size:10px;">ESC</kbd> to exit.</p>
+      <div class="cta">CLICK TO START</div>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { PointerLockControls } from 'three/addons/controls/PointerLockControls.js';
+    import { Reflector } from 'three/addons/objects/Reflector.js';
+    import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+    import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+    import { SSAOPass } from 'three/addons/postprocessing/SSAOPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
+    /* ─────────────────────────────────────────────────────────────────
+       Coordinate system (world units = feet) — LONG AXIS ALONG X:
+         x: 0 .. 80  (length, FRONT wall to BACK wall)
+         z: 0 .. 25  (width, LEFT wall to RIGHT wall)
+         y: 0 .. 14  (height, floor to ceiling)
+       Concrete pads:  x = 0..3 (front entry) and x = 77..80 (back exit)
+       Pitching cage:  x = 5..77, z = 2..14, y = 0..11   (12' × 72' × 11')
+         - 2' walking strip in front of cage (x = 3..5)
+         - back of cage flush with back concrete pad
+       Right-side strip: z = 14..25 (11' wide)
+         - bathroom 6'-11 1/2" × 8'-8 1/2" (architect 2026-05-09) at x = 3..9.96, z = 16.29..25
+         - mirror wall along z = 24.7, x = 10..40
+         - plyo rack at x = 42..50, z = 22..24.5
+         - kettlebell rack at x = 52..60, z = 22..24.5
+       Door: on front wall (x = 0), span z = 14..17
+    ────────────────────────────────────────────────────────────────── */
+
+    const PAL = {
+      floor:    0x141414,
+      concrete: 0xb9b6ad,
+      wall:     0xf2efe8,
+      ceiling:  0xe8e5dc,
+      truss:    0x2a3640,
+      turf:     0x0e0e0e,
+      turfStripe: 0x1a1a1a,
+      mound:    0x1e5fb8,
+      moundTop: 0x2a6fc8,
+      rubber:   0xfafafa,
+      net:      0x0a0a0a,
+      mirror:   0xc8dde8,
+      mirrorFrame: 0x3a4a55,
+      bathWall: 0x4a5d6b,
+      wood:     0x8a6a4a,
+      woodDk:   0x5a3e26,
+      kbBlack:  0x1a232b,
+      brand:    0xb8d4e0,
+      mat:      0x3a4a55,
+    };
+
+    // ── Renderer / scene / cameras ───────────────────────────────────
+    const app = document.getElementById('app');
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
+    app.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xa3c4d8); // daytime sky
+    scene.fog = new THREE.Fog(0xc1d4df, 140, 380);
+
+    // Building center: (40, 4, 12.5). Default orbit looks at the glass front from outside.
+    const orbitCam = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 600);
+    orbitCam.position.set(-35, 28, 55);
+    orbitCam.lookAt(40, 4, 12.5);
+
+    const walkCam = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.05, 300);
+    walkCam.position.set(1.5, 5.6, 15.5); // standing just inside the front door
+    walkCam.lookAt(40, 5.6, 12.5);
+
+    // ── Image-based lighting (PMREM) ─────────────────────────────────
+    // Procedural indoor environment that every MeshStandardMaterial picks up
+    // as ambient/diffuse fill + reflection contribution.
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+
+    // Required for RectAreaLights to render correctly
+    RectAreaLightUniformsLib.init();
+
+    // ── Post-processing pipeline ─────────────────────────────────────
+    // Composer chain: render → SSAO → bloom → tone-mapped output.
+    // SSAO grounds geometry into corners; bloom blooms light fixtures + mirror.
+    let activeCam = orbitCam;
+    const composer = new EffectComposer(renderer);
+    const renderPass = new RenderPass(scene, activeCam);
+    composer.addPass(renderPass);
+
+    const ssaoPass = new SSAOPass(scene, activeCam, window.innerWidth, window.innerHeight);
+    ssaoPass.kernelRadius = 0.5;     // small radius — gym corners are tight
+    ssaoPass.minDistance   = 0.001;
+    ssaoPass.maxDistance   = 0.1;
+    composer.addPass(ssaoPass);
+
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      0.45,  // strength
+      0.5,   // radius
+      0.82   // threshold — only the brightest fixtures + reflections bloom
+    );
+    composer.addPass(bloomPass);
+
+    composer.addPass(new OutputPass());
+
+    // ── Lighting ──────────────────────────────────────────────────────
+    // Ambient kept low — envmap + interior fixtures provide most of the fill.
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+
+    const sun = new THREE.DirectionalLight(0xfff4e0, 1.0);
+    sun.position.set(-40, 70, 40);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -80;
+    sun.shadow.camera.right = 100;
+    sun.shadow.camera.top = 80;
+    sun.shadow.camera.bottom = -80;
+    sun.shadow.camera.near = 1;
+    sun.shadow.camera.far = 250;
+    sun.shadow.bias = -0.0005;
+    scene.add(sun);
+
+    // ── Interior overhead lighting (high-bay LED fixtures) ──────────
+    // Two rows of 3 fixtures: one row over the cage lanes, one over the
+    // gym strip. Emissive fixture body + RectAreaLight beneath = visible
+    // light source + actual illumination + something for the floor reflector
+    // and wall mirror to pick up.
+    const fixtureMat = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      emissive: 0xfff0d0,
+      emissiveIntensity: 1.6,
+      roughness: 0.6,
+      metalness: 0.0,
+    });
+    const fixtureSlots = [
+      { x: 18, z: 6 }, { x: 40, z: 6 }, { x: 62, z: 6 },     // over cage lanes
+      { x: 18, z: 19 }, { x: 40, z: 19 }, { x: 62, z: 19 },  // over gym strip
+    ];
+    fixtureSlots.forEach((p) => {
+      const fixture = new THREE.Mesh(new THREE.BoxGeometry(4, 0.25, 1.2), fixtureMat);
+      fixture.position.set(p.x, 13.7, p.z); // just below 14ft ceiling
+      scene.add(fixture);
+
+      const light = new THREE.RectAreaLight(0xfff0d0, 5, 4, 1.2);
+      light.position.set(p.x, 13.6, p.z);
+      light.lookAt(p.x, 0, p.z); // shine straight down
+      scene.add(light);
+    });
+
+    scene.add(new THREE.HemisphereLight(0xb8d4e0, 0x2a3640, 0.45));
+
+    // Ceiling-mounted bay lights along the LENGTH axis
+    for (let x = 8; x < 80; x += 12) {
+      const bay = new THREE.PointLight(0xfff0d4, 0.55, 35, 1.5);
+      bay.position.set(x, 13.5, 12.5);
+      scene.add(bay);
+      const housing = new THREE.Mesh(
+        new THREE.BoxGeometry(1.0, 0.4, 2.5),
+        new THREE.MeshStandardMaterial({ color: 0x222428, roughness: 0.6 })
+      );
+      housing.position.set(x, 13.6, 12.5);
+      scene.add(housing);
+      const bulb = new THREE.Mesh(
+        new THREE.BoxGeometry(0.7, 0.15, 2.2),
+        new THREE.MeshBasicMaterial({ color: 0xfff4d4 })
+      );
+      bulb.position.set(x, 13.4, 12.5);
+      scene.add(bulb);
+    }
+
+    // ── Materials ─────────────────────────────────────────────────────
+    const matFloor = new THREE.MeshStandardMaterial({ color: PAL.floor, roughness: 0.75, metalness: 0.05 });
+    const matConcrete = new THREE.MeshStandardMaterial({ color: PAL.concrete, roughness: 0.92 });
+    const matWall = new THREE.MeshStandardMaterial({ color: PAL.wall, roughness: 0.85, side: THREE.DoubleSide });
+    const matCeiling = new THREE.MeshStandardMaterial({ color: PAL.ceiling, roughness: 0.9, side: THREE.DoubleSide });
+    const matTurf = new THREE.MeshStandardMaterial({ color: PAL.turf, roughness: 0.95 });
+    const matNet = new THREE.MeshStandardMaterial({
+      color: 0x6a6a6a, roughness: 0.6, transparent: true, opacity: 0.14,
+      side: THREE.DoubleSide, depthWrite: false,
+    });
+    const matFrame = new THREE.MeshStandardMaterial({ color: 0x1a1a1a, roughness: 0.55, metalness: 0.4 });
+    const matMoundTop = new THREE.MeshStandardMaterial({ color: PAL.moundTop, roughness: 0.7 });
+    const matRubber = new THREE.MeshStandardMaterial({ color: PAL.rubber, roughness: 0.5 });
+    const matBathWall = new THREE.MeshStandardMaterial({ color: PAL.bathWall, roughness: 0.85, side: THREE.DoubleSide });
+    // Faked glassy mirror — gradient texture with subtle streaks, shiny + slightly metallic.
+    function makeMirrorTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1024; c.height = 384;
+      const ctx = c.getContext('2d');
+      // vertical gradient: ceiling-tone at top → floor/wall tone at bottom
+      const grad = ctx.createLinearGradient(0, 0, 0, c.height);
+      grad.addColorStop(0,    '#dfeef5');
+      grad.addColorStop(0.45, '#cfe1ec');
+      grad.addColorStop(0.55, '#bcd2dd');
+      grad.addColorStop(1,    '#7d96a3');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, c.width, c.height);
+
+      // hint of horizon line where ceiling reflection meets floor reflection
+      ctx.fillStyle = 'rgba(255,255,255,0.18)';
+      ctx.fillRect(0, c.height * 0.50, c.width, 1);
+
+      // soft diagonal streaks
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+      ctx.lineWidth = 14;
+      for (let i = -3; i < 12; i++) {
+        ctx.beginPath();
+        ctx.moveTo(i * 100,            0);
+        ctx.lineTo(i * 100 + 280, c.height);
+        ctx.stroke();
+      }
+      // a couple of brighter highlight streaks
+      ctx.strokeStyle = 'rgba(255,255,255,0.16)';
+      ctx.lineWidth = 6;
+      for (const x of [220, 540, 820]) {
+        ctx.beginPath();
+        ctx.moveTo(x,            0);
+        ctx.lineTo(x + 200, c.height);
+        ctx.stroke();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+
+      // very subtle bottom haze (like a smudge / floor reflection blur)
+      const bottom = ctx.createLinearGradient(0, c.height * 0.7, 0, c.height);
+      bottom.addColorStop(0, 'rgba(40,55,70,0)');
+      bottom.addColorStop(1, 'rgba(40,55,70,0.25)');
+      ctx.fillStyle = bottom;
+      ctx.fillRect(0, c.height * 0.7, c.width, c.height * 0.3);
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    }
+    const matMirror = new THREE.MeshStandardMaterial({
+      map: makeMirrorTexture(),
+      roughness: 0.08,
+      metalness: 0.85,
+      envMapIntensity: 1.2,
+    });
+    const matMirrorFrame = new THREE.MeshStandardMaterial({ color: PAL.mirrorFrame, roughness: 0.55, metalness: 0.5 });
+    const matWood = new THREE.MeshStandardMaterial({ color: PAL.wood, roughness: 0.8 });
+    const matWoodDk = new THREE.MeshStandardMaterial({ color: PAL.woodDk, roughness: 0.85 });
+    const matMetal = new THREE.MeshStandardMaterial({ color: PAL.kbBlack, roughness: 0.4, metalness: 0.6 });
+    const matMat = new THREE.MeshStandardMaterial({ color: PAL.mat, roughness: 0.95 });
+
+    /* ─────────────────────────────────────────────────────────────────
+       BUILDING SHELL (long axis = x)
+    ────────────────────────────────────────────────────────────────── */
+
+    // Concrete pad - front (x = 0..3)
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(3, 0.05, 25), matConcrete);
+      m.position.set(1.5, -0.025, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+    // Concrete pad - back (x = 77..80)
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(3, 0.05, 25), matConcrete);
+      m.position.set(78.5, -0.025, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+    // Rubber interior floor (x = 3..77)
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(74, 0.05, 25), matFloor);
+      m.position.set(40, -0.025, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+
+    // Walls
+    const WALL_T = 0.5;
+    const WALL_H = 14;
+    function wall(w, h, d, x, y, z) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matWall);
+      m.position.set(x, y, z);
+      m.castShadow = true; m.receiveShadow = true;
+      return m;
+    }
+    // Long walls (running along x)
+    scene.add(wall(80 + WALL_T*2, WALL_H, WALL_T, 40, WALL_H/2, -WALL_T/2));      // left long wall (z=0)
+    scene.add(wall(80 + WALL_T*2, WALL_H, WALL_T, 40, WALL_H/2, 25 + WALL_T/2));  // right long wall (z=25)
+    // Back short wall (x=80) — with roller door cutout
+    //   door is 6' wide × 8' tall, offset right-of-center:
+    //     looking at the back wall from inside, 4' of wall on the right (z=21..25),
+    //     then 6' door (z=15..21), then 15' of wall on the left (z=0..15)
+    {
+      const ROLL_W = 6, ROLL_H = 8;
+      const ROLL_Z1 = 15, ROLL_Z2 = 21;
+      // left segment (z = 0..15)
+      scene.add(wall(WALL_T, WALL_H, ROLL_Z1, 80 + WALL_T/2, WALL_H/2, ROLL_Z1/2));
+      // right segment (z = 21..25)
+      scene.add(wall(WALL_T, WALL_H, 25 - ROLL_Z2, 80 + WALL_T/2, WALL_H/2, (ROLL_Z2 + 25)/2));
+      // lintel above the door (y = 8..14)
+      scene.add(wall(WALL_T, WALL_H - ROLL_H, ROLL_W, 80 + WALL_T/2, ROLL_H + (WALL_H - ROLL_H)/2, (ROLL_Z1 + ROLL_Z2)/2));
+
+      // roller door slab (sectional panel)
+      const doorMat = new THREE.MeshStandardMaterial({ color: 0x3a4a55, roughness: 0.55, metalness: 0.3 });
+      const door = new THREE.Mesh(new THREE.BoxGeometry(0.15, ROLL_H, ROLL_W), doorMat);
+      door.position.set(80, ROLL_H/2, (ROLL_Z1 + ROLL_Z2)/2);
+      door.castShadow = true;
+      scene.add(door);
+
+      // section grooves (every 2 ft of height)
+      const grooveMat = new THREE.MeshStandardMaterial({ color: 0x1a232b, roughness: 0.8 });
+      for (let yy = 2; yy < ROLL_H; yy += 2) {
+        const groove = new THREE.Mesh(
+          new THREE.BoxGeometry(0.18, 0.05, ROLL_W),
+          grooveMat
+        );
+        groove.position.set(80, yy, (ROLL_Z1 + ROLL_Z2)/2);
+        scene.add(groove);
+      }
+
+      // vertical handle / lift bar (interior side)
+      const handleMat = new THREE.MeshStandardMaterial({ color: 0xb8d4e0, roughness: 0.4, metalness: 0.6 });
+      const handle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.2, 0.15), handleMat);
+      handle.position.set(79.85, 3.5, (ROLL_Z1 + ROLL_Z2)/2);
+      scene.add(handle);
+
+      // door tracks — vertical rails inside, on each side of the opening, up past the lintel
+      const trackMat = new THREE.MeshStandardMaterial({ color: 0x3a4a55, roughness: 0.5, metalness: 0.6 });
+      const trackGeom = new THREE.BoxGeometry(0.4, ROLL_H + 0.5, 0.18);
+      const trackL = new THREE.Mesh(trackGeom, trackMat);
+      trackL.position.set(79.7, (ROLL_H + 0.5)/2, ROLL_Z1);
+      const trackR = trackL.clone();
+      trackR.position.set(79.7, (ROLL_H + 0.5)/2, ROLL_Z2);
+      scene.add(trackL, trackR);
+
+      // roller drum (horizontal cylinder above the door, mounted to the lintel)
+      const drum = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.45, 0.45, ROLL_W + 0.4, 16),
+        trackMat
+      );
+      drum.rotation.x = Math.PI / 2;
+      drum.position.set(79.6, ROLL_H + 0.7, (ROLL_Z1 + ROLL_Z2)/2);
+      scene.add(drum);
+
+      // drum end caps / mounting plates
+      const capGeom = new THREE.BoxGeometry(0.5, 1.0, 0.2);
+      const capL = new THREE.Mesh(capGeom, trackMat);
+      capL.position.set(79.6, ROLL_H + 0.7, ROLL_Z1 - 0.2);
+      const capR = capL.clone();
+      capR.position.set(79.6, ROLL_H + 0.7, ROLL_Z2 + 0.2);
+      scene.add(capL, capR);
+    }
+    // Front facade (x=0) — full glass curtain wall + glass door
+    {
+      const matGlass = new THREE.MeshStandardMaterial({
+        color: 0xb8d4e0,
+        metalness: 0.3,
+        roughness: 0.05,
+        transparent: true,
+        opacity: 0.22,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+      });
+      const matMullion = new THREE.MeshStandardMaterial({
+        color: 0x2a3640, metalness: 0.6, roughness: 0.4,
+      });
+
+      // Glass panes (3 sections: left of door, transom over door, right of door)
+      function pane(zCenter, w, yCenter, h) {
+        const m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), matGlass);
+        m.position.set(0, yCenter, zCenter);
+        m.rotation.y = -Math.PI / 2; // face -x (toward parking lot)
+        return m;
+      }
+      scene.add(pane(7,    14, 7,    14)); // left pane (z=0..14)
+      scene.add(pane(15.5,  3, 10.5,  7)); // transom over door (z=14..17, y=7..14)
+      scene.add(pane(21,    8, 7,    14)); // right pane (z=17..25)
+
+      // Vertical mullions every 5 ft + at door jambs
+      const vMullionGeom = new THREE.BoxGeometry(0.5, 14, 0.25);
+      [0, 5, 10, 14, 17, 21, 25].forEach(z => {
+        const m = new THREE.Mesh(vMullionGeom, matMullion);
+        m.position.set(0, 7, z);
+        scene.add(m);
+      });
+      // Horizontal rails at floor, mid (door head height), and ceiling
+      const hRail = (y) => {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.25, 25.5), matMullion);
+        m.position.set(0, y, 12.5);
+        return m;
+      };
+      scene.add(hRail(0));
+      scene.add(hRail(7));   // door head / transom break
+      scene.add(hRail(14));
+
+      // Glass door (hinged on z=14 side, swung inward to interior)
+      const doorPivot = new THREE.Group();
+      doorPivot.position.set(0, 0, 14);
+      doorPivot.rotation.y = -Math.PI / 8;
+      scene.add(doorPivot);
+
+      const doorGlass = new THREE.Mesh(new THREE.BoxGeometry(0.12, 7, 3), matGlass);
+      doorGlass.position.set(0, 3.5, 1.5);
+      doorPivot.add(doorGlass);
+
+      // door rails (top + bottom) and stiles (left + right)
+      const doorRailMat = new THREE.MeshStandardMaterial({ color: 0x2a3640, metalness: 0.6, roughness: 0.4 });
+      const dTop = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 3), doorRailMat);
+      dTop.position.set(0, 6.83, 1.5);
+      const dBot = new THREE.Mesh(new THREE.BoxGeometry(0.18, 0.35, 3), doorRailMat);
+      dBot.position.set(0, 0.18, 1.5);
+      const dStileL = new THREE.Mesh(new THREE.BoxGeometry(0.18, 7, 0.2), doorRailMat);
+      dStileL.position.set(0, 3.5, 0.1);
+      const dStileR = new THREE.Mesh(new THREE.BoxGeometry(0.18, 7, 0.2), doorRailMat);
+      dStileR.position.set(0, 3.5, 2.9);
+      doorPivot.add(dTop, dBot, dStileL, dStileR);
+
+      // Vertical pull handle (interior side)
+      const handleMat = new THREE.MeshStandardMaterial({ color: 0xb8d4e0, metalness: 0.85, roughness: 0.18 });
+      const handle = new THREE.Mesh(new THREE.BoxGeometry(0.06, 2.5, 0.15), handleMat);
+      handle.position.set(0.18, 3.5, 2.6);
+      doorPivot.add(handle);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       OUTDOOR ENVIRONMENT — parking lot in front of the building (x < 0)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      // Ground plane far beyond the parking lot, simple grass/concrete fade
+      const ground = new THREE.Mesh(
+        new THREE.BoxGeometry(300, 0.02, 300),
+        new THREE.MeshStandardMaterial({ color: 0x86927a, roughness: 0.95 })
+      );
+      ground.position.set(-50, -0.06, 12.5);
+      ground.receiveShadow = true;
+      scene.add(ground);
+
+      // Asphalt parking lot
+      const asphalt = new THREE.Mesh(
+        new THREE.BoxGeometry(60, 0.04, 80),
+        new THREE.MeshStandardMaterial({ color: 0x2a2d33, roughness: 0.9 })
+      );
+      asphalt.position.set(-32, -0.04, 12.5);
+      asphalt.receiveShadow = true;
+      scene.add(asphalt);
+
+      // Sidewalk strip just in front of the building (x = -3..0)
+      const sidewalk = new THREE.Mesh(
+        new THREE.BoxGeometry(3, 0.06, 30),
+        new THREE.MeshStandardMaterial({ color: 0xa8a39a, roughness: 0.85 })
+      );
+      sidewalk.position.set(-1.5, -0.018, 12.5);
+      sidewalk.receiveShadow = true;
+      scene.add(sidewalk);
+
+      // Curb edge (raised lip between sidewalk and asphalt)
+      const curb = new THREE.Mesh(
+        new THREE.BoxGeometry(0.4, 0.4, 30),
+        new THREE.MeshStandardMaterial({ color: 0xc0bcb2, roughness: 0.85 })
+      );
+      curb.position.set(-3.2, 0.18, 12.5);
+      scene.add(curb);
+
+      // Parking spot stripes — 6 spots facing the building (cars nose-in toward sidewalk)
+      const stripeMat = new THREE.MeshBasicMaterial({ color: 0xfafaf0 });
+      const stripeGeom = new THREE.BoxGeometry(0.25, 0.005, 18);
+      const stripeXCenter = -14; // car nose at x=-5 (sidewalk edge), car length 18 -> back at x=-23
+      const spotZs = [-12, -3, 6, 15, 24, 33, 42];
+      spotZs.forEach(z => {
+        const stripe = new THREE.Mesh(stripeGeom, stripeMat);
+        stripe.position.set(stripeXCenter, 0.001, z);
+        scene.add(stripe);
+      });
+
+      // Curb stops at the head of each spot (between stripes)
+      const stopMat = new THREE.MeshStandardMaterial({ color: 0xb89a6c, roughness: 0.9 });
+      const stopGeom = new THREE.BoxGeometry(0.5, 0.4, 6);
+      [-7.5, 1.5, 10.5, 19.5, 28.5, 37.5].forEach(z => {
+        const s = new THREE.Mesh(stopGeom, stopMat);
+        s.position.set(-5.5, 0.18, z);
+        scene.add(s);
+      });
+
+      // Tall light pole at edge of lot
+      const poleMat = new THREE.MeshStandardMaterial({ color: 0x2a2d33, roughness: 0.6, metalness: 0.4 });
+      const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 22, 12), poleMat);
+      pole.position.set(-26, 11, -10);
+      scene.add(pole);
+      const arm = new THREE.Mesh(new THREE.BoxGeometry(4, 0.3, 0.3), poleMat);
+      arm.position.set(-24, 21, -10);
+      scene.add(arm);
+      const lamp = new THREE.Mesh(
+        new THREE.BoxGeometry(2.5, 0.5, 1.2),
+        new THREE.MeshStandardMaterial({ color: 0x202428, roughness: 0.5 })
+      );
+      lamp.position.set(-22, 20.7, -10);
+      scene.add(lamp);
+    }
+
+    // Ceiling
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(80, 0.2, 25), matCeiling);
+      m.position.set(40, WALL_H + 0.1, 12.5);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+
+    // Roof trusses (perpendicular to length, every 8 ft along x)
+    for (let x = 4; x <= 80; x += 8) {
+      const truss = new THREE.Mesh(
+        new THREE.BoxGeometry(0.4, 0.4, 25),
+        new THREE.MeshStandardMaterial({ color: PAL.truss, roughness: 0.6 })
+      );
+      truss.position.set(x, WALL_H - 0.5, 12.5);
+      scene.add(truss);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       BRAND TEXTURES
+    ────────────────────────────────────────────────────────────────── */
+    // Full horizontal lockup: TAP diamond + ATHLETES / PITCHING ACADEMY
+    function makeLockupTexture() {
+      const c = document.createElement('canvas');
+      c.width = 1280; c.height = 400;
+      const ctx = c.getContext('2d');
+      // light-blue brand panel
+      ctx.fillStyle = '#b8d4e0';
+      ctx.fillRect(0, 0, 1280, 400);
+
+      const ink = '#1a232b';
+      ctx.strokeStyle = ink;
+      ctx.fillStyle = ink;
+
+      // Diamond (left)
+      ctx.lineWidth = 16;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(220,  50);
+      ctx.lineTo(390, 200);
+      ctx.lineTo(220, 350);
+      ctx.lineTo( 50, 200);
+      ctx.closePath();
+      ctx.stroke();
+
+      // TAP text inside diamond
+      ctx.font = '900 115px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('TAP', 220, 195);
+
+      // Home plate at bottom of diamond
+      ctx.lineWidth = 12;
+      ctx.beginPath();
+      ctx.moveTo(186, 268);
+      ctx.lineTo(254, 268);
+      ctx.lineTo(254, 296);
+      ctx.lineTo(220, 326);
+      ctx.lineTo(186, 296);
+      ctx.closePath();
+      ctx.stroke();
+
+      // "ATHLETES" — big bold (right)
+      ctx.font = '900 138px Inter, sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('ATHLETES', 470, 155);
+
+      // "PITCHING ACADEMY" — smaller, letter-spaced
+      ctx.font = '500 56px Inter, sans-serif';
+      const sub = 'PITCHING ACADEMY';
+      const startX = 470;
+      const subY = 252;
+      const spacing = 8;
+      let xx = startX;
+      for (const ch of sub) {
+        ctx.fillText(ch, xx, subY);
+        xx += ctx.measureText(ch).width + spacing;
+      }
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    }
+
+    // Circle floor decal — TAP diamond + home plate inside a ring on a brand panel
+    function makeCircleLogoTexture() {
+      const c = document.createElement('canvas');
+      c.width = 512; c.height = 512;
+      const ctx = c.getContext('2d');
+      const cx = 256, cy = 256;
+
+      // light-blue filled circle (the "painted" decal panel)
+      ctx.fillStyle = '#b8d4e0';
+      ctx.beginPath();
+      ctx.arc(cx, cy, 244, 0, Math.PI * 2);
+      ctx.fill();
+
+      const ink = '#1a232b';
+      ctx.strokeStyle = ink;
+      ctx.fillStyle = ink;
+
+      // outer ring
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 220, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 196, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // diamond
+      ctx.lineWidth = 14;
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - 130);
+      ctx.lineTo(cx + 130, cy);
+      ctx.lineTo(cx, cy + 130);
+      ctx.lineTo(cx - 130, cy);
+      ctx.closePath();
+      ctx.stroke();
+
+      // TAP text
+      ctx.font = '900 76px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('TAP', cx, cy - 4);
+
+      // home plate inside the diamond, below TAP
+      ctx.lineWidth = 8;
+      ctx.beginPath();
+      ctx.moveTo(cx - 28, cy + 56);
+      ctx.lineTo(cx + 28, cy + 56);
+      ctx.lineTo(cx + 28, cy + 80);
+      ctx.lineTo(cx,      cy + 104);
+      ctx.lineTo(cx - 28, cy + 80);
+      ctx.closePath();
+      ctx.stroke();
+
+      const tex = new THREE.CanvasTexture(c);
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.anisotropy = 8;
+      return tex;
+    }
+
+    // shared lockup texture (used by all wall placements)
+    const lockupTex = makeLockupTexture();
+
+    // Back wall decal — left segment of back wall (z=0..15), behind the cage netting
+    {
+      const decal = new THREE.Mesh(
+        new THREE.PlaneGeometry(12, 3.75),
+        new THREE.MeshBasicMaterial({ map: lockupTex, transparent: true })
+      );
+      decal.position.set(79.95, 7, 7.5);
+      decal.rotation.y = -Math.PI / 2;
+      scene.add(decal);
+    }
+
+    // Left wall decals — 3 lockups along the cage length (z=0 wall, behind the left side net)
+    [20, 45, 70].forEach(xPos => {
+      const decal = new THREE.Mesh(
+        new THREE.PlaneGeometry(12, 3.75),
+        new THREE.MeshBasicMaterial({ map: lockupTex, transparent: true })
+      );
+      decal.position.set(xPos, 7.5, 0.01); // z=0 interior face, default normal faces +z (into building)
+      scene.add(decal);
+    });
+
+    // Floor circle decal on rubber flooring (mobility/right-strip area)
+    {
+      const tex = makeCircleLogoTexture();
+      const floorLogo = new THREE.Mesh(
+        new THREE.PlaneGeometry(8, 8),
+        new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+      );
+      floorLogo.rotation.x = -Math.PI / 2;
+      floorLogo.position.set(25, 0.06, 19);
+      scene.add(floorLogo);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       PITCHING CAGE — 12' × 72' × 11' (x=5..77, h=11)
+       Cage is offset off the LEFT long wall (z=0) by:
+         - 1-3/8" wall padding (z=0..0.115)
+         - 1' clearance gap (z=0.115..1.115)
+       Cage left net therefore begins at z=1.115; right net at z=13.115.
+       cageZcenter is 7.115 — used by mounds/plates/markers/presets so a
+       future shift only requires changing WALL_PAD_T or NET_CLEAR.
+    ────────────────────────────────────────────────────────────────── */
+
+    const cageX1 = 5, cageX2 = 77;
+    const WALL_PAD_T = 1.375 / 12;            // 1-3/8" wall padding
+    const NET_CLEAR  = 1;                      // 1' clearance, padding face → net
+    const cageZ1     = WALL_PAD_T + NET_CLEAR; // 1.115
+    const cageZ2     = cageZ1 + 12;            // 13.115
+    const cageZcenter = (cageZ1 + cageZ2) / 2; // 7.115
+    const cageH = 11;
+
+    // Mound layout: one regulation portable mound (9' × 4') paired with one
+    // compact mound (6'4" × 2'6"), touching, centered on cageZcenter.
+    // Compact sits on the lower-z side; regulation on the higher-z side.
+    const stdLen = 9,        stdWid = 4;
+    const smallLen = 6+4/12, smallWid = 2.5;
+    const moundBlockWid = stdWid + smallWid;                       // 6.5
+    const moundBlockZ0  = cageZcenter - moundBlockWid / 2;         // 3.865
+    const smallCenterZ  = moundBlockZ0 + smallWid / 2;             // 5.115
+    const stdCenterZ    = moundBlockZ0 + smallWid + stdWid / 2;    // 8.365
+    const laneCenters   = [smallCenterZ, stdCenterZ];
+
+    // Wall padding on the LEFT long wall (z=0), spanning the cage length
+    // (x = cageX1..cageX2) at cage height. Sits flush against the wall's
+    // interior face; its outer face is the surface that ball traffic sees.
+    {
+      const padLen = cageX2 - cageX1;
+      const padMat = new THREE.MeshStandardMaterial({ color: 0x2a2724, roughness: 0.95 });
+      const pad = new THREE.Mesh(
+        new THREE.BoxGeometry(padLen, cageH, WALL_PAD_T),
+        padMat
+      );
+      pad.position.set((cageX1 + cageX2) / 2, cageH / 2, WALL_PAD_T / 2);
+      pad.receiveShadow = true;
+      scene.add(pad);
+    }
+
+    // Turf base
+    {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(cageX2-cageX1, 0.06, cageZ2-cageZ1), matTurf);
+      m.position.set((cageX1+cageX2)/2, 0.03, (cageZ1+cageZ2)/2);
+      m.receiveShadow = true;
+      scene.add(m);
+    }
+    /* Distance markers across the turf — perpendicular to the lane direction.
+       Distance is measured from the BACK POINT of home plate (world x ≈ 68.15)
+       backward to where the FRONT EDGE OF THE PITCHING RUBBER would sit.
+       Plate at x=69 → back point: 69 - 0.85 = 68.15. */
+    {
+      const platePointX = 68.15;
+      const distances = [
+        { ft: 40,   label: "40'"    },
+        { ft: 46,   label: "46'"    },
+        { ft: 50,   label: "50'"    },
+        { ft: 54,   label: "54'"    },
+        { ft: 60.5, label: "60'6\"" },
+      ];
+      const lineMat = new THREE.MeshStandardMaterial({ color: 0xfafafa, roughness: 0.6 });
+
+      function makeDistanceLabel(text) {
+        const c = document.createElement('canvas');
+        c.width = 384; c.height = 128;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = 'rgba(255,255,255,0.94)';
+        ctx.font = '900 90px Inter, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(text, c.width / 2, c.height / 2);
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        tex.anisotropy = 8;
+        return tex;
+      }
+
+      distances.forEach(d => {
+        const x = platePointX - d.ft;
+        // painted line across the full cage width
+        const line = new THREE.Mesh(
+          new THREE.BoxGeometry(0.15, 0.005, cageZ2 - cageZ1),
+          lineMat
+        );
+        line.position.set(x, 0.064, (cageZ1 + cageZ2) / 2);
+        scene.add(line);
+
+        // labels — one per lane, painted on the turf so a pitcher reads them
+        // correctly when looking +x toward home plate. Two lanes match
+        // the compact + regulation mound layout.
+        laneCenters.forEach(zCenter => {
+          const labelMat = new THREE.MeshBasicMaterial({
+            map: makeDistanceLabel(d.label),
+            transparent: true,
+          });
+          const label = new THREE.Mesh(new THREE.PlaneGeometry(1.5, 0.5), labelMat);
+          label.rotation.x = -Math.PI / 2;
+          label.position.set(x - 0.75, 0.066, zCenter);
+          scene.add(label);
+        });
+      });
+    }
+
+    // Net cage frame: vertical posts every 9 ft along x (8 posts each side spans 72 ft)
+    const FRAME_T = 0.2;
+    for (let x = cageX1; x <= cageX2 + 0.001; x += 9) {
+      [cageZ1, cageZ2].forEach(z => {
+        const post = new THREE.Mesh(
+          new THREE.BoxGeometry(FRAME_T, cageH, FRAME_T),
+          matFrame
+        );
+        post.position.set(x, cageH/2, z);
+        scene.add(post);
+      });
+    }
+
+    // Top rails (4 sides)
+    function rail(p1, p2) {
+      const dir = new THREE.Vector3().subVectors(p2, p1);
+      const len = dir.length();
+      const m = new THREE.Mesh(new THREE.BoxGeometry(FRAME_T, FRAME_T, len), matFrame);
+      const mid = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
+      m.position.copy(mid);
+      m.lookAt(p2);
+      return m;
+    }
+    scene.add(rail(new THREE.Vector3(cageX1, cageH, cageZ1), new THREE.Vector3(cageX2, cageH, cageZ1)));
+    scene.add(rail(new THREE.Vector3(cageX1, cageH, cageZ2), new THREE.Vector3(cageX2, cageH, cageZ2)));
+    scene.add(rail(new THREE.Vector3(cageX1, cageH, cageZ1), new THREE.Vector3(cageX1, cageH, cageZ2)));
+    scene.add(rail(new THREE.Vector3(cageX2, cageH, cageZ1), new THREE.Vector3(cageX2, cageH, cageZ2)));
+
+    // Net panels
+    function netPanel(w, h, d, x, y, z) {
+      const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matNet);
+      m.position.set(x, y, z);
+      return m;
+    }
+    // Left (z=cageZ1): runs along x, thin in z
+    scene.add(netPanel(cageX2-cageX1, cageH, 0.05, (cageX1+cageX2)/2, cageH/2, cageZ1));
+    // Right (z=cageZ2)
+    scene.add(netPanel(cageX2-cageX1, cageH, 0.05, (cageX1+cageX2)/2, cageH/2, cageZ2));
+    // Front net (x=cageX1): runs along z, thin in x
+    scene.add(netPanel(0.05, cageH, cageZ2-cageZ1, cageX1, cageH/2, (cageZ1+cageZ2)/2));
+    // Back net (x=cageX2)
+    scene.add(netPanel(0.05, cageH, cageZ2-cageZ1, cageX2, cageH/2, (cageZ1+cageZ2)/2));
+    // Top net
+    scene.add(netPanel(cageX2-cageX1, 0.05, cageZ2-cageZ1, (cageX1+cageX2)/2, cageH, (cageZ1+cageZ2)/2));
+
+    /* ─────────────────────────────────────────────────────────────────
+       MOUNDS — one regulation portable mound (9' × 4' × 10") paired with
+       one compact mound (6'4" × 2'6" × 10"), touching, centered on the
+       cage centerline (cageZcenter = 7.115).
+         Compact:    x = 7..13.333, z = 3.865..6.365  (center z=5.115)
+         Regulation: x = 7..16,     z = 6.365..10.365 (center z=8.365)
+       Both rubbers at x=8.5 → regulation 60'-6" to plates at x=69.
+    ────────────────────────────────────────────────────────────────── */
+    function mound(x1, x2, z1, z2) {
+      const w = x2 - x1, d = z2 - z1, h = 10/12; // 10 inches tall
+      const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matMoundTop);
+      body.position.set((x1+x2)/2, h/2, (z1+z2)/2);
+      body.castShadow = true;
+      scene.add(body);
+      // Pitching rubber on top, ~1.5 ft from the back of the mound (the -x edge,
+      // closest to the front net at x=5). Pitcher sets back foot on the rubber
+      // and strides forward (+x) toward home plate.
+      const rubber = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.08, 2), matRubber);
+      rubber.position.set(x1 + 1.5, h + 0.04, (z1+z2)/2);
+      scene.add(rubber);
+    }
+    {
+      const mx1 = 7;
+      // compact mound on the lower-z side
+      const smZ1 = moundBlockZ0;
+      const smZ2 = smZ1 + smallWid;
+      mound(mx1, mx1 + smallLen, smZ1, smZ2);
+      // regulation mound on the higher-z side, touching the compact one
+      const stZ1 = smZ2;
+      const stZ2 = stZ1 + stdWid;
+      mound(mx1, mx1 + stdLen, stZ1, stZ2);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       HOME PLATES — one per mound at x=69 (8' catcher's box behind),
+       aligned with each mound's center. Pentagon, point facing -x toward
+       the pitcher. Strike-zone targets sit on the back net (x≈77).
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const shape = new THREE.Shape();
+      shape.moveTo(0, -0.71); shape.lineTo(0, 0.71);
+      shape.lineTo(-0.4, 0.71); shape.lineTo(-0.85, 0); shape.lineTo(-0.4, -0.71);
+      shape.closePath();
+      const geom = new THREE.ExtrudeGeometry(shape, { depth: 0.06, bevelEnabled: false });
+      const plateMat = new THREE.MeshStandardMaterial({ color: 0xfafafa, roughness: 0.4 });
+      const tgtMat = new THREE.MeshBasicMaterial({
+        color: 0xb8d4e0, transparent: true, opacity: 0.7, side: THREE.DoubleSide,
+      });
+      const bullseyeMat = new THREE.MeshBasicMaterial({ color: 0xb8d4e0, side: THREE.DoubleSide });
+
+      laneCenters.forEach(z => {
+        const plate = new THREE.Mesh(geom, plateMat);
+        plate.rotation.x = -Math.PI / 2;
+        plate.position.set(69, 0.07, z);
+        scene.add(plate);
+
+        // Strike-zone target on back net (x=cageX2=77), centered above plate
+        const tgt = new THREE.Mesh(new THREE.PlaneGeometry(2.5, 2.5), tgtMat);
+        tgt.position.set(76.95, 3.7, z);
+        tgt.rotation.y = -Math.PI / 2;
+        scene.add(tgt);
+
+        const bullseye = new THREE.Mesh(new THREE.RingGeometry(0.35, 0.5, 32), bullseyeMat);
+        bullseye.position.set(76.94, 3.7, z);
+        bullseye.rotation.y = -Math.PI / 2;
+        scene.add(bullseye);
+      });
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       BATHROOM (x=3..8, z=20..25, h=9) — front-right interior corner
+       Right wall (z=25) shared with building wall. Door on z=20 face.
+    ────────────────────────────────────────────────────────────────── */
+    {
+      // Bathroom interior per architect spec 2026-05-09: 8'-8 1/2" × 6'-11 1/2".
+      // Long side (8'-8.5") runs along z; short side (6'-11.5") along x to clear mirror at x=10.
+      // Door is on the LONG wall at x=bx2 (gym-facing, mirror side). 1×1 ft floor grate
+      // sits to the right of the door (-z side) in the gym floor — code-required, can't be covered.
+      const bx1 = 3, bx2 = bx1 + 6 + 11.5/12;
+      const bz2 = 25, bz1 = bz2 - (8 + 8.5/12);
+      const bh = 9;
+      // entry-side wall (x=bx1), faces -x toward entry pad
+      scene.add(mkBath(0.2, bh, bz2-bz1, bx1, bh/2, (bz1+bz2)/2));
+      // gym-facing wall (x=bx2) — has the door
+      scene.add(mkBath(0.2, bh, bz2-bz1, bx2, bh/2, (bz1+bz2)/2));
+      // side wall (z=bz1), perpendicular to mirror — solid
+      scene.add(mkBath(bx2-bx1, bh, 0.2, (bx1+bx2)/2, bh/2, bz1));
+      // roof
+      scene.add(mkBath(bx2-bx1, 0.2, bz2-bz1, (bx1+bx2)/2, bh, (bz1+bz2)/2));
+
+      function mkBath(w, h, d, x, y, z) {
+        const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), matBathWall);
+        m.position.set(x, y, z);
+        return m;
+      }
+
+      // Door on x=bx2 wall (gym-facing), centered along z. 3 ft wide, opens into bathroom.
+      const doorWidth = 3;
+      const doorCenterZ = (bz1+bz2)/2;
+      const door = new THREE.Mesh(
+        new THREE.BoxGeometry(0.05, 7, doorWidth),
+        new THREE.MeshStandardMaterial({ color: 0x1a232b, roughness: 0.5 })
+      );
+      door.position.set(bx2 + 0.1, 3.5, doorCenterZ);
+      scene.add(door);
+      // handle (toward +z side of door)
+      const handle = new THREE.Mesh(
+        new THREE.SphereGeometry(0.1),
+        new THREE.MeshStandardMaterial({ color: PAL.brand, roughness: 0.3, metalness: 0.6 })
+      );
+      handle.position.set(bx2 + 0.16, 3.3, doorCenterZ + 1.2);
+      scene.add(handle);
+
+      // WC sign above the door, facing the gym (+x)
+      {
+        const c = document.createElement('canvas');
+        c.width = 256; c.height = 128;
+        const ctx = c.getContext('2d');
+        ctx.fillStyle = 'rgba(184,212,224,0.95)';
+        ctx.font = '800 80px Inter, sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('WC', 128, 64);
+        const tex = new THREE.CanvasTexture(c);
+        tex.colorSpace = THREE.SRGBColorSpace;
+        const sign = new THREE.Mesh(
+          new THREE.PlaneGeometry(1.5, 0.75),
+          new THREE.MeshBasicMaterial({ map: tex, transparent: true })
+        );
+        sign.rotation.y = -Math.PI / 2; // face +x toward gym
+        sign.position.set(bx2 + 0.15, 6, doorCenterZ);
+        scene.add(sign);
+      }
+
+      // Floor grate (1×1 ft, code-required) — gym floor, tucked into the corner
+      // where the bathroom's gym-facing wall meets the side wall at z=bz1
+      // (right edge when looking at the bathroom from the gym).
+      {
+        const grateW = 1, grateD = 1, grateThk = 0.05;
+        const grateMat = new THREE.MeshStandardMaterial({
+          color: 0x2a2724, roughness: 0.85, metalness: 0.4
+        });
+        const grate = new THREE.Mesh(
+          new THREE.BoxGeometry(grateW, grateThk, grateD),
+          grateMat
+        );
+        grate.position.set(
+          bx2 + 0.1 + grateW/2,    // just outside the gym-facing wall
+          grateThk/2,              // sitting on the floor
+          bz1 + grateD/2           // flush with the side wall at z=bz1
+        );
+        scene.add(grate);
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       MIRROR WALL — on right wall (z=25), x=10..40, h=10
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const mirror = new THREE.Mesh(new THREE.PlaneGeometry(30, 10), matMirror);
+      mirror.position.set(25, 5, 24.85);
+      mirror.rotation.y = Math.PI; // face -z (into the building)
+      scene.add(mirror);
+
+      const frame = new THREE.Mesh(
+        new THREE.BoxGeometry(30.4, 10.4, 0.15),
+        matMirrorFrame
+      );
+      frame.position.set(25, 5, 24.92);
+      scene.add(frame);
+
+      // floor tape line in front of mirror (z=23, x=10..40)
+      const tape = new THREE.Mesh(
+        new THREE.BoxGeometry(30, 0.005, 0.1),
+        new THREE.MeshStandardMaterial({ color: PAL.brand, emissive: PAL.brand, emissiveIntensity: 0.3 })
+      );
+      tape.position.set(25, 0.07, 23);
+      scene.add(tape);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       PLYO BALL RACK (x=42..50, z=22..24.5, h=1.5)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const px1 = 42, px2 = 50, pz1 = 22, pz2 = 24.5, ph = 1.5;
+      const base = new THREE.Mesh(
+        new THREE.BoxGeometry(px2-px1, ph, pz2-pz1),
+        matWood
+      );
+      base.position.set((px1+px2)/2, ph/2, (pz1+pz2)/2);
+      base.castShadow = true;
+      scene.add(base);
+      const top = new THREE.Mesh(
+        new THREE.BoxGeometry(px2-px1+0.1, 0.1, pz2-pz1+0.1),
+        matWoodDk
+      );
+      top.position.set((px1+px2)/2, ph + 0.05, (pz1+pz2)/2);
+      scene.add(top);
+
+      // 4 plyo balls along x
+      const colors = [0xc2402d, 0x1e5fb8, 0x6a7884, 0x4a7c4e];
+      const sizes = [0.35, 0.42, 0.50, 0.58];
+      const xPositions = [43.0, 45.0, 47.0, 49.0];
+      colors.forEach((c, i) => {
+        const ball = new THREE.Mesh(
+          new THREE.SphereGeometry(sizes[i], 24, 16),
+          new THREE.MeshStandardMaterial({ color: c, roughness: 0.55 })
+        );
+        ball.position.set(xPositions[i], ph + sizes[i] + 0.05, (pz1+pz2)/2);
+        ball.castShadow = true;
+        scene.add(ball);
+      });
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       KETTLEBELL RACK (x=52..60, z=22..24.5)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const kx1 = 52, kx2 = 60, kz1 = 22, kz2 = 24.5;
+      const base = new THREE.Mesh(
+        new THREE.BoxGeometry(kx2-kx1, 0.6, kz2-kz1),
+        matWoodDk
+      );
+      base.position.set((kx1+kx2)/2, 0.3, (kz1+kz2)/2);
+      base.castShadow = true;
+      scene.add(base);
+      const uprightGeom = new THREE.BoxGeometry(0.15, 3, 0.15);
+      [[kx1,kz1],[kx2,kz1],[kx1,kz2],[kx2,kz2]].forEach(([x,z]) => {
+        const u = new THREE.Mesh(uprightGeom, matMetal);
+        u.position.set(x, 1.5 + 0.6, z);
+        scene.add(u);
+      });
+      const kbSizes = [0.35, 0.42, 0.50, 0.58, 0.66];
+      kbSizes.forEach((r, i) => {
+        const x = kx1 + 0.8 + (i / (kbSizes.length - 1)) * (kx2 - kx1 - 1.6);
+        const ball = new THREE.Mesh(new THREE.SphereGeometry(r, 24, 16), matMetal);
+        ball.position.set(x, 0.6 + r + 0.05, (kz1+kz2)/2);
+        ball.castShadow = true;
+        scene.add(ball);
+        const handle = new THREE.Mesh(
+          new THREE.TorusGeometry(r * 0.5, 0.05, 8, 18, Math.PI),
+          matMetal
+        );
+        handle.position.set(x, 0.6 + r * 1.7 + 0.05, (kz1+kz2)/2);
+        handle.rotation.x = Math.PI / 2;
+        scene.add(handle);
+      });
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       WELCOME MAT — just inside the front door (x=4..6, z=14..17)
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const mat = new THREE.Mesh(new THREE.BoxGeometry(2, 0.04, 3), matMat);
+      mat.position.set(5, 0.07, 15.5);
+      scene.add(mat);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       FLOOR REFLECTOR — subtle "wet rubber" sheen on the gym strip
+       Heavy dark tint so only fixtures + bright edges show in reflection.
+    ────────────────────────────────────────────────────────────────── */
+    {
+      const floorReflector = new Reflector(
+        new THREE.PlaneGeometry(67, 11.5),
+        {
+          clipBias: 0.003,
+          textureWidth: 1024,
+          textureHeight: 256,
+          color: 0x0a0a0a, // very dark tint — only highlights survive
+        }
+      );
+      floorReflector.position.set(43.5, 0.02, 19.25); // gym strip, just above floor
+      floorReflector.rotation.x = -Math.PI / 2;       // face +y (up)
+      scene.add(floorReflector);
+    }
+
+    /* ─────────────────────────────────────────────────────────────────
+       CONTROLS — orbit + walk
+    ────────────────────────────────────────────────────────────────── */
+
+    let mode = 'orbit';
+    // activeCam is declared earlier (alongside the composer setup) so the
+    // post-processing passes can reference it. The setMode() handler below
+    // reassigns it when switching between orbit/walk.
+
+    const orbit = new OrbitControls(orbitCam, renderer.domElement);
+    orbit.target.set(40, 4, 12.5);
+    orbit.enableDamping = true;
+    orbit.dampingFactor = 0.08;
+    orbit.maxPolarAngle = Math.PI * 0.49;
+    orbit.minDistance = 5;
+    orbit.maxDistance = 250;
+    orbit.update();
+
+    const walk = new PointerLockControls(walkCam, document.body);
+    scene.add(walk.getObject());
+
+    const keys = { w:false, a:false, s:false, d:false, shift:false };
+    const velocity = new THREE.Vector3();
+    const direction = new THREE.Vector3();
+    const PLAYER_HEIGHT = 5.6;
+
+    document.addEventListener('keydown', (e) => {
+      if (mode !== 'walk') return;
+      if (e.code === 'KeyW') keys.w = true;
+      if (e.code === 'KeyA') keys.a = true;
+      if (e.code === 'KeyS') keys.s = true;
+      if (e.code === 'KeyD') keys.d = true;
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') keys.shift = true;
+    });
+    document.addEventListener('keyup', (e) => {
+      if (e.code === 'KeyW') keys.w = false;
+      if (e.code === 'KeyA') keys.a = false;
+      if (e.code === 'KeyS') keys.s = false;
+      if (e.code === 'KeyD') keys.d = false;
+      if (e.code === 'ShiftLeft' || e.code === 'ShiftRight') keys.shift = false;
+    });
+
+    const lockHint = document.getElementById('lock-hint');
+    let lockSupported = !!document.body.requestPointerLock;
+    lockHint.addEventListener('click', () => {
+      if (!lockSupported) return;
+      try { walk.lock(); } catch (_) { lockSupported = false; }
+    });
+    walk.addEventListener('lock', () => lockHint.classList.remove('show'));
+    walk.addEventListener('unlock', () => { if (mode === 'walk') lockHint.classList.add('show'); });
+
+    function setMode(newMode) {
+      mode = newMode;
+      activeCam = (mode === 'walk') ? walkCam : orbitCam;
+      document.querySelectorAll('#mode-panel button[data-mode]').forEach(b => {
+        b.classList.toggle('active', b.dataset.mode === mode);
+      });
+      document.getElementById('help-orbit').style.display = (mode === 'orbit') ? '' : 'none';
+      document.getElementById('help-walk').style.display = (mode === 'walk') ? '' : 'none';
+      if (mode === 'walk') {
+        lockHint.classList.add('show');
+      } else {
+        lockHint.classList.remove('show');
+        if (walk.isLocked) walk.unlock();
+      }
+      document.getElementById('cam-info').textContent = mode;
+    }
+
+    function setPreset(preset) {
+      if (preset === 'iso') {
+        setMode('orbit');
+        orbitCam.position.set(-35, 28, 55);
+        orbit.target.set(40, 4, 12.5);
+      } else if (preset === 'top') {
+        setMode('orbit');
+        orbitCam.position.set(40, 100, 12.501);
+        orbit.target.set(40, 0, 12.5);
+      } else if (preset === 'mound') {
+        setMode('walk');
+        // standing on the regulation mound's rubber, looking at its plate
+        walkCam.position.set(9, 5.6, stdCenterZ);
+        walkCam.lookAt(69, 4.5, stdCenterZ);
+      } else if (preset === 'plate') {
+        setMode('walk');
+        // 4 ft behind home plate at cage center, looking back at both mounds
+        walkCam.position.set(73, 5.6, cageZcenter);
+        walkCam.lookAt(8, 4.5, cageZcenter);
+      } else if (preset === 'entry') {
+        setMode('walk');
+        walkCam.position.set(1.5, 5.6, 15.5);
+        walkCam.lookAt(40, 5.6, 12.5);
+      }
+      orbit.update();
+    }
+
+    document.querySelectorAll('#mode-panel button').forEach(b => {
+      b.addEventListener('click', () => {
+        if (b.dataset.mode) setMode(b.dataset.mode);
+        if (b.dataset.preset) setPreset(b.dataset.preset);
+      });
+    });
+
+    const clock = new THREE.Clock();
+    function updateWalk(dt) {
+      if (!walk.isLocked) return;
+      const speed = (keys.shift ? 18 : 9);
+      direction.z = Number(keys.w) - Number(keys.s);
+      direction.x = Number(keys.d) - Number(keys.a);
+      direction.normalize();
+
+      velocity.x -= velocity.x * 10 * dt;
+      velocity.z -= velocity.z * 10 * dt;
+
+      if (keys.w || keys.s) velocity.z -= direction.z * speed * 8 * dt;
+      if (keys.a || keys.d) velocity.x -= direction.x * speed * 8 * dt;
+
+      walk.moveRight(-velocity.x * dt);
+      walk.moveForward(-velocity.z * dt);
+
+      const obj = walk.getObject();
+      obj.position.x = Math.max(0.5, Math.min(79.5, obj.position.x));
+      obj.position.z = Math.max(0.5, Math.min(24.5, obj.position.z));
+      obj.position.y = PLAYER_HEIGHT;
+    }
+
+    window.addEventListener('resize', () => {
+      const w = window.innerWidth, h = window.innerHeight;
+      renderer.setSize(w, h);
+      composer.setSize(w, h);
+      ssaoPass.setSize(w, h);
+      bloomPass.setSize(w, h);
+      orbitCam.aspect = w / h; orbitCam.updateProjectionMatrix();
+      walkCam.aspect = w / h; walkCam.updateProjectionMatrix();
+    });
+
+    function animate() {
+      const dt = Math.min(clock.getDelta(), 0.05);
+      if (mode === 'walk') updateWalk(dt);
+      else orbit.update();
+
+      // Post-processing passes need the active camera each frame
+      renderPass.camera = activeCam;
+      ssaoPass.camera   = activeCam;
+      composer.render();
+
+      requestAnimationFrame(animate);
+    }
+    animate();
+  </script>
+</body>
+</html>

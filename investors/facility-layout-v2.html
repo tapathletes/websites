@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TAP Athletes Pitching Academy — Facility Layout v2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --slate: #3a4a55;
+    --slate-deep: #2a3640;
+    --slate-mid: #4a5d6b;
+    --slate-light: #5a6f7e;
+    --powder: #b8d4e0;
+    --powder-soft: #d4e4ed;
+    --black: #0a0a0a;
+    --rubber: #141414;
+    --rubber-light: #1f1f1f;
+    --turf: #4a7c4e;
+    --turf-light: #5a8c5e;
+    --turf-deep: #3a6c3e;
+    --royal: #1e5fb8;
+    --royal-deep: #164a96;
+    --paper: #f5f8fb;
+    --ink: #1a232b;
+    --concrete: #b9b6ad;
+    --concrete-deep: #8e8c83;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: #e8edf2; }
+  body {
+    background: #e8edf2;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .sheet {
+    width: min(1800px, 100%);
+    aspect-ratio: 3 / 2;
+    background: var(--paper);
+    position: relative;
+    box-shadow: 0 30px 80px -20px rgba(58, 74, 85, 0.25), 0 4px 12px rgba(58, 74, 85, 0.08);
+    overflow: hidden;
+  }
+  .sheet::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(to right, rgba(58,74,85,0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(58,74,85,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .sheet::after {
+    content: '';
+    position: absolute; inset: 0;
+    border: 1px solid rgba(58,74,85,0.12);
+    pointer-events: none;
+  }
+  svg { display: block; width: 100%; height: 100%; }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+<svg viewBox="0 0 1800 1200" xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+
+  <defs>
+    <linearGradient id="wallTop" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#4a5d6b"/>
+      <stop offset="1" stop-color="#3a4a55"/>
+    </linearGradient>
+    <linearGradient id="wallSideL" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#2a3640"/>
+      <stop offset="1" stop-color="#3a4a55"/>
+    </linearGradient>
+    <linearGradient id="wallSideR" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#3a4a55"/>
+      <stop offset="1" stop-color="#2a3640"/>
+    </linearGradient>
+    <linearGradient id="wallBack" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#3f515d"/>
+      <stop offset="1" stop-color="#324049"/>
+    </linearGradient>
+
+    <linearGradient id="floor" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1a1a1a"/>
+      <stop offset="1" stop-color="#0a0a0a"/>
+    </linearGradient>
+
+    <linearGradient id="turfGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1a1a1a"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+
+    <linearGradient id="concreteGrad" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#c4c1b8"/>
+      <stop offset="1" stop-color="#a09d94"/>
+    </linearGradient>
+
+    <linearGradient id="moundTop" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#2a6fc8"/>
+      <stop offset="1" stop-color="#164a96"/>
+    </linearGradient>
+    <linearGradient id="moundSide" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#1e5fb8"/>
+      <stop offset="1" stop-color="#0f3a78"/>
+    </linearGradient>
+
+    <linearGradient id="mirrorGrad" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#cfe1ea"/>
+      <stop offset="0.5" stop-color="#e8f0f5"/>
+      <stop offset="1" stop-color="#a8c4d2"/>
+    </linearGradient>
+
+    <linearGradient id="bathroomTop" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#5a6f7e"/>
+      <stop offset="1" stop-color="#42525e"/>
+    </linearGradient>
+
+    <filter id="pillShadow" x="-20%" y="-20%" width="140%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#3a4a55" flood-opacity="0.25"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="3" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+
+    <symbol id="tapDiamond" viewBox="0 0 100 120">
+      <g fill="none" stroke="currentColor" stroke-width="3.5">
+        <path d="M50 6 L94 50 L50 94 L6 50 Z"/>
+      </g>
+      <text x="50" y="60" text-anchor="middle"
+            font-family="Inter, sans-serif" font-weight="800" font-size="28"
+            letter-spacing="2" fill="currentColor">TAP</text>
+      <path d="M38 102 L62 102 L62 110 L50 117 L38 110 Z"
+            fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+    </symbol>
+
+    <pattern id="netting" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+      <path d="M0 14 L14 0 M-3 3 L3 -3 M11 17 L17 11" stroke="#1a1a1a" stroke-width="0.6" opacity="0.55"/>
+      <path d="M0 0 L14 14 M-3 11 L3 17 M11 -3 L17 3" stroke="#1a1a1a" stroke-width="0.6" opacity="0.55"/>
+    </pattern>
+
+    <pattern id="turfDots" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="url(#turfGrad)"/>
+      <circle cx="2" cy="2" r="0.5" fill="#000" opacity="0.6"/>
+      <circle cx="5" cy="4" r="0.4" fill="#2a2a2a" opacity="0.6"/>
+    </pattern>
+
+    <pattern id="rubberTex" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect width="20" height="20" fill="url(#floor)"/>
+      <circle cx="4" cy="6" r="0.6" fill="#2a2a2a"/>
+      <circle cx="14" cy="3" r="0.5" fill="#222"/>
+      <circle cx="9" cy="13" r="0.7" fill="#2a2a2a"/>
+      <circle cx="17" cy="16" r="0.5" fill="#222"/>
+      <circle cx="2" cy="17" r="0.4" fill="#1e1e1e"/>
+    </pattern>
+
+    <pattern id="concreteTex" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="url(#concreteGrad)"/>
+      <circle cx="6" cy="8" r="0.5" fill="#7a7870" opacity="0.6"/>
+      <circle cx="18" cy="4" r="0.4" fill="#7a7870" opacity="0.5"/>
+      <circle cx="12" cy="16" r="0.6" fill="#6e6c64" opacity="0.5"/>
+      <circle cx="2" cy="20" r="0.4" fill="#7a7870" opacity="0.5"/>
+      <circle cx="21" cy="20" r="0.5" fill="#7a7870" opacity="0.5"/>
+    </pattern>
+  </defs>
+
+  <!-- ============== HEADER ============== -->
+  <g id="header">
+    <g transform="translate(70, 60)" color="#3a4a55">
+      <use href="#tapDiamond" width="64" height="76"/>
+    </g>
+
+    <text x="156" y="98" font-family="Inter, sans-serif" font-weight="800" font-size="34"
+          letter-spacing="3" fill="#3a4a55">TAP ATHLETES</text>
+    <text x="156" y="128" font-family="Inter, sans-serif" font-weight="500" font-size="20"
+          letter-spacing="6" fill="#5a6f7e">PITCHING ACADEMY</text>
+
+    <g transform="translate(1730, 60)">
+      <text x="0" y="20" text-anchor="end"
+            font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2"
+            fill="#5a6f7e">DOC · FL-001 / REV B</text>
+      <text x="0" y="42" text-anchor="end"
+            font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2"
+            fill="#5a6f7e">SCALE · 1/4" = 1'-0"</text>
+      <text x="0" y="64" text-anchor="end"
+            font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="2"
+            fill="#5a6f7e">SHEET · 1 OF 1</text>
+    </g>
+
+    <line x1="70" y1="160" x2="1730" y2="160" stroke="#3a4a55" stroke-width="1" opacity="0.35"/>
+
+    <text x="70" y="200" font-family="Inter, sans-serif" font-weight="700" font-size="44"
+          letter-spacing="-0.5" fill="#1a232b">Facility Layout</text>
+    <text x="70" y="232" font-family="Inter, sans-serif" font-weight="400" font-size="18"
+          letter-spacing="0.5" fill="#5a6f7e">Elite pitching development. Built for the next level.</text>
+
+    <g transform="translate(1730, 195)">
+      <rect x="-220" y="-30" width="220" height="50" fill="#3a4a55"/>
+      <text x="-110" y="-8" text-anchor="middle" font-family="JetBrains Mono, monospace"
+            font-size="10" letter-spacing="3" fill="#b8d4e0">FOOTPRINT</text>
+      <text x="-110" y="13" text-anchor="middle" font-family="Inter, sans-serif"
+            font-weight="700" font-size="18" letter-spacing="2" fill="#fff">25' × 80' · 2,000 SF</text>
+    </g>
+  </g>
+
+  <!-- ============== ISOMETRIC DIAGRAM ==============
+       iso projection (10 px/ft horizontal, 7 px/ft vertical):
+         ex  (along width, going front-right)  = ( 8.660, -5.0 )
+         ez  (along depth, going back-left)    = (-8.660, -5.0 )
+         ey  (vertical, up the page)           = ( 0,    -7.0 )
+       project(x, z, y) -> sx = 8.660*(x-z), sy = -5*(x+z) - 7*y
+
+       Building 25 ft wide (along ex) × 80 ft deep (along ez).
+       Wall height ~ 14 ft.
+       3 ft concrete pad at front (z=0..3) and back (z=77..80).
+       Interior shell: 25 × 74 ft.
+
+       front-left  (FL): (0, 0)
+       front-right (FR): 25*ex = (216.50, -125)
+       back-left   (BL): 80*ez = (-692.80, -400)
+       back-right  (BR): FR + BL = (-476.30, -525)
+  -->
+
+  <!-- soft drop shadow under the building -->
+  <ellipse cx="900" cy="1080" rx="560" ry="48" fill="#3a4a55" opacity="0.16"/>
+  <ellipse cx="900" cy="1080" rx="460" ry="30" fill="#3a4a55" opacity="0.18"/>
+
+  <g id="building" transform="translate(1010, 1000)">
+
+    <!-- ====== FLOOR (full footprint, rubber base) ====== -->
+    <polygon points="0,0 216.50,-125 -476.30,-525 -692.80,-400"
+             fill="url(#rubberTex)" stroke="#000" stroke-width="0.5"/>
+
+    <!-- 5-ft floor seams -->
+    <g opacity="0.15" stroke="#3a3a3a" stroke-width="0.5" fill="none">
+      <!-- lines parallel to ex at every 5 ft of depth (z = 5, 10, 15, ..., 75) -->
+      <line x1="-43.30" y1="-25" x2="173.20" y2="-150"/>
+      <line x1="-86.60" y1="-50" x2="129.90" y2="-175"/>
+      <line x1="-129.90" y1="-75" x2="86.60" y2="-200"/>
+      <line x1="-173.20" y1="-100" x2="43.30" y2="-225"/>
+      <line x1="-216.50" y1="-125" x2="0" y2="-250"/>
+      <line x1="-259.80" y1="-150" x2="-43.30" y2="-275"/>
+      <line x1="-303.10" y1="-175" x2="-86.60" y2="-300"/>
+      <line x1="-346.40" y1="-200" x2="-129.90" y2="-325"/>
+      <line x1="-389.70" y1="-225" x2="-173.20" y2="-350"/>
+      <line x1="-433.00" y1="-250" x2="-216.50" y2="-375"/>
+      <line x1="-476.30" y1="-275" x2="-259.80" y2="-400"/>
+      <line x1="-519.60" y1="-300" x2="-303.10" y2="-425"/>
+      <line x1="-562.90" y1="-325" x2="-346.40" y2="-450"/>
+      <line x1="-606.20" y1="-350" x2="-389.70" y2="-475"/>
+      <line x1="-649.50" y1="-375" x2="-433.00" y2="-500"/>
+      <!-- lines parallel to ez at every 5 ft of width (x = 5, 10, 15, 20) -->
+      <line x1="43.30" y1="-25" x2="-649.50" y2="-425"/>
+      <line x1="86.60" y1="-50" x2="-606.20" y2="-450"/>
+      <line x1="129.90" y1="-75" x2="-562.90" y2="-475"/>
+      <line x1="173.20" y1="-100" x2="-519.60" y2="-500"/>
+    </g>
+
+    <!-- ====== CONCRETE PAD - FRONT (z=0..3) ====== -->
+    <polygon points="0,0 216.50,-125 190.52,-140 -25.98,-15"
+             fill="url(#concreteTex)" stroke="#6e6c64" stroke-width="0.6"/>
+    <!-- expansion joints across pad -->
+    <g stroke="#6e6c64" stroke-width="0.4" opacity="0.55">
+      <line x1="-8.66" y1="-5" x2="207.84" y2="-130"/>
+      <line x1="-17.32" y1="-10" x2="199.18" y2="-135"/>
+    </g>
+
+    <!-- ====== CONCRETE PAD - BACK (z=77..80) ====== -->
+    <polygon points="-666.82,-385 -450.32,-510 -476.30,-525 -692.80,-400"
+             fill="url(#concreteTex)" stroke="#6e6c64" stroke-width="0.6"/>
+    <g stroke="#6e6c64" stroke-width="0.4" opacity="0.55">
+      <line x1="-675.48" y1="-390" x2="-458.98" y2="-515"/>
+      <line x1="-684.14" y1="-395" x2="-467.64" y2="-520"/>
+    </g>
+
+    <!-- ====== WALLS (back + left, with thickness) ====== -->
+    <!-- BACK wall (z=80) from BL to BR, height up 14 ft (98 px) -->
+    <polygon points="-692.80,-400 -476.30,-525 -476.30,-623 -692.80,-498"
+             fill="url(#wallBack)" stroke="#1f2830" stroke-width="1.2"/>
+    <!-- LEFT wall (x=0) from FL to BL -->
+    <polygon points="0,0 -692.80,-400 -692.80,-498 0,-98"
+             fill="url(#wallSideL)" stroke="#1f2830" stroke-width="1.2"/>
+    <!-- top caps -->
+    <polygon points="-692.80,-498 -476.30,-623 -476.30,-626 -692.80,-501"
+             fill="#5a6f7e"/>
+    <polygon points="0,-98 -692.80,-498 -692.80,-501 0,-101"
+             fill="#5a6f7e"/>
+    <!-- BL inner corner crease -->
+    <line x1="-692.80" y1="-400" x2="-692.80" y2="-498" stroke="#1a232b" stroke-width="1.2"/>
+
+    <!-- ====== BACK-WALL BRAND DECAL ======
+         Centered on back wall, 7 ft up. Back wall basis:
+           u (per-ft along width)  = (8.660, -5.0)
+           v (vertical, per-ft up) = (0, -7.0)
+         Center: midpoint(BL, BR) + 7*v = (-584.55, -462.5) + (0,-49) = (-584.55, -511.5)
+    -->
+    <g transform="matrix(8.660, -5.0, 0, -7.0, -584.55, -462.5)" opacity="0.92">
+      <text x="0" y="6" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800"
+            font-size="2.0" letter-spacing="0.2" fill="#b8d4e0">TAP ATHLETES</text>
+      <text x="0" y="3.5" text-anchor="middle" font-family="Inter, sans-serif" font-weight="500"
+            font-size="1.0" letter-spacing="0.4" fill="#b8d4e0">PITCHING ACADEMY</text>
+    </g>
+
+    <!-- ====== PITCHING LANE / NET CAGE ======
+         x = 2..16  (14 ft wide), z = 5..75 (70 ft long), 2 ft clearance both ends.
+         Net height = 11 ft.
+         Cage corners (floor):
+           A (2, 5):   (-25.98, -35)
+           B (16, 5):  (95.26, -105)
+           C (16, 75): (-510.94, -455)
+           D (2, 75):  (-632.18, -385)
+         Cage tops (h=11): subtract (0, 77)
+           A_top (-25.98, -112)
+           B_top (95.26, -182)
+           C_top (-510.94, -532)
+           D_top (-632.18, -462)
+    -->
+    <g id="lane">
+      <!-- turf base -->
+      <polygon points="-25.98,-35 95.26,-105 -510.94,-455 -632.18,-385"
+               fill="url(#turfGrad)" stroke="#000" stroke-width="0.8"/>
+      <!-- turf stripes (mowing pattern) — every 2 ft of width across the cage -->
+      <g opacity="0.45">
+        <polygon points="-8.66,-45 8.66,-55 -597.74,-405 -615.06,-395" fill="#2a2a2a" opacity="0.55"/>
+        <polygon points="25.98,-65 43.30,-75 -563.10,-425 -580.42,-415" fill="#2a2a2a" opacity="0.55"/>
+        <polygon points="60.62,-85 77.94,-95 -528.46,-445 -545.78,-435" fill="#2a2a2a" opacity="0.55"/>
+      </g>
+      <!-- turf inner outline -->
+      <polygon points="-25.98,-35 95.26,-105 -510.94,-455 -632.18,-385"
+               fill="none" stroke="#b8d4e0" stroke-width="0.8" opacity="0.35"/>
+
+      <!-- ===== Net panels (drawn behind posts) ===== -->
+      <!-- LEFT side net (vertical, x=2 plane) -->
+      <polygon points="-25.98,-35 -632.18,-385 -632.18,-462 -25.98,-112"
+               fill="url(#netting)" stroke="#0a0a0a" stroke-width="0.6" opacity="0.95"/>
+      <polygon points="-25.98,-35 -632.18,-385 -632.18,-462 -25.98,-112"
+               fill="#0a0a0a" opacity="0.18"/>
+      <!-- RIGHT side net (x=16 plane) -->
+      <polygon points="95.26,-105 -510.94,-455 -510.94,-532 95.26,-182"
+               fill="url(#netting)" stroke="#0a0a0a" stroke-width="0.6" opacity="0.95"/>
+      <polygon points="95.26,-105 -510.94,-455 -510.94,-532 95.26,-182"
+               fill="#0a0a0a" opacity="0.15"/>
+      <!-- BACK net (z=75 plane) -->
+      <polygon points="-632.18,-385 -510.94,-455 -510.94,-532 -632.18,-462"
+               fill="url(#netting)" stroke="#0a0a0a" stroke-width="0.6" opacity="0.98"/>
+      <!-- TOP net (faint mesh) -->
+      <polygon points="-25.98,-112 95.26,-182 -510.94,-532 -632.18,-462"
+               fill="url(#netting)" opacity="0.35"/>
+
+      <!-- Frame top rails -->
+      <g stroke="#1a1a1a" stroke-width="2.5" fill="none" stroke-linecap="round">
+        <line x1="-25.98" y1="-112" x2="-632.18" y2="-462"/>
+        <line x1="95.26" y1="-182" x2="-510.94" y2="-532"/>
+        <line x1="-25.98" y1="-112" x2="95.26" y2="-182"/>
+        <line x1="-632.18" y1="-462" x2="-510.94" y2="-532"/>
+      </g>
+
+      <!-- Vertical posts every 10 ft (z=5,15,25,35,45,55,65,75) -->
+      <g stroke="#0a0a0a" stroke-width="3" stroke-linecap="round">
+        <!-- LEFT (x=2) -->
+        <line x1="-25.98" y1="-35" x2="-25.98" y2="-112"/>
+        <line x1="-112.58" y1="-85" x2="-112.58" y2="-162"/>
+        <line x1="-199.18" y1="-135" x2="-199.18" y2="-212"/>
+        <line x1="-285.78" y1="-185" x2="-285.78" y2="-262"/>
+        <line x1="-372.38" y1="-235" x2="-372.38" y2="-312"/>
+        <line x1="-458.98" y1="-285" x2="-458.98" y2="-362"/>
+        <line x1="-545.58" y1="-335" x2="-545.58" y2="-412"/>
+        <line x1="-632.18" y1="-385" x2="-632.18" y2="-462"/>
+        <!-- RIGHT (x=16) -->
+        <line x1="95.26" y1="-105" x2="95.26" y2="-182"/>
+        <line x1="8.66" y1="-155" x2="8.66" y2="-232"/>
+        <line x1="-77.94" y1="-205" x2="-77.94" y2="-282"/>
+        <line x1="-164.54" y1="-255" x2="-164.54" y2="-332"/>
+        <line x1="-251.14" y1="-305" x2="-251.14" y2="-382"/>
+        <line x1="-337.74" y1="-355" x2="-337.74" y2="-432"/>
+        <line x1="-424.34" y1="-405" x2="-424.34" y2="-482"/>
+        <line x1="-510.94" y1="-455" x2="-510.94" y2="-532"/>
+      </g>
+
+      <!-- Bottom frame rails -->
+      <g stroke="#1a1a1a" stroke-width="1.5" fill="none">
+        <line x1="-25.98" y1="-35" x2="-632.18" y2="-385"/>
+        <line x1="95.26" y1="-105" x2="-510.94" y2="-455"/>
+      </g>
+
+      <!-- ===== Home plate (x=9, z=73) ===== -->
+      <g transform="translate(-554.16, -410)">
+        <path d="M-12,0 L12,0 L12,7 L0,16 L-12,7 Z" fill="#fff" stroke="#1a1a1a" stroke-width="1.0"/>
+        <g stroke="#fff" stroke-width="0.8" opacity="0.55" fill="none">
+          <path d="M-26,-5 L-12,-5 M12,-5 L26,-5 M-26,-5 L-26,15 M26,-5 L26,15 M-26,15 L-12,15 M12,15 L26,15"/>
+        </g>
+      </g>
+
+      <!-- ===== Strike-zone target on back net (x=9, z=75, y=4) ===== -->
+      <g transform="translate(-571.56, -448)">
+        <g transform="matrix(8.660, -5.0, 0, -7.0, 0, 0)">
+          <rect x="-1.5" y="0" width="3" height="2.5" fill="none" stroke="#b8d4e0" stroke-width="0.18"/>
+          <rect x="-1.3" y="0.2" width="2.6" height="2.1" fill="none" stroke="#b8d4e0" stroke-width="0.1" opacity="0.7"/>
+          <circle cx="0" cy="1.25" r="0.45" fill="none" stroke="#b8d4e0" stroke-width="0.14"/>
+          <circle cx="0" cy="1.25" r="0.18" fill="#b8d4e0"/>
+        </g>
+      </g>
+
+      <!-- ===== Mound A (x=3..7, z=7..17, h=0.8) ===== -->
+      <g id="moundA">
+        <!-- right side face -->
+        <polygon points="0,-70 -86.60,-120 -86.60,-125.6 0,-75.6"
+                 fill="url(#moundSide)" stroke="#0a2a5a" stroke-width="0.5"/>
+        <!-- front face -->
+        <polygon points="-34.64,-50 0,-70 0,-75.6 -34.64,-55.6"
+                 fill="#1e5fb8" stroke="#0a2a5a" stroke-width="0.5"/>
+        <!-- top -->
+        <polygon points="-34.64,-55.6 0,-75.6 -86.60,-125.6 -121.24,-105.6"
+                 fill="url(#moundTop)" stroke="#0a2a5a" stroke-width="0.6"/>
+        <!-- foam edge -->
+        <polygon points="-34.64,-55.6 0,-75.6 -2,-77.4 -36.64,-57.4" fill="#0a0a0a"/>
+        <polygon points="0,-75.6 -86.60,-125.6 -84.60,-127.4 2,-77.4" fill="#0a0a0a"/>
+        <!-- pitching rubber (x=4..6, z=15..15.5) -->
+        <polygon points="-95.26,-100.6 -77.94,-110.6 -82.27,-113.1 -99.59,-103.1"
+                 fill="#fff" stroke="#888" stroke-width="0.4"/>
+      </g>
+
+      <!-- ===== Mound B (x=11..15, z=7..17, h=0.8) ===== -->
+      <g id="moundB">
+        <polygon points="69.28,-110 -17.32,-160 -17.32,-165.6 69.28,-115.6"
+                 fill="url(#moundSide)" stroke="#0a2a5a" stroke-width="0.5"/>
+        <polygon points="34.64,-90 69.28,-110 69.28,-115.6 34.64,-95.6"
+                 fill="#1e5fb8" stroke="#0a2a5a" stroke-width="0.5"/>
+        <polygon points="34.64,-95.6 69.28,-115.6 -17.32,-165.6 -51.96,-145.6"
+                 fill="url(#moundTop)" stroke="#0a2a5a" stroke-width="0.6"/>
+        <polygon points="34.64,-95.6 69.28,-115.6 67.28,-117.4 32.64,-97.4" fill="#0a0a0a"/>
+        <polygon points="69.28,-115.6 -17.32,-165.6 -15.32,-167.4 71.28,-117.4" fill="#0a0a0a"/>
+        <polygon points="-25.98,-140.6 -8.66,-150.6 -12.99,-153.1 -30.31,-143.1"
+                 fill="#fff" stroke="#888" stroke-width="0.4"/>
+      </g>
+
+    </g><!-- /lane -->
+
+    <!-- ====== BATHROOM (x=20..25, z=3..8, h=9) ====== -->
+    <g id="bathroom">
+      <!-- left face (FL=20,3 -> BL=20,8) -->
+      <polygon points="147.22,-115 103.92,-140 103.92,-203 147.22,-178"
+               fill="url(#wallSideR)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- back face (BL=20,8 -> BR=25,8) -->
+      <polygon points="103.92,-140 147.22,-165 147.22,-228 103.92,-203"
+               fill="url(#wallBack)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- right face (BR=25,8 -> FR=25,3) — flush with right exterior wall -->
+      <polygon points="147.22,-165 190.52,-140 190.52,-203 147.22,-228"
+               fill="url(#wallSideL)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- top -->
+      <polygon points="147.22,-178 103.92,-203 147.22,-228 190.52,-203"
+               fill="url(#bathroomTop)" stroke="#1f2830" stroke-width="0.8"/>
+      <!-- door on left face: z=4.5..6.5, h=0..7 -->
+      <polygon points="134.23,-122.5 116.91,-132.5 116.91,-181.5 134.23,-171.5"
+               fill="#1a232b" stroke="#0a0a0a" stroke-width="0.8"/>
+      <!-- handle -->
+      <circle cx="120.5" cy="-152" r="1.4" fill="#b8d4e0"/>
+      <!-- WC label -->
+      <text x="125" y="-141" font-family="Inter, sans-serif" font-weight="700" font-size="5"
+            fill="#b8d4e0" text-anchor="middle"
+            transform="rotate(-30 125 -141)">WC</text>
+    </g>
+
+    <!-- ====== MIRROR WALL (x=24.7, z=10..40, h=10) ====== -->
+    <g id="mirror">
+      <polygon points="127.30,-173.5 -132.50,-323.5 -132.50,-393.5 127.30,-243.5"
+               fill="url(#mirrorGrad)" stroke="#1a232b" stroke-width="1"/>
+      <polygon points="127.30,-173.5 -132.50,-323.5 -132.50,-393.5 127.30,-243.5"
+               fill="none" stroke="#3a4a55" stroke-width="3"/>
+      <g opacity="0.35" stroke="#fff" stroke-width="1" fill="none">
+        <line x1="100" y1="-195" x2="85" y2="-380"/>
+        <line x1="40" y1="-230" x2="25" y2="-365"/>
+        <line x1="-50" y1="-280" x2="-65" y2="-360"/>
+      </g>
+      <!-- floor tape line in front of mirror (x=23, z=10..40) -->
+      <g opacity="0.6" stroke="#b8d4e0" stroke-width="1" stroke-dasharray="3 3" fill="none">
+        <line x1="112.58" y1="-165" x2="-147.22" y2="-315"/>
+      </g>
+    </g>
+
+    <!-- ====== PLYO BALL RACK (x=22..24.5, z=42..50, h=1.5) ====== -->
+    <g id="plyoRack">
+      <polygon points="-173.20,-320 -151.55,-332.5 -151.55,-343 -173.20,-330.5"
+               fill="#8a6a4a" stroke="#3a2a1a" stroke-width="0.5"/>
+      <polygon points="-151.55,-332.5 -220.83,-372.5 -220.83,-383 -151.55,-343"
+               fill="#6f5238" stroke="#3a2a1a" stroke-width="0.5"/>
+      <polygon points="-173.20,-330.5 -151.55,-343 -220.83,-383 -242.48,-370.5"
+               fill="#a07e58" stroke="#3a2a1a" stroke-width="0.6"/>
+      <polygon points="-173.20,-320 -151.55,-332.5 -220.83,-372.5 -242.48,-360"
+               fill="#5a3e26" stroke="#3a2a1a" stroke-width="0.5" opacity="0.85"/>
+      <!-- balls (midline x=23.25, z=43.5/45.5/47.5/49.5, atop shelf) -->
+      <g>
+        <g transform="translate(-175.40, -352.75)">
+          <ellipse cx="2" cy="3" rx="8" ry="8" fill="#000" opacity="0.35"/>
+          <circle r="8" fill="#c2402d"/>
+          <ellipse cx="-2" cy="-2" rx="2.5" ry="1.7" fill="#fff" opacity="0.45"/>
+        </g>
+        <g transform="translate(-192.72, -362.75)">
+          <ellipse cx="2" cy="3" rx="9" ry="9" fill="#000" opacity="0.35"/>
+          <circle r="9" fill="#1e5fb8"/>
+          <ellipse cx="-2.5" cy="-2.5" rx="3" ry="2" fill="#fff" opacity="0.45"/>
+        </g>
+        <g transform="translate(-210.04, -372.75)">
+          <ellipse cx="2" cy="3" rx="10" ry="10" fill="#000" opacity="0.35"/>
+          <circle r="10" fill="#6a7884"/>
+          <ellipse cx="-3" cy="-3" rx="3.5" ry="2.5" fill="#fff" opacity="0.4"/>
+        </g>
+        <g transform="translate(-227.36, -382.75)">
+          <ellipse cx="2" cy="3" rx="11" ry="11" fill="#000" opacity="0.35"/>
+          <circle r="11" fill="#4a7c4e"/>
+          <ellipse cx="-3.5" cy="-3.5" rx="4" ry="3" fill="#fff" opacity="0.4"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ====== KETTLEBELL RACK (x=22..24.5, z=52..60) ====== -->
+    <g id="kbRack">
+      <polygon points="-259.80,-370 -238.15,-382.5 -307.43,-422.5 -329.08,-410"
+               fill="#3a2a1a" stroke="#1a0a00" stroke-width="0.5"/>
+      <polygon points="-259.80,-370 -238.15,-382.5 -238.15,-374 -259.80,-361.5"
+               fill="#5a3e26"/>
+      <polygon points="-238.15,-382.5 -307.43,-422.5 -307.43,-414 -238.15,-374"
+               fill="#3a2a1a"/>
+      <!-- uprights -->
+      <g stroke="#1a232b" stroke-width="2" stroke-linecap="round">
+        <line x1="-259.80" y1="-370" x2="-259.80" y2="-394"/>
+        <line x1="-238.15" y1="-382.5" x2="-238.15" y2="-406.5"/>
+        <line x1="-329.08" y1="-410" x2="-329.08" y2="-434"/>
+        <line x1="-307.43" y1="-422.5" x2="-307.43" y2="-446.5"/>
+      </g>
+      <g stroke="#1a232b" stroke-width="2" fill="none">
+        <line x1="-259.80" y1="-394" x2="-329.08" y2="-434"/>
+        <line x1="-238.15" y1="-406.5" x2="-307.43" y2="-446.5"/>
+      </g>
+      <!-- 5 kettlebells (midline x=23.25, ascending size) -->
+      <g>
+        <g transform="translate(-265.20, -376)">
+          <ellipse cx="2" cy="5" rx="6" ry="2" fill="#000" opacity="0.35"/>
+          <path d="M-2.5,-5 q2.5,-6 5,0" fill="none" stroke="#1a232b" stroke-width="1.4"/>
+          <circle r="5" fill="#1a232b"/>
+        </g>
+        <g transform="translate(-279.85, -384.4)">
+          <ellipse cx="3" cy="6" rx="8" ry="2.5" fill="#000" opacity="0.35"/>
+          <path d="M-3.5,-7 q3.5,-8 7,0" fill="none" stroke="#1a232b" stroke-width="1.6"/>
+          <circle r="7" fill="#1a232b"/>
+        </g>
+        <g transform="translate(-294.51, -392.8)">
+          <ellipse cx="3" cy="7" rx="10" ry="3" fill="#000" opacity="0.35"/>
+          <path d="M-4.5,-9 q4.5,-10 9,0" fill="none" stroke="#1a232b" stroke-width="1.8"/>
+          <circle r="9" fill="#1a232b"/>
+        </g>
+        <g transform="translate(-309.16, -401.2)">
+          <ellipse cx="3" cy="8" rx="12" ry="3.5" fill="#000" opacity="0.35"/>
+          <path d="M-5.5,-11 q5.5,-12 11,0" fill="none" stroke="#1a232b" stroke-width="2"/>
+          <circle r="11" fill="#1a232b"/>
+        </g>
+        <g transform="translate(-324.61, -410.05)">
+          <ellipse cx="4" cy="9" rx="13" ry="4" fill="#000" opacity="0.35"/>
+          <path d="M-6.5,-13 q6.5,-14 13,0" fill="none" stroke="#1a232b" stroke-width="2.2"/>
+          <circle r="13" fill="#1a232b"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ====== ENTRANCE (front wall, x=14..17, z=0) ====== -->
+    <g id="entrance">
+      <!-- WELCOME mat just inside (x=14..17, z=4..6) -->
+      <polygon points="86.60,-90 112.58,-105 95.26,-115 69.28,-100"
+               fill="#3a4a55" stroke="#1a232b" stroke-width="0.5"/>
+      <polygon points="86.60,-90 112.58,-105 95.26,-115 69.28,-100"
+               fill="none" stroke="#b8d4e0" stroke-width="0.7" opacity="0.7"
+               stroke-dasharray="2 2"/>
+      <text x="91" y="-103" font-family="Inter, sans-serif" font-weight="800"
+            font-size="6" letter-spacing="2" fill="#b8d4e0"
+            transform="rotate(-30 91 -103)">WELCOME</text>
+
+      <!-- door arc (hinge at 14, 0 sweeping into room) -->
+      <g fill="none" stroke="#b8d4e0" stroke-width="0.7" opacity="0.6" stroke-dasharray="3 2">
+        <path d="M121.24,-70 Q132,-50 105,-45"/>
+      </g>
+
+      <!-- Door span on front wall edge -->
+      <line x1="121.24" y1="-70" x2="147.22" y2="-85" stroke="#b8d4e0" stroke-width="3"/>
+    </g>
+
+  </g><!-- /building -->
+
+  <!-- ============== DIMENSION LINES ============== -->
+  <g id="dimensions" font-family="JetBrains Mono, monospace" font-size="11" letter-spacing="1.5">
+
+    <!-- 25' WIDTH (front edge): from FL (1010, 1000) to FR (1010+216.5, 1000-125)=(1226.5, 875) -->
+    <g stroke="#3a4a55" fill="#3a4a55">
+      <line x1="1042" y1="1056" x2="1258.5" y2="931" stroke-width="1"/>
+      <line x1="1010" y1="1000" x2="1042" y2="1056" stroke-width="0.8"/>
+      <line x1="1226.5" y1="875" x2="1258.5" y2="931" stroke-width="0.8"/>
+      <polygon points="1042,1056 1052,1051 1054,1063"/>
+      <polygon points="1258.5,931 1248.5,936 1246.5,924"/>
+      <text x="1150" y="1003" text-anchor="middle" fill="#1a232b" font-weight="600"
+            transform="rotate(-30 1150 1003)">25'-0" WIDTH</text>
+    </g>
+
+    <!-- 80' DEPTH (left edge): from FL (1010, 1000) to BL (1010-692.8, 1000-400)=(317.2, 600) -->
+    <g stroke="#3a4a55" fill="#3a4a55">
+      <line x1="978" y1="1056" x2="285.2" y2="656" stroke-width="1"/>
+      <line x1="1010" y1="1000" x2="978" y2="1056" stroke-width="0.8"/>
+      <line x1="317.2" y1="600" x2="285.2" y2="656" stroke-width="0.8"/>
+      <polygon points="978,1056 968,1051 966,1063"/>
+      <polygon points="285.2,656 295.2,661 297.2,649"/>
+      <text x="635" y="864" text-anchor="middle" fill="#1a232b" font-weight="600"
+            transform="rotate(30 635 864)">80'-0" DEPTH</text>
+    </g>
+
+    <!-- 14' LANE WIDTH (front of cage at z=2 inside lane, between x=2 and x=16):
+         p1 = 2*ex + 2*ez = (0, -20)  -> screen (1010, 980)
+         p2 = 16*ex + 2*ez = (121.24, -90) -> screen (1131.24, 910) -->
+    <g stroke="#b8d4e0" fill="#3a4a55">
+      <line x1="1010" y1="980" x2="1131.24" y2="910" stroke-width="1.2"/>
+      <line x1="1010" y1="980" x2="1010" y2="974" stroke-width="0.8"/>
+      <line x1="1010" y1="980" x2="1010" y2="986" stroke-width="0.8"/>
+      <line x1="1131.24" y1="910" x2="1131.24" y2="904" stroke-width="0.8"/>
+      <line x1="1131.24" y1="910" x2="1131.24" y2="916" stroke-width="0.8"/>
+      <text x="1070" y="941" text-anchor="middle" fill="#fff" font-weight="700"
+            transform="rotate(-30 1070 941)" stroke="none">14'-0"</text>
+    </g>
+
+    <!-- 2' LEFT CLEARANCE (between left wall x=0 and net x=2 at front of cage):
+         p1 = 0*ex + 5*ez = (-43.30, -25)   -> screen (966.7, 975)
+         p2 = 2*ex + 5*ez = (-25.98, -35)  -> screen (984.02, 965) -->
+    <g stroke="#3a4a55" fill="#3a4a55">
+      <line x1="966.7" y1="975" x2="984.02" y2="965" stroke-width="0.8"/>
+      <text x="940" y="985" text-anchor="end" fill="#1a232b" font-size="9" font-weight="600">2'-0" CLR</text>
+    </g>
+
+  </g>
+
+  <!-- ============== ORIENTATION INDICATOR ============== -->
+  <g id="orient" transform="translate(140, 1010)">
+    <circle r="48" fill="#fff" stroke="#3a4a55" stroke-width="1.2"/>
+    <circle r="40" fill="none" stroke="#3a4a55" stroke-width="0.5" stroke-dasharray="2 3"/>
+    <polygon points="0,-32 -10,-10 -3,-10 -3,18 3,18 3,-10 10,-10"
+             fill="#3a4a55"/>
+    <text y="-38" text-anchor="middle" font-family="Inter, sans-serif" font-weight="800"
+          font-size="11" letter-spacing="3" fill="#3a4a55">FRONT</text>
+    <text y="44" text-anchor="middle" font-family="Inter, sans-serif" font-weight="600"
+          font-size="9" letter-spacing="3" fill="#5a6f7e">BACK ↓</text>
+  </g>
+
+  <!-- ============== SCALE BAR ============== -->
+  <g id="scaleBar" transform="translate(260, 1100)">
+    <text x="0" y="-12" font-family="JetBrains Mono, monospace" font-size="10"
+          letter-spacing="3" fill="#3a4a55" font-weight="500">SCALE  ·  10 PX = 1 FT</text>
+    <g>
+      <rect x="0" y="0" width="50" height="10" fill="#3a4a55"/>
+      <rect x="50" y="0" width="50" height="10" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+      <rect x="100" y="0" width="50" height="10" fill="#3a4a55"/>
+      <rect x="150" y="0" width="50" height="10" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+    </g>
+    <g font-family="JetBrains Mono, monospace" font-size="10" fill="#3a4a55" letter-spacing="1">
+      <text x="0" y="26" text-anchor="middle">0</text>
+      <text x="50" y="26" text-anchor="middle">5'</text>
+      <text x="100" y="26" text-anchor="middle">10'</text>
+      <text x="150" y="26" text-anchor="middle">15'</text>
+      <text x="200" y="26" text-anchor="middle">20'</text>
+    </g>
+  </g>
+
+  <!-- ============== LEGEND (bottom-right) ============== -->
+  <g id="legend" transform="translate(1390, 1080)">
+    <rect x="0" y="0" width="340" height="100" fill="#fff" stroke="#3a4a55" stroke-width="1"/>
+    <rect x="0" y="0" width="340" height="22" fill="#3a4a55"/>
+    <text x="14" y="16" font-family="Inter, sans-serif" font-weight="700" font-size="11"
+          letter-spacing="3" fill="#b8d4e0">LEGEND · MATERIALS</text>
+
+    <g font-family="Inter, sans-serif" font-size="11" letter-spacing="1" fill="#1a232b">
+      <g transform="translate(16, 38)">
+        <rect width="16" height="14" fill="url(#turfGrad)" stroke="#000" stroke-width="0.4"/>
+        <text x="26" y="11" font-weight="600">BLACK TURF — 14×70 CAGE</text>
+      </g>
+      <g transform="translate(16, 60)">
+        <rect width="16" height="14" fill="url(#rubberTex)" stroke="#000" stroke-width="0.4"/>
+        <text x="26" y="11" font-weight="600">RUBBER FLOORING — INTERIOR</text>
+      </g>
+      <g transform="translate(16, 82)">
+        <rect width="16" height="14" fill="url(#concreteTex)" stroke="#6e6c64" stroke-width="0.4"/>
+        <text x="26" y="11" font-weight="600">CONCRETE PAD — 3' AT EACH END</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ============== FOOTER ============== -->
+  <g id="footer">
+    <line x1="70" y1="1160" x2="1730" y2="1160" stroke="#3a4a55" stroke-width="0.5" opacity="0.35"/>
+    <text x="70" y="1185" font-family="JetBrains Mono, monospace" font-size="10"
+          letter-spacing="3" fill="#5a6f7e">TAP ATHLETES · PITCHING ACADEMY · FACILITY LAYOUT · ISO VIEW</text>
+    <text x="1730" y="1185" text-anchor="end" font-family="JetBrains Mono, monospace" font-size="10"
+          letter-spacing="3" fill="#5a6f7e">REV B · 25' × 80' · NTS WHEN PRINTED &lt; 24"</text>
+  </g>
+
+</svg>
+</div>
+
+</body>
+</html>
