@@ -1,7 +1,7 @@
 # Architectural specs
 
 Authoritative dimensional + code-required input for the facility build.
-**Different from `reference/`** — that folder is design-time mood-board
+**Different from the old `reference/` folder** (removed; in git history) — that was design-time mood-board
 material; this folder is what suppliers and the city actually need to see.
 
 When the 3D rebuild starts (Stage 2 of Track A), this folder is the source

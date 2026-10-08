@@ -57,5 +57,4 @@ Then open <http://localhost:4567/>.
 used to generate the HTML output. They are *not* loaded by the HTML files
 and are kept here for archival purposes only.
 
-`reference/` contains design-time reference images (photos, screenshots).
-Not loaded by the app.
+`reference/` (design-time reference images) was removed when this site moved into the `websites` repo; it is in git history.
