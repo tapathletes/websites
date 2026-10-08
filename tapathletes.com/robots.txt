@@ -1,0 +1,113 @@
+# robots.txt for https://tapathletes.com
+# TAP Athletes — youth & high-school baseball pitching academy, Rogers, Arkansas
+#
+# POSTURE: permissive. We WANT to be crawled, indexed, quoted, and cited —
+# by classic search engines AND by AI answer engines. Being the source an
+# LLM cites when a parent asks "where can my kid learn to pitch in NWA?"
+# is a primary acquisition channel for us, not a threat.
+#
+# WHY AI BOTS ARE NAMED EXPLICITLY BELOW:
+# robots.txt matching selects only the SINGLE most-specific user-agent group
+# for a given crawler; a named group completely replaces the `*` group for
+# that bot. So naming them is not redundant decoration — it is (a) an
+# unambiguous, auditable statement of intent, and (b) protection against a
+# future maintainer adding a blanket restriction to `*` and silently locking
+# out the answer engines we depend on. If you add a Disallow below, add it to
+# BOTH groups or you will create a split policy by accident.
+#
+# Rule of thumb for edits: the only things that belong in Disallow are gated
+# assets and print/PDF source pages. Everything public stays crawlable.
+#
+# Last reviewed: 2026-09-24
+
+# ---------------------------------------------------------------------------
+# All standard crawlers (Googlebot, Bingbot, Slurp, DuckDuckBot, everyone else)
+# ---------------------------------------------------------------------------
+User-agent: *
+Allow: /
+# The email-gated PDF itself. A PDF cannot carry a <meta name="robots"> tag,
+# and GitHub Pages cannot set an X-Robots-Tag header, so robots.txt is the
+# ONLY lever available for it.
+Disallow: /foundations/TAP-Athletes-Foundations-Curriculum-Guide.pdf
+
+# NOTE — /foundations/curriculum-guide is deliberately NOT disallowed here.
+# That page already carries <meta name="robots" content="noindex, follow">,
+# which is the stronger guarantee: a crawler must FETCH a page to see its
+# noindex tag, so blocking it in robots.txt would prevent the exclusion we
+# actually want and could still leave a bare URL-only entry in the index.
+# Let crawlers fetch it and honour the noindex. The same curriculum content
+# is free and crawlable at /foundations/curriculum — that is the page we
+# want ranked and cited.
+
+# ---------------------------------------------------------------------------
+# AI / answer-engine crawlers — EXPLICITLY WELCOME
+# ---------------------------------------------------------------------------
+# Grouped by vendor. Tokens verified 2026-08-13 against vendor documentation
+# (OpenAI developers.openai.com/api/docs/bots, Anthropic support.claude.com
+# article 8896518, Google google-common-crawlers, Meta developers.facebook.com
+# web-crawlers). Note Anthropic RENAMED its crawlers: the old `anthropic-ai`
+# and `Claude-Web` tokens are retired — ClaudeBot / Claude-User /
+# Claude-SearchBot are current. Re-verify tokens before trusting this list;
+# this space changes fast.
+
+# OpenAI — GPTBot trains models, OAI-SearchBot builds the ChatGPT search
+# index, ChatGPT-User fetches live when a user asks about us.
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: OAI-AdsBot
+
+# Perplexity — PerplexityBot indexes; Perplexity-User fetches on demand.
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+
+# Anthropic (Claude) — training, user-initiated fetch, and search indexing.
+User-agent: ClaudeBot
+User-agent: Claude-User
+User-agent: Claude-SearchBot
+
+# Google — Googlebot powers AI Overviews/AI Mode via normal indexing;
+# Google-Extended is the separate opt-in for Gemini training & grounding.
+User-agent: Googlebot
+User-agent: Google-Extended
+User-agent: Google-CloudVertexBot
+
+# Microsoft / Bing — Bingbot feeds Bing, Copilot, and (partly) ChatGPT search.
+User-agent: Bingbot
+
+# Apple — Applebot powers Siri/Spotlight; Applebot-Extended is the
+# Apple Intelligence training opt-in.
+User-agent: Applebot
+User-agent: Applebot-Extended
+
+# Meta AI
+User-agent: meta-externalagent
+User-agent: meta-externalfetcher
+
+# DuckDuckGo AI assistant
+User-agent: DuckAssistBot
+
+# Amazon (Alexa / Rufus / Nova)
+User-agent: Amazonbot
+
+# Common Crawl — the corpus many open models and researchers train on.
+User-agent: CCBot
+
+# ByteDance (Doubao / TikTok search)
+User-agent: Bytespider
+
+# Cohere
+User-agent: cohere-ai
+User-agent: cohere-training-data-crawler
+
+# Other answer engines & knowledge-graph builders
+User-agent: Diffbot
+User-agent: Timpibot
+User-agent: YouBot
+User-agent: MistralAI-User
+Allow: /
+# Same exclusion as above — keep this in sync with the `*` group.
+Disallow: /foundations/TAP-Athletes-Foundations-Curriculum-Guide.pdf
+
+# ---------------------------------------------------------------------------
+Sitemap: https://tapathletes.com/sitemap.xml

@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Foundations Pitching Curriculum — TAP Athletes</title>
+  <meta name="description" content="The full Foundations pitching curriculum: four mechanical phases governed by effort bands, 18 skills, sample drills, and how pitchers advance. Rogers, Arkansas." />
+  <link rel="canonical" href="https://tapathletes.com/foundations/curriculum/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="TAP Athletes" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://tapathletes.com/foundations/curriculum/" />
+  <meta property="og:title" content="The Foundations Pitching Curriculum — TAP Athletes" />
+  <meta property="og:description" content="The full Foundations pitching curriculum: four mechanical phases governed by effort bands, 18 skills, sample drills, and how pitchers advance. Rogers, Arkansas." />
+  <meta property="og:image" content="https://tapathletes.com/images/og-card.png" />
+  <meta property="og:image:alt" content="TAP Athletes — Pitching Academy, Rogers Arkansas" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="The Foundations Pitching Curriculum — TAP Athletes" />
+  <meta name="twitter:description" content="The full Foundations pitching curriculum: four mechanical phases governed by effort bands, 18 skills, sample drills, and how pitchers advance. Rogers, Arkansas." />
+  <meta name="twitter:image" content="https://tapathletes.com/images/og-card.png" />
+
+  <meta name="apple-mobile-web-app-title" content="TAP Athletes" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink:        { DEFAULT: '#1A1A1A', soft: '#2D2D2D', muted: '#6B6B6B', faint: '#999999', light: '#B5B5B5' },
+            cream:      { DEFAULT: '#FAF9F7', warm: '#F5F3EF', dark: '#EDEBE6' },
+            forest:     { DEFAULT: '#1B3D2F', light: '#2A5A43', pale: '#E8F0EC', bright: '#3D7A5F' },
+            rust:       { DEFAULT: '#C4501C', hover: '#A8431A', light: '#FDF0EA', pale: '#FEF7F3' },
+            slate:      { DEFAULT: '#3A4F5E', light: '#E9EEF1', pale: '#F4F6F8' },
+          },
+          fontFamily: {
+            display: ['"Instrument Serif"', 'Georgia', 'serif'],
+            body:    ['"DM Sans"', 'system-ui', 'sans-serif'],
+          },
+          fontSize: {
+            'hero':  'clamp(2.8rem, 1rem + 5.5vw, 5.5rem)',
+            '2xl-r': 'clamp(1.8rem, 1rem + 2.5vw, 3rem)',
+            'xl-r':  'clamp(1.4rem, 1.1rem + 1.25vw, 2rem)',
+            'lg-r':  'clamp(1.1rem, 1rem + 0.5vw, 1.35rem)',
+            'base-r':'clamp(0.95rem, 0.9rem + 0.25vw, 1.1rem)',
+            'sm-r':  'clamp(0.85rem, 0.8rem + 0.2vw, 0.95rem)',
+            'xs-r':  'clamp(0.75rem, 0.7rem + 0.15vw, 0.85rem)',
+          },
+          maxWidth: {
+            'narrow':  '640px',
+            'default': '900px',
+            'wide':    '1120px',
+          },
+          borderRadius: { 'xl': '0.75rem', '2xl': '1rem' },
+          boxShadow: {
+            'soft':   '0 1px 3px rgba(0,0,0,0.04)',
+            'medium': '0 4px 16px rgba(0,0,0,0.06)',
+            'heavy':  '0 8px 30px rgba(0,0,0,0.08)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer base {
+      html {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+      }
+      body {
+        font-family: theme('fontFamily.body');
+        color: theme('colors.ink.DEFAULT');
+        background: theme('colors.cream.DEFAULT');
+      }
+      ::selection { background: rgba(27,61,47,0.12); }
+    }
+    @layer utilities {
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+      }
+      .fade-up.visible { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "vjxdxd7lxo");
+  </script>
+  <!-- structured-data:start -->
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["SportsActivityLocation","LocalBusiness","Organization"],"@id":"https://tapathletes.com/#organization","name":"TAP Athletes","alternateName":"TAP Athletes Pitching Academy","legalName":"Training Athletic Performance, Inc.","url":"https://tapathletes.com/","logo":{"@type":"ImageObject","url":"https://tapathletes.com/images/web-app-manifest-512x512.png","width":512,"height":512},"image":"https://tapathletes.com/images/og-card.png","description":"TAP Athletes is a baseball pitching academy in Rogers, Arkansas, serving youth and high-school pitchers ages 8 and up. TAP trains pitching only — no hitting, no fielding, no general athletic training. Programs are progression-based: athletes are assessed, placed at a level that matches their current mechanics, and advance by demonstrating skills rather than by aging up.","telephone":"+1-833-860-2711","email":"support@tapathletes.com","address":{"@type":"PostalAddress","streetAddress":"1751 S 1st Street","addressLocality":"Rogers","addressRegion":"AR","postalCode":"72758","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Rogers","containedInPlace":{"@type":"State","name":"Arkansas"}},{"@type":"Place","name":"Northwest Arkansas"}],"priceRange":"$15 – $4,500","sport":"Baseball","knowsAbout":["Baseball pitching instruction","Youth pitching mechanics","Pitch design","Pitching velocity development","Pitching command training","Rapsodo pitch tracking"]},{"@type":"WebSite","@id":"https://tapathletes.com/#website","url":"https://tapathletes.com/","name":"TAP Athletes","publisher":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://tapathletes.com/foundations/curriculum/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapathletes.com/"},{"@type":"ListItem","position":2,"name":"Foundations","item":"https://tapathletes.com/foundations/"},{"@type":"ListItem","position":3,"name":"Curriculum","item":"https://tapathletes.com/foundations/curriculum/"}]},{"@type":"WebPage","@id":"https://tapathletes.com/foundations/curriculum/#webpage","url":"https://tapathletes.com/foundations/curriculum/","isPartOf":{"@id":"https://tapathletes.com/#website"},"about":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US","primaryImageOfPage":"https://tapathletes.com/images/og-card.png","name":"The Foundations Pitching Curriculum — TAP Athletes","description":"The full Foundations pitching curriculum: four mechanical phases governed by effort bands, 18 skills, sample drills, and how pitchers advance.","datePublished":"2026-08-13","dateModified":"2026-09-24","breadcrumb":{"@id":"https://tapathletes.com/foundations/curriculum/#breadcrumb"},"mainEntity":{"@id":"https://tapathletes.com/foundations/curriculum/#article"}},{"@type":"Article","@id":"https://tapathletes.com/foundations/curriculum/#article","headline":"The Foundations Pitching Curriculum","url":"https://tapathletes.com/foundations/curriculum/","mainEntityOfPage":{"@id":"https://tapathletes.com/foundations/curriculum/#webpage"},"author":{"@id":"https://tapathletes.com/#organization"},"publisher":{"@id":"https://tapathletes.com/#organization"},"datePublished":"2026-08-13","dateModified":"2026-09-24","image":"https://tapathletes.com/images/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"about":{"@id":"https://tapathletes.com/foundations/#service"},"description":"Public documentation of what the Foundations program teaches: four mechanical phases, each bound to an effort band (Band 1 at 30–50% of recent representative maximum, Band 2 at 50–70%, Band 3 at 70–85%, Band 4 at 85% and above); eighteen mechanical skills across four categories (Lower Body & Force Transfer; Arm Action & Upper Body; Sequencing & Full-Body Integration; Command & Pitch Execution), trained in every phase; sample drills; and how assessment, per-skill placement, and coach-signed advancement work.","keywords":["pitching curriculum","effort bands","youth pitching mechanics","pitching progression","TAP Athletes Foundations"]},{"@type":"FAQPage","@id":"https://tapathletes.com/foundations/curriculum/#faq","mainEntity":[{"@type":"Question","name":"What is an effort band?","acceptedAnswer":{"@type":"Answer","text":"An effort band is a defined range of throwing intensity, expressed as a percentage of the pitcher's recent representative maximum. Foundations uses four: Band 1 at 30–50%, Band 2 at 50–70%, Band 3 at 70–85%, and Band 4 at 85% and above. Each mechanical phase is bound to one band, so a pitcher's training intensity is defined by where they are in the curriculum."}},{"@type":"Question","name":"Does my pitcher's age determine their phase?","acceptedAnswer":{"@type":"Answer","text":"No. Phases describe what the pitcher is working on, not their age or experience level. All new pitchers begin in Phase 1, regardless of background. Effort bands are assigned from the pitcher's recent representative maximum throwing velocity — not age, not experience, and not a parent's report."}},{"@type":"Question","name":"How does a pitcher advance to the next phase?","acceptedAnswer":{"@type":"Answer","text":"By demonstrating the ability to perform and repeat what is being trained. No pitcher moves to the next phase just by attending. Advancement is earned, and the coach signs off before the pitcher progresses."}},{"@type":"Question","name":"Can a pitcher be in two phases at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Placement is per-skill, not per-pitcher. A pitcher may be placed into different phases for different skills based on their individual development — for example, further along in lower-body force transfer than in command."}},{"@type":"Question","name":"Who is the Foundations curriculum for?","acceptedAnswer":{"@type":"Answer","text":"Pitchers ages 8 and up, at any experience level, training at TAP Athletes in Rogers, Arkansas. Foundations Prep is a one-month entry point for younger pitchers, beginners, or families new to structured training, aimed at ages 8–12."}}]}]}</script>
+  <!-- structured-data:end -->
+</head>
+<body class="min-h-screen">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- NAV -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <header class="sticky top-0 z-50 bg-cream/90 backdrop-blur-xl border-b border-cream-dark/60 transition-shadow" id="site-header">
+    <div class="max-w-wide mx-auto px-5 lg:px-12 flex items-center justify-between h-16">
+      <a href="https://tapathletes.com" class="flex items-center gap-2" aria-label="TAP Athletes home">
+        <span class="font-body text-base font-bold tracking-tight text-ink">TAP Athletes</span>
+        <span class="text-xs font-medium text-ink-muted">/ Curriculum</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8" aria-label="Primary">
+        <a href="#phases" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">Phases</a>
+        <a href="#skills" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">18 Skills</a>
+        <a href="#process" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">Process</a>
+        <a href="#classes" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">Classes</a>
+        <a href="/foundations/" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">Foundations</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="/foundations#enrollment" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Enroll</a>
+        <button class="md:hidden flex flex-col gap-[5px] items-center justify-center w-9 h-9" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+          <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
+          <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
+          <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
+        </button>
+      </div>
+    </div>
+    <div class="hidden flex-col gap-1 px-5 pb-5 pt-3 border-t border-cream-dark md:hidden" id="mobileNav" aria-hidden="true">
+      <a href="#phases" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Phases</a>
+      <a href="#skills" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">18 Skills</a>
+      <a href="#process" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Process</a>
+      <a href="#classes" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Classes</a>
+      <a href="/foundations/" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Foundations</a>
+      <a href="/foundations#enrollment" class="mt-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-forest text-white">Enroll</a>
+    </div>
+  </header>
+
+  <main>
+    <article>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- HERO -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="pt-16 pb-12 lg:pt-24 lg:pb-16">
+        <div class="max-w-wide mx-auto px-5 lg:px-12">
+          <nav aria-label="Breadcrumb" class="mb-6">
+            <ol class="flex flex-wrap items-center gap-2 text-xs-r text-ink-faint">
+              <li><a href="/" class="hover:text-ink transition-colors">TAP Athletes</a></li>
+              <li aria-hidden="true">/</li>
+              <li><a href="/foundations/" class="hover:text-ink transition-colors">Foundations</a></li>
+              <li aria-hidden="true">/</li>
+              <li class="text-ink-muted" aria-current="page">Curriculum</li>
+            </ol>
+          </nav>
+
+          <div class="max-w-[760px]">
+            <p class="text-sm-r font-semibold uppercase tracking-[0.15em] text-forest mb-6">Foundations Program · Ages 8+ · Rogers, Arkansas</p>
+            <h1 class="font-display text-hero text-ink leading-[1.05] mb-6">
+              The Foundations<br>
+              <em class="text-forest">pitching curriculum.</em>
+            </h1>
+            <p class="text-lg-r text-ink-muted leading-relaxed max-w-[56ch]">
+              Four mechanical phases, each governed by an effort band. Eighteen mechanical skills, trained in every phase. This page documents the whole thing — what a pitcher works on, how they are placed, and what it takes to advance.
+            </p>
+          </div>
+
+          <!-- At a glance -->
+          <div class="border-t border-cream-dark mt-12 pt-8 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+            <div>
+              <div class="font-display text-2xl-r text-ink italic">4 phases</div>
+              <div class="text-xs-r text-ink-muted mt-1">Each bound to an effort band</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl-r text-ink italic">18 skills</div>
+              <div class="text-xs-r text-ink-muted mt-1">Across 4 categories</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl-r text-ink italic">30–85%+</div>
+              <div class="text-xs-r text-ink-muted mt-1">Effort band range</div>
+            </div>
+            <div>
+              <div class="font-display text-2xl-r text-ink italic">Earned</div>
+              <div class="text-xs-r text-ink-muted mt-1">Advancement, not attendance</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- HOW IT IS ORGANIZED -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-white" id="organized">
+        <div class="max-w-wide mx-auto px-5 lg:px-12">
+          <div class="grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-12 lg:gap-20 items-start">
+            <div>
+              <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">How It Is Organized</p>
+              <h2 class="font-display text-2xl-r text-ink leading-tight mb-5">Phases, effort bands, and skills.</h2>
+              <p class="text-base-r text-ink-muted leading-relaxed mb-5">
+                Foundations develops the whole pitcher through a structured mechanical curriculum, paired with included classes covering everything else the position demands — pitch design, game knowledge, and positional responsibilities.
+              </p>
+              <p class="text-base-r text-ink-muted leading-relaxed">
+                The mechanical curriculum has three moving parts. <strong class="text-ink font-semibold">Phases</strong> describe what a pitcher is working on. <strong class="text-ink font-semibold">Effort bands</strong> govern how hard they throw while working on it. <strong class="text-ink font-semibold">Skills</strong> are the eighteen mechanical elements being trained — the same eighteen at every phase.
+              </p>
+            </div>
+            <div class="space-y-4">
+              <div class="bg-cream rounded-xl p-6">
+                <h3 class="font-body text-base-r font-bold text-ink mb-2">What is an effort band?</h3>
+                <p class="text-sm-r text-ink-muted leading-relaxed">A defined range of throwing intensity, expressed as a percentage of the pitcher's recent representative maximum. Each phase corresponds to one band — so intensity is a property of the curriculum, not a guess made session to session.</p>
+              </div>
+              <div class="bg-cream rounded-xl p-6">
+                <h3 class="font-body text-base-r font-bold text-ink mb-2">Phase is not age</h3>
+                <p class="text-sm-r text-ink-muted leading-relaxed">Phases describe what the pitcher is working on — not their age or experience level. All new pitchers begin in Phase 1, regardless of background.</p>
+              </div>
+              <div class="bg-cream rounded-xl p-6">
+                <h3 class="font-body text-base-r font-bold text-ink mb-2">Placement is per-skill</h3>
+                <p class="text-sm-r text-ink-muted leading-relaxed">A pitcher may be placed into different phases for different skills based on their individual development. Placement is per-skill, not per-pitcher.</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-10 text-base-r text-ink italic border-l-2 border-rust/40 bg-rust-pale/60 py-4 pl-5 pr-5 rounded-r-xl max-w-[64ch]">
+            "Phases describe what the pitcher is working on — not their age or experience level. All new pitchers begin in Phase 1, regardless of background."
+            <span class="block mt-2 not-italic text-xs font-semibold uppercase tracking-[0.15em] text-ink-faint">— Foundations Methodology</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- THE FOUR PHASES -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-cream" id="phases">
+        <div class="max-w-default mx-auto px-5 lg:px-12">
+          <div class="max-w-[640px] mb-10">
+            <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">The Mechanical Curriculum</p>
+            <h2 class="font-display text-2xl-r text-ink leading-tight mb-5">Four phases, four effort bands.</h2>
+            <p class="text-base-r text-ink-muted leading-relaxed">Every phase trains all eighteen skills. What changes between phases is the effort, the complexity, and how much of the delivery is integrated at once.</p>
+          </div>
+
+          <div class="space-y-3">
+
+            <!-- Phase 1 -->
+            <details class="group bg-white border border-cream-dark rounded-xl" open>
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span class="font-display text-lg italic text-forest">Phase 1</span>
+                  <span class="text-base-r font-semibold text-ink">Movement &amp; Throwing Foundations</span>
+                  <span class="text-xs font-semibold uppercase tracking-[0.1em] text-rust bg-rust-pale px-3 py-1 rounded-full whitespace-nowrap">Effort Band 1 · 30–50%</span>
+                </span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-xs-r font-semibold uppercase tracking-[0.12em] text-ink-faint mt-4 mb-3">Proprioception · Movement-first drills · Low intensity</p>
+                <p class="text-sm-r text-ink-muted leading-relaxed">Learning what the positions feel like. Skills are introduced at low effort through movement-first drills — static holds, controlled weight shifts, and plyo ball work. The pitcher is not chasing velocity. They are building a proprioceptive map of how each movement should feel before any intensity is added.</p>
+              </div>
+            </details>
+
+            <!-- Phase 2 -->
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span class="font-display text-lg italic text-forest">Phase 2</span>
+                  <span class="text-base-r font-semibold text-ink">Stability &amp; Transfer</span>
+                  <span class="text-xs font-semibold uppercase tracking-[0.1em] text-rust bg-rust-pale px-3 py-1 rounded-full whitespace-nowrap">Effort Band 2 · 50–70%</span>
+                </span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-xs-r font-semibold uppercase tracking-[0.12em] text-ink-faint mt-4 mb-3">Load · Rotational demand · Repeatability</p>
+                <p class="text-sm-r text-ink-muted leading-relaxed">Can they hold it under load? Skills are reinforced with increased effort and rotational demand. Flat-ground and mound throwing with constraint focus. The question shifts from "can they do it?" to "can they repeat it?" Advancement requires demonstrated stability — not just attendance.</p>
+              </div>
+            </details>
+
+            <!-- Phase 3 -->
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span class="font-display text-lg italic text-forest">Phase 3</span>
+                  <span class="text-base-r font-semibold text-ink">Command &amp; Intent Development</span>
+                  <span class="text-xs font-semibold uppercase tracking-[0.1em] text-rust bg-rust-pale px-3 py-1 rounded-full whitespace-nowrap">Effort Band 3 · 70–85%</span>
+                </span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-xs-r font-semibold uppercase tracking-[0.12em] text-ink-faint mt-4 mb-3">Mound work · Quadrant targeting · Sequencing</p>
+                <p class="text-sm-r text-ink-muted leading-relaxed">Mechanics meet purpose. Full mound work with quadrant targeting, effort ladders, and pitch-to-pitch sequencing. The pitcher must maintain their trained patterns while commanding the ball to specific locations. Self-assessment and internal awareness become primary training tools.</p>
+              </div>
+            </details>
+
+            <!-- Phase 4 -->
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                  <span class="font-display text-lg italic text-forest">Phase 4</span>
+                  <span class="text-base-r font-semibold text-ink">Competitive Integration</span>
+                  <span class="text-xs font-semibold uppercase tracking-[0.1em] text-rust bg-rust-pale px-3 py-1 rounded-full whitespace-nowrap">Effort Band 4 · 85%+</span>
+                </span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-xs-r font-semibold uppercase tracking-[0.12em] text-ink-faint mt-4 mb-3">Game conditions · Pressure · Fatigue</p>
+                <p class="text-sm-r text-ink-muted leading-relaxed">Everything under game conditions. Competitive bullpens, hitter scenarios, and pitch sequencing at game speed. The pitcher proves that trained patterns survive pressure, fatigue, and the cognitive load of real competition. This phase is earned, never rushed.</p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 18 SKILLS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-white" id="skills">
+        <div class="max-w-default mx-auto px-5 lg:px-12">
+          <div class="max-w-[640px] mb-8">
+            <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">The Framework</p>
+            <h2 class="font-display text-2xl-r text-ink leading-tight mb-5">18 skills. 4 categories. Every phase.</h2>
+            <p class="text-base-r text-ink-muted leading-relaxed mb-4">
+              The same eighteen mechanical skills are trained at every phase — only the effort, complexity, and integration change. A pitcher in Phase 1 and a pitcher in Phase 4 are both working on Front-Leg Stability; they are simply training it under different conditions.
+            </p>
+            <p class="text-base-r text-ink-muted leading-relaxed">
+              The four categories are also the curriculum's subphases: a pitcher works through Subphase A, B, C, and D within a phase.
+            </p>
+          </div>
+
+          <div class="bg-cream-warm border border-cream-dark rounded-xl p-5 lg:p-6 mb-10">
+            <p class="text-sm-r text-ink-muted leading-relaxed"><strong class="text-ink font-semibold">About the sample drills below.</strong> Where a skill shows drills, those are published samples drawn from Subphase A and Subphase C at Phase 1 and Phase 3 — the same sample the curriculum guide publishes. Skills in categories B and D are trained in every phase, but their drill lists are not part of the published sample.</p>
+          </div>
+
+          <!-- Category A -->
+          <h3 class="font-display text-xl-r text-ink leading-tight mb-1">A · Lower Body &amp; Force Transfer</h3>
+          <p class="text-sm-r text-ink-faint mb-4">Five skills · A1–A5</p>
+          <div class="space-y-3 mb-12">
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">A1</span>Front-Leg Stability</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Front-Leg Post Hold · Walk-In Plyo Ball Throw to Freeze · Flat-Ground Controlled Throw with Freeze · Self-Assessment Rep</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Step-Behind to Brace Throw · Stretch Delivery to Called Quadrant · Three-Pitch Intent Ladders (70 → 78 → 85%)</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">A2</span>Drive Leg Extension</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Wall Press Drive-Leg Extension · Drive-Leg Load &amp; Hover · Flat-Ground Throw with Drive-Leg Focus · "Best Rep" Identification</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Half-Kneeling PlyoCare Throws · Half-Foam Roller Drive-Leg Push-Off · PlyoCare Rocker &amp; Step-Behind Throws · Mound Fastballs to Quadrant Targets · Mound Fastballs with Self-Called Locations</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">A3</span>Hip-to-Shoulder Separation</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Seated Trunk Rotation · Standing Separation Walk-Through · Rocker PlyoCare Pivot Throw · Step-Behind PlyoCare Throw</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Walk-In PlyoCare Pivot Pickoff · Rocker Throws with Separation Hold · Mound Delivery with "Hips First" Checkpoint · Targeted Four-Quadrant Fastballs · Three-Pitch Sequences</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">A4</span>Pelvic Rotation</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Wall-Supported Stride-to-Hip-Turn · Partner Mirror Drill · Rocker Throw with Hip-Lead Focus · Pivot Pickoff with Pelvic Emphasis</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Step-and-Brace Pelvic Rotation · Crow-Hop Throws with Pelvic Timing · Mound Fastball Command Series · Three-Pitch Sequencing Challenge</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">A5</span>Stride Direction &amp; Momentum</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Stride-Only Delivery Reps · Stride-to-Target with Guided Hip Lead · Plyo Ball Step-and-Throw to Line · Regulation Baseball Stride-and-Throw</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Corridor Stride Throws · Mound Corridor Throws with Half-Zone Targeting · Sequenced Quadrant Command with Internalized Stride Corridor</p>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <!-- Category B -->
+          <h3 class="font-display text-xl-r text-ink leading-tight mb-1">B · Arm Action &amp; Upper Body</h3>
+          <p class="text-sm-r text-ink-faint mb-4">Five skills · B1–B5</p>
+          <div class="space-y-3 mb-12">
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">B1</span>Arm Path &amp; Hand Break Timing</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Stationary Hand Break to Arm Spiral · Set-Position Partner Throw · Walk-In Throw with Hand Break Focus · Rocker Throw with Timing Cadence</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Standing Hand Break Drill with Plyo Ball · Rocker Throw Timing Anchor · Stretch Delivery with Tempo Variation · Mound Throws to Called Quadrants</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">B2</span>Scapular Loading</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Prone Scapular Retraction Holds · Wall Lean Scap-Load Isometric · Pivot-Pick Scap-Load Throws · Flat-Ground Delivery with Scap-Load Self-Check</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Rocker Throws with Heavy PlyoCare Ball · Pivot Pickoff Throws · Flat-Ground Quadrant Targets · Mound Throws with Pre-Called Sequences</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">B3</span>External Rotation &amp; Layback</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Seated PVC Pipe Layback Exploration · Prone 90/90 External Rotation with Plyo Ball · Walk-In Stride and Freeze · Flat-Ground Throw with Self-Check</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Plyo Ball Rocker Throws with Pause at Foot Strike · Plyo Ball Shuffle Throws with Layback Emphasis · Flat-Ground Targeted Throws with Self-Assessment · Mound Command Series</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">B4</span>Arm Acceleration &amp; Internal Rotation</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Seated Plyo Ball Pronation Tosses · Kneeling Internal Rotation Throws · Rocker Throws with Pronation Focus · Pivot Pick-Off Throws</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Pivot Pickoff Plyo Ball Throws · Step-Behind Plyo Ball Throws · Walk-In Throws with Acceleration Focus · Quadrant Mapping from the Mound</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">B5</span>Glove-Side Control &amp; Deceleration</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Mirror Glove-Arm Mapping · Kneeling Throws with Glove Tuck · Flat-Ground Throws with Glove Tuck Constraint · Plyo Ball Deceleration Focus</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Rocker Throws with Glove-Side Hold · Deceleration Check Reps · Mound Fastballs to Called Locations · Deceleration-Focused Finish Pitches</p>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <!-- Category C -->
+          <h3 class="font-display text-xl-r text-ink leading-tight mb-1">C · Sequencing &amp; Full-Body Integration</h3>
+          <p class="text-sm-r text-ink-faint mb-4">Four skills · C1–C4</p>
+          <div class="space-y-3 mb-12">
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">C1</span>Hip-to-Shoulder Separation Timing</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Medicine Ball Load-and-Hold · Standing Separation Drill · Pivot Pickoff with Separation Focus · Rocker Throw with Separation Focus</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Step-Behind Rocker Throw · Band-Resisted Trunk Rotation · PlyoCare Step-Back with Verbal Timing Call · Tempo-Varied Delivery · Mound Separation-to-Spot · 3-and-3 Challenge</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">C2</span>Arm Timing Relative to Hip Rotation</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Wall Hip Rotation with Passive Arm · Rocker Hip Rotation · Step-Behind Throw with Pause · Hip-Tap Throw</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Seated Rotational Throw · Walking Wind-Up to Hip Stall · Full Delivery with Timing Self-Rating · Mound Throws with Quadrant Targeting · Three-Pitch Sequence with Intent Hold</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">C3</span>Trunk Tilt &amp; Forward Flexion</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Wall-Guided Lateral Trunk Tilt · PVC Pipe Forward Flexion Hinge · Tall Kneeling Throws · Split-Stance Throws · Partner Freeze-Frame</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Rocker PlyoCare with Trunk Bias · Step-Behind with Forward Flexion Focus · Targeted Mound Throws — Glove Side Low / Arm Side Low · Challenge Round — 5 of 8</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">C4</span>Balance Point &amp; Rocker Mechanics</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Static Balance-Point Hold · Eyes-Closed Balance-Point Hold · Walk-Through Rocker to Balance · Rocker to Balance on 2×4 Board · Rocker-to-Balance-to-Toss</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Slow-Motion Rocker Walk-Through with Pause · Rocker-to-Balance with Cone Touch · Mound Rocker "Rhythm Throws" · Quadrant Calling — "Pattern First, Location Second" · "3-in-a-Row" Challenge</p>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <!-- Category D -->
+          <h3 class="font-display text-xl-r text-ink leading-tight mb-1">D · Command &amp; Pitch Execution</h3>
+          <p class="text-sm-r text-ink-faint mb-4">Four skills · D1–D4</p>
+          <div class="space-y-3">
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">D1</span>Repeatable Release Point</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Wall-Facing Arm Path Trace · Towel Drill — Release Point Snap · Kneeling One-Knee Throw to Target · Full Flat-Ground Throw with Post-Release Freeze</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Plyo Ball Release Mapping · Heavy Plyo Ball Slot Reinforcement · Two-Quadrant Release-Point Matching · Called-Quadrant Sequences</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">D2</span>Rhythm &amp; Timing Consistency</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Full Delivery Walk-Through with Count · Counted Cadence Flat-Ground Throws · “Match the Feel” Delivery Reps</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Metronomic PlyoCare Rocker Throws · Stretch Delivery Tempo Sets from the Mound · Quadrant Command with Tempo Self-Score</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">D3</span>Mound Presence &amp; Intent Management</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Three-Tier Effort Throws (Flat Ground) · Mound Occupy and Deliver · Target Toss Challenge</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">“Effort Dial” Alternating Intent Series · “Blind Dial” Coach-Called Intent · “Recovery Pitch” Sequence · “Simulated At-Bat” Scored Sequence</p>
+                </div>
+              </div>
+            </details>
+
+            <details class="group bg-cream border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-4 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                <span><span class="text-rust font-bold tracking-[0.08em] mr-3">D4</span>Stretch vs. Windup Mechanics</span>
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-5 pt-0 border-t border-cream-dark">
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 1 sample drills · Effort Band 1 (30–50%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Windup Walk-Through with Freeze Points · Stretch Walk-Through with Freeze Points · Windup and Stretch Throws with Checkpoint Self-Report · Stretch-Windup Alternation Pairs</p>
+                </div>
+                <div class="mt-4">
+                  <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-1">Phase 3 sample drills · Effort Band 3 (70–85%)</div>
+                  <p class="text-sm-r text-ink-muted leading-relaxed">Stretch Cluster · Windup Cluster · Alternating Mode, Fixed Zone · Alternating Mode, Called Zones</p>
+                </div>
+              </div>
+            </details>
+
+          </div>
+
+          <p class="mt-10 text-base-r text-ink italic border-l-2 border-rust/40 bg-rust-pale/60 py-4 pl-5 pr-5 rounded-r-xl max-w-[64ch]">
+            "A pitcher may be placed into different phases for different skills based on their individual development — placement is per-skill, not per-pitcher."
+            <span class="block mt-2 not-italic text-xs font-semibold uppercase tracking-[0.15em] text-ink-faint">— On Placement</span>
+          </p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- THE PROCESS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-cream" id="process">
+        <div class="max-w-wide mx-auto px-5 lg:px-12">
+          <div class="max-w-[640px] mb-10">
+            <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">How It Works</p>
+            <h2 class="font-display text-2xl-r text-ink leading-tight mb-5">From assessment to advancement.</h2>
+            <p class="text-base-r text-ink-muted leading-relaxed">Every pitcher follows the same structured entry point. The system evaluates where they are, places them correctly, and builds from there.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+
+            <div class="bg-white border border-cream-dark rounded-2xl p-6 lg:p-8 fade-up">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="shrink-0 w-10 h-10 rounded-lg bg-forest-pale flex items-center justify-center text-forest font-display text-lg italic">1</div>
+                <h3 class="font-body text-lg-r font-bold text-ink">Assessment</h3>
+              </div>
+              <p class="text-sm-r text-ink-muted leading-relaxed mb-4">Every pitcher begins with a free, 90-minute in-person evaluation. It covers training history, pitch repertoire, a full warm-up with movement quality grading, and a flat-ground throwing observation. No one skips this step — it produces the starting point for everything that follows.</p>
+              <div class="text-xs font-bold uppercase tracking-[0.1em] text-forest mb-2">Four athleticism benchmarks</div>
+              <ul class="flex flex-col gap-1.5">
+                <li class="text-sm-r text-ink font-medium pl-4 relative"><span class="absolute left-0 text-forest">+</span>Broad jump</li>
+                <li class="text-sm-r text-ink font-medium pl-4 relative"><span class="absolute left-0 text-forest">+</span>Single-leg balance</li>
+                <li class="text-sm-r text-ink font-medium pl-4 relative"><span class="absolute left-0 text-forest">+</span>Rotational med ball throw</li>
+                <li class="text-sm-r text-ink font-medium pl-4 relative"><span class="absolute left-0 text-forest">+</span>10-yard acceleration</li>
+              </ul>
+            </div>
+
+            <div class="bg-white border border-cream-dark rounded-2xl p-6 lg:p-8 fade-up">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="shrink-0 w-10 h-10 rounded-lg bg-forest-pale flex items-center justify-center text-forest font-display text-lg italic">2</div>
+                <h3 class="font-body text-lg-r font-bold text-ink">Placement</h3>
+              </div>
+              <p class="text-sm-r text-ink-muted leading-relaxed mb-4">Based on the assessment, the pitcher is placed into the right phase and subphase. Effort bands are assigned using the pitcher's recent representative maximum throwing velocity — <strong class="text-ink font-semibold">not age, not experience, and not what a parent reports on the phone.</strong></p>
+              <p class="text-sm-r text-ink-muted leading-relaxed">The coach manages placement using observable signals: movement quality at current effort, effort awareness, recent throwing exposure, and recovery feedback. A pitcher may be placed into different phases for different skills.</p>
+            </div>
+
+            <div class="bg-white border border-cream-dark rounded-2xl p-6 lg:p-8 fade-up">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="shrink-0 w-10 h-10 rounded-lg bg-forest-pale flex items-center justify-center text-forest font-display text-lg italic">3</div>
+                <h3 class="font-body text-lg-r font-bold text-ink">Reserved Weekly Training</h3>
+              </div>
+              <p class="text-sm-r text-ink-muted leading-relaxed">Training times are assigned in advance — no weekly booking, no scrambling for availability. Sessions can take place at our facility or, for Hybrid members, the coach comes to the pitcher's home, park, or field. The schedule is built around your family, not the other way around.</p>
+            </div>
+
+            <div class="bg-white border border-cream-dark rounded-2xl p-6 lg:p-8 fade-up">
+              <div class="flex items-center gap-4 mb-4">
+                <div class="shrink-0 w-10 h-10 rounded-lg bg-forest-pale flex items-center justify-center text-forest font-display text-lg italic">4</div>
+                <h3 class="font-body text-lg-r font-bold text-ink">Advance When Ready</h3>
+              </div>
+              <p class="text-sm-r text-ink-muted leading-relaxed">No pitcher moves to the next phase just by attending. <strong class="text-ink font-semibold">Advancement is earned</strong> by demonstrating the ability to perform and repeat what's being trained. The coach signs off; the pitcher progresses.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- INCLUDED CLASSES -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-white" id="classes">
+        <div class="max-w-wide mx-auto px-5 lg:px-12">
+          <div class="max-w-[640px] mb-10">
+            <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">Included Classes</p>
+            <h2 class="font-display text-2xl-r text-ink leading-tight mb-5">Beyond mechanics.</h2>
+            <p class="text-base-r text-ink-muted leading-relaxed">The game doesn't stop when the pitch crosses the plate. Two classes cover the parts of pitching that don't show up in a velocity reading — included free for Foundations members.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+
+            <div class="bg-cream rounded-2xl p-6 lg:p-8 fade-up">
+              <div class="flex items-baseline gap-3 mb-3">
+                <span class="font-display text-lg italic text-forest">Class 01</span>
+                <span class="text-xs font-semibold text-rust uppercase tracking-wide bg-rust-pale px-2 py-0.5 rounded-full">Pitch Design</span>
+              </div>
+              <h3 class="font-display text-xl-r text-ink leading-tight mb-2">Sequencing &amp; Mix Creation</h3>
+              <p class="text-sm-r text-ink-muted leading-relaxed mb-4">How to build a pitch mix that works in sequence, not just individually. Pitchers learn to think like pitchers instead of just throwing harder.</p>
+              <ul class="flex flex-col gap-2">
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Sequence pitches to create deception and tunnel effectively</li>
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Build a mix around your actual stuff, not a template</li>
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Make smarter count-based decisions</li>
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Read hitters and adjust mid-outing</li>
+              </ul>
+            </div>
+
+            <div class="bg-cream rounded-2xl p-6 lg:p-8 fade-up">
+              <div class="flex items-baseline gap-3 mb-3">
+                <span class="font-display text-lg italic text-forest">Class 02</span>
+                <span class="text-xs font-semibold text-rust uppercase tracking-wide bg-rust-pale px-2 py-0.5 rounded-full">Complete Pitcher</span>
+              </div>
+              <h3 class="font-display text-xl-r text-ink leading-tight mb-2">Beyond the Pitch</h3>
+              <p class="text-sm-r text-ink-muted leading-relaxed mb-4">Everything a pitcher is responsible for that doesn't show up in a velocity reading.</p>
+              <ul class="flex flex-col gap-2">
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Pickoff mechanics and holding runners</li>
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Backup responsibilities on throws and wild pitches</li>
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Fielding your position — PFPs and game situations</li>
+                <li class="text-sm-r text-ink-muted pl-4 relative"><span class="absolute left-0 text-forest">+</span>Communicating with your catcher and infield</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 border-t border-cream-dark pt-8">
+            <div>
+              <div class="text-xs font-bold uppercase tracking-[0.15em] text-ink-faint mb-2">Cadence</div>
+              <p class="text-sm-r text-ink-muted leading-relaxed">Classes run on a rolling schedule throughout the year. Members attend at any cadence that fits their training week.</p>
+            </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-[0.15em] text-ink-faint mb-2">Format</div>
+              <p class="text-sm-r text-ink-muted leading-relaxed">Small-group instruction at the TAP Athletes facility. Whiteboard work, video review, and live application on the mound.</p>
+            </div>
+            <div>
+              <div class="text-xs font-bold uppercase tracking-[0.15em] text-ink-faint mb-2">Cost</div>
+              <p class="text-sm-r text-ink-muted leading-relaxed">Included free with the Standard or Hybrid Foundations plan. No additional fee, no à-la-carte add-ons.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- COMMON QUESTIONS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-cream" id="questions">
+        <div class="max-w-default mx-auto px-5 lg:px-12">
+          <div class="max-w-[640px] mb-10">
+            <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">Common Questions</p>
+            <h2 class="font-display text-2xl-r text-ink leading-tight">About the curriculum.</h2>
+          </div>
+
+          <div class="space-y-3">
+
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                What is an effort band?
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-sm-r text-ink-muted leading-relaxed mt-4">An effort band is a defined range of throwing intensity, expressed as a percentage of the pitcher's recent representative maximum. Foundations uses four: Band 1 at 30–50%, Band 2 at 50–70%, Band 3 at 70–85%, and Band 4 at 85% and above. Each mechanical phase is bound to one band, so a pitcher's training intensity is defined by where they are in the curriculum.</p>
+              </div>
+            </details>
+
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                Does my pitcher's age determine their phase?
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-sm-r text-ink-muted leading-relaxed mt-4">No. Phases describe what the pitcher is working on — not their age or experience level. All new pitchers begin in Phase 1, regardless of background. Effort bands are assigned from the pitcher's recent representative maximum throwing velocity, not age, not experience, and not a parent's report.</p>
+              </div>
+            </details>
+
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                How does a pitcher advance to the next phase?
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-sm-r text-ink-muted leading-relaxed mt-4">By demonstrating the ability to perform and repeat what's being trained. No pitcher moves to the next phase just by attending. Advancement is earned, and the coach signs off before the pitcher progresses.</p>
+              </div>
+            </details>
+
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                Can a pitcher be in two phases at once?
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-sm-r text-ink-muted leading-relaxed mt-4">Yes. Placement is per-skill, not per-pitcher. A pitcher may be placed into different phases for different skills based on their individual development — for example, further along in lower-body force transfer than in command.</p>
+              </div>
+            </details>
+
+            <details class="group bg-white border border-cream-dark rounded-xl">
+              <summary class="cursor-pointer select-none flex items-center justify-between gap-4 px-6 py-5 text-base-r font-semibold text-ink hover:text-forest transition-colors list-none [&::-webkit-details-marker]:hidden">
+                Who is the Foundations curriculum for?
+                <svg class="w-4 h-4 text-ink-light transition-transform duration-200 group-open:rotate-180 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </summary>
+              <div class="px-6 pb-6 pt-0 border-t border-cream-dark">
+                <p class="text-sm-r text-ink-muted leading-relaxed mt-4">Pitchers ages 8 and up, at any experience level, training at TAP Athletes in Rogers, Arkansas. Foundations Prep is a one-month entry point for younger pitchers, beginners, or families new to structured training, aimed at ages 8–12.</p>
+              </div>
+            </details>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- ENROLLMENT / CTA -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section class="py-16 lg:py-24 bg-white" id="enrollment">
+        <div class="max-w-wide mx-auto px-5 lg:px-12">
+          <div class="max-w-[640px] mb-10">
+            <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest mb-4">Training Inside the Curriculum</p>
+            <h2 class="font-display text-2xl-r text-ink leading-tight mb-5">Two formats. Same progression.</h2>
+            <p class="text-base-r text-ink-muted leading-relaxed">Both options begin with the free in-person assessment and follow this same curriculum. The only difference is where training happens.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5 items-start">
+            <div class="bg-cream border border-cream-dark rounded-2xl p-6 lg:p-8 fade-up">
+              <span class="inline-block text-xs font-semibold uppercase tracking-[0.1em] text-ink-muted mb-2">Standard</span>
+              <h3 class="font-display text-xl-r italic text-ink mb-3">All-Facility</h3>
+              <p class="text-sm-r text-ink-muted leading-relaxed mb-4">Every session at the TAP Athletes facility. Full access to equipment and a controlled training environment. Classes included free.</p>
+              <div class="pt-4 border-t border-cream-dark">
+                <span class="font-display text-2xl-r italic text-ink">$510</span>
+                <span class="text-sm-r text-ink-muted">/month</span>
+              </div>
+            </div>
+            <div class="bg-cream border border-cream-dark rounded-2xl p-6 lg:p-8 fade-up">
+              <span class="inline-block text-xs font-semibold uppercase tracking-[0.1em] text-forest mb-2">Flexible</span>
+              <h3 class="font-display text-xl-r italic text-ink mb-3">Hybrid</h3>
+              <p class="text-sm-r text-ink-muted leading-relaxed mb-4">Facility sessions plus up to 4 on-site visits per month — the coach comes to the pitcher's home, park, or field. Same progression, no gaps.</p>
+              <div class="pt-4 border-t border-cream-dark">
+                <span class="font-display text-2xl-r italic text-ink">$600</span>
+                <span class="text-sm-r text-ink-muted">/month</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-cream border border-cream-dark rounded-2xl p-6 lg:p-8">
+            <div class="flex flex-wrap items-center gap-3 mb-3">
+              <span class="inline-block text-xs font-semibold uppercase tracking-[0.1em] text-forest bg-forest-pale px-3 py-1 rounded-full">Introductory</span>
+              <h3 class="font-display text-xl-r italic text-ink">Foundations Prep</h3>
+            </div>
+            <p class="text-sm-r text-ink-muted leading-relaxed max-w-[56ch]">A one-month entry point for younger pitchers, beginners, or families new to structured training. Two 30-minute sessions per week, ideal for ages 8–12. After one month, pitchers transition into the full program.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOSING CTA -->
+      <section class="py-16 lg:py-24 bg-forest" id="closing">
+        <div class="max-w-default mx-auto px-5 lg:px-12 text-center">
+          <h2 class="font-display text-2xl-r italic text-white leading-tight mb-4">Start where the curriculum starts.</h2>
+          <p class="text-base-r text-white/65 leading-relaxed mb-8 max-w-[52ch] mx-auto">Enrollment begins with a free 90-minute in-person assessment at our Rogers, Arkansas facility. It produces the placement that everything on this page builds from.</p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href="/foundations#enrollment" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-white text-forest hover:bg-cream transition-all hover:-translate-y-px hover:shadow-medium">Enroll in Foundations</a>
+            <a href="/foundations/" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-transparent text-white border border-white/30 hover:border-white/60 transition-all">See the program</a>
+          </div>
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- FOOTER -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <footer class="bg-ink px-5 lg:px-12 py-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
+    <div class="text-sm font-bold text-white/80 tracking-tight">TAP Athletes</div>
+    <div class="flex flex-wrap gap-6">
+      <a href="tel:+18338602711" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Contact</a>
+      <a href="https://tapathletes.com/#programs" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Programs</a>
+      <a href="/foundations/" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Foundations</a>
+      <a href="#questions" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Questions</a>
+    </div>
+    <div class="text-xs text-white/25 lg:text-right leading-relaxed">
+      1751 S 1st Street, Rogers, AR 72758<br>
+      <a href="tel:+18338602711" class="hover:text-white/50 transition-colors">(833) 860-2711</a> · <a href="mailto:support@tapathletes.com" class="hover:text-white/50 transition-colors">support@tapathletes.com</a>
+    </div>
+  </footer>
+
+  <script>
+(function(){
+  'use strict';
+
+  // Header shadow
+  const header = document.getElementById('site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('shadow-soft', window.scrollY > 20);
+    }, { passive: true });
+  }
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  if (menuBtn && mobileNav) {
+    menuBtn.addEventListener('click', () => {
+      const isOpen = mobileNav.classList.toggle('!flex');
+      mobileNav.classList.toggle('hidden', !isOpen);
+      menuBtn.setAttribute('aria-expanded', isOpen);
+      mobileNav.setAttribute('aria-hidden', !isOpen);
+    });
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileNav.classList.remove('!flex');
+        mobileNav.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        mobileNav.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
+  // Scroll reveal
+  const fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const siblings = Array.from(entry.target.parentElement.children).filter(el => el.classList.contains('fade-up'));
+          const delay = siblings.indexOf(entry.target) * 80;
+          setTimeout(() => entry.target.classList.add('visible'), delay);
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+    fadeEls.forEach(el => obs.observe(el));
+  } else {
+    fadeEls.forEach(el => el.classList.add('visible'));
+  }
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+})();
+  </script>
+</body>
+</html>

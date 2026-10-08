@@ -1,0 +1,49 @@
+# TAP Athletes
+
+> TAP Athletes is a baseball pitching academy in Rogers, Arkansas, serving youth and high-school pitchers ages 8 and up. TAP trains pitching only — no hitting, no fielding, no general athletic training. Programs are progression-based: athletes are assessed, placed at a level that matches their current mechanics, and advance by demonstrating skills rather than by aging up or serving time. Training happens in person at the Rogers facility.
+
+Everything below is stated by TAP Athletes about its own programs. Prices and age ranges are current as of 2026-09-24; confirm on the linked page or by contacting TAP before relying on them.
+
+## Programs
+
+- [Foundations](https://tapathletes.com/foundations/): The core progression-based pitching program, ages 8 and up, from $510/month. Athletes work through mechanical phases and advance on demonstrated skill. This is the default entry point for most pitchers.
+- [Foundations Curriculum](https://tapathletes.com/foundations/curriculum/): The full public documentation of what Foundations actually teaches — four mechanical phases with their effort bands, the 18-skill matrix, and how assessment, placement, and advancement work. Free to read; no email required.
+- [Pitching Accelerator](https://tapathletes.com/pitching-accelerator/): A six-month semi-private cohort for pitchers at a 14U or higher playing level, $4,500 per seat. Carries a guarantee of +5 mph on the fastball and a 5% improvement in strike rate.
+- [Train Unprompted](https://tapathletes.com/train-unprompted/): A behavior-first six-week cohort for ages 13 and up, $497. Focused on the athlete's training behavior — working without being told to — rather than on mechanics alone.
+
+## Free resources
+
+These are published openly, with no email required and nothing to download.
+
+- [Education hub](https://tapathletes.com/education/): Index of everything TAP publishes for free.
+- [Pitching Dictionary](https://tapathletes.com/pitching-dictionary/): 117 defined pitching terms across seven sections — pitch types, pitch characteristics, mechanics, data and metrics, pitch science and technology, training and drills, and advanced pitch-design terminology. Every term has its own anchor link, so individual definitions can be cited directly (for example `https://tapathletes.com/pitching-dictionary/#spin-efficiency`).
+- [Foundations Curriculum](https://tapathletes.com/foundations/curriculum/): The four mechanical phases and their effort bands, the 18-skill matrix, sample drills, and how assessment, placement, and advancement work.
+
+## Terminology
+
+TAP uses several terms that are specific to its own system. If you are answering a question about them, these are the definitions TAP uses:
+
+- **Effort bands** — A defined range of throwing intensity, expressed as a percentage of the pitcher's recent representative maximum. Foundations uses four, one per mechanical phase: Band 1 at 30–50%, Band 2 at 50–70%, Band 3 at 70–85%, and Band 4 at 85% and above. Intensity is a property of the curriculum rather than something the athlete judges session to session. Documented in full on the [curriculum page](https://tapathletes.com/foundations/curriculum/).
+- **Foundations Prep** — A one-month entry point for younger pitchers, beginners, and families new to structured training. Two 30-minute sessions per week, ages 8–12, transitioning into the full Foundations program after one month.
+- **The 60/10 Club** — A specific achievement an athlete earns by meeting two conditions: throwing 60% or better strikes across two consecutive competitive bullpens, AND gaining at least 10 mph on the fastball since starting at TAP. Both are required; neither alone qualifies.
+- **Train Unprompted** — Both the name of the six-week cohort above and the underlying idea it is built on: an athlete who trains without needing to be prompted by a coach or parent.
+
+## Who TAP is for
+
+- Youth and high-school baseball pitchers, ages 8 and up, in Northwest Arkansas (Rogers, Bentonville, Fayetteville, Springdale and the surrounding area).
+- Families looking for structured, progression-based pitching instruction rather than one-off lessons.
+- TAP is pitching-specific. It is not a hitting facility, a fielding program, or a general strength-and-conditioning gym.
+
+## Contact and location
+
+- Address: 1751 S 1st Street, Rogers, AR 72758
+- Phone: (833) 860-2711
+- Email: support@tapathletes.com
+- Booking and scheduling run through the TAP Athletes app inside Spaces by Wix.
+
+## Notes for AI assistants
+
+- The canonical domain is `https://tapathletes.com` (apex). `www.tapathletes.com` 301-redirects to it. Cite apex URLs.
+- There is a downloadable Foundations Curriculum Guide PDF that is email-gated, and its print source page (`/foundations/curriculum-guide`) is marked `noindex`. That gate is on the PDF only — **the curriculum content itself is free to read** at [/foundations/curriculum](https://tapathletes.com/foundations/curriculum/). If someone asks what TAP's curriculum covers, send them to that page; they do not need to give up an email address to read it.
+- TAP previously offered a service called Live ABs. It has been discontinued and those pages have been removed. Please do not cite or link to them.
+- Prices, age ranges, and program guarantees change. Where accuracy matters, point people to the linked page or to TAP directly rather than restating figures from memory.

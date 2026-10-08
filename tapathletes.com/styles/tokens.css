@@ -1,0 +1,186 @@
+/* ============================================================
+   TAP Athletes — Design Tokens
+   ============================================================
+   Single source of truth for color, type, spacing, and layout
+   primitives across the homepage.
+
+   Architecture:
+     1. Brand color primitives   — raw hex values, only here
+     2. Semantic color tokens    — what components consume
+     3. Type scale               — 7 steps, geometric
+     4. Spacing scale            — 8 steps, geometric
+     5. Layout                   — container, gutters
+     6. Effects                  — borders, shadows, motion
+
+   Open Props is loaded separately via <link> in index.html as
+   underlying scaffolding. Components do NOT reference Open Props
+   variables by name; they consume the tokens defined here.
+
+   Rules of the road:
+     - Components never use raw px or raw hex. Always reference a token.
+     - If you need a value the scale doesn't have, the scale is wrong —
+       fix the scale, don't bypass it.
+     - Primary section padding   = var(--section-pad-primary)
+       Secondary section padding = var(--section-pad-secondary)
+     - The hero is the only place --text-display appears.
+     - DO NOT introduce a serif. Hierarchy is scale, not font variety.
+   ============================================================ */
+
+:root {
+  /* ----------------------------------------------------------
+     1. Brand color primitives — raw values live ONLY here
+     ---------------------------------------------------------- */
+  --navy:        #1B2A4A;
+  --navy-dark:   #0E1A2E;
+  --navy-light:  #243558;
+  --blue:        #2E75B6;
+  --blue-light:  #4A90D9;
+  --green:       #548235;
+  --green-light: #6FA842;
+  --gold:        #B8922A;
+  --teal:        #2C5F7C;        /* Classes & Instruction accent — existing site value */
+  --white:       #FFFFFF;
+  --off-white:   #F5F4F0;
+  --gray-100:    #EDECEA;
+  --gray-200:    #D4D2CC;
+  --gray-600:    #4A4845;
+
+  /* Text ramp */
+  --text-1:      #0E1A2E;        /* primary type */
+  --text-2:      #4A4845;        /* secondary type */
+  --text-3:      #6E6B65;        /* faint type */
+  --text:        var(--text-1);  /* legacy alias — prefer --color-text */
+
+  /* ----------------------------------------------------------
+     2. Semantic color tokens — what components consume
+     ---------------------------------------------------------- */
+  --color-bg:            var(--white);
+  --color-bg-alt:        var(--off-white);
+  --color-bg-strong:     var(--navy);          /* reserved: 60/10, final CTA */
+  --color-bg-strong-2:   var(--navy-dark);     /* footer */
+
+  --color-text:          var(--text-1);
+  --color-text-muted:    var(--text-2);
+  --color-text-faint:    var(--text-3);
+  --color-text-on-dark:  var(--white);
+
+  --color-border:        var(--gray-100);
+  --color-border-strong: var(--gray-200);
+  --color-rule:          rgba(14, 26, 46, 0.08);
+
+  /* Program identity colors — accents only (top bars, link hovers,
+     badge borders). Never as large fills or section backgrounds. */
+  --color-accent-academy:     var(--blue);     /* Pitching Accelerator */
+  --color-accent-unprompted:  var(--gold);     /* Train Unprompted */
+  --color-accent-foundations: var(--green);    /* Foundations */
+  --color-accent-classes:     var(--teal);     /* Classes & Instruction */
+
+  --color-cta:           var(--navy);
+  --color-cta-hover:     var(--blue);
+  --color-link:          var(--blue);
+
+  /* ----------------------------------------------------------
+     3. Type scale — 7 steps, geometric
+     Stay inside this set. Hierarchy comes from scale, not from
+     font variety.
+     ---------------------------------------------------------- */
+  --text-display:    clamp(64px, 7vw, 112px);   /* hero headline only */
+  --text-h1:         clamp(44px, 5vw, 72px);    /* primary section titles (Overview, Programs) */
+  --text-h2:         clamp(28px, 3vw, 40px);    /* secondary section titles (App, 60/10, Classes, FAQ, Final CTA) */
+  --text-h3:         22px;                       /* card / tile titles */
+  --text-body-lead:  18px;                       /* hero sub, section leads */
+  --text-body:       15px;                       /* standard body */
+  --text-caption:    11px;                       /* eyebrows, labels, badges */
+
+  /* Line heights */
+  --leading-display: 0.92;
+  --leading-tight:   1.05;
+  --leading-snug:    1.35;
+  --leading-normal:  1.6;
+  --leading-loose:   1.72;
+
+  /* Letter spacing */
+  --tracking-display:  -0.01em;
+  --tracking-tight:    0.04em;
+  --tracking-caps:     0.08em;
+  --tracking-wide:     0.16em;
+  --tracking-eyebrow:  0.22em;
+
+  /* Measures — paragraph line-length control. Apply via max-width on
+     prose blocks so reading lines stay in the comfortable 50–75ch band. */
+  --measure-narrow:  52ch;
+  --measure-default: 64ch;
+  --measure-wide:    72ch;
+
+  /* Weights — Barlow / Barlow Condensed loaded set */
+  --weight-light:     300;
+  --weight-regular:   400;
+  --weight-medium:    500;
+  --weight-semibold:  600;
+  --weight-bold:      700;
+  --weight-extrabold: 800;
+  --weight-black:     900;
+
+  /* Font families — DO NOT introduce a serif. */
+  --font-sans:    'Barlow', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Barlow Condensed', 'Barlow', system-ui, sans-serif;
+
+  /* ----------------------------------------------------------
+     4. Spacing scale — 8 steps, geometric
+     Use these tokens. No raw px in margins/padding.
+     ---------------------------------------------------------- */
+  --space-4xs:   4px;     /* tight clusters (icon + label) */
+  --space-3xs:   8px;     /* related lines (label + value) */
+  --space-2xs:   12px;    /* cluster elements */
+  --space-xs:    20px;    /* distinct items in a list */
+  --space-sm:    32px;    /* paragraphs, card padding */
+  --space-md:    56px;    /* section header → content */
+  --space-lg:    96px;    /* primary section vertical padding */
+  --space-xl:    144px;   /* hero padding, dramatic breaks */
+
+  /* Section rhythm — drives the page hierarchy.
+     Primary sections breathe. Secondary sections punctuate. */
+  --section-pad-primary:    var(--space-lg);   /* Hero, Overview, Programs */
+  --section-pad-secondary:  var(--space-md);   /* App, 60/10, Classes, FAQ, Final CTA */
+  --section-pad-supporting: var(--space-sm);   /* tightest beats */
+
+  /* ----------------------------------------------------------
+     5. Layout
+     ---------------------------------------------------------- */
+  --container-max:    1120px;
+  --container-pad:    48px;       /* desktop edge gutter */
+  --container-pad-md: 24px;       /* tablet / mobile edge gutter */
+  --container-pad-sm: 20px;       /* small mobile edge gutter */
+
+  /* Anchor scroll offset — keeps section headings clear of the sticky
+     nav when an in-page link jumps to them. Apply via
+     html { scroll-padding-top: var(--scroll-padding); } in base.css. */
+  --scroll-padding:   80px;
+
+  /* ----------------------------------------------------------
+     6. Effects — radii, shadows, motion
+     IMG aesthetic favors hard edges. Use radii sparingly.
+     ---------------------------------------------------------- */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+
+  --shadow-sm: 0 2px 12px rgba(14, 26, 46, 0.06);
+  --shadow-md: 0 8px 32px rgba(14, 26, 46, 0.10);
+  --shadow-lg: 0 20px 60px rgba(14, 26, 46, 0.14);
+
+  --ease-out:       cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast:  0.15s;
+  --duration-base:  0.25s;
+  --duration-slow:  0.55s;
+}
+
+/* Reduced motion — neutralize durations without removing tokens,
+   so component CSS still composes cleanly. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0s;
+    --duration-base: 0s;
+    --duration-slow: 0s;
+  }
+}

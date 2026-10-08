@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="TAP Athletes">
+  <title>TAP Athletes</title>
+  <rect width="100" height="100" fill="#252424"/>
+  <!-- Diamond ring: outer diamond minus inner diamond, drawn with even-odd fill so the
+       stroke weight stays exact at every render size (no stroke scaling artefacts). -->
+  <path fill="#FFFFFF" fill-rule="evenodd"
+        d="M50 6 94 50 50 94 6 50Z
+           M50 12.4 87.6 50 50 87.6 12.4 50Z"/>
+  <!-- Home plate -->
+  <path fill="#FFFFFF"
+        d="M44.07 67.9H55.93V73.3L50 79.3 44.07 73.3Z"/>
+</svg>

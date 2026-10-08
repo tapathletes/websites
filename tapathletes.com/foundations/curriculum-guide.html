@@ -1,0 +1,1568 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Foundations — Curriculum Guide · TAP Athletes Pitching Academy</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --forest: #1B3D2F;
+    --rust: #C4501C;
+    --ink: #1A1A1A;
+    --body: #666666;
+    --mute: #999999;
+    --cream: #F8F8F6;
+    --rule: #D9D7CF;
+    --rule-soft: #E8E6DE;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: #EDEBE3;
+    color: var(--ink);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .doc {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 48px 0 96px;
+  }
+
+  .page {
+    background: var(--cream);
+    width: 100%;
+    min-height: calc(880px * 11 / 8.5);
+    padding: 72px 88px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 24px 48px -24px rgba(20,30,20,0.18);
+    margin-bottom: 36px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .page.cover {
+    height: calc(880px * 11 / 8.5);
+    min-height: 0;
+  }
+
+  /* ───────── Type ───────── */
+  h1, h2, h3, h4 { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; color: var(--ink); margin: 0; }
+  .display {
+    font-family: Georgia, serif;
+    font-size: 64px;
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .display em { color: var(--rust); font-style: italic; }
+  .heading-xl {
+    font-family: Georgia, serif;
+    font-size: 44px;
+    line-height: 1.05;
+    letter-spacing: -0.005em;
+  }
+  .heading-xl em { font-style: italic; color: var(--forest); }
+  .heading-lg {
+    font-family: Georgia, serif;
+    font-size: 32px;
+    line-height: 1.1;
+  }
+  .heading-lg em { font-style: italic; color: var(--rust); }
+  .heading-md {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+  .heading-md em { font-style: italic; color: var(--rust); }
+
+  .eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 500;
+  }
+  .eyebrow.rust { color: var(--rust); }
+  .eyebrow.mute { color: var(--mute); }
+
+  .micro {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mute);
+    font-weight: 500;
+  }
+
+  .body { color: var(--body); font-size: 13px; line-height: 1.7; }
+  .body p { margin: 0 0 12px; }
+  .body strong { color: var(--ink); font-weight: 500; }
+
+  .lede {
+    font-family: Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    font-weight: 400;
+  }
+  .lede em { color: var(--forest); font-style: italic; }
+
+  .mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.04em;
+    color: var(--forest);
+    font-weight: 500;
+  }
+  .mono.rust { color: var(--rust); }
+  .mono.mute { color: var(--mute); }
+
+  .rule { height: 1px; background: var(--rule); border: 0; margin: 0; }
+  .rule.soft { background: var(--rule-soft); }
+  .rule.dark { background: var(--ink); height: 2px; }
+  .rule.forest { background: var(--forest); height: 2px; }
+
+  /* ───────── Page chrome ───────── */
+  .page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 36px;
+  }
+  .page-head .left { display: flex; gap: 18px; align-items: baseline; }
+  .page-head .left .mark { color: var(--forest); }
+  .page-foot {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .pageno {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 13px;
+    color: var(--mute);
+  }
+
+  /* ───────── Brand mark ───────── */
+  .brandmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--forest);
+  }
+  .brandmark .dot {
+    width: 9px; height: 9px;
+    background: var(--rust);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .brandmark .pipe {
+    color: var(--mute);
+    font-weight: 300;
+    margin: 0 2px;
+  }
+
+  /* ───────── Cover ───────── */
+  .cover {
+    padding: 40px 88px 56px;
+    background: var(--cream);
+    position: relative;
+  }
+  .cover::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 88px; right: 88px;
+    height: 4px;
+    background: var(--forest);
+  }
+  .cover-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: calc(880px * 11 / 8.5 - 96px);
+    gap: 0;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-top: 14px;
+  }
+  .cover-title {
+    align-self: center;
+    padding: 0;
+  }
+  .cover-title .small-eye {
+    margin-bottom: 18px;
+  }
+  .cover-title .program {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: var(--rust);
+    font-style: italic;
+    letter-spacing: 0.01em;
+    margin-bottom: 4px;
+  }
+  .cover-title h1 {
+    font-family: Georgia, serif;
+    font-size: 92px;
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 400;
+  }
+  .cover-title h1 .sub {
+    display: block;
+    font-size: 84px;
+    line-height: 1.0;
+    color: var(--ink);
+    margin-top: 4px;
+    font-style: italic;
+    letter-spacing: -0.02em;
+  }
+  .cover-foot {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 32px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .cover-foot .col .micro { display: block; margin-bottom: 6px; }
+  .cover-foot .col p { margin: 0; font-size: 12.5px; color: var(--ink); line-height: 1.5; }
+  .cover-abstract {
+    max-width: 540px;
+    margin-top: 44px;
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--body);
+  }
+
+  .seal {
+    width: 96px; height: 96px;
+    border: 1.5px solid var(--forest);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    color: var(--forest);
+    font-family: Georgia, serif;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    position: relative;
+  }
+  .seal::before {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--forest);
+    border-radius: 50%;
+  }
+  .seal .yr {
+    font-style: italic;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    text-transform: none;
+    color: var(--rust);
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* ───────── Generic layouts ───────── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+  }
+  .two-col .label .micro { display: block; }
+  .three-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .section-head {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: end;
+    margin-bottom: 34px;
+  }
+  .section-head .heading-xl {
+    margin-top: 12px;
+  }
+
+  /* ───────── Phase cards ───────── */
+  .phase {
+    display: grid;
+    grid-template-columns: 88px 1fr 180px;
+    gap: 28px;
+    padding: 22px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .phase:last-of-type { border-bottom: 1px solid var(--rule); }
+  .phase .pnum {
+    font-family: Georgia, serif;
+    font-size: 44px;
+    line-height: 1;
+    color: var(--rust);
+    font-style: italic;
+  }
+  .phase .pnum small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+  .phase .ptitle {
+    font-family: Georgia, serif;
+    font-size: 19px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .phase .ptitle em { color: var(--forest); font-style: italic; }
+  .phase .pbody { font-size: 12.5px; color: var(--body); line-height: 1.6; }
+  .phase .pband {
+    text-align: right;
+  }
+  .pband .badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border: 1px solid var(--forest);
+    color: var(--forest);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+  }
+  .pband .pct {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--rust);
+    margin-top: 6px;
+    display: block;
+  }
+
+  /* ───────── Class cards ───────── */
+  .class-card {
+    border: 1px solid var(--rule);
+    padding: 22px 24px 24px;
+    background: #FBFBF8;
+  }
+  .class-card .ctag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--rust);
+    font-weight: 500;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .class-card .ctag::before {
+    content: "";
+    width: 18px; height: 1px; background: var(--rust);
+  }
+  .class-card h3 {
+    font-family: Georgia, serif;
+    font-size: 26px;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .class-card .csub {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--forest);
+    font-size: 14px;
+    margin-bottom: 14px;
+  }
+  .class-card .body { margin-bottom: 14px; font-size: 12.5px; }
+  .class-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule-soft);
+  }
+  .class-card li {
+    padding: 9px 0 9px 18px;
+    font-size: 12px;
+    color: var(--ink);
+    border-bottom: 1px solid var(--rule-soft);
+    position: relative;
+    line-height: 1.45;
+  }
+  .class-card li::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 16px;
+    width: 8px; height: 1px;
+    background: var(--rust);
+  }
+
+  /* ───────── Curriculum tables ───────── */
+  .phase-banner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: end;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--forest);
+    margin-bottom: 22px;
+  }
+  .phase-banner .num {
+    font-family: Georgia, serif;
+    font-size: 80px;
+    font-style: italic;
+    line-height: 0.85;
+    color: var(--rust);
+  }
+  .phase-banner .name {
+    font-family: Georgia, serif;
+    font-size: 28px;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .phase-banner .name em { color: var(--forest); font-style: italic; }
+  .phase-banner .meta {
+    text-align: right;
+    color: var(--forest);
+  }
+  .phase-banner .meta .mono { display: block; }
+  .phase-banner .meta .pct {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 22px;
+    color: var(--rust);
+    margin-top: 4px;
+  }
+
+  .subphase-title {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 22px 0 12px;
+  }
+  .subphase-title .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.08em;
+  }
+  .subphase-title .name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .subphase-title .line {
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .skill-row {
+    display: grid;
+    grid-template-columns: 36px 200px 1fr;
+    gap: 18px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule-soft);
+    align-items: baseline;
+  }
+  .skill-row:last-child { border-bottom: 0; }
+  .skill-row .id {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+    padding-top: 1px;
+  }
+  .skill-row .name {
+    font-family: Georgia, serif;
+    font-size: 14.5px;
+    color: var(--ink);
+    font-style: italic;
+    line-height: 1.3;
+  }
+  .skill-row .drills {
+    font-size: 11.5px;
+    color: var(--body);
+    line-height: 1.6;
+  }
+  .skill-row .drills .sep {
+    color: var(--mute);
+    margin: 0 6px;
+    font-weight: 400;
+  }
+
+  /* ───────── 18-skill matrix ───────── */
+  .matrix-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--ink);
+    border-left: 1px solid var(--rule);
+  }
+  .matrix-cat {
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 22px 24px 24px;
+    background: var(--cream);
+    position: relative;
+  }
+  .matrix-cat .head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 14px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .matrix-cat .letter {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--rust);
+  }
+  .matrix-cat .cname {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+  .matrix-cat ol {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .matrix-cat ol li {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-size: 13px;
+  }
+  .matrix-cat ol li:last-child { border-bottom: 0; }
+  .matrix-cat ol li .sk {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.05em;
+  }
+  .matrix-cat ol li .sn {
+    font-family: Georgia, serif;
+    color: var(--ink);
+    font-size: 14px;
+  }
+
+  /* ───────── Process steps ───────── */
+  .step {
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 36px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    align-items: start;
+  }
+  .step:last-of-type { border-bottom: 1px solid var(--rule); }
+  .step .num {
+    font-family: Georgia, serif;
+    font-size: 56px;
+    font-style: italic;
+    line-height: 0.9;
+    color: var(--forest);
+  }
+  .step .num small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 9.5px;
+    letter-spacing: 0.22em;
+    color: var(--mute);
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+  .step h3 {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .step h3 em { color: var(--rust); font-style: italic; }
+  .step .body { font-size: 12.5px; }
+
+  /* ───────── Enrollment cards ───────── */
+  .plans {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .plan {
+    border: 1px solid var(--rule);
+    padding: 26px 26px 28px;
+    background: #FBFBF8;
+    display: flex;
+    flex-direction: column;
+  }
+  .plan.featured {
+    border-color: var(--forest);
+    background: #FFFFFF;
+  }
+  .plan .ptag {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--forest);
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+  .plan.featured .ptag { color: var(--rust); }
+  .plan h3 {
+    font-family: Georgia, serif;
+    font-size: 30px;
+    line-height: 1.05;
+    margin-bottom: 4px;
+  }
+  .plan h3 em { color: var(--forest); font-style: italic; }
+  .plan .price {
+    font-family: Georgia, serif;
+    font-size: 24px;
+    color: var(--rust);
+    font-style: italic;
+    margin: 14px 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule-soft);
+  }
+  .plan .price small {
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    color: var(--mute);
+    letter-spacing: 0.04em;
+  }
+  .plan .body { font-size: 12.5px; margin-bottom: 16px; }
+  .plan ul {
+    list-style: none;
+    margin: 0; padding: 0;
+  }
+  .plan ul li {
+    padding: 7px 0 7px 22px;
+    font-size: 12px;
+    color: var(--ink);
+    position: relative;
+    line-height: 1.45;
+  }
+  .plan ul li::before {
+    content: "✓";
+    position: absolute;
+    left: 0; top: 7px;
+    color: var(--rust);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+  }
+
+  .intro-card {
+    border: 1px dashed var(--forest);
+    background: rgba(27, 61, 47, 0.03);
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 30px;
+    align-items: center;
+  }
+  .intro-card .left h3 {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .intro-card .left h3 em { color: var(--rust); font-style: italic; }
+  .intro-card .left .body { font-size: 12.5px; margin-bottom: 0; }
+  .intro-card .right {
+    text-align: right;
+    border-left: 1px solid var(--rule);
+    padding-left: 30px;
+    font-size: 11px;
+    color: var(--forest);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.8;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .contact-block {
+    margin-top: 36px;
+    padding-top: 24px;
+    border-top: 2px solid var(--forest);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+  .contact-block .org {
+    font-family: Georgia, serif;
+    font-size: 22px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .contact-block .org em { color: var(--rust); font-style: italic; }
+  .contact-block .body { font-size: 12px; line-height: 1.7; }
+  .contact-block .right { text-align: right; }
+  .contact-block .right .micro { display: block; margin-bottom: 8px; }
+  .contact-block .right .url {
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--forest);
+  }
+
+  /* ───────── Index / TOC strip ───────── */
+  .toc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 48px;
+    margin-top: 26px;
+  }
+  .toc .row {
+    display: grid;
+    grid-template-columns: 24px 1fr 28px;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px dotted var(--rule);
+    align-items: baseline;
+    font-size: 13px;
+  }
+  .toc .row .n {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--mute);
+  }
+  .toc .row .t {
+    font-family: Georgia, serif;
+    color: var(--ink);
+  }
+  .toc .row .p {
+    font-family: Georgia, serif;
+    font-style: italic;
+    color: var(--forest);
+    text-align: right;
+    font-size: 13px;
+  }
+
+  /* ───────── Pull quote / callout ───────── */
+  .pull {
+    margin: 26px 0 0;
+    padding: 18px 26px;
+    border-left: 2px solid var(--rust);
+    background: rgba(196, 80, 28, 0.04);
+    font-family: Georgia, serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .pull .attr {
+    display: block;
+    margin-top: 8px;
+    font-style: normal;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--mute);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    .doc { padding: 16px 0 48px; }
+    .page { padding: 32px 24px; min-height: auto; margin-bottom: 16px; }
+    .page.cover { height: auto; min-height: auto; padding: 32px 24px 40px; }
+    .cover::before { left: 24px; right: 24px; }
+    .cover-grid { min-height: auto; }
+    .cover-title h1 { font-size: 48px; }
+    .cover-title h1 .sub { font-size: 42px; margin-top: 4px; }
+    .cover-title .program { font-size: 16px; }
+    .cover-foot { grid-template-columns: 1fr; gap: 16px; }
+    .cover-foot .col:last-child { display: flex; justify-content: flex-start; }
+    .cover-abstract { margin-top: 24px; font-size: 14px; }
+    .seal { width: 72px; height: 72px; font-size: 8px; }
+    .seal .yr { font-size: 10px; }
+    .two-col { grid-template-columns: 1fr; gap: 16px; }
+    .three-col { grid-template-columns: 1fr; gap: 16px; }
+    .section-head { grid-template-columns: 1fr; gap: 12px; }
+    .heading-xl { font-size: 28px; }
+    .heading-lg { font-size: 24px; }
+    .heading-md { font-size: 18px; }
+    .display { font-size: 36px; }
+    .lede { font-size: 14px; }
+    .phase { grid-template-columns: 1fr; gap: 12px; }
+    .phase .pnum { font-size: 28px; display: flex; align-items: baseline; gap: 8px; }
+    .phase .pnum small { display: inline; margin-top: 0; margin-left: 8px; }
+    .phase .pband { text-align: left; display: flex; align-items: center; gap: 8px; }
+    .phase-banner { grid-template-columns: 1fr; gap: 8px; }
+    .phase-banner .num { font-size: 48px; }
+    .phase-banner .name { font-size: 20px; }
+    .phase-banner .meta { text-align: left; }
+    .skill-row { grid-template-columns: 36px 1fr; gap: 8px; }
+    .skill-row .name { font-size: 13px; }
+    .skill-row .drills { grid-column: 1 / -1; font-size: 10.5px; padding-left: 36px; }
+    .matrix-grid { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 1fr; gap: 8px; }
+    .step .num { font-size: 32px; display: flex; align-items: baseline; gap: 8px; }
+    .step .num small { display: inline; margin-top: 0; margin-left: 8px; }
+    .plans { grid-template-columns: 1fr; }
+    .intro-card { grid-template-columns: 1fr; gap: 16px; }
+    .intro-card .right { text-align: left; border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 12px; }
+    .contact-block { grid-template-columns: 1fr; gap: 16px; }
+    .contact-block .right { text-align: left; }
+    .toc { grid-template-columns: 1fr; }
+    .page-head { flex-wrap: wrap; gap: 4px; margin-bottom: 20px; }
+  }
+
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ COVER ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page cover" data-screen-label="01 Cover">
+    <div class="cover-grid">
+      <div class="cover-meta">
+        <div class="brandmark">
+          <span class="dot"></span>
+          <span>TAP Athletes</span>
+          <span class="pipe">|</span>
+          <span style="color:var(--rust)">Pitching Academy</span>
+        </div>
+        <div class="micro">Curriculum Guide</div>
+      </div>
+
+      <div class="cover-title">
+        <div class="small-eye eyebrow rust">Foundations Program · Ages 8 +</div>
+        <h1>
+          Foundations
+          <span class="sub">Curriculum Guide</span>
+        </h1>
+
+        <p class="cover-abstract">
+          A complete reference for what the program develops, how the four phases of mechanical
+          training work, and how to enroll. Built around <em>movement first</em>, governed
+          by effort bands, and earned phase by phase.
+        </p>
+      </div>
+
+      <div class="cover-foot">
+        <div class="col">
+          <span class="micro">Issued by</span>
+          <p>Training Athletic Performance, Inc.<br/>
+          1751 S 1st Street · Rogers, Arkansas 72758</p>
+        </div>
+        <div class="col">
+          <span class="micro">Reference</span>
+          <p>tapathletes.com/foundations</p>
+        </div>
+        <div class="col" style="display:flex;justify-content:flex-end;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ INSIDE COVER / TOC ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="02 Inside Cover">
+    <div class="page-head">
+      <div class="left">
+        <span class="brandmark"><span class="dot"></span><span>TAP</span><span class="pipe">|</span><span style="color:var(--rust)">Pitching Academy</span></span>
+      </div>
+      <span class="micro">Foundations · Curriculum Guide</span>
+    </div>
+
+    <div class="two-col">
+      <div class="label">
+        <span class="micro">§ 00</span>
+        <span class="eyebrow">About this Guide</span>
+      </div>
+      <div>
+        <h1 class="heading-xl">A structured, progression-based <em>pitching development program</em> for ages 8 and up.</h1>
+        <p class="lede" style="margin-top:22px;">
+          This guide is the academy's reference for parents, athletes, and coaches.
+          It covers what the program <em>develops</em>, how training is <em>placed and progressed</em>,
+          which classes are included, and the two enrollment formats.
+        </p>
+      </div>
+    </div>
+
+    <div style="margin-top:42px;">
+      <div class="phase-banner" style="border-bottom-color: var(--ink); padding-bottom:14px;">
+        <span class="mono rust">§ Contents</span>
+        <span class="name" style="font-size:22px;">In this <em>guide</em>.</span>
+        <span class="meta"><span class="mono mute">7 sections · 18 skills</span></span>
+      </div>
+
+      <div class="toc">
+        <div class="row"><span class="n">I.</span><span class="t">What We Develop — The Complete Pitcher</span><span class="p">03</span></div>
+        <div class="row"><span class="n">II.</span><span class="t">Included Classes — Pitch Design &amp; Complete Pitcher</span><span class="p">04</span></div>
+        <div class="row"><span class="n">III.</span><span class="t">Foundations Curriculum — Phase 1</span><span class="p">05</span></div>
+        <div class="row"><span class="n">IV.</span><span class="t">Foundations Curriculum — Phase 3</span><span class="p">06</span></div>
+        <div class="row"><span class="n">V.</span><span class="t">How the Curriculum Works — 18 Skills</span><span class="p">07</span></div>
+        <div class="row"><span class="n">VI.</span><span class="t">How It Works — The Process</span><span class="p">08</span></div>
+        <div class="row"><span class="n">VII.</span><span class="t">Enrollment — Standard &amp; Hybrid</span><span class="p">09</span></div>
+        <div class="row"><span class="n">—</span><span class="t">Contact &amp; Colophon</span><span class="p">09</span></div>
+      </div>
+
+      <div class="pull">
+        “Phases describe what the pitcher is working on — not their age or experience level.
+        All new pitchers begin in Phase 1, regardless of background.”
+        <span class="attr">— Foundations Methodology</span>
+      </div>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">tapathletes.com/foundations</span>
+      <span class="pageno">ii</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ I. WHAT WE DEVELOP ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="03 What We Develop">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ I</span>
+        <span class="eyebrow">What We Develop</span>
+      </div>
+      <span class="micro">Foundations Program</span>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:6px;">The Premise</span>
+        <span class="mono rust">Mechanics + Classes</span>
+      </div>
+      <h2 class="heading-xl">The <em>complete pitcher.</em></h2>
+    </div>
+
+    <div class="two-col" style="margin-bottom:36px;">
+      <div></div>
+      <p class="lede">
+        Foundations develops the whole pitcher through a structured mechanical curriculum, paired
+        with included classes covering <em>everything else the position demands</em> — pitch design,
+        game knowledge, and positional responsibilities.
+      </p>
+    </div>
+
+    <hr class="rule dark" />
+
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin:22px 0 6px;">
+      <span class="eyebrow">Mechanics — 4 Phases Governed by Effort Bands</span>
+      <span class="mono mute">phase ≠ age</span>
+    </div>
+    <p class="body" style="max-width:640px;margin-bottom:8px;">
+      Each phase corresponds to an <strong>effort band</strong> — a defined range of throwing intensity
+      expressed as a percentage of the pitcher's recent representative maximum. Phases describe
+      what the pitcher is <em style="color:var(--rust);font-style:italic;">working on</em>,
+      not their age or experience level.
+    </p>
+
+    <div style="margin-top:14px;">
+      <div class="phase">
+        <div class="pnum">01<small>Phase</small></div>
+        <div>
+          <div class="ptitle">Movement &amp; Throwing <em>Foundations</em></div>
+          <div class="pbody">Learning what the positions feel like. Skills are introduced at low effort through movement-first drills — static holds, controlled weight shifts, and plyo ball work. The pitcher is not chasing velocity. They are building a proprioceptive map of how each movement should feel before any intensity is added.</div>
+        </div>
+        <div class="pband">
+          <span class="badge">EFFORT BAND 1</span>
+          <span class="pct">30–50%</span>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="pnum">02<small>Phase</small></div>
+        <div>
+          <div class="ptitle">Stability &amp; <em>Transfer</em></div>
+          <div class="pbody">Can they hold it under load? Skills are reinforced with increased effort and rotational demand. Flat-ground and mound throwing with constraint focus. The question shifts from “can they do it?” to “can they repeat it?” Advancement requires demonstrated stability — not just attendance.</div>
+        </div>
+        <div class="pband">
+          <span class="badge">EFFORT BAND 2</span>
+          <span class="pct">50–70%</span>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="pnum">03<small>Phase</small></div>
+        <div>
+          <div class="ptitle">Command &amp; <em>Intent Development</em></div>
+          <div class="pbody">Mechanics meet purpose. Full mound work with quadrant targeting, effort ladders, and pitch-to-pitch sequencing. The pitcher must maintain their trained patterns while commanding the ball to specific locations. Self-assessment and internal awareness become primary training tools.</div>
+        </div>
+        <div class="pband">
+          <span class="badge">EFFORT BAND 3</span>
+          <span class="pct">70–85%</span>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="pnum">04<small>Phase</small></div>
+        <div>
+          <div class="ptitle">Competitive <em>Integration</em></div>
+          <div class="pbody">Everything under game conditions. Competitive bullpens, hitter scenarios, and pitch sequencing at game speed. The pitcher proves that trained patterns survive pressure, fatigue, and the cognitive load of real competition. This phase is earned, never rushed.</div>
+        </div>
+        <div class="pband">
+          <span class="badge">EFFORT BAND 4</span>
+          <span class="pct">85% +</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">I — What We Develop</span>
+      <span class="pageno">03</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ II. INCLUDED CLASSES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="04 Included Classes">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ II</span>
+        <span class="eyebrow">Included Classes</span>
+      </div>
+      <span class="micro">Beyond Mechanics</span>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:6px;">Included Free</span>
+        <span class="mono rust">2 classes · ongoing</span>
+      </div>
+      <h2 class="heading-xl">Beyond <em>mechanics.</em></h2>
+    </div>
+
+    <div class="two-col" style="margin-bottom:38px;">
+      <div></div>
+      <p class="lede">
+        The game doesn't stop when the pitch crosses the plate. Classes cover the parts of pitching
+        that don't show up in a velocity reading — <em>included free</em> for Foundations members.
+      </p>
+    </div>
+
+    <div class="three-col" style="grid-template-columns: 1fr 1fr; gap: 26px;">
+      <div class="class-card">
+        <div class="ctag">Class 01 · Pitch Design</div>
+        <h3>Sequencing &amp; Mix Creation</h3>
+        <div class="csub">— think like a pitcher, not a thrower.</div>
+        <p class="body">How to build a pitch mix that works in sequence, not just individually. Pitchers learn to think like pitchers instead of just throwing harder.</p>
+        <ul>
+          <li>Sequence pitches to create deception and tunnel effectively</li>
+          <li>Build a mix around your actual stuff, not a template</li>
+          <li>Make smarter count-based decisions</li>
+          <li>Read hitters and adjust mid-outing</li>
+        </ul>
+      </div>
+
+      <div class="class-card">
+        <div class="ctag">Class 02 · Complete Pitcher</div>
+        <h3>Beyond the Pitch</h3>
+        <div class="csub">— what a pitcher is responsible for, end to end.</div>
+        <p class="body">Everything a pitcher is responsible for that doesn't show up in a velocity reading.</p>
+        <ul>
+          <li>Pickoff mechanics and holding runners</li>
+          <li>Backup responsibilities on throws and wild pitches</li>
+          <li>Fielding your position — PFPs and game situations</li>
+          <li>Communicating with your catcher and infield</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pull" style="margin-top:36px;">
+      “Velocity is a number. Pitching is a craft. Classes exist so the pitcher leaves the
+      academy able to <em style="color:var(--rust);">do the job</em> — not just throw the ball.”
+      <span class="attr">— On the Role of Classes</span>
+    </div>
+
+    <div style="margin-top:30px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:8px;">Cadence</span>
+        <p class="body" style="margin:0;font-size:12px;">Classes run on a rolling schedule throughout the year. Members attend at any cadence that fits their training week.</p>
+      </div>
+      <div>
+        <span class="micro" style="display:block;margin-bottom:8px;">Format</span>
+        <p class="body" style="margin:0;font-size:12px;">Small-group instruction at the TAP Athletes facility. Whiteboard work, video review, and live application on the mound.</p>
+      </div>
+      <div>
+        <span class="micro" style="display:block;margin-bottom:8px;">Cost</span>
+        <p class="body" style="margin:0;font-size:12px;">Included free with Standard or Hybrid Foundations program. No additional fee, no à-la-carte add-ons.</p>
+      </div>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">II — Included Classes</span>
+      <span class="pageno">04</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ III. PHASE 1 CURRICULUM ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="05 Phase 1 Curriculum">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ III</span>
+        <span class="eyebrow">Foundations Curriculum</span>
+      </div>
+      <span class="micro">Phase 1 · Effort Band 1</span>
+    </div>
+
+    <div class="phase-banner">
+      <span class="num">01</span>
+      <div class="name">
+        <em>Movement</em> &amp; Throwing Foundations
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);font-style:normal;margin-top:6px;">Proprioception · Movement-First Drills · Low Intensity</div>
+      </div>
+      <div class="meta">
+        <span class="mono">EFFORT BAND 1</span>
+        <span class="pct">30 – 50%</span>
+      </div>
+    </div>
+
+    <div class="subphase-title">
+      <span class="tag">SUBPHASE A</span>
+      <span class="name">Lower Body &amp; Force Transfer</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="skill-row">
+      <span class="id">A1</span>
+      <span class="name">Front-Leg Stability</span>
+      <span class="drills">Front-Leg Post Hold <span class="sep">·</span> Walk-In Plyo Ball Throw to Freeze <span class="sep">·</span> Flat-Ground Controlled Throw with Freeze <span class="sep">·</span> Self-Assessment Rep</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A2</span>
+      <span class="name">Drive Leg Extension</span>
+      <span class="drills">Wall Press Drive-Leg Extension <span class="sep">·</span> Drive-Leg Load &amp; Hover <span class="sep">·</span> Flat-Ground Throw with Drive-Leg Focus <span class="sep">·</span> “Best Rep” Identification</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A3</span>
+      <span class="name">Hip-to-Shoulder Separation</span>
+      <span class="drills">Seated Trunk Rotation <span class="sep">·</span> Standing Separation Walk-Through <span class="sep">·</span> Rocker PlyoCare Pivot Throw <span class="sep">·</span> Step-Behind PlyoCare Throw</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A4</span>
+      <span class="name">Pelvic Rotation</span>
+      <span class="drills">Wall-Supported Stride-to-Hip-Turn <span class="sep">·</span> Partner Mirror Drill <span class="sep">·</span> Rocker Throw with Hip-Lead Focus <span class="sep">·</span> Pivot Pickoff with Pelvic Emphasis</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A5</span>
+      <span class="name">Stride Direction &amp; Momentum</span>
+      <span class="drills">Stride-Only Delivery Reps <span class="sep">·</span> Stride-to-Target with Guided Hip Lead <span class="sep">·</span> Plyo Ball Step-and-Throw to Line <span class="sep">·</span> Regulation Baseball Stride-and-Throw</span>
+    </div>
+
+    <div class="subphase-title">
+      <span class="tag">SUBPHASE C</span>
+      <span class="name">Sequencing &amp; Integration</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="skill-row">
+      <span class="id">C1</span>
+      <span class="name">Hip-to-Shoulder Separation Timing</span>
+      <span class="drills">Medicine Ball Load-and-Hold <span class="sep">·</span> Standing Separation Drill <span class="sep">·</span> Pivot Pickoff with Separation Focus <span class="sep">·</span> Rocker Throw with Separation Focus</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">C2</span>
+      <span class="name">Arm Timing Relative to Hip Rotation</span>
+      <span class="drills">Wall Hip Rotation with Passive Arm <span class="sep">·</span> Rocker Hip Rotation <span class="sep">·</span> Step-Behind Throw with Pause <span class="sep">·</span> Hip-Tap Throw</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">C3</span>
+      <span class="name">Trunk Tilt &amp; Forward Flexion</span>
+      <span class="drills">Wall-Guided Lateral Trunk Tilt <span class="sep">·</span> PVC Pipe Forward Flexion Hinge <span class="sep">·</span> Tall Kneeling Throws <span class="sep">·</span> Split-Stance Throws <span class="sep">·</span> Partner Freeze-Frame</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">C4</span>
+      <span class="name">Balance Point &amp; Rocker Mechanics</span>
+      <span class="drills">Static Balance-Point Hold <span class="sep">·</span> Eyes-Closed Balance-Point Hold <span class="sep">·</span> Walk-Through Rocker to Balance <span class="sep">·</span> Rocker to Balance on 2×4 Board <span class="sep">·</span> Rocker-to-Balance-to-Toss</span>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">III — Foundations Curriculum · Phase 1</span>
+      <span class="pageno">05</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ IV. PHASE 3 CURRICULUM ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="06 Phase 3 Curriculum">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ IV</span>
+        <span class="eyebrow">Foundations Curriculum</span>
+      </div>
+      <span class="micro">Phase 3 · Effort Band 3</span>
+    </div>
+
+    <div class="phase-banner">
+      <span class="num">03</span>
+      <div class="name">
+        Command &amp; <em>Intent</em> Development
+        <div style="font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--mute);font-style:normal;margin-top:6px;">Mound Work · Quadrant Targeting · Sequencing</div>
+      </div>
+      <div class="meta">
+        <span class="mono">EFFORT BAND 3</span>
+        <span class="pct">70 – 85%</span>
+      </div>
+    </div>
+
+    <div class="subphase-title">
+      <span class="tag">SUBPHASE A</span>
+      <span class="name">Lower Body &amp; Force Transfer</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="skill-row">
+      <span class="id">A1</span>
+      <span class="name">Front-Leg Stability</span>
+      <span class="drills">Step-Behind to Brace Throw <span class="sep">·</span> Stretch Delivery to Called Quadrant <span class="sep">·</span> Three-Pitch Intent Ladders <span style="color:var(--rust);">(70 → 78 → 85%)</span></span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A2</span>
+      <span class="name">Drive Leg Extension</span>
+      <span class="drills">Half-Kneeling PlyoCare Throws <span class="sep">·</span> Half-Foam Roller Drive-Leg Push-Off <span class="sep">·</span> PlyoCare Rocker &amp; Step-Behind Throws <span class="sep">·</span> Mound Fastballs to Quadrant Targets <span class="sep">·</span> Mound Fastballs with Self-Called Locations</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A3</span>
+      <span class="name">Hip-to-Shoulder Separation</span>
+      <span class="drills">Walk-In PlyoCare Pivot Pickoff <span class="sep">·</span> Rocker Throws with Separation Hold <span class="sep">·</span> Mound Delivery with “Hips First” Checkpoint <span class="sep">·</span> Targeted Four-Quadrant Fastballs <span class="sep">·</span> Three-Pitch Sequences</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A4</span>
+      <span class="name">Pelvic Rotation</span>
+      <span class="drills">Step-and-Brace Pelvic Rotation <span class="sep">·</span> Crow-Hop Throws with Pelvic Timing <span class="sep">·</span> Mound Fastball Command Series <span class="sep">·</span> Three-Pitch Sequencing Challenge</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">A5</span>
+      <span class="name">Stride Direction &amp; Momentum</span>
+      <span class="drills">Corridor Stride Throws <span class="sep">·</span> Mound Corridor Throws with Half-Zone Targeting <span class="sep">·</span> Sequenced Quadrant Command with Internalized Stride Corridor</span>
+    </div>
+
+    <div class="subphase-title">
+      <span class="tag">SUBPHASE C</span>
+      <span class="name">Sequencing &amp; Integration</span>
+      <span class="line"></span>
+    </div>
+
+    <div class="skill-row">
+      <span class="id">C1</span>
+      <span class="name">Hip-to-Shoulder Separation Timing</span>
+      <span class="drills">Step-Behind Rocker Throw <span class="sep">·</span> Band-Resisted Trunk Rotation <span class="sep">·</span> PlyoCare Step-Back with Verbal Timing Call <span class="sep">·</span> Tempo-Varied Delivery <span class="sep">·</span> Mound Separation-to-Spot <span class="sep">·</span> 3-and-3 Challenge</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">C2</span>
+      <span class="name">Arm Timing Relative to Hip Rotation</span>
+      <span class="drills">Seated Rotational Throw <span class="sep">·</span> Walking Wind-Up to Hip Stall <span class="sep">·</span> Full Delivery with Timing Self-Rating <span class="sep">·</span> Mound Throws with Quadrant Targeting <span class="sep">·</span> Three-Pitch Sequence with Intent Hold</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">C3</span>
+      <span class="name">Trunk Tilt &amp; Forward Flexion</span>
+      <span class="drills">Rocker PlyoCare with Trunk Bias <span class="sep">·</span> Step-Behind with Forward Flexion Focus <span class="sep">·</span> Targeted Mound Throws — Glove Side Low / Arm Side Low <span class="sep">·</span> Challenge Round — 5 of 8</span>
+    </div>
+    <div class="skill-row">
+      <span class="id">C4</span>
+      <span class="name">Balance Point &amp; Rocker Mechanics</span>
+      <span class="drills">Slow-Motion Rocker Walk-Through with Pause <span class="sep">·</span> Rocker-to-Balance with Cone Touch <span class="sep">·</span> Mound Rocker “Rhythm Throws” <span class="sep">·</span> Quadrant Calling — “Pattern First, Location Second” <span class="sep">·</span> “3-in-a-Row” Challenge</span>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">IV — Foundations Curriculum · Phase 3</span>
+      <span class="pageno">06</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ V. 18-SKILL MATRIX ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="07 Skill Matrix">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ V</span>
+        <span class="eyebrow">How the Curriculum Works</span>
+      </div>
+      <span class="micro">The 18-Skill Framework</span>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:6px;">The Framework</span>
+        <span class="mono rust">18 skills · 4 categories</span>
+      </div>
+      <h2 class="heading-xl"><em>18 skills.</em> 4 categories. Every phase.</h2>
+    </div>
+
+    <div class="two-col" style="margin-bottom:32px;">
+      <div></div>
+      <p class="lede">
+        The same eighteen mechanical skills are trained at every phase — only the <em>effort, complexity,
+        and integration</em> change. A pitcher in Phase 1 and a pitcher in Phase 4 are working
+        on Front-Leg Stability; they are simply training it under different conditions.
+      </p>
+    </div>
+
+    <div class="matrix-grid">
+      <div class="matrix-cat">
+        <div class="head">
+          <span class="letter">A</span>
+          <span class="cname">Lower Body<br/>&amp; Force Transfer</span>
+        </div>
+        <ol>
+          <li><span class="sk">A1</span><span class="sn">Front-Leg Stability</span></li>
+          <li><span class="sk">A2</span><span class="sn">Drive Leg Extension</span></li>
+          <li><span class="sk">A3</span><span class="sn">Hip-to-Shoulder Separation</span></li>
+          <li><span class="sk">A4</span><span class="sn">Pelvic Rotation</span></li>
+          <li><span class="sk">A5</span><span class="sn">Stride Direction &amp; Momentum</span></li>
+        </ol>
+      </div>
+
+      <div class="matrix-cat">
+        <div class="head">
+          <span class="letter">B</span>
+          <span class="cname">Arm Action<br/>&amp; Upper Body</span>
+        </div>
+        <ol>
+          <li><span class="sk">B1</span><span class="sn">Arm Path &amp; Hand Break Timing</span></li>
+          <li><span class="sk">B2</span><span class="sn">Scapular Loading</span></li>
+          <li><span class="sk">B3</span><span class="sn">External Rotation &amp; Layback</span></li>
+          <li><span class="sk">B4</span><span class="sn">Arm Acceleration &amp; Internal Rotation</span></li>
+          <li><span class="sk">B5</span><span class="sn">Glove-Side Control &amp; Deceleration</span></li>
+        </ol>
+      </div>
+
+      <div class="matrix-cat">
+        <div class="head">
+          <span class="letter">C</span>
+          <span class="cname">Sequencing<br/>&amp; Full-Body Integration</span>
+        </div>
+        <ol>
+          <li><span class="sk">C1</span><span class="sn">Hip-to-Shoulder Separation Timing</span></li>
+          <li><span class="sk">C2</span><span class="sn">Arm Timing Relative to Hip Rotation</span></li>
+          <li><span class="sk">C3</span><span class="sn">Trunk Tilt &amp; Forward Flexion</span></li>
+          <li><span class="sk">C4</span><span class="sn">Balance Point &amp; Rocker Mechanics</span></li>
+        </ol>
+      </div>
+
+      <div class="matrix-cat">
+        <div class="head">
+          <span class="letter">D</span>
+          <span class="cname">Command<br/>&amp; Pitch Execution</span>
+        </div>
+        <ol>
+          <li><span class="sk">D1</span><span class="sn">Repeatable Release Point</span></li>
+          <li><span class="sk">D2</span><span class="sn">Rhythm &amp; Timing Consistency</span></li>
+          <li><span class="sk">D3</span><span class="sn">Mound Presence &amp; Intent Management</span></li>
+          <li><span class="sk">D4</span><span class="sn">Stretch vs. Windup Mechanics</span></li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="pull">
+      “A pitcher may be placed into <em style="color:var(--rust)">different phases for different skills</em>
+      based on their individual development — placement is per-skill, not per-pitcher.”
+      <span class="attr">— On Placement</span>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">V — How the Curriculum Works</span>
+      <span class="pageno">07</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ VI. PROCESS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="08 Process">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ VI</span>
+        <span class="eyebrow">How It Works</span>
+      </div>
+      <span class="micro">The Process</span>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:6px;">From Inquiry to Training</span>
+        <span class="mono rust">4 steps · structured</span>
+      </div>
+      <h2 class="heading-xl">The <em>process.</em></h2>
+    </div>
+
+    <div class="two-col" style="margin-bottom:18px;">
+      <div></div>
+      <p class="lede">
+        Every pitcher follows the same structured entry point. The system <em>evaluates where they are,
+        places them correctly, and builds from there.</em>
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="num">1<small>Step One</small></div>
+      <div>
+        <h3><em>Assessment</em> — 90-minute in-person evaluation, free.</h3>
+        <p class="body">Every pitcher begins with a free, 90-minute in-person evaluation. The assessment covers training history, pitch repertoire, a full warm-up with movement quality grading, four athleticism benchmarks <strong>(broad jump, single-leg balance, rotational med ball throw, 10-yard acceleration)</strong>, and a flat-ground throwing observation. No one skips this step — it produces the starting point for everything that follows.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2<small>Step Two</small></div>
+      <div>
+        <h3><em>Placement</em> — phase, subphase, and effort band.</h3>
+        <p class="body">Based on the assessment, your pitcher is placed into the right phase and subphase. Effort bands are assigned using the pitcher's recent representative maximum throwing velocity — <strong>not age, not experience, and not what a parent reports on the phone.</strong> The coach manages placement using observable signals: movement quality at current effort, effort awareness, recent throwing exposure, and recovery feedback. A pitcher may be placed into different phases for different skills based on their individual development.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3<small>Step Three</small></div>
+      <div>
+        <h3>Reserved Weekly <em>Training</em>.</h3>
+        <p class="body">Training times are assigned in advance — no weekly booking, no scrambling for availability. Sessions can take place at our facility or, for Hybrid members, the coach comes to your pitcher's home, park, or field. <strong>The schedule is built around your family, not the other way around.</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4<small>Step Four</small></div>
+      <div>
+        <h3>Advance When <em>Ready</em>.</h3>
+        <p class="body">No pitcher moves to the next phase just by attending. <strong>Advancement is earned</strong> by demonstrating the ability to perform and repeat what's being trained. The coach signs off; the pitcher progresses.</p>
+      </div>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">VI — How It Works</span>
+      <span class="pageno">08</span>
+    </div>
+  </section>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ VII. ENROLLMENT ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <section class="page" data-screen-label="09 Enrollment">
+    <div class="page-head">
+      <div class="left">
+        <span class="mono">§ VII</span>
+        <span class="eyebrow">Enrollment</span>
+      </div>
+      <span class="micro">Two Formats · Same Progression</span>
+    </div>
+
+    <div class="section-head" style="margin-bottom:24px;">
+      <div>
+        <span class="micro" style="display:block;margin-bottom:6px;">Two Formats</span>
+        <span class="mono rust">Standard · Hybrid</span>
+      </div>
+      <h2 class="heading-xl"><em>Two formats.</em> Same progression.</h2>
+    </div>
+
+    <div class="two-col" style="margin-bottom:28px;">
+      <div></div>
+      <p class="lede">
+        Both options begin with an in-person assessment and follow the same Foundations curriculum.
+        The only difference is <em>where training happens.</em>
+      </p>
+    </div>
+
+    <div class="plans">
+      <div class="plan">
+        <div class="ptag">Standard · All-Facility</div>
+        <h3>The <em>Standard</em> Plan</h3>
+        <div class="price">$510<small> / month</small></div>
+        <p class="body">Every session at the TAP Athletes facility. Full access to equipment and a controlled training environment.</p>
+        <ul>
+          <li>2 sessions / week recommended</li>
+          <li>Up to 8 sessions per month</li>
+          <li>Reserved weekly time slots</li>
+          <li>Classes included free</li>
+        </ul>
+      </div>
+
+      <div class="plan featured">
+        <div class="ptag">Flexible · Hybrid</div>
+        <h3>The <em>Hybrid</em> Plan</h3>
+        <div class="price">$600<small> / month</small></div>
+        <p class="body">Facility sessions plus up to 4 on-site visits per month — coach comes to your pitcher's home, park, or field.</p>
+        <ul>
+          <li>All facility sessions included</li>
+          <li>Up to 4 on-site sessions / month</li>
+          <li>Same progression — no gaps</li>
+          <li>Classes included free</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="intro-card">
+      <div class="left">
+        <span class="micro" style="display:block;margin-bottom:6px;color:var(--rust);">Introductory · Foundations Prep</span>
+        <h3>A one-month <em>entry point.</em></h3>
+        <p class="body">For younger pitchers, beginners, or families new to structured training. Two 30-minute sessions per week. After one month, pitchers transition into the full program.</p>
+      </div>
+      <div class="right">
+        2 × / week<br/>
+        30 min sessions<br/>
+        1-month commitment<br/>
+        <span style="color:var(--rust);">Ages 8 – 12</span>
+      </div>
+    </div>
+
+    <div class="contact-block">
+      <div class="left">
+        <div class="org">TAP Athletes <em>| Pitching Academy</em></div>
+        <p class="body">
+          Training Athletic Performance, Inc.<br/>
+          1751 S 1st Street<br/>
+          Rogers, Arkansas 72758
+        </p>
+      </div>
+      <div class="right">
+        <span class="micro">Get in touch</span>
+        <p class="body" style="text-align:right;">
+          (833) 860-2711<br/>
+          support@tapathletes.com
+        </p>
+        <div class="url" style="margin-top:10px;">tapathletes.com/foundations</div>
+      </div>
+    </div>
+
+    <div class="page-foot">
+      <span class="micro">VII — Enrollment · End of Guide</span>
+      <span class="pageno">09</span>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

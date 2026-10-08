@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Sitemap for https://tapathletes.com
+  Canonical host is the APEX domain; www.tapathletes.com 301-redirects here.
+
+  Intentionally EXCLUDED: /foundations/curriculum-guide (noindex; it is the
+  print/PDF source for an email-gated lead magnet). The same curriculum
+  content is public and indexable at /foundations/curriculum.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage — pitching academy overview, Rogers, AR -->
+  <url>
+    <loc>https://tapathletes.com/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Foundations — progression-based pitching program, ages 8+ -->
+  <url>
+    <loc>https://tapathletes.com/foundations/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Pitching Accelerator — 6-month semi-private cohort, 14U+ -->
+  <url>
+    <loc>https://tapathletes.com/pitching-accelerator/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Train Unprompted — behavior-first 6-week cohort, ages 13+ -->
+  <url>
+    <loc>https://tapathletes.com/train-unprompted/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Foundations curriculum — public documentation of phases, effort bands,
+       the 18-skill matrix, and assessment/placement/advancement -->
+  <url>
+    <loc>https://tapathletes.com/foundations/curriculum/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Education hub — index of the free published resources -->
+  <url>
+    <loc>https://tapathletes.com/education/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Pitching Dictionary — 117 defined terms across seven sections -->
+  <url>
+    <loc>https://tapathletes.com/pitching-dictionary/</loc>
+    <lastmod>2026-09-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
