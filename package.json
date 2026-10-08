@@ -1,0 +1,13 @@
+{
+  "name": "websites",
+  "private": true,
+  "type": "module",
+  "description": "Every public tapathletes.com site, one folder per site. No dependencies: scripts are plain Node.",
+  "scripts": {
+    "build:jsonld": "node shared/jsonld/build.mjs",
+    "check:metadata": "node shared/check-metadata.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
