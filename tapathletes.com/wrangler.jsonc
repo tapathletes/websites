@@ -1,0 +1,14 @@
+// Cloudflare Workers static-assets site for tapathletes.com (replaces GitHub Pages and the planned Vercel project).
+// No code runs: Cloudflare serves the files in this folder. `.assetsignore` keeps dev and build files off the site.
+{
+  "name": "tapathletes-com",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+    // /foundations -> /foundations/ and /foundations/curriculum-guide -> curriculum-guide.html, as GitHub Pages did.
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}

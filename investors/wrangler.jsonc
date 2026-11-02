@@ -1,0 +1,14 @@
+// Cloudflare Workers static-assets site for investors.tapathletes.com (was facility.tapathletes.com on GitHub Pages).
+// No code runs: Cloudflare serves the files in this folder. `.assetsignore` keeps dev files and the 45 MB demo video
+// off the site (Cloudflare's per-file limit is 25 MiB); the video is served from R2 at media.tapathletes.com.
+{
+  "name": "tapathletes-investors",
+  "compatibility_date": "2026-11-01",
+  "assets": {
+    "directory": ".",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  },
+  "workers_dev": true,
+  "preview_urls": false
+}

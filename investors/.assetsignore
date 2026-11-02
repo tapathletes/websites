@@ -1,0 +1,9 @@
+# Files Cloudflare must not publish (gitignore syntax).
+.*
+wrangler.jsonc
+vercel.json
+CNAME
+README.md
+node_modules/
+# Over Cloudflare's 25 MiB per-file limit; served from R2 at https://media.tapathletes.com/tapos-demo-video.mp4
+demos/tapos-demo-video.mp4

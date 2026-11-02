@@ -1,0 +1,11 @@
+# Files Cloudflare must not publish (gitignore syntax). Build and dev tooling only.
+.*
+wrangler.jsonc
+vercel.json
+site.config.mjs
+vite.config.js
+package.json
+package-lock.json
+CNAME
+scripts/
+node_modules/
