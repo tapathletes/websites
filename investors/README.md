@@ -32,7 +32,11 @@ Archive:
   captions). Embedded on the landing page under "Demos";
   `demos/tapos-demo-video-poster.png` is the still shown before play. The
   video is rendered in the `tap-os` repo (`tools/video/`); copy a new render
-  over this file to update it.
+  over this file to update it. The site does not serve this copy: it is over
+  Cloudflare's 25 MiB per-file limit, so the page plays it from R2 at
+  `https://media.tapathletes.com/tapos-demo-video.mp4` (bucket
+  `tapathletes-media`). After a new render, upload it there too:
+  `pnpm dlx wrangler@4 r2 object put tapathletes-media/tapos-demo-video.mp4 --file demos/tapos-demo-video.mp4 --content-type video/mp4 --remote`.
 
 ## Run locally
 

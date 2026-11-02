@@ -1,6 +1,8 @@
 # websites
 
-Every public `tapathletes.com` site, one folder per site. Each folder is its own Vercel static project: Root Directory = the folder, Framework = Other, no build command, output `.`, Ignored Build Step `git diff --quiet HEAD^ HEAD -- .`.
+Every public `tapathletes.com` site, one folder per site. Each folder is its own Cloudflare Workers static-assets site (no code runs; Cloudflare serves the files): the folder's `wrangler.jsonc` names the Worker, `.assetsignore` keeps dev and build files off the site, and `_headers` sets response headers. Moved from GitHub Pages on 2026-11-02 (the earlier plan named Vercel; see the tapos ADR that records the Cloudflare move).
+
+Deploy a site by hand: `cd <site>` then `pnpm dlx wrangler@4 deploy` with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` set. Once Cloudflare Workers Builds is connected to this repo, merging to `main` publishes, as GitHub Pages did. Any file over 25 MiB must go to R2 instead (the investors demo video lives at `https://media.tapathletes.com/`).
 
 | Folder | Site |
 |---|---|
@@ -24,7 +26,7 @@ python -m http.server 8000
 # open http://localhost:8000/
 ```
 
-Or push a branch and open the Vercel preview deployment for that site's project.
+Or deploy the branch by hand (above) and open the site's `*.workers.dev` address.
 
 ## Scripts (Node 20+, no dependencies)
 
