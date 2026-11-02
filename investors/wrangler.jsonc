@@ -9,6 +9,11 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
   },
+  // Live hostname (the old name until the investors rename). Attached as a Workers route on the proxied
+  // record — see docs/runbooks/cloudflare-dns.md in tapathletes/tapos. Kept here so every deploy keeps it.
+  "routes": [
+    { "pattern": "facility.tapathletes.com/*", "zone_name": "tapathletes.com" }
+  ],
   "workers_dev": true,
   "preview_urls": false
 }

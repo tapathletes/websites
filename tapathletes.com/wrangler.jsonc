@@ -9,6 +9,12 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
   },
+  // Live hostname. Attached as a Workers route on the proxied apex record (not a custom domain) — see
+  // docs/runbooks/cloudflare-dns.md in tapathletes/tapos. Kept here so every deploy keeps it.
+  // www.tapathletes.com is a Cloudflare redirect rule to the apex, not a route.
+  "routes": [
+    { "pattern": "tapathletes.com/*", "zone_name": "tapathletes.com" }
+  ],
   "workers_dev": true,
   "preview_urls": false
 }
