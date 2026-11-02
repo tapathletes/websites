@@ -1,4 +1,5 @@
-// Cloudflare Workers static-assets site for investors.tapathletes.com (was facility.tapathletes.com on GitHub Pages).
+// Cloudflare Workers static-assets site for company.tapathletes.com, the Training Athletic Performance, Inc.
+// company hub (was facility.tapathletes.com on GitHub Pages). The folder and Worker keep the name `investors` for now.
 // No code runs: Cloudflare serves the files in this folder. `.assetsignore` keeps dev files and the 45 MB demo video
 // off the site (Cloudflare's per-file limit is 25 MiB); the video is served from R2 at media.tapathletes.com.
 {
@@ -9,10 +10,11 @@
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "none"
   },
-  // Live hostname (the old name until the investors rename). Attached as a Workers route on the proxied
-  // record — see docs/runbooks/cloudflare-dns.md in tapathletes/tapos. Kept here so every deploy keeps it.
+  // Live hostname, attached as a Workers route on the proxied record — see docs/runbooks/cloudflare-dns.md in
+  // tapathletes/tapos. Kept here so every deploy keeps it. facility.tapathletes.com has no route: a zone
+  // redirect rule sends it to company.tapathletes.com with a 301 (path and query kept).
   "routes": [
-    { "pattern": "facility.tapathletes.com/*", "zone_name": "tapathletes.com" }
+    { "pattern": "company.tapathletes.com/*", "zone_name": "tapathletes.com" }
   ],
   "workers_dev": true,
   "preview_urls": false
