@@ -7,7 +7,7 @@ Deploy a site by hand: `cd <site>` then `pnpm dlx wrangler@4 deploy` with `CLOUD
 | Folder | Site |
 |---|---|
 | `tapathletes.com/` | `tapathletes.com` — the Rogers academy (history kept from `tapathletes/tapathletes.com`) |
-| `investors/` | `investors.tapathletes.com` — investor hub and facility walkthrough; `facility.tapathletes.com` redirects here (history kept from `tapathletes/tap-facility-layout`) |
+| `investors/` | `company.tapathletes.com` — the Training Athletic Performance, Inc. company hub (investor material and the facility walkthrough inside it); `facility.tapathletes.com` 301s here, path and query kept. The folder and the Worker keep the names `investors` / `tapathletes-investors` for now (history kept from `tapathletes/tap-facility-layout`) |
 | `shared/` | Build-time tools only, never served: `tokens.css`, `jsonld/build.mjs`, `check-metadata.mjs` |
 
 Planned: `coach/`, `parents/`, `athletes/`.

@@ -5,7 +5,8 @@ investors, suppliers (flooring, equipment), and used as an internal planning
 tool. Dimensional accuracy is load-bearing — the model is used to spec real
 purchase orders, not just to impress.
 
-**Live:** see GitHub Pages URL in the repo's About panel.
+**Live:** <https://company.tapathletes.com/> (Cloudflare Worker
+`tapathletes-investors`; `facility.tapathletes.com` 301s there).
 
 ## Variants
 
@@ -13,7 +14,7 @@ Active:
 
 - [`sky/`](sky/) — Three.js walkthrough: black rubber border around a grey
   PVC field, 14' × 70' net, one mound, classroom nook
-  (served at `facility.tapathletes.com/sky/`).
+  (served at `company.tapathletes.com/sky/`).
 - [`facility-3d.html`](facility-3d.html) — Three.js walkthrough, black turf.
   Earlier layout; not updated with the sky variant's 2026-10-01 changes.
 
