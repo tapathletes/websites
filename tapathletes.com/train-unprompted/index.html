@@ -218,6 +218,7 @@ footer{padding:3rem 0;text-align:center;background:var(--cream);border-top:1px s
   <!-- structured-data:start -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["SportsActivityLocation","LocalBusiness","Organization"],"@id":"https://tapathletes.com/#organization","name":"TAP Athletes","alternateName":"TAP Athletes Pitching Academy","legalName":"Training Athletic Performance, Inc.","url":"https://tapathletes.com/","logo":{"@type":"ImageObject","url":"https://tapathletes.com/images/web-app-manifest-512x512.png","width":512,"height":512},"image":"https://tapathletes.com/images/og-card.png","description":"TAP Athletes is a baseball pitching academy in Rogers, Arkansas, serving youth and high-school pitchers ages 8 and up. TAP trains pitching only — no hitting, no fielding, no general athletic training. Programs are progression-based: athletes are assessed, placed at a level that matches their current mechanics, and advance by demonstrating skills rather than by aging up.","telephone":"+1-833-860-2711","email":"support@tapathletes.com","address":{"@type":"PostalAddress","streetAddress":"1751 S 1st Street","addressLocality":"Rogers","addressRegion":"AR","postalCode":"72758","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Rogers","containedInPlace":{"@type":"State","name":"Arkansas"}},{"@type":"Place","name":"Northwest Arkansas"}],"priceRange":"$15 – $4,500","sport":"Baseball","knowsAbout":["Baseball pitching instruction","Youth pitching mechanics","Pitch design","Pitching velocity development","Pitching command training","Rapsodo pitch tracking"]},{"@type":"WebSite","@id":"https://tapathletes.com/#website","url":"https://tapathletes.com/","name":"TAP Athletes","publisher":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://tapathletes.com/train-unprompted/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapathletes.com/"},{"@type":"ListItem","position":2,"name":"Train Unprompted","item":"https://tapathletes.com/train-unprompted/"}]},{"@type":"WebPage","@id":"https://tapathletes.com/train-unprompted/#webpage","url":"https://tapathletes.com/train-unprompted/","isPartOf":{"@id":"https://tapathletes.com/#website"},"about":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US","primaryImageOfPage":"https://tapathletes.com/images/og-card.png","name":"Train Unprompted — TAP Athletes Pitching Academy","description":"A six-week youth and high school baseball pitching program for ages 13+ that teaches athletes to train on their own. Weekly coach home visits. $497.","datePublished":"2026-04-08","dateModified":"2026-09-24","breadcrumb":{"@id":"https://tapathletes.com/train-unprompted/#breadcrumb"},"mainEntity":{"@id":"https://tapathletes.com/train-unprompted/#service"}},{"@type":"Service","@id":"https://tapathletes.com/train-unprompted/#service","name":"Train Unprompted","serviceType":"Behavior-first baseball pitching development cohort","url":"https://tapathletes.com/train-unprompted/","provider":{"@id":"https://tapathletes.com/#organization"},"areaServed":{"@type":"City","name":"Rogers","containedInPlace":{"@type":"State","name":"Arkansas"}},"audience":{"@type":"PeopleAudience","audienceType":"Youth and high-school baseball pitchers","suggestedMinAge":13,"description":"Pitchers ages 13 and up (junior high and up)."},"description":"A six-week cohort built to develop athlete ownership: the ability to train without being told to. Three touchpoints every week — a facility session, an at-home coach visit, and a video call — for 15+ touchpoints across the program, built on the self-determination pillars of autonomy, competence, and relatedness. Athletes learn why each drill works, how to execute it independently, and how to organize progressions and regressions. Every athlete leaves with a personal drill library, a training plan he built himself, and six weeks of logged work in the included student-athlete planner. If an athlete completes the program and is not independently running his own training sessions, TAP continues working with him at no additional cost; Phase 3 check-ins are always included.","offers":{"@type":"Offer","price":497,"priceCurrency":"USD","availability":"https://schema.org/InStock","seller":{"@id":"https://tapathletes.com/#organization"},"name":"Train Unprompted — six-week cohort","url":"https://tapathletes.com/train-unprompted/","description":"$497 flat for six weeks, no add-ons. Planner included. Extra Phase 3 check-ins at no charge."}}]}</script>
   <!-- structured-data:end -->
+  <script src="/js/analytics.js" defer></script>
 </head>
 <body>
 
@@ -226,8 +227,8 @@ footer{padding:3rem 0;text-align:center;background:var(--cream);border-top:1px s
   <div class="nav-right">
     <a href="#program" class="nav-link">Program</a>
     <a href="#approach" class="nav-link">Approach</a>
-    <a href="#enroll" class="nav-link">Enroll</a>
-    <a href="#enroll" class="nav-btn">Secure a Seat</a>
+    <a data-event="enroll_clicked" data-location="nav" href="#enroll" class="nav-link">Enroll</a>
+    <a data-event="secure_seat_clicked" data-location="nav" href="#enroll" class="nav-btn">Secure a Seat</a>
   </div>
 </div></nav>
 
@@ -237,8 +238,8 @@ footer{padding:3rem 0;text-align:center;background:var(--cream);border-top:1px s
   <h1 class="hero-h rv">Teach Him How<br><em>to Train.</em></h1>
   <p class="hero-body rv">The lessons are good. The coaching is good. But the reps between sessions aren't happening unless you push them — and somewhere between the reminders and the arguments, you're starting to wonder if any of it is worth it. TAP Athletes' "Train Unprompted™" program teaches pitchers the <strong>structure, routine, and identity</strong> that turns between-session work into a quiet habit. The goal: <strong>he trains because of who he believes he is, not because you told him to.</strong></p>
   <div class="hero-actions rv">
-    <a href="#enroll" class="btn-dark">Secure a Seat — Free</a>
-    <a href="#program" class="btn-text">See the program ↓</a>
+    <a data-event="secure_seat_clicked" data-location="hero" href="#enroll" class="btn-dark">Secure a Seat — Free</a>
+    <a data-event="see_program_clicked" data-location="hero" href="#program" class="btn-text">See the program ↓</a>
   </div>
 </div></section>
 
@@ -387,7 +388,7 @@ footer{padding:3rem 0;text-align:center;background:var(--cream);border-top:1px s
       <div class="sec-label" style="margin-bottom:0.4rem">Our Instructors</div>
       <div style="font-size:0.95rem;line-height:1.6;color:var(--body);max-width:640px">TAP Athletes instructors bring <strong style="color:var(--text);font-weight:500">12+ years of youth pitching development</strong>, high school freshman and varsity coaching experience, NFHS Level 2+ certification, and USA Baseball A, B, and C credentials. The system was developed through collegiate study in behavioral science and over a decade of applied work with young pitchers. Every session is coached from a documented process — the same structure, the same progression, every time.<br><br><strong style="color:var(--text);font-weight:500">Eugene Calhoun, Pitching Director</strong> — leads every intake call personally and oversees all program delivery. He's the one who answers the phone.</div>
     </div>
-    <a href="#enroll" class="btn-dark" style="flex-shrink:0">Secure a Seat — Free</a>
+    <a data-event="secure_seat_clicked" data-location="instructors" href="#enroll" class="btn-dark" style="flex-shrink:0">Secure a Seat — Free</a>
   </div>
 </div></section>
 
@@ -417,7 +418,7 @@ footer{padding:3rem 0;text-align:center;background:var(--cream);border-top:1px s
       </div>
       <div class="wl-form-title">Join the Train Unprompted™ Waitlist</div>
       <div class="wl-form-sub">Expect a call within 48 hours from Pitching Director Eugene Calhoun. No payment required.</div>
-      <form id="waitlist-form" action="https://formspree.io/f/xzdkloyq" method="POST">
+      <form data-event="waitlist_submitted" data-location="enroll" id="waitlist-form" action="https://formspree.io/f/xzdkloyq" method="POST">
         <div class="f"><label>Parent / Guardian</label><input type="text" name="parent_name" placeholder="Your name" required></div>
         <div class="f"><label>Athlete's Name</label><input type="text" name="athlete_name" placeholder="Athlete's name" required></div>
         <div class="f"><label>Email</label><input type="email" name="email" placeholder="your@email.com" required></div>

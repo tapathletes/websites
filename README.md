@@ -8,7 +8,7 @@ Deploy a site by hand: `cd <site>` then `pnpm dlx wrangler@4 deploy` with `CLOUD
 |---|---|
 | `tapathletes.com/` | `tapathletes.com` — the Rogers academy (history kept from `tapathletes/tapathletes.com`) |
 | `investors/` | `company.tapathletes.com` — the Training Athletic Performance, Inc. company hub (investor material and the facility walkthrough inside it); `facility.tapathletes.com` 301s here, path and query kept. The folder and the Worker keep the names `investors` / `tapathletes-investors` for now (history kept from `tapathletes/tap-facility-layout`) |
-| `shared/` | Build-time tools only, never served: `tokens.css`, `jsonld/build.mjs`, `check-metadata.mjs` |
+| `shared/` | Build-time tools only, never served: `tokens.css`, `jsonld/build.mjs`, `check-metadata.mjs`, `check-tracking.mjs` |
 
 Planned: `coach/`, `parents/`, `athletes/`.
 
@@ -33,6 +33,15 @@ Or deploy the branch by hand (above) and open the site's `*.workers.dev` address
 ```sh
 node shared/jsonld/build.mjs <site>      # regenerate JSON-LD from <site>/site.config.mjs
 node shared/check-metadata.mjs <site>    # the web-estate metadata checklist; exits 1 on any miss
+node shared/check-tracking.mjs <site>    # the click-tracking checklist (sites with /js/analytics.js); exits 1 on any miss
 ```
 
-Or `pnpm run build:jsonld <site>` / `pnpm run check:metadata <site>`. Never `npm install` here.
+Or `pnpm run build:jsonld <site>` / `pnpm run check:metadata <site>` / `pnpm run check:tracking <site>`. Never `npm install` here.
+
+## Analytics (tapathletes.com)
+
+Every page loads `tapathletes.com/js/analytics.js`, which sends page views and clicks to PostHog (the same project as TAPOS; each event carries `site: "tapathletes.com"`). The decision is ADR-0045 in `tapathletes/tapos`, amended 2026-11-12: tapathletes.com tracks every visitor and every button click. The capture rules match TAPOS: no session replay, no on-screen text or attributes in autocapture, no person profiles for anonymous visitors, no query strings in captured URLs, and nothing a visitor types into a form.
+
+Name every button. Give the element `data-event="<what>_clicked"` and `data-location="<where on the page>"` (optional `data-detail="<which one>"`); a form gets `data-event="<what>_submitted"`. Reuse an existing name for the same kind of button, such as `get_app_clicked` or `enroll_clicked`, and let the location tell them apart. Unnamed links and buttons still send `link_clicked` / `button_clicked` with their label, but `check:tracking` fails on any off-site, `sms:`, `tel:` or `mailto:` link and on any form that has no name.
+
+Events are sent only from the live host. On `localhost` or a `*.workers.dev` preview, each event is printed to the browser console as `[analytics] <event> {…}` instead, so a change can be checked before it ships.

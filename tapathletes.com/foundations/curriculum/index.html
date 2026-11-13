@@ -106,6 +106,7 @@
   <!-- structured-data:start -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["SportsActivityLocation","LocalBusiness","Organization"],"@id":"https://tapathletes.com/#organization","name":"TAP Athletes","alternateName":"TAP Athletes Pitching Academy","legalName":"Training Athletic Performance, Inc.","url":"https://tapathletes.com/","logo":{"@type":"ImageObject","url":"https://tapathletes.com/images/web-app-manifest-512x512.png","width":512,"height":512},"image":"https://tapathletes.com/images/og-card.png","description":"TAP Athletes is a baseball pitching academy in Rogers, Arkansas, serving youth and high-school pitchers ages 8 and up. TAP trains pitching only — no hitting, no fielding, no general athletic training. Programs are progression-based: athletes are assessed, placed at a level that matches their current mechanics, and advance by demonstrating skills rather than by aging up.","telephone":"+1-833-860-2711","email":"support@tapathletes.com","address":{"@type":"PostalAddress","streetAddress":"1751 S 1st Street","addressLocality":"Rogers","addressRegion":"AR","postalCode":"72758","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Rogers","containedInPlace":{"@type":"State","name":"Arkansas"}},{"@type":"Place","name":"Northwest Arkansas"}],"priceRange":"$15 – $4,500","sport":"Baseball","knowsAbout":["Baseball pitching instruction","Youth pitching mechanics","Pitch design","Pitching velocity development","Pitching command training","Rapsodo pitch tracking"]},{"@type":"WebSite","@id":"https://tapathletes.com/#website","url":"https://tapathletes.com/","name":"TAP Athletes","publisher":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US"},{"@type":"BreadcrumbList","@id":"https://tapathletes.com/foundations/curriculum/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tapathletes.com/"},{"@type":"ListItem","position":2,"name":"Foundations","item":"https://tapathletes.com/foundations/"},{"@type":"ListItem","position":3,"name":"Curriculum","item":"https://tapathletes.com/foundations/curriculum/"}]},{"@type":"WebPage","@id":"https://tapathletes.com/foundations/curriculum/#webpage","url":"https://tapathletes.com/foundations/curriculum/","isPartOf":{"@id":"https://tapathletes.com/#website"},"about":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US","primaryImageOfPage":"https://tapathletes.com/images/og-card.png","name":"The Foundations Pitching Curriculum — TAP Athletes","description":"The full Foundations pitching curriculum: four mechanical phases governed by effort bands, 18 skills, sample drills, and how pitchers advance.","datePublished":"2026-08-13","dateModified":"2026-09-24","breadcrumb":{"@id":"https://tapathletes.com/foundations/curriculum/#breadcrumb"},"mainEntity":{"@id":"https://tapathletes.com/foundations/curriculum/#article"}},{"@type":"Article","@id":"https://tapathletes.com/foundations/curriculum/#article","headline":"The Foundations Pitching Curriculum","url":"https://tapathletes.com/foundations/curriculum/","mainEntityOfPage":{"@id":"https://tapathletes.com/foundations/curriculum/#webpage"},"author":{"@id":"https://tapathletes.com/#organization"},"publisher":{"@id":"https://tapathletes.com/#organization"},"datePublished":"2026-08-13","dateModified":"2026-09-24","image":"https://tapathletes.com/images/og-card.png","inLanguage":"en-US","isAccessibleForFree":true,"about":{"@id":"https://tapathletes.com/foundations/#service"},"description":"Public documentation of what the Foundations program teaches: four mechanical phases, each bound to an effort band (Band 1 at 30–50% of recent representative maximum, Band 2 at 50–70%, Band 3 at 70–85%, Band 4 at 85% and above); eighteen mechanical skills across four categories (Lower Body & Force Transfer; Arm Action & Upper Body; Sequencing & Full-Body Integration; Command & Pitch Execution), trained in every phase; sample drills; and how assessment, per-skill placement, and coach-signed advancement work.","keywords":["pitching curriculum","effort bands","youth pitching mechanics","pitching progression","TAP Athletes Foundations"]},{"@type":"FAQPage","@id":"https://tapathletes.com/foundations/curriculum/#faq","mainEntity":[{"@type":"Question","name":"What is an effort band?","acceptedAnswer":{"@type":"Answer","text":"An effort band is a defined range of throwing intensity, expressed as a percentage of the pitcher's recent representative maximum. Foundations uses four: Band 1 at 30–50%, Band 2 at 50–70%, Band 3 at 70–85%, and Band 4 at 85% and above. Each mechanical phase is bound to one band, so a pitcher's training intensity is defined by where they are in the curriculum."}},{"@type":"Question","name":"Does my pitcher's age determine their phase?","acceptedAnswer":{"@type":"Answer","text":"No. Phases describe what the pitcher is working on, not their age or experience level. All new pitchers begin in Phase 1, regardless of background. Effort bands are assigned from the pitcher's recent representative maximum throwing velocity — not age, not experience, and not a parent's report."}},{"@type":"Question","name":"How does a pitcher advance to the next phase?","acceptedAnswer":{"@type":"Answer","text":"By demonstrating the ability to perform and repeat what is being trained. No pitcher moves to the next phase just by attending. Advancement is earned, and the coach signs off before the pitcher progresses."}},{"@type":"Question","name":"Can a pitcher be in two phases at once?","acceptedAnswer":{"@type":"Answer","text":"Yes. Placement is per-skill, not per-pitcher. A pitcher may be placed into different phases for different skills based on their individual development — for example, further along in lower-body force transfer than in command."}},{"@type":"Question","name":"Who is the Foundations curriculum for?","acceptedAnswer":{"@type":"Answer","text":"Pitchers ages 8 and up, at any experience level, training at TAP Athletes in Rogers, Arkansas. Foundations Prep is a one-month entry point for younger pitchers, beginners, or families new to structured training, aimed at ages 8–12."}}]}]}</script>
   <!-- structured-data:end -->
+  <script src="/js/analytics.js" defer></script>
 </head>
 <body class="min-h-screen">
 
@@ -126,21 +127,21 @@
         <a href="/foundations/" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">Foundations</a>
       </nav>
       <div class="flex items-center gap-3">
-        <a href="/foundations#enrollment" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Enroll</a>
-        <button class="md:hidden flex flex-col gap-[5px] items-center justify-center w-9 h-9" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <a data-event="enroll_clicked" data-location="header" href="/foundations#enrollment" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Enroll</a>
+        <button data-event="mobile_menu_clicked" data-location="header" class="md:hidden flex flex-col gap-[5px] items-center justify-center w-9 h-9" id="menuBtn" aria-label="Open menu" aria-expanded="false">
           <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
           <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
           <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
         </button>
       </div>
     </div>
-    <div class="hidden flex-col gap-1 px-5 pb-5 pt-3 border-t border-cream-dark md:hidden" id="mobileNav" aria-hidden="true">
+    <div data-location="mobile_menu" class="hidden flex-col gap-1 px-5 pb-5 pt-3 border-t border-cream-dark md:hidden" id="mobileNav" aria-hidden="true">
       <a href="#phases" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Phases</a>
       <a href="#skills" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">18 Skills</a>
       <a href="#process" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Process</a>
       <a href="#classes" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Classes</a>
       <a href="/foundations/" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Foundations</a>
-      <a href="/foundations#enrollment" class="mt-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-forest text-white">Enroll</a>
+      <a data-event="enroll_clicked" data-location="mobile_menu" href="/foundations#enrollment" class="mt-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-forest text-white">Enroll</a>
     </div>
   </header>
 
@@ -909,8 +910,8 @@
           <h2 class="font-display text-2xl-r italic text-white leading-tight mb-4">Start where the curriculum starts.</h2>
           <p class="text-base-r text-white/65 leading-relaxed mb-8 max-w-[52ch] mx-auto">Enrollment begins with a free 90-minute in-person assessment at our Rogers, Arkansas facility. It produces the placement that everything on this page builds from.</p>
           <div class="flex flex-wrap justify-center gap-3">
-            <a href="/foundations#enrollment" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-white text-forest hover:bg-cream transition-all hover:-translate-y-px hover:shadow-medium">Enroll in Foundations</a>
-            <a href="/foundations/" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-transparent text-white border border-white/30 hover:border-white/60 transition-all">See the program</a>
+            <a data-event="enroll_clicked" data-location="closing" href="/foundations#enrollment" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-white text-forest hover:bg-cream transition-all hover:-translate-y-px hover:shadow-medium">Enroll in Foundations</a>
+            <a data-event="see_program_clicked" data-location="closing" href="/foundations/" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-transparent text-white border border-white/30 hover:border-white/60 transition-all">See the program</a>
           </div>
         </div>
       </section>
@@ -924,14 +925,14 @@
   <footer class="bg-ink px-5 lg:px-12 py-8 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4">
     <div class="text-sm font-bold text-white/80 tracking-tight">TAP Athletes</div>
     <div class="flex flex-wrap gap-6">
-      <a href="tel:+18338602711" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Contact</a>
+      <a data-event="phone_clicked" data-location="footer" href="tel:+18338602711" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Contact</a>
       <a href="https://tapathletes.com/#programs" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Programs</a>
       <a href="/foundations/" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Foundations</a>
       <a href="#questions" class="text-xs font-medium text-white/30 hover:text-white/70 transition-colors">Questions</a>
     </div>
     <div class="text-xs text-white/25 lg:text-right leading-relaxed">
       1751 S 1st Street, Rogers, AR 72758<br>
-      <a href="tel:+18338602711" class="hover:text-white/50 transition-colors">(833) 860-2711</a> · <a href="mailto:support@tapathletes.com" class="hover:text-white/50 transition-colors">support@tapathletes.com</a>
+      <a data-event="phone_clicked" data-location="footer" href="tel:+18338602711" class="hover:text-white/50 transition-colors">(833) 860-2711</a> · <a data-event="email_clicked" data-location="footer" href="mailto:support@tapathletes.com" class="hover:text-white/50 transition-colors">support@tapathletes.com</a>
     </div>
   </footer>
 

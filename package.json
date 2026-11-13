@@ -5,7 +5,8 @@
   "description": "Every public tapathletes.com site, one folder per site. No dependencies: scripts are plain Node.",
   "scripts": {
     "build:jsonld": "node shared/jsonld/build.mjs",
-    "check:metadata": "node shared/check-metadata.mjs"
+    "check:metadata": "node shared/check-metadata.mjs",
+    "check:tracking": "node shared/check-tracking.mjs"
   },
   "engines": {
     "node": ">=20"
