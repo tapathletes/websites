@@ -251,6 +251,7 @@
   <!-- structured-data:start -->
   <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":["SportsActivityLocation","LocalBusiness","Organization"],"@id":"https://tapathletes.com/#organization","name":"TAP Athletes","alternateName":"TAP Athletes Pitching Academy","legalName":"Training Athletic Performance, Inc.","url":"https://tapathletes.com/","logo":{"@type":"ImageObject","url":"https://tapathletes.com/images/web-app-manifest-512x512.png","width":512,"height":512},"image":"https://tapathletes.com/images/og-card.png","description":"TAP Athletes is a baseball pitching academy in Rogers, Arkansas, serving youth and high-school pitchers ages 8 and up. TAP trains pitching only — no hitting, no fielding, no general athletic training. Programs are progression-based: athletes are assessed, placed at a level that matches their current mechanics, and advance by demonstrating skills rather than by aging up.","telephone":"+1-833-860-2711","email":"support@tapathletes.com","address":{"@type":"PostalAddress","streetAddress":"1751 S 1st Street","addressLocality":"Rogers","addressRegion":"AR","postalCode":"72758","addressCountry":"US"},"areaServed":[{"@type":"City","name":"Rogers","containedInPlace":{"@type":"State","name":"Arkansas"}},{"@type":"Place","name":"Northwest Arkansas"}],"priceRange":"$15 – $4,500","sport":"Baseball","knowsAbout":["Baseball pitching instruction","Youth pitching mechanics","Pitch design","Pitching velocity development","Pitching command training","Rapsodo pitch tracking"]},{"@type":"WebSite","@id":"https://tapathletes.com/#website","url":"https://tapathletes.com/","name":"TAP Athletes","publisher":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US"},{"@type":"WebPage","@id":"https://tapathletes.com/#webpage","url":"https://tapathletes.com/","isPartOf":{"@id":"https://tapathletes.com/#website"},"about":{"@id":"https://tapathletes.com/#organization"},"inLanguage":"en-US","primaryImageOfPage":"https://tapathletes.com/images/og-card.png","name":"TAP Athletes — Baseball Pitching Instruction in Rogers, Arkansas","description":"Pitching academy in Rogers, Arkansas for ages 8 and up. Structured programs, group classes, and individual instruction that build mechanics, command, and confidence.","datePublished":"2026-04-08","dateModified":"2026-09-24","mainEntity":{"@id":"https://tapathletes.com/#organization"}},{"@type":"OfferCatalog","@id":"https://tapathletes.com/#programs","name":"TAP Athletes programs and sessions","itemListElement":[{"@type":"Offer","name":"Classes & individual instruction (à la carte)","description":"Single sessions, group classes (Pitch Design, Beyond the Pitch, rotating topics), and Rapsodo scripted bullpens. Open to any athlete ages 8+, no program enrollment required. Booked in the TAP Athletes app.","priceCurrency":"USD","priceSpecification":{"@type":"PriceSpecification","minPrice":15,"maxPrice":100,"priceCurrency":"USD","unitText":"per session"},"seller":{"@id":"https://tapathletes.com/#organization"}},{"@type":"Offer","name":"TAP Athletes Foundations","url":"https://tapathletes.com/foundations/","description":"Progression-based pitching development, ages 8+. Monthly, from $510.","price":510,"priceCurrency":"USD","seller":{"@id":"https://tapathletes.com/#organization"}},{"@type":"Offer","name":"Train Unprompted","url":"https://tapathletes.com/train-unprompted/","description":"Six-week behavior-first cohort, ages 13+. $497 flat.","price":497,"priceCurrency":"USD","seller":{"@id":"https://tapathletes.com/#organization"}},{"@type":"Offer","name":"Pitching Accelerator","url":"https://tapathletes.com/pitching-accelerator/","description":"Six-month semi-private cohort, 14U+ playing level, with a +5 mph and +5% strike-rate guarantee. $4,500 per seat.","price":4500,"priceCurrency":"USD","seller":{"@id":"https://tapathletes.com/#organization"}}]},{"@type":"FAQPage","@id":"https://tapathletes.com/#faq","mainEntity":[{"@type":"Question","name":"What age does TAP Athletes work with?","acceptedAnswer":{"@type":"Answer","text":"We work with pitchers ages 8 and up. Each program targets a different stage: Foundations is for ages 8+ at all skill levels; Pitching Accelerator is for the 14U playing level and higher; Train Unprompted is for ages 13+ (junior high and up)."}},{"@type":"Question","name":"Do you offer private instruction outside of programs?","acceptedAnswer":{"@type":"Answer","text":"Yes. Outside of our structured programs we offer individual instruction, Rapsodo scripted bullpens, and standalone classes (Pitch Design, Beyond the Pitch, and rotating topics). All are booked inside the TAP Athletes app with no long-term commitment required."}},{"@type":"Question","name":"What makes TAP Athletes different from a private pitching coach?","acceptedAnswer":{"@type":"Answer","text":"The difference is how, what, and why we teach pitching: a pitching-only focus (no hitting, no fielding), full-time instructors whose whole job is pitcher development, a documented curriculum with defined progression and real end points to every phase, independent training through bookable Rapsodo bullpen slots, and finish lines such as Foundations milestones, the 60/10 Club, and the Accelerator guarantee."}}]}]}</script>
   <!-- structured-data:end -->
+  <script src="/js/analytics.js" defer></script>
 </head>
 <body class="min-h-screen">
 
@@ -269,22 +270,22 @@
         <a href="#faq" class="text-sm font-medium text-ink-muted hover:text-ink transition-colors">FAQ</a>
       </nav>
       <div class="flex items-center gap-3">
-        <a href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Get the App</a>
-        <button class="md:hidden flex flex-col gap-[5px] items-center justify-center w-9 h-9" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <a data-event="get_app_clicked" data-location="header" href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="hidden md:inline-flex items-center justify-center px-5 py-2 text-sm font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Get the App</a>
+        <button data-event="mobile_menu_clicked" data-location="header" class="md:hidden flex flex-col gap-[5px] items-center justify-center w-9 h-9" id="menuBtn" aria-label="Open menu" aria-expanded="false">
           <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
           <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
           <span class="block w-[18px] h-[2px] bg-ink rounded-full"></span>
         </button>
       </div>
     </div>
-    <div class="hidden flex-col gap-1 px-5 pb-5 pt-3 border-t border-cream-dark md:hidden" id="mobileNav" aria-hidden="true">
+    <div data-location="mobile_menu" class="hidden flex-col gap-1 px-5 pb-5 pt-3 border-t border-cream-dark md:hidden" id="mobileNav" aria-hidden="true">
       <a href="#programs" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Programs</a>
       <a href="#classes" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Classes</a>
       <a href="#club" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">60/10 Club</a>
       <a href="#app" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">App</a>
       <a href="/education/" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">Education</a>
       <a href="#faq" class="text-base text-ink py-2.5 px-2 rounded-lg hover:bg-cream-warm transition-colors">FAQ</a>
-      <a href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-forest text-white">Get the App</a>
+      <a data-event="get_app_clicked" data-location="mobile_menu" href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold rounded-lg bg-forest text-white">Get the App</a>
     </div>
   </header>
 
@@ -303,10 +304,10 @@
             TAP Athletes is a pitching academy built on the belief that anyone can learn to pitch. We help young pitchers build mechanics, command, and confidence through structured programs, classes, and individual instruction.
           </p>
           <div class="flex flex-col gap-3 mb-10 max-w-[420px]">
-            <a href="#programs" class="w-full inline-flex items-center justify-center px-7 py-3.5 text-base-r font-semibold uppercase tracking-[0.1em] rounded-lg bg-forest text-white hover:bg-forest-light transition-all hover:-translate-y-px hover:shadow-medium">
+            <a data-event="explore_programs_clicked" data-location="hero" href="#programs" class="w-full inline-flex items-center justify-center px-7 py-3.5 text-base-r font-semibold uppercase tracking-[0.1em] rounded-lg bg-forest text-white hover:bg-forest-light transition-all hover:-translate-y-px hover:shadow-medium">
               Explore Programs
             </a>
-            <a href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-7 py-3.5 text-base-r font-semibold uppercase tracking-[0.1em] rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-all">
+            <a data-event="sign_in_clicked" data-location="hero" href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-7 py-3.5 text-base-r font-semibold uppercase tracking-[0.1em] rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-all">
               Sign In / Sign Up
             </a>
           </div>
@@ -328,15 +329,15 @@
               <span class="text-[10px] font-semibold uppercase tracking-[0.15em] text-forest-pale/80">Invite</span>
               <span class="font-body text-base-r font-bold tracking-[0.15em] text-white">VWMF1Y</span>
             </div>
-            <a href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2.5 text-xs-r font-semibold rounded-lg bg-rust text-white hover:bg-rust-hover transition-colors whitespace-nowrap">
+            <a data-event="open_direct_invite_clicked" data-location="app_strip" href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2.5 text-xs-r font-semibold rounded-lg bg-rust text-white hover:bg-rust-hover transition-colors whitespace-nowrap">
               Open Direct Invite
             </a>
           </div>
           <div class="flex items-center gap-2 lg:order-1">
-            <a href="https://apps.apple.com/app/spaces-by-wix/id1099748482" target="_blank" rel="noopener noreferrer" class="block">
+            <a data-event="app_store_clicked" data-location="app_strip" href="https://apps.apple.com/app/spaces-by-wix/id1099748482" target="_blank" rel="noopener noreferrer" class="block">
               <img src="/images/app-store-badge.svg" alt="Download on the App Store" width="135" height="40" class="h-10 w-auto">
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.wix.android" target="_blank" rel="noopener noreferrer" class="block">
+            <a data-event="google_play_clicked" data-location="app_strip" href="https://play.google.com/store/apps/details?id=com.wix.android" target="_blank" rel="noopener noreferrer" class="block">
               <img src="/images/google-play-badge.svg" alt="Get it on Google Play" width="135" height="40" class="h-10 w-auto">
             </a>
           </div>
@@ -373,7 +374,7 @@
               <span class="font-display text-2xl-r italic text-ink">$15&ndash;$100</span>
               <span class="text-sm-r text-ink-muted">/session</span>
             </div>
-            <a href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-colors">See Classes</a>
+            <a data-event="see_classes_clicked" data-location="classes_card" href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-colors">See Classes</a>
           </div>
 
           <!-- Foundations -->
@@ -397,7 +398,7 @@
               <span class="font-display text-2xl-r italic text-ink">$600</span>
               <span class="text-sm-r text-ink-muted">/mo</span>
             </div>
-            <a href="/foundations/" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Learn More</a>
+            <a data-event="learn_more_clicked" data-location="foundations_card" href="/foundations/" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-forest text-white hover:bg-forest-light transition-colors">Learn More</a>
           </div>
 
           <!-- Train Unprompted -->
@@ -417,7 +418,7 @@
               <span class="font-display text-2xl-r italic text-ink">$497</span>
               <span class="text-sm-r text-ink-muted">flat — no add-ons</span>
             </div>
-            <a href="/train-unprompted/" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-colors">Learn More</a>
+            <a data-event="learn_more_clicked" data-location="train_unprompted_card" href="/train-unprompted/" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-colors">Learn More</a>
           </div>
 
           <!-- Pitching Accelerator -->
@@ -437,7 +438,7 @@
               <span class="font-display text-2xl-r italic text-ink">$4,500</span>
               <span class="text-sm-r text-ink-muted">/seat</span>
             </div>
-            <a href="/pitching-accelerator/" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-colors">Learn More</a>
+            <a data-event="learn_more_clicked" data-location="pitching_accelerator_card" href="/pitching-accelerator/" class="w-full inline-flex items-center justify-center px-6 py-3 text-sm-r font-semibold rounded-lg bg-transparent text-ink border border-ink/15 hover:border-ink/30 hover:bg-cream-warm transition-colors">Learn More</a>
           </div>
 
         </div>
@@ -491,10 +492,10 @@
           <div class="flex flex-wrap items-end justify-between gap-4 mb-5">
             <h3 class="font-body text-lg-r font-bold text-ink">Athletes</h3>
             <div class="flex gap-2 shrink-0" data-carousel-controls="athletes">
-              <button type="button" data-carousel-prev aria-label="Previous athlete" class="w-11 h-11 inline-flex items-center justify-center rounded-full border border-ink/15 text-ink hover:border-ink/40 hover:bg-cream-warm transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+              <button data-event="athlete_carousel_clicked" data-location="athletes" data-detail="previous" type="button" data-carousel-prev aria-label="Previous athlete" class="w-11 h-11 inline-flex items-center justify-center rounded-full border border-ink/15 text-ink hover:border-ink/40 hover:bg-cream-warm transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
               </button>
-              <button type="button" data-carousel-next aria-label="Next athlete" class="w-11 h-11 inline-flex items-center justify-center rounded-full border border-ink/15 text-ink hover:border-ink/40 hover:bg-cream-warm transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
+              <button data-event="athlete_carousel_clicked" data-location="athletes" data-detail="next" type="button" data-carousel-next aria-label="Next athlete" class="w-11 h-11 inline-flex items-center justify-center rounded-full border border-ink/15 text-ink hover:border-ink/40 hover:bg-cream-warm transition-colors disabled:opacity-30 disabled:cursor-not-allowed">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
               </button>
             </div>
@@ -558,7 +559,7 @@
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Not used"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="Introduced / scaling"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 12 3 A 9 9 0 0 1 12 21 L 12 12 Z" fill="currentColor"/></svg>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about strength equipment for 7th-8th grade" data-popup="htw-popup-strength"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="strength_equipment" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about strength equipment for 7th-8th grade" data-popup="htw-popup-strength"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
           </div>
@@ -598,7 +599,7 @@
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg>
               <span class="htw-descriptor">non-resistance warmup</span>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about J-Bands for 7th-8th grade" data-popup="htw-popup-jbands"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="j_bands" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about J-Bands for 7th-8th grade" data-popup="htw-popup-jbands"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
           </div>
@@ -610,7 +611,7 @@
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Not used"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="Introduced / scaling"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 12 3 A 9 9 0 0 1 12 21 L 12 12 Z" fill="currentColor"/></svg>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Rapsodo for 7th-8th grade" data-popup="htw-popup-rapsodo"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="rapsodo" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Rapsodo for 7th-8th grade" data-popup="htw-popup-rapsodo"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
           </div>
@@ -621,12 +622,12 @@
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="Introduced / scaling"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 12 3 A 9 9 0 0 1 12 21 L 12 12 Z" fill="currentColor"/></svg>
               <span class="htw-descriptor">effort bands</span>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Pocket radar effort bands" data-popup="htw-popup-pocket-radar"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="effort_bands" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Pocket radar effort bands" data-popup="htw-popup-pocket-radar"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="Introduced / scaling"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 12 3 A 9 9 0 0 1 12 21 L 12 12 Z" fill="currentColor"/></svg>
               <span class="htw-descriptor">effort bands</span>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Pocket radar effort bands" data-popup="htw-popup-pocket-radar"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="effort_bands" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Pocket radar effort bands" data-popup="htw-popup-pocket-radar"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
@@ -639,7 +640,7 @@
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="First introduction"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 12 3 A 9 9 0 0 1 21 12 L 12 12 Z" fill="currentColor"/></svg>
               <span class="htw-descriptor">light long-toss</span>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about light long-toss for 5th-6th grade" data-popup="htw-popup-longtoss"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="long_toss" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about light long-toss for 5th-6th grade" data-popup="htw-popup-longtoss"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
@@ -652,7 +653,7 @@
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Not used"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
             <div class="htw-cell" role="cell">
               <svg class="fc" viewBox="0 0 24 24" aria-label="Introduced / scaling"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M 12 3 A 9 9 0 0 1 12 21 L 12 12 Z" fill="currentColor"/></svg>
-              <button class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Independent Training for 7th-8th grade" data-popup="htw-popup-independent"><span aria-hidden="true">&#9432;</span></button>
+              <button data-event="training_info_opened" data-location="how_we_train" data-detail="independent_training" class="htw-info" type="button" aria-haspopup="dialog" aria-label="More information about Independent Training for 7th-8th grade" data-popup="htw-popup-independent"><span aria-hidden="true">&#9432;</span></button>
             </div>
             <div class="htw-cell" role="cell"><svg class="fc" viewBox="0 0 24 24" aria-label="Standard"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></div>
           </div>
@@ -682,13 +683,13 @@
               </div>
             </div>
             <div class="flex flex-col gap-3 items-start md:items-end">
-              <a href="https://apps.apple.com/app/spaces-by-wix/id1099748482" target="_blank" rel="noopener noreferrer" class="block w-[200px] h-[60px] rounded-lg overflow-hidden">
+              <a data-event="app_store_clicked" data-location="app_section" href="https://apps.apple.com/app/spaces-by-wix/id1099748482" target="_blank" rel="noopener noreferrer" class="block w-[200px] h-[60px] rounded-lg overflow-hidden">
                 <img src="/images/app-store-badge.svg" alt="Download on the App Store" class="!w-full !h-full !max-w-none object-cover">
               </a>
-              <a href="https://play.google.com/store/apps/details?id=com.wix.android" target="_blank" rel="noopener noreferrer" class="block w-[200px] h-[60px] rounded-lg overflow-hidden">
+              <a data-event="google_play_clicked" data-location="app_section" href="https://play.google.com/store/apps/details?id=com.wix.android" target="_blank" rel="noopener noreferrer" class="block w-[200px] h-[60px] rounded-lg overflow-hidden">
                 <img src="/images/google-play-badge.svg" alt="Get it on Google Play" class="!w-full !h-full !max-w-none object-cover">
               </a>
-              <a href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="w-[200px] h-[60px] inline-flex items-center justify-center px-6 text-sm-r font-semibold rounded-lg bg-rust text-white hover:bg-rust-hover transition-colors">Open Direct Invite</a>
+              <a data-event="open_direct_invite_clicked" data-location="app_section" href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="w-[200px] h-[60px] inline-flex items-center justify-center px-6 text-sm-r font-semibold rounded-lg bg-rust text-white hover:bg-rust-hover transition-colors">Open Direct Invite</a>
             </div>
           </div>
         </div>
@@ -715,7 +716,7 @@
               </ul>
               <div class="flex justify-between items-center pt-4 border-t border-cream-dark">
                 <span class="text-xs-r text-ink-faint">Open Enrollment · All Levels</span>
-                <a href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="text-sm-r font-semibold text-forest hover:text-forest-light">Book Class &rarr;</a>
+                <a data-event="book_class_clicked" data-location="class_pitch_design" href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="text-sm-r font-semibold text-forest hover:text-forest-light">Book Class &rarr;</a>
               </div>
             </div>
 
@@ -734,7 +735,7 @@
               </ul>
               <div class="flex justify-between items-center pt-4 border-t border-cream-dark">
                 <span class="text-xs-r text-ink-faint">Open Enrollment · All Levels</span>
-                <a href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="text-sm-r font-semibold text-forest hover:text-forest-light">Book Class &rarr;</a>
+                <a data-event="book_class_clicked" data-location="class_beyond_the_pitch" href="https://apps.wix.com/place-invites/invite-lp/065530a1-8ed2-4fe7-95b5-046c830596f6" target="_blank" rel="noopener noreferrer" class="text-sm-r font-semibold text-forest hover:text-forest-light">Book Class &rarr;</a>
               </div>
             </div>
           </div>
@@ -746,9 +747,9 @@
             <p class="text-xs-r font-semibold uppercase tracking-[0.15em] text-forest-pale/80 mb-3">Curriculum Preview &middot; Free PDF</p>
             <h3 class="font-body text-lg-r font-bold text-white mb-2">A look inside the curriculum.</h3>
             <p class="text-sm-r text-white/80 leading-relaxed mb-3">A sample from two phases &mdash; Movement &amp; Throwing and Command &amp; Intent &mdash; with the drills, effort bands, and how progress gets measured.</p>
-            <p class="text-sm-r text-white/60 leading-relaxed">Prefer to just read it? <a href="/foundations/curriculum/" class="text-white font-medium underline underline-offset-4 decoration-white/40 hover:decoration-white transition-colors">The full curriculum is on the web &rarr;</a></p>
+            <p class="text-sm-r text-white/60 leading-relaxed">Prefer to just read it? <a data-event="read_curriculum_clicked" data-location="curriculum_cta" href="/foundations/curriculum/" class="text-white font-medium underline underline-offset-4 decoration-white/40 hover:decoration-white transition-colors">The full curriculum is on the web &rarr;</a></p>
           </div>
-          <a href="#" data-guide-btn class="inline-flex items-center gap-2 justify-center px-7 py-3.5 text-base-r font-semibold rounded-lg bg-white text-forest border border-white hover:bg-cream-warm transition-all whitespace-nowrap shrink-0">
+          <a data-event="curriculum_guide_clicked" data-location="curriculum_cta" href="#" data-guide-btn class="inline-flex items-center gap-2 justify-center px-7 py-3.5 text-base-r font-semibold rounded-lg bg-white text-forest border border-white hover:bg-cream-warm transition-all whitespace-nowrap shrink-0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download Curriculum Guide
           </a>
@@ -837,10 +838,10 @@
         <h2 class="font-display text-2xl-r italic text-white leading-tight mb-4">Find the right path.</h2>
         <p class="text-base-r text-white/65 leading-relaxed mb-8 max-w-[48ch] mx-auto">Four paths. One standard. Whether you're starting out or chasing the 60/10, there's a path at TAP Athletes.</p>
         <div class="flex flex-wrap justify-center gap-3">
-          <a href="#programs" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-white text-forest hover:bg-cream transition-all hover:-translate-y-px hover:shadow-medium">Explore Programs</a>
-          <a href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-transparent text-white border border-white/30 hover:border-white/60 transition-all">Get the App</a>
+          <a data-event="explore_programs_clicked" data-location="closing" href="#programs" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-white text-forest hover:bg-cream transition-all hover:-translate-y-px hover:shadow-medium">Explore Programs</a>
+          <a data-event="get_app_clicked" data-location="closing" href="https://wix.app/mobile.apps/9UnuV7p?ref=mam" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-8 py-4 text-base-r font-semibold rounded-lg bg-transparent text-white border border-white/30 hover:border-white/60 transition-all">Get the App</a>
         </div>
-        <p class="mt-6 text-sm-r text-white/55">Have information overload? <a href="sms:+18338602711?&body=Hi%20TAP%20Athletes!%20My%20name%20is%20___%20and%20I%20want%20to%20learn%20about%20___%20(program%20or%20training%20request)." class="text-white/85 font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-colors">Text us your question &rarr;</a></p>
+        <p class="mt-6 text-sm-r text-white/55">Have information overload? <a data-event="text_us_clicked" data-location="closing" href="sms:+18338602711?&body=Hi%20TAP%20Athletes!%20My%20name%20is%20___%20and%20I%20want%20to%20learn%20about%20___%20(program%20or%20training%20request)." class="text-white/85 font-medium underline underline-offset-4 decoration-white/30 hover:decoration-white/70 transition-colors">Text us your question &rarr;</a></p>
       </div>
     </section>
 
@@ -857,7 +858,7 @@
     </div>
     <div class="text-xs text-white/25 lg:text-right leading-relaxed">
       1751 S 1st Street, Rogers, AR 72758<br>
-      <a href="tel:+18338602711" class="hover:text-white/50 transition-colors">(833) 860-2711</a> · <a href="mailto:support@tapathletes.com" class="hover:text-white/50 transition-colors">support@tapathletes.com</a>
+      <a data-event="phone_clicked" data-location="footer" href="tel:+18338602711" class="hover:text-white/50 transition-colors">(833) 860-2711</a> · <a data-event="email_clicked" data-location="footer" href="mailto:support@tapathletes.com" class="hover:text-white/50 transition-colors">support@tapathletes.com</a>
     </div>
   </footer>
 
@@ -988,7 +989,7 @@
       <button id="emailModalClose" type="button" class="absolute top-4 right-4 text-ink-muted hover:text-ink text-xl leading-none cursor-pointer" aria-label="Close">&times;</button>
       <h3 class="font-display text-xl-r italic text-ink mb-2">Curriculum Guide</h3>
       <p class="text-sm-r text-ink-muted mb-5">Enter your email to access the full Foundations curriculum guide.</p>
-      <form id="guideForm">
+      <form data-event="curriculum_guide_submitted" data-location="email_gate" id="guideForm">
         <input type="email" name="email" required placeholder="Email address" class="w-full px-4 py-3 border border-cream-dark rounded-lg font-body text-sm-r mb-3 outline-none focus:border-forest transition-colors" />
         <button type="submit" id="guideSubmitBtn" class="w-full inline-flex items-center justify-center px-6 py-3.5 text-base-r font-semibold rounded-lg bg-rust text-white hover:bg-rust-hover transition-colors">Download</button>
       </form>
